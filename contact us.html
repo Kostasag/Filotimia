@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Filotimia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#dfe5e6;
+      --bg-accent:#eef2f3;
+      --text:#2b2b2b;
+      --muted:#6b7a86;
+      --brand:#0ea5b3;
+      --brand-2:#146c94;
+      --card:#ffffff;
+      --ring:rgba(20,108,148,0.15);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-accent) 100%);
+      color:var(--text);line-height:1.65;
+    }
+
+    /* ===== LANGUAGE SWITCH ===== */
+    .lang-switch{
+      position:fixed;top:18px;right:18px;z-index:9999;
+      display:flex;align-items:center;gap:8px;
+      background:rgba(0,0,0,.35);backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.25);
+      padding:6px 10px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)
+    }
+    .lang-btn{
+      appearance:none;border:none;cursor:pointer;
+      font:600 12px/1 'Poppins',sans-serif;letter-spacing:.4px;
+      padding:6px 10px;border-radius:999px;color:#fff;background:transparent;opacity:.85
+    }
+    .lang-btn.active{background:rgba(255,255,255,.18);opacity:1}
+    .lang-divider{color:#ddd;opacity:.8}
+
+    /* ===== NAVBAR ===== */
+    header{
+      position:fixed;top:0;left:0;width:100%;background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      z-index:1000;
+    }
+    .nav-container{
+      max-width:1200px;margin:0 auto;padding:10px 20px;
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .nav-logo img{height:52px;width:auto;border-radius:10px;}
+    nav ul{display:flex;gap:26px;list-style:none;}
+    nav ul li a{
+      text-decoration:none;color:#222;font-weight:500;
+      padding:6px 0;transition:color .3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active{color:var(--brand);}
+    .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .menu-toggle span{
+      display:block;width:26px;height:3px;background:#222;border-radius:4px;
+      transition:all .3s ease;
+    }
+    @media (max-width:820px){
+      nav ul{
+        position:absolute;top:70px;left:0;width:100%;
+        flex-direction:column;background:#fff;border-top:1px solid rgba(0,0,0,.1);
+        max-height:0;overflow:hidden;transition:max-height .4s ease;
+      }
+      nav ul.open{max-height:400px;}
+      nav ul li{text-align:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);}
+      .menu-toggle{display:flex;}
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    main{margin-top:120px;padding:40px 20px 80px;}
+    .contact-wrap{
+      max-width:980px;margin:0 auto;background:var(--card);border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);padding:36px 28px;border:1px solid var(--ring);
+    }
+    .contact-wrap h2{
+      font-size:2rem;text-align:center;margin-bottom:28px;
+      color:#0e2b3a;border-bottom:2px solid var(--brand-2);
+      display:inline-block;padding-bottom:8px;
+    }
+    form{display:flex;flex-direction:column;gap:18px;margin-top:10px}
+    .form-row{display:flex;gap:18px;flex-wrap:wrap}
+    .form-row input{
+      flex:1 1 260px;padding:14px;font-size:1rem;border-radius:10px;
+      border:1px solid rgba(0,0,0,.1);background:var(--bg-accent);color:#000;
+    }
+    textarea{
+      padding:16px;font-size:1rem;border-radius:10px;border:1px solid rgba(0,0,0,.1);
+      background:var(--bg-accent);color:#000;min-height:140px;resize:vertical;
+    }
+    button{
+      padding:14px 18px;font-size:1.05rem;font-weight:700;color:#fff;
+      background:linear-gradient(135deg,#3e7b97,#0ea5b3);
+      border:none;border-radius:10px;cursor:pointer;transition:.25s;
+    }
+    button:hover{filter:brightness(1.08)}
+    .map-box{margin-top:36px;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .map-box iframe{width:100%;height:340px;border:0;display:block}
+
+    /* ===== FOOTER ===== */
+    .new-footer{background:#eaeaea;padding:60px 20px 30px;color:#333;margin-top:60px;}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px;align-items:flex-start;padding-bottom:30px;border-bottom:1px solid #ccc;}
+    .footer-brand img{width:50px;height:50px;border-radius:12px;object-fit:cover;margin-bottom:10px;}
+    .footer-brand h3{font-size:1.4rem;margin:0;color:#333;}
+    .footer-links h4{margin-bottom:12px;font-weight:600;color:#222;}
+    .footer-links a{display:block;color:#555;font-size:.95rem;text-decoration:none;margin-bottom:6px;transition:color .3s ease;}
+    .footer-links a:hover{color:var(--brand);}
+    .footer-bottom{text-align:center;padding-top:20px;font-size:.9rem;color:#666;}
+
+    /* ===== CALL BUTTON ===== */
+    .call-button{
+      position:fixed;right:0;top:50%;transform:translateY(-50%);
+      background-color:#2d4fa4;color:white;border-radius:12px 0 0 12px;
+      padding:16px;display:flex;align-items:center;z-index:1000;cursor:pointer;
+      transition:right .4s ease,padding .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.2);
+      text-decoration:none;
+    }
+    .call-button i{font-size:28px;}
+    .call-tooltip{overflow:hidden;max-width:0;opacity:0;margin-left:0;display:flex;flex-direction:column;white-space:nowrap;transition:max-width .5s ease,opacity .4s ease,margin-left .4s ease;}
+    .call-tooltip strong{font-size:17px;font-weight:600;margin-bottom:3px;}
+    .call-tooltip span{font-size:15px;font-weight:500;text-decoration:underline;}
+    .call-button:hover .call-tooltip{max-width:220px;opacity:1;margin-left:14px;}
+  </style>
+</head>
+<body>
+
+<!-- Header / Navbar -->
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="images/img17.jpg" alt="Filotimia Logo"></a>
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html"><span class="gr">Αρχική</span><span class="en" style="display:none;">Home</span></a></li>
+        <li><a href="about us.html"><span class="gr">Σχετικά</span><span class="en" style="display:none;">About Us</span></a></li>
+        <li><a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span></a></li>
+        <li><a href="connections.html"><span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span></a></li>
+        <li><a href="index.html#booking"><span class="gr">Κρατήσεις</span><span class="en" style="display:none;">Booking</span></a></li>
+        <li><a href="contact us.html" class="active"><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact Us</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Language Switch -->
+<div class="lang-switch" aria-label="Language switch">
+  <button class="lang-btn active" data-lang="gr" aria-label="Ελληνικά">ΕΛ</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+</div>
+
+<!-- CALL BUTTON -->
+<a href="tel:+306948813906" class="call-button">
+  <i class="fas fa-headset"></i>
+  <div class="call-tooltip">
+    <strong>Call us</strong>
+    <span>+30 69 4881 3906</span>
+  </div>
+</a>
+
+<main>
+  <section class="contact-section">
+    <div class="contact-wrap">
+      <h2><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></h2>
+
+      <form action="mailto:info@filotimia.gr" method="POST" enctype="text/plain">
+        <div class="form-row">
+          <input type="text" name="firstname" data-gr="Όνομα" data-en="First name" placeholder="Όνομα" required>
+          <input type="text" name="lastname" data-gr="Επώνυμο" data-en="Last name" placeholder="Επώνυμο" required>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" data-gr="Email" data-en="Email" placeholder="Email" required>
+          <input type="text" name="phone" data-gr="Τηλέφωνο" data-en="Phone" placeholder="Τηλέφωνο">
+        </div>
+        <textarea name="message" data-gr="Το μήνυμά σας..." data-en="Your message..." placeholder="Το μήνυμά σας..." required></textarea>
+        <button type="submit"><span class="gr">Αποστολή</span><span class="en" style="display:none;">Send</span></button>
+      </form>
+
+      <div class="map-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.751176090709!2d25.5153851!3d36.881063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14981b003c577321%3A0xed3e225574de0b36!2sFilotimia%20Apartments!5e0!3m2!1sel!2sgr!4v1712345678901" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="new-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/img17.jpg" alt="Filotimia Logo">
+      <h3>Filotimia Apartments • +30 69 4881 3906</h3>
+    </div>
+    <div class="footer-links">
+      <h4><span class="gr">Σχετικά & Επικοινωνία</span><span class="en" style="display:none;">About & Contact</span></h4>
+      <a href="about us.html"><span class="gr">Σχετικά με εμάς</span><span class="en" style="display:none;">About Us</span></a>
+      <a href="contact us.html"><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></a>
+    </div>
+    <div class="footer-links">
+      <h4><span class="gr">Υπηρεσίες</span><span class="en" style="display:none;">Services</span></h4>
+      <a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span></a>
+      <a href="#"><span class="gr">Όροι Χρήσης</span><span class="en" style="display:none;">Terms of Use</span></a>
+    </div>
+    <div class="footer-links">
+      <h4>Social</h4>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><span class="gr">© 2025 Filotimia Schoinousa • Όλα τα δικαιώματα κατοχυρωμένα</span><span class="en" style="display:none;">© 2025 Filotimia Schoinousa • All rights reserved</span></p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const menuToggle=document.getElementById('menuToggle');
+  const navMenu=document.getElementById('navMenu');
+  menuToggle.addEventListener('click',()=>{navMenu.classList.toggle('open');});
+
+  // Language switch
+  const langButtons=document.querySelectorAll('.lang-btn');
+  langButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      langButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      setLanguage(btn.dataset.lang);
+    });
+  });
+  function setLanguage(lang){
+    document.documentElement.lang=(lang==='gr'?'el':'en');
+    document.querySelectorAll('.gr').forEach(el=>el.style.display=(lang==='gr'?'inline':'none'));
+    document.querySelectorAll('.en').forEach(el=>el.style.display=(lang==='en'?'inline':'none'));
+    document.querySelectorAll('[data-gr]').forEach(el=>{
+      const text=el.getAttribute(lang==='gr'?'data-gr':'data-en');
+      if(text!==null) el.placeholder=text;
+    });
+    localStorage.setItem('siteLang',lang);
+  }
+  setLanguage(localStorage.getItem('siteLang')||'gr');
+</script>
+
+</body>
+</html>

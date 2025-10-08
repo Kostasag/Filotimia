@@ -1,0 +1,13 @@
+FILOTIMIA WEBSITE ΤΙ ΑΠΟΜΕΝΕΙ
+
+1) Better hd/resolution main video index
+
+2)Indoor Outdoor section
+
+3)general check up
+
+*4)add reveiews, build κρατησεις.html and netlify upoload
+
+5)update images on direct booking and booking
+
+6)uupdate logo on htmls

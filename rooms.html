@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rooms | Filotimia Schoinousa</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root{
+      --brand:#0ea5b3;
+      --text:#2b2b2b;
+      --glass: rgba(18,25,34,.42);
+      --glass-border: rgba(255,255,255,.18);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{font-family:'Poppins',sans-serif;background:#aebdbd;color:#333;overflow-x:hidden;scroll-behavior:smooth}
+    .en{display:none} /* Greek default */
+
+    /* ===== LANGUAGE SWITCH (same as example) ===== */
+    .lang-switch{
+      position:fixed;top:18px;right:18px;z-index:9999;
+      display:flex;align-items:center;gap:8px;
+      background:rgba(0,0,0,.35);backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.25);
+      padding:6px 10px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)
+    }
+    .lang-btn{
+      appearance:none;border:none;cursor:pointer;
+      font:600 12px/1 'Poppins',sans-serif;letter-spacing:.4px;
+      padding:6px 10px;border-radius:999px;color:#fff;background:transparent;opacity:.85
+    }
+    .lang-btn.active{background:rgba(255,255,255,.18);opacity:1}
+    .lang-divider{color:#ddd;opacity:.8}
+
+    /* ===== NAVBAR (from example / connections) ===== */
+    .site-header{
+      position:fixed;top:0;left:0;width:100%;background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      z-index:1000;
+    }
+    .nav-container{
+      max-width:1200px;margin:0 auto;padding:10px 20px;
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .nav-logo img{height:52px;width:auto;border-radius:10px;}
+    nav ul{display:flex;gap:26px;list-style:none;}
+    nav ul li a{
+      text-decoration:none;color:#222;font-weight:500;
+      padding:6px 0;transition:color .3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active{color:var(--brand);}
+    .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .menu-toggle span{
+      display:block;width:26px;height:3px;background:#222;border-radius:4px;
+      transition:all .3s ease;
+    }
+    @media (max-width:820px){
+      nav ul{
+        position:absolute;top:70px;left:0;width:100%;
+        flex-direction:column;background:#fff;border-top:1px solid rgba(0,0,0,.1);
+        max-height:0;overflow:hidden;transition:max-height .4s ease;
+      }
+      nav ul.open{max-height:400px;}
+      nav ul li{text-align:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);}
+      .menu-toggle{display:flex;}
+    }
+
+    /* ===== VIDEO HERO ===== */
+    .video-background-section{
+      position:relative;width:100%;height:100vh;overflow:hidden;isolation:isolate;background:#0c1a2b;
+      margin-top:72px; /* keep content clear of fixed navbar */
+    }
+    .video-iframe-wrapper{position:absolute;inset:0;z-index:-1;pointer-events:none;filter:brightness(1.16) contrast(1.07) saturate(1.08)}
+    .video-iframe-wrapper iframe{
+      width:100vw;height:56.25vw;min-height:100vh;min-width:177.77vh;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none
+    }
+    @media (min-width:1400px){ .video-iframe-wrapper{filter:brightness(1.2) contrast(1.08) saturate(1.1)} }
+    .video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.42));z-index:1}
+    .video-overlay::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(1200px 600px at 50% 88%, rgba(255,255,255,.16), transparent 60%);
+      mix-blend-mode:screen;opacity:.45;
+    }
+    .hero-overlay{
+      position:absolute;left:50%;transform:translateX(-50%);bottom:min(7vh,7%);z-index:2;
+      text-align:center;color:#fff;width:min(92%,860px);padding:0 12px;
+    }
+    .hero-box{
+      background:var(--glass);border:1px solid var(--glass-border);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.35);
+      padding:1.2rem 1.4rem;
+    }
+    .hero-kicker{
+      display:inline-block;font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+      color:#dbe7f1;opacity:.95;padding:4px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(13,27,42,.35);
+    }
+    .hero-box h1{
+      font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Poppins',sans-serif;
+      font-size:clamp(1.6rem,1vw + 1.3rem,2.2rem);font-weight:700;margin:.35rem 0 .8rem;line-height:1.2;color:#fff;
+      text-shadow:0 2px 10px rgba(0,0,0,.35);
+    }
+    .hero-sub{font-family:'Manrope',sans-serif;font-size:clamp(.95rem,.4vw + .9rem,1.05rem);font-weight:500;color:#eef5f7;opacity:.98;line-height:1.65;margin:0 auto 1.1rem;max-width:60ch}
+    .hero-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;text-decoration:none;font-weight:700;letter-spacing:.2px}
+    .hero-btn.primary{background:linear-gradient(135deg,#0b5fa6,#148dc6);color:#fff;box-shadow:0 12px 24px rgba(20,141,198,.28)}
+    .hero-btn.primary:hover{transform:translateY(-1px)}
+    .hero-btn.ghost{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);color:#fff}
+
+    /* ===== ROOMS SECTION ===== */
+    .rooms-background{position:relative;width:100vw;margin-left:calc(-50vw + 50%);background:linear-gradient(180deg,#eef3f6 0%,#e6edf2 60%,#e2e9ef 100%);padding:140px 0 110px;box-sizing:border-box;overflow:hidden}
+    .rooms-background::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;background-image:radial-gradient(circle at 10% 20%, rgba(0,0,0,.16) 1px, transparent 1px),radial-gradient(circle at 60% 80%, rgba(0,0,0,.16) 1px, transparent 1px);background-size:12px 12px,14px 14px}
+    .rooms-section{position:relative;max-width:1280px;margin:0 auto;padding:0 24px;color:#000}
+    .rooms-grid{display:flex;flex-direction:column;gap:36px}
+    .room-card{display:flex;align-items:stretch;overflow:hidden;border-radius:22px;background:#fff;box-shadow:0 18px 48px rgba(15,23,42,.18),0 2px 8px rgba(0,0,0,.06);min-height:clamp(380px, 40vw, 560px)}
+    .room-card:nth-child(even){flex-direction:row-reverse}
+    .room-image{position:relative;flex:0 0 55%;min-height:inherit;background-size:cover;background-position:center;transition:transform .6s ease;cursor:pointer}
+    .room-card:hover .room-image{transform:scale(1.03)}
+    .img-label{position:absolute;left:18px;bottom:18px;font-size:.85rem;color:#fff;background:rgba(0,0,0,.42);padding:6px 10px;border-radius:10px;letter-spacing:.3px}
+    .room-info{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,3.2vw,56px) clamp(26px,3vw,48px);background:linear-gradient(180deg,#ffffff 0%, #fbfbfb 100%)}
+    .room-info h2{font-size:clamp(1.75rem, 1.2vw + 1.4rem, 2.2rem);margin-bottom:14px;color:#0a4e78}
+    .room-info p{font-size:clamp(.98rem, .4vw + .9rem, 1.05rem);margin-bottom:18px;line-height:1.7;color:#3b3b3b}
+    .room-info ul{list-style:none;padding:0;margin:0 0 26px 0;display:grid;gap:10px}
+    .room-info ul li{font-size:.98rem;color:#2f2f2f;position:relative;padding-left:22px}
+    .room-info ul li::before{content:"";position:absolute;left:0;top:.45em;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#00b9da,#0a8eb3)}
+    .room-info a{align-self:flex-start;padding:12px 26px;border-radius:30px;background-color:#02649c;color:#fff;text-decoration:none;font-weight:700;letter-spacing:.2px;transition:all .25s ease;box-shadow:0 10px 20px rgba(2,100,156,.25)}
+    .room-info a:hover{background-color:#00b9da;transform:translateY(-1px)}
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox{display:none;position:fixed;z-index:1000;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center}
+    .lightbox img{max-width:90%;max-height:82%;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+    .lightbox-controls{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 30px}
+    .lightbox-controls span{font-size:3rem;color:#fff;cursor:pointer;user-select:none}
+
+    /* ===== CALL BUTTON (same as example) ===== */
+    .call-button {
+      position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+      background-color:#2d4fa4; color:#fff; border-radius:12px 0 0 12px;
+      padding:16px; display:flex; align-items:center; z-index:1000; cursor:pointer;
+      transition:right .4s ease, padding .3s ease; box-shadow:0 4px 12px rgba(0,0,0,.2);
+      text-decoration:none;
+    }
+    .call-button i{font-size:28px;transition:transform .3s ease}
+    .call-tooltip{overflow:hidden;max-width:0;opacity:0;margin-left:0;display:flex;flex-direction:column;white-space:nowrap;transition:max-width .5s ease,opacity .4s ease,margin-left .4s ease}
+    .call-tooltip strong{font-family:'Trebuchet MS','Segoe UI',sans-serif;font-size:17px;font-weight:600;margin-bottom:3px}
+    .call-tooltip span{font-size:15px;font-weight:500;text-decoration:underline}
+    .call-button:hover{padding-right:24px}
+    .call-button:hover .call-tooltip{max-width:220px;opacity:1;margin-left:14px}
+    .call-button.open .call-tooltip{max-width:220px;opacity:1;margin-left:14px}
+    @media (max-width:768px){ .call-button{padding:14px} .call-tooltip strong{font-size:16px} .call-tooltip span{font-size:14px} }
+
+    /* ===== FOOTER ===== */
+    .new-footer{background:#f0f0f0;padding:60px 20px 30px;color:#333}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px;align-items:flex-start;padding-bottom:30px;border-bottom:1px solid #ccc}
+    .footer-brand img{width:50px;height:50px;border-radius:12px;object-fit:cover;margin-bottom:10px}
+    .footer-brand h3{font-size:1.4rem;margin:0;color:#333}
+    .footer-links h4{margin-bottom:12px;font-weight:600;color:#222}
+    .footer-links a{display:block;color:#555;font-size:.95rem;text-decoration:none;margin-bottom:6px;transition:color .3s ease}
+    .footer-links a:hover{color:#00b9da}
+    .footer-bottom{text-align:center;padding-top:20px;font-size:.9rem;color:#666}
+
+    /* Scroll-to-top */
+    #scrollToTopBtn{
+      position:fixed;bottom:30px;right:30px;z-index:100;background:linear-gradient(145deg,#00b9da,#00a1c7);
+      color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;
+      box-shadow:0 4px 15px rgba(0,185,218,.4);transition:.3s;display:none
+    }
+    #scrollToTopBtn:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,185,218,.6);background:linear-gradient(145deg,#00d2f7,#00a1c7)}
+
+    /* Responsive tweaks for rooms cards */
+    @media (max-width:1024px){
+      .room-card{min-height:clamp(360px, 52vw, 520px)}
+      .room-image{flex-basis:52%}
+    }
+    @media (max-width:768px){
+      .room-card{flex-direction:column;min-height:auto}
+      .room-card:nth-child(even){flex-direction:column}
+      .room-image{flex-basis:auto;min-height:320px}
+      .room-info{padding:22px 20px}
+    }
+    @media (max-width:480px){
+      .hero-box{border-radius:16px}
+      .lightbox img{max-width:95%;max-height:80vh}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="images/img17.jpg" alt="Filotimia Logo"></a>
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html"><span class="gr">Αρχική</span><span class="en">Home</span></a></li>
+        <li><a href="about us.html"><span class="gr">Σχετικά</span><span class="en">About Us</span></a></li>
+        <li><a href="rooms.html" class="active"><span class="gr">Δωμάτια</span><span class="en">Rooms</span></a></li>
+        <li><a href="connections.html"><span class="gr">Δρομολόγια</span><span class="en">Connections</span></a></li>
+        <li><a href="index.html#booking"><span class="gr">Κρατήσεις</span><span class="en">Booking</span></a></li>
+        <li><a href="contact us.html"><span class="gr">Επικοινωνία</span><span class="en">Contact Us</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch" aria-label="Language switch">
+  <button class="lang-btn active" data-lang="gr" aria-label="Ελληνικά">ΕΛ</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+</div>
+
+<!-- Call Button -->
+<a href="tel:+306948813906" class="call-button" id="callBtn" aria-label="Call us">
+  <i class="fas fa-headset"></i>
+  <div class="call-tooltip">
+    <strong>Call us</strong>
+    <span>+30 69 4881 3906</span>
+  </div>
+</a>
+
+<!-- ===== VIDEO HERO ===== -->
+<section class="video-background-section" aria-label="Hero video">
+  <div class="video-overlay"></div>
+
+  <div class="video-iframe-wrapper">
+    <iframe
+      src="https://www.youtube.com/embed/NmyKHIRTxVE?autoplay=1&mute=1&loop=1&controls=0&playlist=NmyKHIRTxVE&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&vq=hd1080"
+      title="Filotimia drone video"
+      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="hero-overlay">
+    <div class="hero-box">
+      <span class="hero-kicker">
+        <span class="gr">Πέτρινα Διαμερίσματα • Σχοινούσα</span>
+        <span class="en">Stone Apartments • Schoinoussa</span>
+      </span>
+
+      <h1>
+        <span class="gr">Ανακαλύψτε τα Δωμάτια μας</span>
+        <span class="en">Discover Our Stone Apartments</span>
+      </h1>
+
+      <p class="hero-sub">
+        <span class="gr">Άνεση, ηρεμία και απλότητα — σχεδιασμένα για πραγματική χαλάρωση.</span>
+        <span class="en">Comfort, calm, and simplicity—designed for true relaxation.</span>
+      </p>
+
+      <div class="hero-cta">
+        <a href="#rooms" class="hero-btn primary">
+          <span class="gr">Δείτε τα δωμάτια</span>
+          <span class="en">Explore Rooms</span>
+        </a>
+        <a href="https://direct-book.com/properties/filotimia" class="hero-btn ghost" target="_blank" rel="noopener">
+          <span class="gr">Κράτηση</span>
+          <span class="en">Book Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROOMS SECTION ===== -->
+<section id="rooms" class="rooms-background">
+  <div class="rooms-section">
+    <div class="rooms-grid">
+
+      <!-- 1️⃣ Large Stone Apartment -->
+      <div class="room-card">
+        <div class="room-image" onclick="openLightbox(0)" style="background-image:url('images/img63.jpeg');">
+          <span class="img-label gr">Προβολή γκαλερί</span>
+          <span class="img-label en">View gallery</span>
+        </div>
+        <div class="room-info">
+          <h2><span class="gr">Μεγάλο Πέτρινο Διαμέρισμα</span><span class="en">Large Stone Apartment</span></h2>
+          <p>
+            <span class="gr">Απολαύστε τον άνετο χώρο και την υπέροχη θέα θάλασσας, με σχεδιασμό λιτής πολυτέλειας. Ιδανικό για οικογένειες.</span>
+            <span class="en">Enjoy a spacious layout and stunning sea view, designed with refined simplicity. Ideal for families.</span>
+          </p>
+          <ul>
+            <li><span class="gr">Μέγιστοι επισκέπτες: 4</span><span class="en">Max guests: 4</span></li>
+            <li><span class="gr">Κρεβάτι: Queen size + Καναπές κρεβάτι</span><span class="en">Bed: Queen size + Sofa bed</span></li>
+            <li><span class="gr">Μέγεθος: 40m²</span><span class="en">Size: 40m²</span></li>
+            <li><span class="gr">Ιδιωτική βεράντα με θέα θάλασσα</span><span class="en">Private terrace with sea view</span></li>
+            <li><span class="gr">Πλήρως εξοπλισμένη κουζίνα</span><span class="en">Fully-equipped kitchen</span></li>
+          </ul>
+          <a href="https://direct-book.com/properties/filotimia"><span class="gr">ΚΡΑΤΗΣΗ</span><span class="en">BOOK NOW</span></a>
+        </div>
+      </div>
+
+      <!-- 2️⃣ Open-plan Stone Apartment -->
+      <div class="room-card">
+        <div class="room-image" onclick="openLightbox(1)" style="background-image:url('images/img205.jpeg');">
+          <span class="img-label gr">Προβολή γκαλερί</span>
+          <span class="img-label en">View gallery</span>
+        </div>
+        <div class="room-info">
+          <h2><span class="gr">Ανοιχτού Χώρου Πέτρινο Διαμέρισμα</span><span class="en">Open-plan Stone Apartment</span></h2>
+          <p>
+            <span class="gr">Μινιμαλιστικός και κομψός χώρος ιδανικός για δυο άτομα, με πέτρινη αισθητική και ηρεμία νησιού.</span>
+            <span class="en">Minimal and elegant open-plan space for two people, blending stone aesthetics with island calm.</span>
+          </p>
+          <ul>
+            <li><span class="gr">Μέγιστοι επισκέπτες: 2</span><span class="en">Max guests: 2</span></li>
+            <li><span class="gr">Κρεβάτι: Queen size</span><span class="en">Bed: Queen size</span></li>
+            <li><span class="gr">Μέγεθος: 30m²</span><span class="en">Size: 30m²</span></li>
+            <li><span class="gr">Φυσικός φωτισμός & ανοιχτή διάταξη με κλιματισμό</span><span class="en">Open layout natural light with air conditioning</span></li>
+            <li><span class="gr">Ιδιωτική βεράντα με θέα θάλασσα</span><span class="en">Private terrace with sea view</span></li>
+            <li><span class="gr">Πλήρως εξοπλισμένη κουζίνα</span><span class="en">Fully-equipped kitchen</span></li>
+          </ul>
+          <a href="https://direct-book.com/properties/filotimia"><span class="gr">ΚΡΑΤΗΣΗ</span><span class="en">BOOK NOW</span></a>
+        </div>
+      </div>
+
+      <!-- 3️⃣ Semi Basement Double Room -->
+      <div class="room-card">
+        <div class="room-image" onclick="openLightbox(2)" style="background-image:url('images/img99.jpeg');">
+          <span class="img-label gr">Προβολή γκαλερί</span>
+          <span class="img-label en">View gallery</span>
+        </div>
+        <div class="room-info">
+          <h2><span class="gr">Ημιυπόγειο Δίκλινο Δωμάτιο</span><span class="en">Semi Basement Double Room</span></h2>
+          <p>
+            <span class="gr">Άνετο και δροσερό δωμάτιο σε ημιυπόγειο επίπεδο, ιδανικό για δύο άτομα. Διαθέτει διπλό ή δύο μονά κρεβάτια και προσφέρει ευχάριστη διαμονή με δροσιά και άνεση τους καλοκαιρινούς μήνες — μια προσιτή επιλογή για τις διακοπές σας.</span>
+            <span class="en">Comfortable and naturally cool room on a semi-basement level, ideal for two guests. It offers either a double or two single beds—an affordable, refreshing summer stay.</span>
+          </p>
+          <ul>
+            <li><span class="gr">Μέγιστοι επισκέπτες: 2</span><span class="en">Max guests: 2</span></li>
+            <li><span class="gr">Κρεβάτι: Queen size</span><span class="en">Bed: Queen size</span></li>
+            <li><span class="gr">Εξωτερικός χώρος με τραπεζάκια και θέα</span><span class="en">Outdoor sitting area with a view</span></li>
+            <li><span class="gr">Κλιματισμός</span><span class="en">Air conditioning</span></li>
+            <li><span class="gr">Μοντέρνα μινιμαλιστική διακόσμηση</span><span class="en">Modern minimal decor</span></li>
+          </ul>
+          <a href="https://direct-book.com/properties/filotimia"><span class="gr">ΚΡΑΤΗΣΗ</span><span class="en">BOOK NOW</span></a>
+        </div>
+      </div>
+
+      <!-- 4️⃣ Triple Semi-Basement -->
+      <div class="room-card">
+        <div class="room-image" onclick="openLightbox(3)" style="background-image:url('images/img114.jpeg');">
+          <span class="img-label gr">Προβολή γκαλερί</span>
+          <span class="img-label en">View gallery</span>
+        </div>
+        <div class="room-info">
+          <h2><span class="gr">Τρίκλινο Ημιυπόγειο Δωμάτιο</span><span class="en">Triple Semi-Basement Room</span></h2>
+          <p>
+            <span class="gr">Άνετο τρίκλινο δωμάτιο σε ημιυπόγειο επίπεδο, δροσερό το καλοκαίρι. Ιδανικό για παρέες ή μικρές οικογένειες.</span>
+            <span class="en">Naturally cool triple room on a semi-basement level—ideal for friends or small families.</span>
+          </p>
+          <ul>
+            <li><span class="gr">Μέγιστοι επισκέπτες: 3</span><span class="en">Max guests: 3</span></li>
+            <li><span class="gr">Εξωτερικός χώρος με τραπεζάκια και θέα</span><span class="en">Outdoor sitting area with a view</span></li>
+            <li><span class="gr">Άνετη & πρακτική διάταξη</span><span class="en">Spacious and practical</span></li>
+            <li><span class="gr">Κλιματισμός</span><span class="en">Air conditioning</span></li>
+            <li><span class="gr">Πλήρως εξοπλισμένη κουζίνα</span><span class="en">Fully-equipped kitchen</span></li>
+          </ul>
+          <a href="https://direct-book.com/properties/filotimia"><span class="gr">ΚΡΑΤΗΣΗ</span><span class="en">BOOK NOW</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-controls">
+    <span onclick="changeImage(-1)">‹</span>
+    <span onclick="changeImage(1)">›</span>
+  </div>
+  <img id="lightbox-img" src="" alt="Room Photo">
+</div>
+
+<!-- FOOTER -->
+<footer class="new-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/img17.jpg" alt="Filotimia Logo" />
+      <h3>Filotimia Apartments<br>+30 694 881 3906</h3>
+    </div>
+    <div class="footer-links">
+      <h4><span class="gr">Σχετικά & Επικοινωνία</span><span class="en">About & Contact</span></h4>
+      <a href="about us.html"><span class="gr">Σχετικά με εμάς</span><span class="en">About Us</span></a>
+      <a href="contact us.html"><span class="gr">Επικοινωνία</span><span class="en">Contact</span></a>
+    </div>
+    <div class="footer-links">
+      <h4><span class="gr">Υπηρεσίες</span><span class="en">Services</span></h4>
+      <a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en">Rooms</span></a>
+      <a href="#"><span class="gr">Όροι Χρήσης</span><span class="en">Terms of Use</span></a>
+    </div>
+    <div class="footer-links">
+      <h4><span class="gr">Social</span><span class="en">Social</span></h4>
+      <a href="#"><span class="gr">Instagram</span><span class="en">Instagram</span></a>
+      <a href="#"><span class="gr">YouTube</span><span class="en">YouTube</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><span class="gr">© 2025 Filotimia Schoinousa • Όλα τα δικαιώματα κατοχυρωμένα</span><span class="en">© 2025 Filotimia Schoinousa • All rights reserved</span></p>
+  </div>
+</footer>
+
+<button id="scrollToTopBtn" title="Πήγαινε στην αρχή">↑</button>
+
+<script>
+  // Mobile menu toggle (same pattern as example)
+  const menuToggle=document.getElementById('menuToggle');
+  const navMenu=document.getElementById('navMenu');
+  menuToggle.addEventListener('click',()=>{navMenu.classList.toggle('open');});
+
+  // Language switch (same UX as example)
+  const langButtons=document.querySelectorAll('.lang-btn');
+  function setLanguage(lang){
+    document.documentElement.lang = (lang==='gr'?'el':'en');
+    document.querySelectorAll('.gr').forEach(el=>el.style.display=(lang==='gr'?'inline':'none'));
+    document.querySelectorAll('.en').forEach(el=>el.style.display=(lang==='en'?'inline':'none'));
+    localStorage.setItem('siteLang',lang);
+    langButtons.forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+  }
+  langButtons.forEach(btn=>btn.addEventListener('click',()=>setLanguage(btn.dataset.lang)));
+  setLanguage(localStorage.getItem('siteLang')||'gr');
+
+  // Scroll to top
+  const scrollToTopBtn=document.getElementById('scrollToTopBtn');
+  window.addEventListener('scroll',()=>{scrollToTopBtn.style.display=window.scrollY>400?'block':'none'});
+  scrollToTopBtn.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
+
+  // Call button (desktop: copy to clipboard + show tooltip)
+  (function () {
+    const btn = document.getElementById('callBtn');
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    const number = '+30 69 4881 3906';
+    if (!isMobile) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        btn.classList.add('open');
+        setTimeout(() => btn.classList.remove('open'), 1800);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(number);
+        }
+      });
+    }
+  })();
+
+  // Lightbox galleries
+  document.addEventListener('DOMContentLoaded', () => {
+    const roomImages = [
+      [
+        'images/img63.jpeg','images/img50.jpeg','images/img51.jpeg','images/img52.jpeg','images/img53.jpeg','images/img54.jpeg',
+        'images/img55.jpeg','images/img56.jpeg','images/img57.jpeg','images/img58.jpeg','images/img59.jpeg',
+        'images/img60.jpeg','images/img61.jpeg','images/img62.jpeg','images/img64.jpeg','images/img65.jpeg',
+        'images/img66.jpeg','images/img67.jpeg','images/img68.jpeg','images/img69.jpeg','images/img70.jpeg',
+        'images/img71.jpeg','images/img72.jpeg','images/img73.jpeg','images/img74.jpeg','images/img405.jpeg','images/img406.jpeg','images/img407.jpeg','images/img408.jpeg','images/img409.jpeg','images/img410.jpeg','images/img411.jpeg','images/img412.jpeg','images/img413.jpeg'
+      ],
+      [
+        'images/img205.jpeg','images/img306.jpeg','images/img302.jpeg','images/img304.jpeg','images/img305.jpeg','images/img307.jpeg','images/img308.jpeg','images/img309.jpeg','images/img310.jpeg','images/img312.jpeg','images/img313.jpeg','images/img314.jpeg','images/img315.jpeg','images/img316.jpeg','images/img317.jpeg','images/img318.jpeg','images/img319.jpeg','images/img320.jpeg','images/img321.jpeg','images/img206.jpeg','images/img301.jpeg'
+      ],
+      [
+        'images/img99.jpeg','images/img90.jpeg','images/img91.jpeg','images/img92.jpeg','images/img93.jpeg','images/img94.jpeg','images/img95.jpeg','images/img96.jpeg','images/img97.jpeg','images/img98.jpeg','images/img100.jpeg','images/img101.jpeg','images/img102.jpeg','images/img103.jpeg','images/img104.jpeg','images/img105.jpeg'
+      ],
+      [
+        'images/img114.jpeg','images/img106.jpeg','images/img107.jpeg','images/img108.jpeg','images/img109.jpeg','images/img110.jpeg','images/img111.jpeg','images/img112.jpeg','images/img113.jpeg','images/img115.jpeg','images/img116.jpeg'
+      ]
+    ];
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentSet = 0, currentImg = 0;
+
+    window.openLightbox = function (setIndex) {
+      const set = roomImages[setIndex];
+      if (!set || !set.length) return;
+      currentSet = setIndex;
+      currentImg = 0;
+      lightboxImg.src = set[currentImg];
+      lightbox.style.display = 'flex';
+    };
+
+    window.changeImage = function (dir) {
+      const set = roomImages[currentSet] || [];
+      if (!set.length) return;
+      currentImg = (currentImg + dir + set.length) % set.length;
+      lightboxImg.src = set[currentImg];
+    };
+
+    lightbox.addEventListener('click', function (e) {
+      if (e.target.id === 'lightbox') this.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', function (e) {
+      const visible = window.getComputedStyle(lightbox).display !== 'none';
+      if (!visible) return;
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      else if (e.key === 'ArrowRight') changeImage(1);
+      else if (e.key === 'Escape') lightbox.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>
