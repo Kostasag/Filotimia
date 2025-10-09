@@ -171,18 +171,23 @@
     <div class="contact-wrap">
       <h2><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></h2>
 
-      <form action="mailto:info@filotimia.gr" method="POST" enctype="text/plain">
-        <div class="form-row">
-          <input type="text" name="firstname" data-gr="Όνομα" data-en="First name" placeholder="Όνομα" required>
-          <input type="text" name="lastname" data-gr="Επώνυμο" data-en="Last name" placeholder="Επώνυμο" required>
-        </div>
-        <div class="form-row">
-          <input type="email" name="email" data-gr="Email" data-en="Email" placeholder="Email" required>
-          <input type="text" name="phone" data-gr="Τηλέφωνο" data-en="Phone" placeholder="Τηλέφωνο">
-        </div>
-        <textarea name="message" data-gr="Το μήνυμά σας..." data-en="Your message..." placeholder="Το μήνυμά σας..." required></textarea>
-        <button type="submit"><span class="gr">Αποστολή</span><span class="en" style="display:none;">Send</span></button>
-      </form>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+  <input type="hidden" name="form-name" value="contact" />
+  <p style="display:none;"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+  <!-- your fields -->
+  <div class="form-row">
+    <input type="text" name="firstname" placeholder="Όνομα" required>
+    <input type="text" name="lastname"  placeholder="Επώνυμο" required>
+  </div>
+  <div class="form-row">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text"  name="phone" placeholder="Τηλέφωνο">
+  </div>
+  <textarea name="message" placeholder="Το μήνυμά σας..." required></textarea>
+
+  <button type="submit">Αποστολή</button>
+</form>
 
       <div class="map-box">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.751176090709!2d25.5153851!3d36.881063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14981b003c577321%3A0xed3e225574de0b36!2sFilotimia%20Apartments!5e0!3m2!1sel!2sgr!4v1712345678901" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -244,6 +249,28 @@
     localStorage.setItem('siteLang',lang);
   }
   setLanguage(localStorage.getItem('siteLang')||'gr');
+</script>
+
+
+<script>
+const form = document.forms['contact'];
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  // Netlify needs form-name in the body for JS submits
+  data.append('form-name', 'contact');
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: new URLSearchParams([...data]).toString()
+    });
+    alert('Ευχαριστούμε! Το μήνυμα στάλθηκε.');
+    form.reset();
+  } catch {
+    alert('Κάτι πήγε στραβά. Προσπαθήστε ξανά.');
+  }
+});
 </script>
 
 </body>
