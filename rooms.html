@@ -132,11 +132,19 @@
     .room-info a{align-self:flex-start;padding:12px 26px;border-radius:30px;background-color:#02649c;color:#fff;text-decoration:none;font-weight:700;letter-spacing:.2px;transition:all .25s ease;box-shadow:0 10px 20px rgba(2,100,156,.25)}
     .room-info a:hover{background-color:#00b9da;transform:translateY(-1px)}
 
-    /* ===== LIGHTBOX ===== */
+    /* ===== LIGHTBOX ===== */  
     .lightbox{display:none;position:fixed;z-index:1000;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center}
     .lightbox img{max-width:90%;max-height:82%;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
     .lightbox-controls{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 30px}
-    .lightbox-controls span{font-size:3rem;color:#fff;cursor:pointer;user-select:none}
+    .lightbox-controls span{font-size:3rem;color:#fff;cursor:pointer;user-select:none} 
+
+    #lightbox-img{
+  max-width: 92vw; max-height: 90vh;
+  will-change: opacity;
+  transition: opacity .18s ease;
+}
+#lightbox-img.lb-fade-out{ opacity: 0; }
+#lightbox-img.lb-fade-in { opacity: 1; }
 
     /* ===== CALL BUTTON (same as example) ===== */
     .call-button {
@@ -188,6 +196,146 @@
       .hero-box{border-radius:16px}
       .lightbox img{max-width:95%;max-height:80vh}
     }
+
+
+
+
+
+
+
+
+    /* Smaller hero box on phones (Rooms hero) */
+@media (max-width: 560px){
+  /* narrower overall container & a bit lower */
+  .hero-overlay{
+    width: min(88%, 380px);             /* tweak 340–420px */
+    bottom: clamp(12px, 4vh, 24px);
+  }
+
+  /* tighter, lighter glass card */
+  .hero-box{
+    padding: .7rem .9rem;               /* was ~1.2rem 1.4rem */
+    border-radius: 14px;
+    background: rgba(18,25,34,.30);     /* more transparent */
+    border: 1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.25);
+  }
+
+  /* compact text */
+  .hero-kicker{ font-size: .72rem; padding: 3px 8px; }
+  .hero-box h1{
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin: .25rem 0 .5rem;
+  }
+  .hero-sub{
+    font-size: .9rem; line-height: 1.45;
+    max-width: 48ch; margin: 0 auto .7rem; opacity:.9;
+  }
+
+  /* smaller buttons */
+  .hero-cta{ gap: 8px; }
+  .hero-btn{ padding: .55rem .9rem; font-size: .9rem; border-radius: 999px; }
+  .hero-btn.primary{ box-shadow: 0 10px 18px rgba(20,141,198,.25); }
+}
+
+/* Extra small phones: make it even tighter */
+@media (max-width: 380px){
+  .hero-overlay{ width: min(90%, 340px); }
+  .hero-sub{ display: none; }           /* hide description on very small screens */
+  .hero-btn{ padding: .5rem .85rem; font-size: .85rem; }
+}
+
+/* Lift the hero box higher on phones */
+@media (max-width: 560px){
+  .hero-overlay{
+    bottom: clamp(36px, 9vh, 72px); /* ↑ increase to move it higher */
+  }
+}
+
+
+
+
+
+/* Control the vertical framing of the hero video */
+.video-iframe-wrapper{ --video-y: -50%; } /* default center */
+
+.video-iframe-wrapper iframe{
+  transform: translate(-50%, var(--video-y)); /* was translate(-50%, -50%) */
+}
+
+/* Desktop tweak: show more rooms (less sky) */
+@media (min-width: 561px){
+  .video-iframe-wrapper{ --video-y: -63%; }  /* try -54% to -60% */
+}
+
+/* Mobile tweak (often needs a bit more) */
+@media (max-width: 560px){
+  .video-iframe-wrapper{ --video-y: -60%; }  /* adjust to taste */
+}
+
+/* Keep video covering when we shift it vertically */
+.video-iframe-wrapper{
+  --video-y: -56%;      /* move up to show more rooms (less sky) */
+  --video-scale: 1.06;  /* slight zoom so no gaps appear */
+}
+
+.video-iframe-wrapper iframe{
+  transform: translate(-50%, var(--video-y)) scale(var(--video-scale));
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Mobile: usually needs a touch more shift + scale */
+@media (max-width:560px){
+  .video-iframe-wrapper{
+    --video-y: -58%;    /* adjust to taste: -58% … -62% */
+    --video-scale: 1.08;
+  }
+}
+
+
+/* Ensure the hero video still covers on mobile after shifting */
+@media (max-width: 560px){
+  /* how much to shift (more negative = less sky) + how much to zoom */
+  .video-iframe-wrapper{
+    --video-y: -62%;     /* try -58% … -66% */
+    --video-scale: 1.16; /* try 1.12 … 1.22 */
+  }
+
+  .video-iframe-wrapper iframe{
+    /* make the iframe big enough so no blue shows at edges */
+    min-height: 115vh;          /* bigger than viewport height */
+    min-width: 204.5vh;         /* 115 * (16/9) to keep 16:9 while covering */
+    transform: translate(-50%, var(--video-y)) scale(var(--video-scale));
+    transform-origin: center top; /* scale expands downward too */
+  }
+
+  /* Optional: if any edge still flashes, darken the layer behind the video */
+  .video-background-section{ background: #000; }
+}
+/* Ensure the hero video still covers on mobile after shifting */
+@media (max-width: 560px){
+  /* how much to shift (more negative = less sky) + how much to zoom */
+  .video-iframe-wrapper{
+    --video-y: -62%;     /* try -58% … -66% */
+    --video-scale: 1.16; /* try 1.12 … 1.22 */
+  }
+
+  .video-iframe-wrapper iframe{
+    /* make the iframe big enough so no blue shows at edges */
+    min-height: 115vh;          /* bigger than viewport height */
+    min-width: 204.5vh;         /* 115 * (16/9) to keep 16:9 while covering */
+    transform: translate(-50%, var(--video-y)) scale(var(--video-scale));
+    transform-origin: center top; /* scale expands downward too */
+  }
+
+  /* Optional: if any edge still flashes, darken the layer behind the video */
+  .video-background-section{ background: #000; }
+}
+
+
   </style>
 </head>
 <body>
@@ -451,59 +599,137 @@
     }
   })();
 
-  // Lightbox galleries
-  document.addEventListener('DOMContentLoaded', () => {
-    const roomImages = [
-      [
-        'images/img63.jpeg','images/img50.jpeg','images/img51.jpeg','images/img52.jpeg','images/img53.jpeg','images/img54.jpeg',
-        'images/img55.jpeg','images/img56.jpeg','images/img57.jpeg','images/img58.jpeg','images/img59.jpeg',
-        'images/img60.jpeg','images/img61.jpeg','images/img62.jpeg','images/img64.jpeg','images/img65.jpeg',
-        'images/img66.jpeg','images/img67.jpeg','images/img68.jpeg','images/img69.jpeg','images/img70.jpeg',
-        'images/img71.jpeg','images/img72.jpeg','images/img73.jpeg','images/img74.jpeg','images/img405.jpeg','images/img406.jpeg','images/img407.jpeg','images/img408.jpeg','images/img409.jpeg','images/img410.jpeg','images/img411.jpeg','images/img412.jpeg','images/img413.jpeg'
-      ],
-      [
-        'images/img205.jpeg','images/img306.jpeg','images/img302.jpeg','images/img304.jpeg','images/img305.jpeg','images/img307.jpeg','images/img308.jpeg','images/img309.jpeg','images/img310.jpeg','images/img312.jpeg','images/img313.jpeg','images/img314.jpeg','images/img315.jpeg','images/img316.jpeg','images/img317.jpeg','images/img318.jpeg','images/img319.jpeg','images/img320.jpeg','images/img321.jpeg','images/img206.jpeg','images/img301.jpeg'
-      ],
-      [
-        'images/img99.jpeg','images/img90.jpeg','images/img91.jpeg','images/img92.jpeg','images/img93.jpeg','images/img94.jpeg','images/img95.jpeg','images/img96.jpeg','images/img97.jpeg','images/img98.jpeg','images/img100.jpeg','images/img101.jpeg','images/img102.jpeg','images/img103.jpeg','images/img104.jpeg','images/img105.jpeg'
-      ],
-      [
-        'images/img114.jpeg','images/img106.jpeg','images/img107.jpeg','images/img108.jpeg','images/img109.jpeg','images/img110.jpeg','images/img111.jpeg','images/img112.jpeg','images/img113.jpeg','images/img115.jpeg','images/img116.jpeg'
-      ]
-    ];
-
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    let currentSet = 0, currentImg = 0;
-
-    window.openLightbox = function (setIndex) {
-      const set = roomImages[setIndex];
-      if (!set || !set.length) return;
-      currentSet = setIndex;
-      currentImg = 0;
-      lightboxImg.src = set[currentImg];
-      lightbox.style.display = 'flex';
-    };
-
-    window.changeImage = function (dir) {
-      const set = roomImages[currentSet] || [];
-      if (!set.length) return;
-      currentImg = (currentImg + dir + set.length) % set.length;
-      lightboxImg.src = set[currentImg];
-    };
-
-    lightbox.addEventListener('click', function (e) {
-      if (e.target.id === 'lightbox') this.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', function (e) {
-      const visible = window.getComputedStyle(lightbox).display !== 'none';
-      if (!visible) return;
-      if (e.key === 'ArrowLeft') changeImage(-1);
-      else if (e.key === 'ArrowRight') changeImage(1);
-      else if (e.key === 'Escape') lightbox.style.display = 'none';
-    });
-  });
+ 
 </script>
+
+<script>
+/* Fast, smooth lightbox with preload + swipe */
+document.addEventListener('DOMContentLoaded', () => {
+  const roomImages = [
+    [
+      'images/img63.jpeg','images/img51.jpeg','images/img52.jpeg','images/img53.jpeg','images/img54.jpeg',
+      'images/img55.jpeg','images/img56.jpeg','images/img57.jpeg','images/img58.jpeg','images/img59.jpeg',
+      'images/img60.jpeg','images/img61.jpeg','images/img62.jpeg','images/img64.jpeg','images/img65.jpeg',
+      'images/img66.jpeg','images/img67.jpeg','images/img68.jpeg','images/img69.jpeg','images/img70.jpeg',
+      'images/img71.jpeg','images/img72.jpeg','images/img73.jpeg','images/img74.jpeg','images/img405.jpeg','images/img406.jpeg','images/img407.jpeg','images/img408.jpeg','images/img409.jpeg','images/img410.jpeg','images/img411.jpeg','images/img412.jpeg','images/img413.jpeg'
+    ],
+    [
+      'images/img205.jpeg','images/img306.jpeg','images/img302.jpeg','images/img304.jpeg','images/img305.jpeg','images/img307.jpeg','images/img308.jpeg','images/img309.jpeg','images/img310.jpeg','images/img312.jpeg','images/img313.jpeg','images/img314.jpeg','images/img315.jpeg','images/img316.jpeg','images/img317.jpeg','images/img318.jpeg','images/img319.jpeg','images/img320.jpeg','images/img321.jpeg','images/img206.jpeg','images/img301.jpeg'
+    ],
+    [
+      'images/img99.jpeg','images/img90.jpeg','images/img91.jpeg','images/img92.jpeg','images/img93.jpeg','images/img94.jpeg','images/img95.jpeg','images/img96.jpeg','images/img97.jpeg','images/img98.jpeg','images/img100.jpeg','images/img101.jpeg','images/img102.jpeg','images/img103.jpeg','images/img104.jpeg','images/img105.jpeg'
+    ],
+    [
+      'images/img114.jpeg','images/img106.jpeg','images/img107.jpeg','images/img108.jpeg','images/img109.jpeg','images/img110.jpeg','images/img111.jpeg','images/img112.jpeg','images/img113.jpeg','images/img115.jpeg','images/img116.jpeg'
+    ]
+  ];
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  if (lightboxImg) { lightboxImg.decoding = 'async'; }
+
+  let currentSet = 0, currentImg = 0, isAnimating = false;
+
+  // Lightweight promise cache for preloaded images
+  const cache = new Map();
+  const preload = (src) => {
+    if (!src) return Promise.resolve();
+    if (cache.has(src)) return cache.get(src);
+    const img = new Image();
+    img.decoding = 'async';
+    const p = new Promise((res, rej) => {
+      img.onload = () => res(src);
+      img.onerror = rej;
+    });
+    img.src = src;
+    cache.set(src, p);
+    // simple cap to avoid unbounded growth
+    if (cache.size > 32) cache.delete(cache.keys().next().value);
+    return p;
+  };
+
+  const preloadNeighbors = () => {
+    const set = roomImages[currentSet] || [];
+    if (!set.length) return;
+    preload(set[(currentImg + 1) % set.length]);
+    preload(set[(currentImg - 1 + set.length) % set.length]);
+  };
+
+  // Public: open the lightbox
+  window.openLightbox = function (setIndex, startIndex = 0) {
+    const set = roomImages[setIndex];
+    if (!set || !set.length) return;
+    currentSet = setIndex;
+    currentImg = Math.max(0, Math.min(startIndex, set.length - 1));
+    const src = set[currentImg];
+
+    preload(src).then(() => {
+      lightboxImg.classList.remove('lb-fade-in','lb-fade-out');
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+      requestAnimationFrame(() => {
+        lightboxImg.classList.add('lb-fade-in');
+        setTimeout(() => lightboxImg.classList.remove('lb-fade-in'), 180);
+      });
+      preloadNeighbors();
+    });
+  };
+
+  // Public: change image with smooth swap
+  window.changeImage = function (dir) {
+    if (isAnimating) return;
+    const set = roomImages[currentSet] || [];
+    if (!set.length) return;
+
+    const nextIndex = (currentImg + dir + set.length) % set.length;
+    const nextSrc = set[nextIndex];
+    isAnimating = true;
+
+    // Preload first -> then cross-fade quickly (no blank frame)
+    preload(nextSrc).then(() => {
+      lightboxImg.classList.add('lb-fade-out');
+      lightboxImg.addEventListener('transitionend', () => {
+        currentImg = nextIndex;
+        lightboxImg.src = nextSrc;
+        lightboxImg.classList.remove('lb-fade-out');
+        lightboxImg.classList.add('lb-fade-in');
+        setTimeout(() => lightboxImg.classList.remove('lb-fade-in'), 180);
+        isAnimating = false;
+        preloadNeighbors();
+      }, { once: true });
+    }).catch(() => { isAnimating = false; });
+  };
+
+  // Close on backdrop click
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.style.display = 'none';
+  });
+
+  // Keyboard controls
+  document.addEventListener('keydown', (e) => {
+    const visible = getComputedStyle(lightbox).display !== 'none';
+    if (!visible) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); window.changeImage(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); window.changeImage(1); }
+    if (e.key === 'Escape') lightbox.style.display = 'none';
+  });
+
+  // Mobile swipe (horizontal)
+  let sx = null, sy = null;
+  lightbox.addEventListener('touchstart', (e) => {
+    const t = e.changedTouches[0];
+    sx = t.clientX; sy = t.clientY;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (sx == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - sx;
+    const dy = Math.abs(t.clientY - sy);
+    if (Math.abs(dx) > 40 && dy < 60) window.changeImage(dx > 0 ? -1 : 1);
+    sx = sy = null;
+  }, { passive: true });
+});
+</script>
+
 </body>
 </html>

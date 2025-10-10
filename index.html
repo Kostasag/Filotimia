@@ -273,48 +273,246 @@ body { min-height: 100vh; }
   :root{ --book-x: 40px; }  /* try 10–20px based on your layout */
 }
 
+
+
+/* Phones: move and shrink the icon a bit */
+@media (max-width:560px){
+  /* move/shrink the icon */
+  .field i{
+    left: 8px;
+    top: 28px;       /* tweak this up/down */
+    font-size: 13px;
+  }
+
+  /* make room for the icon inside inputs */
+  .field input[type="date"],
+  .field select{
+    padding-left: 30px;  /* ≈ left(8) + size(13) + gap(9) */
+  }
+
+  /* per-field fine-tuning (optional) */
+  .booking-grid .field:nth-of-type(1) i{ top: 11px; } /* check-in */
+  .booking-grid .field:nth-of-type(2) i{ top: 11px; } /* check-out */
+  .booking-grid .field:nth-of-type(3) i{ top: 11px; } /* guests */
+}
+
+
 /* ===== SCHOINOUSA SECTION STYLES ===== */
-.schoinousa-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 20px;
-  background-color: #fdf5e6;
-  color: #2c3e50;
-  opacity: 0;
-  transform: translateY(-60px);
-  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+/* ==== Pro layout & styling for Schoinousa section ==== */
+.schoinousa-section{
+  --ink:#1e2a32;
+  --muted:#5f6b74;
+  --brand:#0ea5b3;
+  --card: rgba(255, 255, 255, 0.65);
+  --ring: rgba(139, 137, 137, 0.45);
+
+  padding: clamp(56px, 8vw, 120px) 20px;
+  
+  color: var(--ink);
 }
 
-.schoinousa-section.show-section {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.schoinousa-container {
-  display: flex;
-  flex-wrap: wrap;
+.schoinousa-wrap{
   max-width: 1200px;
-  gap: 40px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;  /* image | text */
+  gap: clamp(20px, 4vw, 40px);
   align-items: center;
 }
 
-.schoinousa-image img {
-  width: 100%;
-  max-width: 700px;
+/* Media */
+.schoinousa-media{
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow: 0 20px 50px rgba(0,0,0,.14);
+  isolation: isolate;
+}
+.schoinousa-media img{
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.035);
+  transition: transform .8s ease;
+}
+.schoinousa-media:hover img{
+  transform: scale(1.06);
+}
+.schoinousa-media .media-caption{
+  position: absolute; left: 16px; bottom: 16px;
+  display: inline-flex; flex-direction: column; gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.36);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+}
+.schoinousa-media .media-caption .badge{
+  font-size: .78rem; letter-spacing: .3px;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(255,255,255,.2);
+}
+.schoinousa-media .media-caption h3{
+  margin: 0; font-size: clamp(1rem, 1.2vw + .8rem, 1.25rem);
+}
+
+/* Card */
+.schoinousa-card{
+  background: var(--card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--ring);
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  padding: clamp(16px, 3vw, 28px);
+}
+.schoinousa-card h2{
+  font-size: clamp(1.4rem, 1.6vw + 1rem, 2.1rem);
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: #0e2b3a;
+}
+.schoinousa-card p{
+  font-size: clamp(1rem, .25vw + .95rem, 1.08rem);
+  line-height: 1.7;
+  color: var(--ink);
+  opacity: .95;
+  margin: 0 0 12px;
 }
 
-.schoinousa-text {
-  flex: 1;
-  max-width: 600px;
+/* Facts pills */
+.facts{
+  list-style: none; padding: 0; margin: 10px 0 14px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.facts li{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 10px; border-radius: 999px;
+  background: rgba(14,165,179,.12);
+  color: #1f3a45; font-weight: 600; font-size: .92rem;
 }
 
-.schoinousa-text h2 { font-size: 2rem; margin-bottom: 15px; }
+/* CTAs */
+.cta-row{ display: flex; gap: 10px; flex-wrap: wrap; }
+.btn{
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 42px; padding: 0 16px; border-radius: 10px;
+  font-weight: 800; letter-spacing: .3px; text-decoration: none;
+  background: linear-gradient(135deg,#f2efe7,#cfc7b6); color:#1f2937;
+  box-shadow: 0 10px 26px rgba(0,0,0,.16), inset 0 -2px 0 rgba(0,0,0,.18);
+  transition: transform .06s ease, filter .15s ease, box-shadow .2s ease;
+}
+.btn:hover{ filter: brightness(1.06); box-shadow: 0 14px 34px rgba(0,0,0,.22); }
+.btn:active{ transform: translateY(1px); }
+.btn.ghost{
+  background: transparent; color: #0e2b3a; border: 1px solid rgba(3, 137, 150, 0.55);
+    box-shadow: 0 14px 34px rgba(0,0,0,.22);
+}
 
-.schoinousa-text p { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; }
+/* Responsive */
+@media (max-width: 2400px){
+  .schoinousa-wrap{ grid-template-columns: 1fr; }
+  .schoinousa-media{ order: 1; }
+  .schoinousa-card{ order: 2; }
+}
+@media (max-width: 560px){
+  .schoinousa-section{ padding: 44px 16px; }
+  .schoinousa-media{ aspect-ratio: 4 / 3; }
+  .schoinousa-media .media-caption{
+    left: 12px; bottom: 12px; padding: 8px 10px; border-radius: 10px;
+  }
+  .facts li{ font-size: .88rem; }
+  .btn{ height: 38px; padding: 0 14px; }
+}
 
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .schoinousa-media img{ transition: none; transform: none; }
+}
+
+
+
+/* Make the Schoinoussa image bigger and pushed left/up on desktop */
+@media (min-width: 700px){
+  .schoinousa-section{ overflow: visible; } /* allow the image to bleed out */
+
+  .schoinousa-wrap{
+    max-width: 1320px;                     /* give the layout more room */
+    grid-template-columns: 1.25fr .85fr;   /* bigger image vs text */
+    gap: clamp(32px, 5vw, 72px);
+  }
+
+  .schoinousa-media{
+    position: relative;
+    overflow: visible;                      /* so the glow can extend */
+    width: 109%;                            /* grow beyond its column */
+    max-width: none;
+    transform: translate(-8%, -18px);       /* push left & a bit up */
+    aspect-ratio: 16/9;                     /* a little taller feel */
+    z-index: 0;
+    box-shadow: 0 28px 68px rgba(0,0,0,.16);
+  }
+
+  /* keep rounded corners on the actual image since container overflows */
+  .schoinousa-media img{
+    border-radius: 22px;
+    transform: scale(1.02);                 /* gentle presence boost */
+  }
+
+  /* soft halo behind the image (subtle, can remove if you don’t want it) */
+  .schoinousa-media::after{
+    content:"";
+    position:absolute;
+    inset:-26px -34px -34px -42px;          /* how far the glow extends */
+    border-radius: 28px;
+    background:
+      radial-gradient(700px 380px at 15% 0%, rgba(14,165,179,.18), transparent 60%),
+      radial-gradient(700px 380px at 95% 100%, rgba(20,108,148,.14), transparent 60%);
+    filter: blur(18px);
+    opacity:.55;
+    z-index:-1;
+    pointer-events:none;
+  }
+}
+
+/* Slightly more space above/below the whole section */
+.schoinousa-section{ padding-block: clamp(80px, 10vw, 160px); }
+
+@media (max-width: 560px){
+  .schoinousa-section{ padding-block: clamp(56px, 12vw, 96px); }
+  .schoinousa-media{
+    width: 95vw;
+    max-width: none;
+    margin-left: calc(55% - 50vw);
+    margin-right: calc(50% - 50vw);
+    aspect-ratio: 4 / 3;
+    transform: none !important;
+    margin-block: 12px;
+  }
+}
+
+
+/* Only the SEE ROOMS button (the non-ghost one) */
+.schoinousa-card .btn:not(.ghost){
+  /* change these to your color */
+   background: transparent; color: #0e2b3a; border: 1px solid rgba(3, 137, 150, 0.55);
+ 
+}
+
+.schoinousa-card .btn:not(.ghost):hover{
+  filter: brightness(1.06);
+  box-shadow: 0 14px 34px rgba(0,0,0,.22);
+}
+
+.schoinousa-card .btn:not(.ghost):active{
+  transform: translateY(1px);
+}
+
+/* optional: focus ring */
+.schoinousa-card .btn:not(.ghost):focus-visible{
+  outline: 3px solid rgba(14,165,179,.45);
+  outline-offset: 2px;
+}
 
 /* line seperator1 */
 
@@ -1367,7 +1565,7 @@ body.light-mode .footer-bottom {
   --mc-gap: 20px;
 
   /* NEW: control animation speed/easing */
-  --mc-speed: 560ms;                       /* slower than before (420ms). Try 700ms for very slow */
+  --mc-speed: 360ms;                       /* slower than before (420ms). Try 700ms for very slow */
   --mc-ease: cubic-bezier(.22,.61,.36,1);  /* motion feel */
 
   position:relative;
@@ -1375,6 +1573,23 @@ body.light-mode .footer-bottom {
   margin:0 auto;
   padding:0 96px;          /* room for arrows */
 }
+
+
+/* Ensure stable layout + fade-in when images load */
+#gallery-rooms .mc-slide{ 
+  aspect-ratio: 4 / 3;   /* use your real ratio if different (e.g., 16/9, 3/2) */
+}
+
+#gallery-rooms .mc-slide img{
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+#gallery-rooms .mc-slide img.is-loaded{
+  opacity: 1;
+}
+
+
 
 /* No native scrolling → no lag, no bar */
 #gallery-rooms .mc-viewport{
@@ -1458,6 +1673,8 @@ body.light-mode .footer-bottom {
   #gallery-rooms .mc-arrow{ width:52px; height:52px; }
   #gallery-rooms .mc-arrow svg{ width:22px; height:22px; }
 }
+
+
 
 
   </style>
@@ -1584,6 +1801,224 @@ body.drawer-open { overflow: hidden; }
     margin-bottom:10px;
   }
 }
+
+
+/* === COMPACT BOOK BOX (MOBILE) === */
+@media (max-width: 560px){
+  /* Card smaller + lighter */
+  #book-box{
+    width: min(88vw, 320px);
+    padding: 8px 10px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+    border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.22);
+    bottom: 10px;
+    transform: translateX(calc(-50% + var(--book-x))); /* keep centered logic */
+  }
+
+  /* Tighter grid & spacing */
+  .booking-grid{
+    grid-template-columns: 1fr 1fr; /* two columns to reduce height */
+    gap: 8px 8px;
+    align-items: center;
+  }
+
+  /* Hide small labels; rely on placeholders */
+  .field .label{ display: none; }
+
+  /* Smaller inputs */
+  .field i{
+    left: 10px;
+    top: 32px;
+    font-size: 14px;
+    opacity: .85;
+  }
+  .field input[type="date"],
+  .field select{
+    height: 40px;                 /* was 48px */
+    padding: 8x 10px 8px 5px;   /* tighter */
+    font-size: 13px;
+    border-radius: 7px;
+  }
+
+
+
+  /* Smaller CTA */
+  .book-btn{
+    height: 42px;                 /* was 48px */
+    padding: 0 16px;
+    font-size: .9rem;
+    border-radius: 10px;
+    grid-column: 1 / -1;          /* full width */
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px){
+  #book-box{ width: min(90vw, 300px); padding: 8px; }
+  .booking-grid{ gap: 6px; }
+  .field input[type="date"], .field select{ height: 38px; font-size: 12.5px; }
+  .book-btn{ height: 40px; font-size: .88rem; }
+}
+
+/* Remove previous phone nudge so it stays centered */
+@media (max-width: 300px){
+  :root{ --book-x: 0px; }  /* was 40px */
+}
+
+
+
+/* === Tighter mobile layout: smaller CTA + narrower checkout === */
+@media (max-width: 560px){
+
+  /* Keep the card compact */
+  #book-box{
+    width: min(86vw, 300px);
+    padding: 8px 10px;
+  }
+
+  /* Make columns uneven: check-in wider, check-out narrower */
+  .booking-grid{
+    grid-template-columns: 1.25fr 0.75fr; /* ci | co */
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Inputs – smaller (also fixes your 8x typo) */
+  .field input[type="date"],
+  .field select{
+    height: 36px;
+    padding: 7px 10px 7px 28px; /* room for the left icon */
+    font-size: 12.5px;
+    border-radius: 8px;
+  }
+
+  /* Checkout (2nd field) – shrink inside the grid cell */
+  .booking-grid .field:nth-of-type(2){
+    max-width: 150px;         /* cap width so it looks visibly smaller */
+    justify-self: end;        /* hug the right side of its column */
+  }
+  .booking-grid .field:nth-of-type(2) input{
+    height: 34px;             /* a touch shorter than the first */
+    font-size: 12.2px;
+    padding: 6px 9px 6px 26px;
+  }
+
+  /* Book Now – smaller and not full width */
+  .book-btn{
+    height: 36px;             /* smaller button */
+    padding: 0 12px;
+    font-size: .82rem;
+    border-radius: 9px;
+    width: 90%;               /* not full width */
+    grid-column: 1 / -1;      /* still sits on its own row */
+    justify-self: center;     /* centered in the card */
+  }
+
+  /* Optional: hide labels to save height */
+  .field .label{ display:none; }
+
+  /* Icon position to match smaller inputs */
+  .field i{ left: 8px; top: 28px; font-size: 13px; }
+}
+
+/* Extra small phones */
+@media (max-width: 380px){
+  .booking-grid .field:nth-of-type(2){ max-width: 135px; }
+  .book-btn{ height: 34px; font-size: .8rem; }
+}
+
+
+/* === Make BOTH date boxes smaller on phones === */
+@media (max-width: 560px){
+
+  /* Two compact columns centered inside the card */
+  .booking-grid{
+    grid-template-columns: auto auto;   /* let items size themselves */
+    justify-content: center;
+    gap: 6px 8px;
+  }
+
+  /* 1) Check-in (1st field) – a bit wider */
+  .booking-grid .field:nth-of-type(1){
+    width: clamp(110px, 40vw, 150px);
+    justify-self: end;
+  }
+  .booking-grid .field:nth-of-type(1) input{
+    height: 34px;
+    font-size: 12.2px;
+    padding: 6px 9px 6px 26px;
+    border-radius: 8px;
+  }
+
+  /* 2) Check-out (2nd field) – slightly narrower than check-in */
+  .booking-grid .field:nth-of-type(2){
+    width: clamp(110px, 40vw, 150px);
+    justify-self: start;
+  }
+
+  .booking-grid .field:nth-of-type(2) input{
+    height: 34px;
+    font-size: 12.1px;
+    padding: 6px 9px 6px 26px;
+    border-radius: 8px;
+  }
+
+  /* Keep the guests field on the next row, full width */
+  .booking-grid .field:nth-of-type(3){
+    grid-column: 1 / -1;
+  }
+
+  /* Tighter icon position for the smaller inputs */
+  .field i{ left: 8px; top: 26px; font-size: 13px; }
+
+  /* Smaller CTA (you can tweak width/height if you want even tighter) */
+  .book-btn{
+    height: 36px;
+    padding: 0 12px;
+    font-size: .82rem;
+    border-radius: 9px;
+    grid-column: 1 / -1;
+    width: 88%;
+    justify-self: center;
+  }
+}
+@media (max-width: 560px){
+  .nights-box { display: none; }
+}
+
+
+/* Make only the translucent background bigger on phones */
+@media (max-width: 600px){
+  /* hide the original bg/border so we don't double it */
+  #book-box{
+    background: transparent;
+    border-color: transparent;
+    position: absolute; /* already absolute, ok to repeat */
+  }
+
+  /* new larger background behind the content */
+  #book-box::before{
+    content:"";
+    position:absolute;
+    inset:-10px;                 /* expand 10px on all sides (tweak 6–16px) */
+    border-radius:16px;
+    background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+    border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.22);
+    z-index:-1;                  /* sits behind the form */
+    pointer-events:none;         /* never blocks clicks */
+  }
+}
+
+
+
+
 </style>
 
 </head>
@@ -1761,43 +2196,88 @@ body.drawer-open { overflow: hidden; }
 
 <!-- SCHOINOUSA SECTION -->
 <!-- SCHOINOUSA SECTION -->
-<section class="schoinousa-section">
-  <div class="schoinousa-container">
-    <div class="schoinousa-image">
-      <img src="https://webbox.imgix.net/images/emqjpecjwvcennsd/be8a8d78-59b5-4966-b190-5588afb75ccf.png" alt="Schoinousa" />
-    </div>
-    <div class="schoinousa-text">
+<section class="schoinousa-section" id="schoinousa">
+  <div class="schoinousa-wrap">
+    <!-- Media -->
+    <figure class="schoinousa-media">
+      <picture>
+        <!-- (Optional) add AVIF/WEBP sources if you have them -->
+        <!-- <source type="image/avif" srcset="images/schoinousa-1600.avif"> -->
+        <!-- <source type="image/webp" srcset="images/schoinousa-1600.webp"> -->
+        <img
+          src="https://webbox.imgix.net/images/emqjpecjwvcennsd/be8a8d78-59b5-4966-b190-5588afb75ccf.png"
+          alt="Schoinoussa island — aerial view"
+          width="1400" height="900" loading="lazy" decoding="async">
+      </picture>
+
+      <figcaption class="media-caption">
+        <span class="badge">Small Cyclades</span>
+        <h3>Σχοινούσα • Schoinoussa</h3>
+      </figcaption>
+    </figure>
+
+    <!-- Text card -->
+    <div class="schoinousa-card">
       <h2>
         <span class="gr">Ανακαλύπτοντας τη Σχοινούσα: Ένας Ήσυχος Παράδεισος στις Μικρές Κυκλάδες</span>
-        <span class="en" style="display: none;">Discovering Schoinoussa: A Quiet Paradise in the Small Cyclades</span>
+        <span class="en" style="display:none;">Discovering Schoinoussa: A Quiet Paradise in the Small Cyclades</span>
       </h2>
+
       <p>
         <span class="gr">
-          Η Σχοινούσα είναι ένα γραφικό νησί και βρίσκεται περίπου στο κέντρο των Μικρών Κυκλάδων, 
-          νότια της Νάξου και βορειανατολικά της Ηρακλειάς. Είναι ένα μικρό νησί, με λίγους κατοίκους 
-          (200) και έκταση 8,144 τ. Χλμ. που προσφέρεται για ήσυχες διακοπές.
+          Η Σχοινούσα είναι ένα μικρό, γραφικό νησί στο κέντρο των Μικρών Κυκλάδων, νότια της Νάξου και βορειοανατολικά της Ηρακλειάς.
+          Με έκταση μόλις ~8&nbsp;km² και περίπου 200 κατοίκους, προσφέρει την απόλυτη ηρεμία για όσους αναζητούν χαλαρές και αυθεντικές διακοπές.
         </span>
-        <span class="en" style="display: none;">
-          Schoinoussa is a picturesque island located roughly at the center of the Small Cyclades, 
-          south of Naxos and northeast of Iraklia. It's a small island with only around 200 residents 
-          and an area of 8.144 sq. km, ideal for peaceful holidays.
+        <span class="en" style="display:none;">
+          Schoinoussa is a small, picturesque island at the heart of the Small Cyclades—south of Naxos and northeast of Iraklia.
+          With an area of ~8&nbsp;km² and ~200 residents, it’s perfect for slow, authentic, peaceful holidays.
         </span>
       </p>
+
       <p>
         <span class="gr">
-          Η Σχοινούσα είναι το πιο άνυδρο μέρος της Ελλάδος, για λίγο δε χαρακτηρίζεται έρημος. 
-          Όμως τα διάφανα γαλαζοπράσινα νερά της, οι χρυσές παραλίες, τα άγρια τοπία και η απόκοσμη ηρεμία 
-          δημιουργούν μια μαγική ατμόσφαιρα για ξεκούραστες διακοπές.
+          Το νησί κατοικείται από την αρχαιότητα και διαθέτει δύο οικισμούς: τη <strong>Χώρα</strong> (1&nbsp;χλμ. από το λιμάνι)
+          και τη <strong>Μεσαριά</strong> (~2,5&nbsp;χλμ.). Η κλίμακα παραμένει ανθρώπινη, με ήρεμους ρυθμούς και εύκολη πρόσβαση σε παραλίες και μονοπάτια.
         </span>
-        <span class="en" style="display: none;">
-          Schoinoussa is the driest place in Greece—almost considered a desert. 
-          Yet, its crystal-clear turquoise waters, golden beaches, wild landscapes, 
-          and otherworldly tranquility create a magical atmosphere for restful vacations.
+        <span class="en" style="display:none;">
+          Inhabited since antiquity, the island has two settlements: <strong>Chora</strong> (1&nbsp;km from the port) and
+          <strong>Messaria</strong> (~2.5&nbsp;km). Everything stays human-scale with easy access to beaches and trails.
         </span>
       </p>
+
+      <p>
+        <span class="gr">
+          Το όνομα αποδίδεται στο φυτό <em>σχίνος</em> (Pistacia lentiscus) ή, κατά άλλη εκδοχή, στον Ενετό άρχοντα Σχινοζά.
+          Παρότι από τα πιο ξηρά μέρη της Ελλάδας, μαγεύει με κρυστάλλινα νερά, χρυσαφένιες παραλίες, άγρια κυκλαδίτικα τοπία
+          και αυθεντική φιλοξενία — ένα γνήσιο καταφύγιο γαλήνης στο Αιγαίο.
+        </span>
+        <span class="en" style="display:none;">
+          Its name is linked to the mastic tree (<em>Pistacia lentiscus</em>) or, by another account, to the Venetian lord Schinoza.
+          Though among the driest places in Greece, it enchants with crystalline waters, golden beaches, rugged Cycladic scenery,
+          and effortless hospitality—a true haven of calm in the Aegean.
+        </span>
+      </p>
+
+      <!-- Quick facts pills -->
+      <ul class="facts">
+        <li><i class="fa-solid fa-ruler-combined"></i> ~8&nbsp;km²</li>
+        <li><i class="fa-solid fa-people-group"></i> ~200</li>
+        <li><i class="fa-solid fa-location-dot"></i> Chora 1&nbsp;km • Messaria 2.5&nbsp;km</li>
+      </ul>
+
+      <!-- CTAs (optional) -->
+      <div class="cta-row">
+        <a class="btn ghost" href="connections.html">
+          <span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span>
+        </a>
+        <a class="btn" href="rooms.html">
+          <span class="gr">Δείτε Δωμάτια</span><span class="en" style="display:none;">See Rooms</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
+
 
 
   <!-- Flipped separator -->
@@ -2340,70 +2820,155 @@ function closeLightbox() {
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-  // Ultra-smooth carousel using translate3d instead of scrollBy
-  (function(){
-    const root     = document.querySelector('#gallery-rooms');
-    if(!root) return;
 
-    const viewport = root.querySelector('.mc-viewport');
-    const track    = root.querySelector('.mc-track');
-    const slides   = Array.from(track.children);
-    const prev     = root.querySelector('.mc-prev');
-    const next     = root.querySelector('.mc-next');
 
-    let index = 0;    // first visible slide
-    let pv = 1;       // items per view (from CSS var)
-    let slideW = 0;   // px width of one slide
-    let gapPx = 0;    // px gap between slides
-    let maxIndex = 0; // last valid first-slide index
+/* Ultra-smooth, lazy, draggable carousel (desktop-optimized) */
+/* Ultra-smooth, lazy, draggable carousel (desktop-optimized) */
+(() => {
+  const root = document.querySelector('#gallery-rooms');
+  if (!root) return;
 
-    function perViewFromCSS(){
-      const cs = getComputedStyle(root.querySelector('.multi-carousel'))
-                  .getPropertyValue('--mc-per-view');
-      return parseInt(cs, 10) || 1;
+  const viewport = root.querySelector('.mc-viewport');
+  const track    = root.querySelector('.mc-track');
+  const slides   = Array.from(track.children);
+  const prevBtn  = root.querySelector('.mc-prev');
+  const nextBtn  = root.querySelector('.mc-next');
+
+  let index = 0;          // first visible slide
+  let pv = 1;             // items per view (from CSS var)
+  let slideW = 0;         // width of one slide
+  let gapPx = 0;          // gap between slides
+  let maxIndex = 0;       // last valid index
+  let isAnimating = false;
+  let speedMs = 560;      // synced with CSS var --mc-speed
+
+  // --- Utils
+  const cssVar = (el, name) => getComputedStyle(el).getPropertyValue(name).trim();
+  const perViewFromCSS = () =>
+    parseInt(cssVar(root.querySelector('.multi-carousel'), '--mc-per-view'), 10) || 1;
+  const toPx = (v) => (typeof v === 'number' ? v : parseFloat(v) || 0);
+
+  function measure() {
+    pv = perViewFromCSS();
+    slideW = slides[0].getBoundingClientRect().width;
+    gapPx  = toPx(getComputedStyle(track).gap);
+    maxIndex = Math.max(0, slides.length - pv);
+    index = Math.max(0, Math.min(index, maxIndex));
+    const cssSpeed = cssVar(root.querySelector('.multi-carousel'), '--mc-speed');
+    if (cssSpeed.endsWith('ms')) speedMs = parseFloat(cssSpeed);
+    else if (cssSpeed.endsWith('s')) speedMs = parseFloat(cssSpeed) * 1000; // ← fix
+
+    snapTo(index, false); // no transition on measure
+    updateArrows();
+  }
+
+  const offsetFor = (i) => Math.round(i * (slideW + gapPx)); // full px to avoid blur
+
+  function snapTo(i, withTransition = true) {
+    const x = offsetFor(i);
+    track.style.transition = withTransition ? `transform ${speedMs}ms var(--mc-ease)` : 'none';
+    track.style.transform  = `translate3d(${-x}px,0,0)`;
+  }
+
+  function page(dir) {
+    if (isAnimating) return;
+    const target = Math.max(0, Math.min(index + dir * pv, maxIndex));
+    if (target === index) return;
+    isAnimating = true;
+    index = target;
+    snapTo(index, true);
+    updateArrows();
+    setTimeout(() => { isAnimating = false; }, speedMs);
+    preloadNeighbors();
+  }
+
+  function updateArrows() {
+    prevBtn.disabled = (index <= 0);
+    nextBtn.disabled = (index >= maxIndex);
+  }
+
+  // Buttons & keyboard
+  prevBtn.addEventListener('click', () => page(-1));
+  nextBtn.addEventListener('click', () => page(+1));
+  viewport.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); page(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); page(+1); }
+  });
+
+  // --- Lazy-load + priority for desktop
+  // --- Lazy-load + priority for desktop
+const imgs = slides.map(sl => sl.querySelector('img')).filter(Boolean);
+imgs.forEach((img, i) => {
+  img.decoding = 'async';
+  if (i < pv * 3) {            // was pv*2 → make first 3 pages eager
+    img.loading = 'eager';
+    img.fetchPriority = 'high';
+  } else {
+    img.loading = 'lazy';
+    img.fetchPriority = 'low';
+  }
+  if (img.complete) img.classList.add('is-loaded');
+  else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+});
+
+// IO: fetch earlier so desktop feels instant
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      const img = e.target.querySelector('img');
+      if (img && img.dataset && img.dataset.src && !img.src) img.src = img.dataset.src;
+      io.unobserve(e.target);
     }
-    function measure(){
-      pv     = perViewFromCSS();
-      slideW = slides[0].getBoundingClientRect().width;
-      gapPx  = parseFloat(getComputedStyle(track).gap) || 0;
-      maxIndex = Math.max(0, slides.length - pv);
-      index = Math.max(0, Math.min(index, maxIndex)); // clamp
-      apply();
-      updateArrows();
-    }
-    function offsetFor(i){ return i * (slideW + gapPx); }
-    function apply(){
-      const x = offsetFor(index);
-      track.style.transform = `translate3d(${-x}px,0,0)`;
-    }
-    function page(dir){
-      index = Math.max(0, Math.min(index + dir * pv, maxIndex));
-      apply();
-      updateArrows();
-    }
-    function updateArrows(){
-      prev.disabled = (index <= 0);
-      next.disabled = (index >= maxIndex);
-    }
+  }
+}, { root: viewport, rootMargin: '0px 1600px', threshold: 0.01 }); // was 800/300
 
-    prev.addEventListener('click', ()=> page(-1));
-    next.addEventListener('click', ()=> page(+1));
+  slides.forEach(sl => io.observe(sl));
 
-    // Keyboard nav when viewport is focused
-    viewport.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowLeft'){ e.preventDefault(); page(-1); }
-      if(e.key === 'ArrowRight'){ e.preventDefault(); page(+1); }
-    });
+  // --- Preload neighbors for instant paging
+  const preloadCache = new Map();
+  const preload = (src) => {
+    if (!src || preloadCache.has(src)) return;
+    const im = new Image();
+    im.decoding = 'async';
+    im.src = src;
+    preloadCache.set(src, true);
+    if (preloadCache.size > 48) preloadCache.delete(preloadCache.keys().next().value);
+  };
 
-    // Recalculate sizes on resize (very robust)
-    const ro = new ResizeObserver(measure);
-    ro.observe(viewport);
-    ro.observe(root.querySelector('.multi-carousel'));
+  function preloadNeighbors() {
+    const start = index;
+    for (let i = 0; i < pv + 3; i++) {
+      const next = slides[start + i]?.querySelector('img');
+      const prev = slides[start - i]?.querySelector('img');
+      if (next) preload(next.currentSrc || next.src || next.dataset?.src);
+      if (prev) preload(prev.currentSrc || prev.src || prev.dataset?.src);
+    }
+  }
 
-    window.addEventListener('load', measure);
-    measure(); // initial
-  })();
+  // Resize (throttled)
+  let roPending = false;
+  const ro = new ResizeObserver(() => {
+    if (roPending) return;
+    roPending = true;
+    requestAnimationFrame(() => { roPending = false; measure(); });
+  });
+  ro.observe(viewport);
+  ro.observe(root.querySelector('.multi-carousel'));
+
+  window.addEventListener('load', () => { measure(); preloadNeighbors(); }, { once: true });
+  measure();
+
+    // Respect reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    speedMs = 0;
+    track.style.transition = 'none';
+  }
+})();
+
+
+
 </script>
+
 
 <script>
     (function(){
