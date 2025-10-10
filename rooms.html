@@ -76,9 +76,9 @@
       position:relative;width:100%;height:100vh;overflow:hidden;isolation:isolate;background:#0c1a2b;
       margin-top:72px; /* keep content clear of fixed navbar */
     }
-    .video-iframe-wrapper{position:absolute;inset:0;z-index:-1;pointer-events:none;filter:brightness(1.16) contrast(1.07) saturate(1.08)}
+    .video-iframe-wrapper{position:absolute;inset:0;z-index:-1; pointer-events:auto;;filter:brightness(1.16) contrast(1.07) saturate(1.08)}
     .video-iframe-wrapper iframe{
-      width:100vw;height:56.25vw;min-height:100vh;min-width:177.77vh;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none
+      width:100vw;height:56.25vw;min-height:100vh;min-width:177.77vh;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;pointer-events:none;
     }
     @media (min-width:1400px){ .video-iframe-wrapper{filter:brightness(1.2) contrast(1.08) saturate(1.1)} }
     .video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.42));z-index:1}
@@ -201,9 +201,6 @@
 
 
 
-
-
-
     /* Smaller hero box on phones (Rooms hero) */
 @media (max-width: 560px){
   /* narrower overall container & a bit lower */
@@ -250,7 +247,7 @@
 /* Lift the hero box higher on phones */
 @media (max-width: 560px){
   .hero-overlay{
-    bottom: clamp(36px, 9vh, 72px); /* ↑ increase to move it higher */
+    bottom: clamp(46px, 10vh, 100px); /* ↑ increase to move it higher */
   }
 }
 
@@ -379,13 +376,19 @@
   <div class="video-overlay"></div>
 
   <div class="video-iframe-wrapper">
-    <iframe
-      src="https://www.youtube.com/embed/NmyKHIRTxVE?autoplay=1&mute=1&loop=1&controls=0&playlist=NmyKHIRTxVE&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&vq=hd1080"
-      title="Filotimia drone video"
-      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <button id="tapToPlay" hidden
+          style="position:absolute;inset:auto auto 12% 50%;transform:translateX(-50%);
+                 padding:.7rem 1.1rem;border-radius:999px;border:1px solid rgba(255,255,255,.35);
+                 background:rgba(0,0,0,.45);backdrop-filter:blur(6px);color:#fff;font-weight:700;">
+    ▶ Tap to play
+  </button>
+
+  <iframe id="heroVideo"
+    src="https://www.youtube.com/embed/NmyKHIRTxVE?controls=0&loop=1&playlist=NmyKHIRTxVE&modestbranding=1&rel=0&playsinline=1&enablejsapi=1&vq=hd1080"
+    title="Filotimia drone video"
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    allowfullscreen></iframe>
+</div>
 
   <div class="hero-overlay">
     <div class="hero-box">
@@ -534,7 +537,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <img src="images/img17.jpg" alt="Filotimia Logo" />
-      <h3>Filotimia Apartments<br>+30 694 881 3906</h3>
+      <h3>Filotimia Apartments</h3>
     </div>
     <div class="footer-links">
       <h4><span class="gr">Σχετικά & Επικοινωνία</span><span class="en">About & Contact</span></h4>
@@ -730,6 +733,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 });
 </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let heroPlayer;
+
+  function onYouTubeIframeAPIReady() {
+    heroPlayer = new YT.Player('heroVideo', {
+      playerVars: {
+        autoplay: 1,       // try autoplay
+        controls: 0,
+        loop: 1,
+        playlist: 'NmyKHIRTxVE',
+        rel: 0,
+        playsinline: 1,
+        modestbranding: 1
+      },
+      events: {
+        onReady: (e) => {
+          try {
+            e.target.mute();
+            const p = e.target.playVideo();
+            if (p && p.catch) p.catch(showTapToPlay);  // Safari/Android may reject
+          } catch(_) { showTapToPlay(); }
+        }
+      }
+    });
+  }
+
+  function showTapToPlay() {
+    const btn = document.getElementById('tapToPlay');
+    if (!btn) return;
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      try { heroPlayer && heroPlayer.playVideo && heroPlayer.playVideo(); } catch(_) {}
+      btn.hidden = true;
+    }, { once: true });
+  }
+</script>
+
 
 </body>
 </html>

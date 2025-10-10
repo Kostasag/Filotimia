@@ -276,10 +276,10 @@ body { min-height: 100vh; }
 
 
 /* Phones: move and shrink the icon a bit */
-@media (max-width:560px){
+@media (max-width:530px){
   /* move/shrink the icon */
   .field i{
-    left: 8px;
+    left: 14px;
     top: 28px;       /* tweak this up/down */
     font-size: 13px;
   }
@@ -291,9 +291,44 @@ body { min-height: 100vh; }
   }
 
   /* per-field fine-tuning (optional) */
-  .booking-grid .field:nth-of-type(1) i{ top: 11px; } /* check-in */
+  .booking-grid .field:nth-of-type(1) i{ top: 111px; } /* check-in */
   .booking-grid .field:nth-of-type(2) i{ top: 11px; } /* check-out */
   .booking-grid .field:nth-of-type(3) i{ top: 11px; } /* guests */
+}
+
+
+
+/* Mobile: shrink the two date fields a bit */
+@media (max-width:530px){
+  /* tighter grid spacing (optional) */
+  .booking-grid{ gap: 6px 8px; }
+
+  /* Check-in & Check-out inputs: smaller height + font + padding */
+  .booking-grid .field:nth-of-type(1) input[type="date"],
+  .booking-grid .field:nth-of-type(2) input[type="date"]{
+    height: 52px;                 /* try 32–36px */
+    font-size: 12.5px;            /* was ~14px */
+    padding: 6px 8px 6px 28px;    /* keep room for icon */
+    border-radius: 8px;
+  }
+
+  /* Align their icons with the new height */
+  .booking-grid .field:nth-of-type(1) i,
+  .booking-grid .field:nth-of-type(2) i{
+    top: 20px;      /* tweak 18–22px to center vertically */
+    left: 8px;
+    font-size: 12px;
+  }
+
+  /* Optional: make both columns a touch narrower so they feel “smaller” */
+  .booking-grid{
+    grid-template-columns: 0.95fr 0.95fr;  /* was 1fr 1fr */
+  }
+
+  /* Optional: smaller calendar chevron in WebKit browsers */
+  .booking-grid input[type="date"]::-webkit-calendar-picker-indicator{
+    transform: scale(.85);
+  }
 }
 
 
@@ -433,7 +468,7 @@ body { min-height: 100vh; }
 
 
 /* Make the Schoinoussa image bigger and pushed left/up on desktop */
-@media (min-width: 700px){
+@media (min-width: 650px){
   .schoinousa-section{ overflow: visible; } /* allow the image to bleed out */
 
   .schoinousa-wrap{
@@ -445,7 +480,7 @@ body { min-height: 100vh; }
   .schoinousa-media{
     position: relative;
     overflow: visible;                      /* so the glow can extend */
-    width: 109%;                            /* grow beyond its column */
+    width: 108%;                            /* grow beyond its column */
     max-width: none;
     transform: translate(-8%, -18px);       /* push left & a bit up */
     aspect-ratio: 16/9;                     /* a little taller feel */
@@ -481,7 +516,7 @@ body { min-height: 100vh; }
 @media (max-width: 560px){
   .schoinousa-section{ padding-block: clamp(56px, 12vw, 96px); }
   .schoinousa-media{
-    width: 95vw;
+    width: 90vw;
     max-width: none;
     margin-left: calc(55% - 50vw);
     margin-right: calc(50% - 50vw);
