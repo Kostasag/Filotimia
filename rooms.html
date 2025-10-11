@@ -146,6 +146,45 @@
 #lightbox-img.lb-fade-out{ opacity: 0; }
 #lightbox-img.lb-fade-in { opacity: 1; }
 
+
+
+/* --- Mobile-friendly lightbox arrows --- */
+.lightbox-controls{
+  position:absolute;
+  top:50%;
+  left:0; right:0;
+  display:flex; justify-content:space-between; align-items:center;
+  transform: translateY(-50%);
+  padding: 0 14px;                /* tighter on phones */
+  z-index: 2;                      /* sit above the image */
+  pointer-events: none;            /* let only buttons receive taps */
+}
+.lightbox-controls span{
+  pointer-events: auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px;       /* nice big tap target */
+  font-size: 28px; line-height: 1;
+  color: #fff;
+  background: rgba(0,0,0,.55);     /* circle button */
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform .12s ease, filter .2s ease;
+}
+.lightbox-controls span:active{ transform: scale(.98); filter: brightness(1.1); }
+
+/* Smaller devices: bump size a bit and pull inward */
+@media (max-width:560px){
+  .lightbox-controls{ padding: 0 10px; }
+  .lightbox-controls span{ width: 56px; height: 56px; font-size: 30px; }
+}
+
+/* Ensure the image sits below */
+#lightbox-img{ position: relative; z-index: 1; }
+
     /* ===== CALL BUTTON (same as example) ===== */
     .call-button {
       position: fixed; right: 0; top: 50%; transform: translateY(-50%);
@@ -614,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'images/img55.jpeg','images/img56.jpeg','images/img57.jpeg','images/img58.jpeg','images/img59.jpeg',
       'images/img60.jpeg','images/img61.jpeg','images/img62.jpeg','images/img64.jpeg','images/img65.jpeg',
       'images/img66.jpeg','images/img67.jpeg','images/img68.jpeg','images/img69.jpeg','images/img70.jpeg',
-      'images/img71.jpeg','images/img72.jpeg','images/img73.jpeg','images/img74.jpeg','images/img405.jpeg','images/img406.jpeg','images/img407.jpeg','images/img408.jpeg','images/img409.jpeg','images/img410.jpeg','images/img411.jpeg','images/img412.jpeg','images/img413.jpeg'
+      'images/img71.jpeg','images/img72.jpeg','images/img73.jpeg','images/img74.jpeg','images/img405.jpeg','images/img407.jpeg','images/img408.jpeg','images/img409.jpeg','images/img410.jpeg','images/img411.jpeg','images/img412.jpeg','images/img413.jpeg'
     ],
     [
       'images/img205.jpeg','images/img306.jpeg','images/img302.jpeg','images/img304.jpeg','images/img305.jpeg','images/img307.jpeg','images/img308.jpeg','images/img309.jpeg','images/img310.jpeg','images/img312.jpeg','images/img313.jpeg','images/img314.jpeg','images/img315.jpeg','images/img316.jpeg','images/img317.jpeg','images/img318.jpeg','images/img319.jpeg','images/img320.jpeg','images/img321.jpeg','images/img206.jpeg','images/img301.jpeg'
