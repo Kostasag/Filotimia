@@ -2193,6 +2193,85 @@ header .btn-book {
     height: 46px;
   }
 }
+
+
+
+/* ==== Compact size for the whole booking box ==== */
+#book-box {
+  /* narrower, tighter card */
+  width: clamp(260px, 86vw, 820px);
+  padding: 10px 12px;
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+/* tighter grid */
+#book-box .booking-grid{
+  gap: 8px 10px;
+  grid-template-columns: 1fr 1fr .8fr auto auto; /* ci | co | guests | nights | CTA */
+}
+
+/* labels a touch smaller */
+#book-box .field .label{
+  font-size: .72rem;
+  margin: 0 0 4px;
+}
+
+/* inputs/selects smaller but still tappable (≥40px) */
+#book-box .field input[type="date"],
+#book-box .field select{
+  height: 42px;
+  border-radius: 10px;
+  padding: 8px 10px 8px 34px;
+  font-size: 14px; /* keep 14–16px; iOS won’t zoom if >=16, see iOS block below */
+}
+
+/* icons nudge for the shorter inputs */
+#book-box .field i{
+  top: 34px;
+  left: 10px;
+  font-size: 14px;
+}
+
+/* nights pill a bit smaller */
+#book-box .nights-badge{
+  height: 30px;
+  min-width: 40px;
+  padding: 0 8px;
+  font-size: .86rem;
+}
+#book-box .nights-box{ min-width: 74px; gap: 4px; }
+#book-box .nights-label{ font-size: .68rem; }
+
+/* CTA smaller but comfy */
+#book-box .book-btn{
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  letter-spacing: .3px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.22), inset 0 -2px 0 rgba(0,0,0,.16);
+}
+
+/* --- Optional: only make it compact on iPhones / small devices --- */
+/* Comment this block out if you want compact size on desktop too */
+@media (max-width: 820px), (hover: none) and (pointer: coarse){
+  #book-box{
+    width: clamp(260px, 88vw, 760px);
+    bottom: 18px;
+  }
+  #book-box .booking-grid{ gap: 8px 8px; }
+  #book-box .book-btn{ height: 40px; }
+}
+
+/* iOS: keep font-size >=16px to prevent zoom on focus */
+@media screen and (max-device-width: 820px) and (-webkit-min-device-pixel-ratio: 2){
+  #book-box input,
+  #book-box select,
+  #book-box button{
+    font-size: 16px; /* ensures no input zoom on iPhone */
+  }
+}
 </style>
 
 <!-- Hide the glassy booking box on mobile 
@@ -2264,23 +2343,24 @@ header .btn-book {
 <!-- Language Toggle| -->
 <div class="lang-switch">
       
- <!-- Greek -->
-  <a
-    class="btn-book text-el"
-    href="https://direct-book.com/properties/filotimia?locale=el&referrer=canvas&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2025-10-12&checkOutDate=2025-10-13&trackPage=yes"
-    target="_blank" rel="noopener"
-  >
-    ΚΡΑΤΗΣΗ ΤΩΡΑ
-  </a>
+<!-- Greek -->
+<a
+  class="btn-book gr"
+  href="https://direct-book.com/properties/filotimia?locale=el&referrer=canvas&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2025-10-12&checkOutDate=2025-10-13&trackPage=yes"
+  target="_blank" rel="noopener"
+>
+  ΚΡΑΤΗΣΗ
+</a>
 
-  <!-- English -->
-  <a
-    class="btn-book text-en"
-    href="https://direct-book.com/properties/filotimia?locale=en&referrer=canvas&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2025-10-12&checkOutDate=2025-10-13&trackPage=yes"
-    target="_blank" rel="noopener"
-  >
-    BOOK NOW
-  </a>
+<!-- English -->
+<a
+  class="btn-book en"
+  href="https://direct-book.com/properties/filotimia?locale=en&referrer=canvas&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2025-10-12&checkOutDate=2025-10-13&trackPage=yes"
+  target="_blank" rel="noopener"
+  style="display:none;"
+>
+  BOOK NOW
+</a>
 
 
   <img src="images/gr-flag.png" alt="Greek" title="Ελληνικά">
