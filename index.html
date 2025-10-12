@@ -5,6 +5,8 @@
   <title>Filotimia Schoinousa</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&family=Roboto:wght@400;500;700&display=swap&subset=greek" rel="stylesheet">
+
   <style>
     /* ===== GENERAL RESET & BASIC STYLES ===== */
 * { box-sizing: border-box; }
@@ -1226,24 +1228,24 @@ body.light-mode .footer-bottom {
     line-height: 1.6;
   }
 
-  /* === Amenities Section === */
-  .amenities-grid.three-by-two {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
+    /* === Amenities Section === */
+    .amenities-grid.three-by-two {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
 
-  .amenity-item p {
-    font-size: 1rem;
-  }
+    .amenity-item p {
+      font-size: 1rem;
+    }
 
-  /* === Video Section === */
-  .video-title {
-    font-size: 1.6rem;
-  }
+    /* === Video Section === */
+    .video-title {
+      font-size: 1.6rem;
+    }
 
-  .video-container {
-    padding-bottom: 75%;
-  }
+    .video-container {
+      padding-bottom: 75%;
+    }
 
   /* === Reviews Section === */
   .review-card {
@@ -2195,6 +2197,308 @@ header .btn-book {
 }
 
 
+
+
+
+/* ===== OVERRIDES: Amenities (paste at the END of your CSS) ===== */
+
+/* Section wrapper */
+section.amenities-section {
+  background: linear-gradient(160deg, #3e5042 0%, #2e3b31 100%) !important;
+  color: #f5f5f5 !important;
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 8vw, 140px) !important;
+  text-align: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Soft texture overlay */
+section.amenities-section::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(40% 40% at 20% 20%, rgba(255,255,255,0.06), transparent 60%),
+    radial-gradient(35% 35% at 80% 80%, rgba(255,255,255,0.05), transparent 60%) !important;
+  pointer-events: none !important;
+}
+
+/* Header block */
+section.amenities-section .amenities-header {
+  margin-top: 10px !important;
+  margin-bottom: clamp(36px, 6vw, 80px) !important;
+}
+
+/* Title */
+section.amenities-section .amenities-title {
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem) !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  color: #fdfdfd !important;
+  margin: 0 0 18px !important;
+  line-height: 1.2 !important;
+  display: inline-block !important;
+}
+
+/* Underline accent */
+section.amenities-section .section-divider {
+  width: 100px !important;
+  height: 3px !important;
+  margin: 0 auto !important;
+  border-radius: 3px !important;
+  background: linear-gradient(90deg, #f5efe4 0%, #d8d0c0 100%) !important;
+}
+
+/* Grid */
+section.amenities-section .amenities-grid.three-by-two {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  gap: clamp(18px, 3.5vw, 40px) clamp(14px, 3vw, 30px) !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  justify-items: center !important;
+}
+
+/* Card */
+section.amenities-section .amenity-item {
+  background: rgba(255,255,255,0.06) !important;
+  padding: clamp(18px, 3.5vw, 30px) clamp(14px, 3vw, 22px) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  transition: transform .3s ease, box-shadow .3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+section.amenities-section .amenity-item:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.35) !important;
+}
+
+/* Icon bubble */
+section.amenities-section .icon-circle {
+  width: clamp(60px, 7vw, 80px) !important;
+  height: clamp(60px, 7vw, 80px) !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #f6f2e8, #e2dbc9) !important;
+  color: #2f4032 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem) !important;
+  margin-bottom: 16px !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.30) !important;
+  transition: transform .3s ease, box-shadow .3s ease !important;
+}
+
+section.amenities-section .amenity-item:hover .icon-circle {
+  transform: scale(1.08) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.40) !important;
+}
+
+/* Text */
+section.amenities-section .amenity-item p {
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: clamp(0.98rem, 1.4vw, 1.1rem) !important;
+  line-height: 1.55 !important;
+  color: #ffffff !important;
+  max-width: 260px !important;
+  margin: 0 auto !important;
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 992px) {
+  section.amenities-section .amenities-grid.three-by-two {
+    gap: 24px 18px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  section.amenities-section {
+    padding: 56px 6vw !important;
+  }
+  section.amenities-section .amenity-item {
+    padding: 22px 18px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  section.amenities-section {
+    padding: 48px 5vw !important;
+  }
+  section.amenities-section .amenities-title {
+    letter-spacing: .05em !important;
+  }
+  section.amenities-section .amenities-grid.three-by-two {
+    grid-template-columns: 1fr !important;
+  }
+  section.amenities-section .amenity-item {
+    max-width: 92% !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* iOS polish for icons/text (optional but nice) */
+@supports (-webkit-touch-callout: none) {
+  section.amenities-section .icon-circle { -webkit-font-smoothing: antialiased !important; }
+  section.amenities-section .amenity-item p { -webkit-text-size-adjust: 100% !important; }
+}
+
+
+
+/* ==== OVERRIDES (paste at end) ==== */
+
+/* 1) Heading: smaller, cleaner, not shouty */
+section.amenities-section .amenities-title {
+  font-family: "Helvetica Neue", Arial, system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;          /* remove ALL CAPS */
+  letter-spacing: .02em !important;
+  font-size: clamp(1.35rem, 2.1vw, 1.9rem) !important; /* smaller */
+  line-height: 1.25 !important;
+  margin-bottom: 10px !important;
+}
+
+section.amenities-section .section-divider {
+  width: 72px !important;                   /* a bit subtler */
+  height: 3px !important;
+}
+
+/* 2) Desktop layout: put "Free Parking" under "Soundproof apartments"
+   Current HTML order:
+   1 Transfer | 2 Cleaning | 3 Soundproof
+   4 Parking  | 5 Garden   | 6 EV charge
+   We reposition items at ≥992px so:
+   Row 1: 1 | 2 | 3
+   Row 2: 5 | 6 | 4   (Parking goes under 3)
+*/
+@media (min-width: 992px) {
+  .amenities-grid.three-by-two {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .amenities-grid.three-by-two .amenity-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+
+  /* Move Parking (4th) under Soundproof (3rd col) */
+  .amenities-grid.three-by-two .amenity-item:nth-child(4) { grid-column: 3; grid-row: 2; }
+
+  /* Shift Garden & EV to fill the left/middle below 1 & 2 */
+  .amenities-grid.three-by-two .amenity-item:nth-child(5) { grid-column: 1; grid-row: 2; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(6) { grid-column: 2; grid-row: 2; }
+}
+
+/* 3) Mobile: keep things tidy and readable */
+@media (max-width: 520px) {
+  section.amenities-section .amenities-title {
+    font-size: 1.4rem !important;           /* even smaller on phones */
+  }
+}
+
+
+
+
+/* ==== OVERRIDES: Equal box size for all amenities (incl. Free Parking) ==== */
+:root{
+  --amenity-min-h: clamp(200px, 28vw, 240px);
+}
+
+section.amenities-section .amenities-grid.three-by-two{
+  justify-items: stretch !important;   /* make each column cell full width */
+  align-items: stretch !important;     /* make rows equal height */
+}
+
+section.amenities-section .amenity-item{
+  width: 100% !important;              /* card fills its grid cell */
+  min-height: var(--amenity-min-h) !important; /* equal height across items */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+/* Ensure the icon bubble and text don’t collapse differently per item */
+section.amenities-section .icon-circle{
+  flex: 0 0 auto !important;
+}
+section.amenities-section .amenity-item p{
+  flex: 0 0 auto !important;
+  max-width: 260px !important;
+  margin: 0 auto !important;
+  text-wrap: balance;
+}
+
+/* Desktop reordering you wanted (Parking under Soundproof) remains intact */
+@media (min-width: 992px){
+  .amenities-grid.three-by-two { grid-template-columns: repeat(3, 1fr) !important; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(1){ grid-column:1; grid-row:1; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(2){ grid-column:2; grid-row:1; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(3){ grid-column:3; grid-row:1; }
+
+  /* Free Parking (4th) goes under Soundproof (3rd column) */
+  .amenities-grid.three-by-two .amenity-item:nth-child(4){ grid-column:3; grid-row:2; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(5){ grid-column:1; grid-row:2; }
+  .amenities-grid.three-by-two .amenity-item:nth-child(6){ grid-column:2; grid-row:2; }
+}
+
+/* Slightly smaller equal height on small screens */
+@media (max-width: 520px){
+  :root{ --amenity-min-h: clamp(170px, 40vw, 210px); }
+}
+
+
+section.amenities-section .amenities-title{
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 700 !important;
+}
+
+section.amenities-section .amenity-item p{
+  font-family: Roboto, "Noto Sans", "Open Sans", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial !important;
+  font-weight: 500 !important;
+  letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* Heading weight: strong but not shouty */
+section.amenities-section .amenities-title{
+  font-weight: 600 !important;   /* try 700 if you prefer a touch bolder */
+}
+
+/* Amenity lines default: medium, not bold */
+section.amenities-section .amenity-item p{
+  font-weight: 500 !important;   /* crisp, readable, not heavy */
+}
+
+/* If you wrap parts in <b>…</b>, make them a touch stronger, not full bold */
+section.amenities-section .amenity-item p b{
+  font-weight: 600 !important;
+}
+
+/* Optional: on hover, gently emphasize the text (desktop only) */
+@media (hover:hover) and (pointer:fine){
+  section.amenities-section .amenity-item:hover p{
+    font-weight: 550; /* subtle lift; most browsers treat as 600 if not supported */
+  }
+}
+
+/* Default: show Greek, hide English */
+.gr { display: inline; }
+.en { display: none; }
+
+/* When English is active (e.g., add class="lang-en" to <html> or <body>) */
+.lang-en .gr { display: none; }
+.lang-en .en { display: inline; }
 </style>
 
 <!-- Hide the glassy booking box on mobile 
@@ -2509,43 +2813,43 @@ header .btn-book {
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-shuttle-van"></i></div>
       <p>
-        <span class="gr"><b>Δωρεάν μεταφορά από/προς το λιμάνι</b></span>
-        <span class="en" style="display: none;"><b>Free transfer to/from the port</b></span>
+        <span class="gr">Δωρεάν μεταφορά από/προς το λιμάνι</span>
+        <span class="en" style="display: none;">Free transfer to/from the port</span>
       </p>
     </div>
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-broom"></i></div>
       <p>
-        <span class="gr"><b>Καθημερινή υπηρεσία καθαρισμού</b></span>
-        <span class="en" style="display: none;"><b>Daily cleaning service</b></span>
+        <span class="gr">Καθημερινή υπηρεσία καθαρισμού</span>
+        <span class="en" style="display: none;">Daily cleaning service</span>
       </p>
     </div>
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-volume-mute"></i></div>
       <p>
-        <span class="gr"><b>Ηχομονωμένα διαμερίσματα</b></span>
-        <span class="en" style="display: none;"><b></b>Soundproof apartments</b></span>
+        <span class="gr">Ηχομονωμένα διαμερίσματα</span>
+        <span class="en" style="display: none;">Soundproof apartments</span>
       </p>
     </div>
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-parking"></i></div>
       <p>
-        <span class="gr"><b>Δωρεάν Parking</b></span>
-        <span class="en" style="display: none;"><b>Free Parking</b></span>
+        <span class="gr">Δωρεάν Parking</span>
+        <span class="en" style="display: none;">Free Parking</span>
       </p>
     </div>
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-leaf"></i></div>
       <p>
-        <span class="gr"><b>Κήπος με βότανα & λουλούδια</b></span>
-        <span class="en" style="display: none;"><b>Garden with herbs & flowers</b></span>
+        <span class="gr">Κήπος με βότανα & λουλούδια</span>
+        <span class="en" style="display: none;">Garden with herbs & flowers</span>
       </p>
     </div>
     <div class="amenity-item">
       <div class="icon-circle"><i class="fas fa-charging-station"></i></div>
       <p>
-        <span class="gr"><b>Σταθμός φόρτισης ηλεκτρικών</b></span>
-        <span class="en" style="display: none;"><b>EV charging station</b></span>
+        <span class="gr">Σταθμός φόρτισης ηλεκτρικών</span>
+        <span class="en" style="display: none;">EV charging station</span>
       </p>
     </div>
   </div>
@@ -2556,65 +2860,82 @@ header .btn-book {
 <!-- Outdoor Area SECTION -->
 <section class="content-section from-left">
   <img src="images/img203.jpeg" alt="Περιβάλλων Χώρος" class="outdoor-img">
-    <!--style="
-      display: block;
-      width: 60%;
-      max-width: 600px;
-      margin: 60px auto;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      transform: perspective(800px) scale(1.1) rotateX(0deg) rotateY(2deg);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-    "
-    onmouseover="this.style.transform='perspective(800px) scale(1.18) rotateX(0deg) rotateY(2deg)';
-                 this.style.boxShadow='0 35px 70px rgba(0, 0, 0, 0.45)'"
-    onmouseout="this.style.transform='perspective(800px) scale(1.1) rotateX(0deg) rotateY(2deg)';
-                this.style.boxShadow='0 22px 45px rgba(0, 0, 0, 0.33)'"
-  >-->
-   <div class="content-text">
-    <h2>Περιβάλλων Χώρος</h2>
-    <p>Ο εξωτερικός χώρος σχεδιάστηκε με βάση την αρχή της  <strong>απλότητας</strong> και της <strong>φυσικότητας</strong>.  Στόχος μας ήταν να δώσουμε την αίσθηση πως το περιβάλλον αποτελεί φυσική συνέχεια του τοπίου, χωρίς τίποτα περιττό.</p>
 
-    <p>Κάθε δωμάτιο έχει το όνομα ενός ελληνικού βοτάνου, χαραγμένο σε ξύλο:  <strong>Βασιλικός, Αμπαρόριζα, Μέντα, Δυόσμος, Λάβδανο, Θρούμπι, Θυμάρι, Ρίγανη, Μαντζουράνα, Δεντρολίβανο, Λεβάντα, Φασκόμηλο.</strong></p>
-    
-    <p>Έξω από κάθε δωμάτιο φυτέψαμε το αντίστοιχο φυτό, ώστε τα αρώματα και τα χρώματα να συνδέονται με το όνομα και την αισθητική του χώρου. Εκτός από τα βότανα, θα δείτε και ελιές, αμπέλια, συκιές, αναρριχώμενες τριανταφυλλιές, μπουκαμβίλιες, αγιόκλημα, γιασεμί, γαρύφαλλα και πολλά ακόμα – συνολικά πάνω από 30 είδη φυτών.</p>
-    
-    <p>Μπροστά από τα δωμάτια απλώνεται ένα παρτέρι μήκους περίπου 60 μέτρων, φυτεμένο με βούρλα και λουλούδια. Εκτός από αισθητική, εξυπηρετεί και πρακτικά: φιλτράρει το νερό από μπάνιο και κουζίνα για επαναχρησιμοποίηση — κάτι πολύτιμο στη Σχοινούσα.</p>
-    
-    <p>Ο συνδυασμός τσιμέντου, πέτρας, ξύλου και λουλουδιών φιλοδοξεί να αποτελέσει ένα «παράθυρο» προς έναν πιο απλό, φυσικό τρόπο ζωής – μια Λιτή Πολυτέλεια.</p>
+  <div class="content-text">
+    <h2>
+      <span class="gr">Περιβάλλων Χώρος</span>
+      <span class="en">Outdoor Area</span>
+    </h2>
+
+    <p>
+      <span class="gr">Ο εξωτερικός χώρος σχεδιάστηκε με βάση την αρχή της <strong>απλότητας</strong> και της <strong>φυσικότητας</strong>. Στόχος μας ήταν να δώσουμε την αίσθηση πως το περιβάλλον αποτελεί φυσική συνέχεια του τοπίου, χωρίς τίποτα περιττό.</span>
+      <span class="en">The outdoor area was designed around the principles of <strong>simplicity</strong> and <strong>naturalness</strong>. Our goal was to make the surroundings feel like a natural continuation of the landscape, with nothing superfluous.</span>
+    </p>
+
+    <p>
+      <span class="gr">Κάθε δωμάτιο έχει το όνομα ενός ελληνικού βοτάνου, χαραγμένο σε ξύλο: <strong>Βασιλικός, Αμπαρόριζα, Μέντα, Δυόσμος, Λάβδανο, Θρούμπι, Θυμάρι, Ρίγανη, Μαντζουράνα, Δεντρολίβανο, Λεβάντα, Φασκόμηλο.</strong></span>
+      <span class="en">Each room is named after a Greek herb, carved on wood: <strong>Basil, Rose Geranium, Mint, Spearmint, Labdanum, Savory, Thyme, Oregano, Marjoram, Rosemary, Lavender, Sage.</strong></span>
+    </p>
+
+    <p>
+      <span class="gr">Έξω από κάθε δωμάτιο φυτέψαμε το αντίστοιχο φυτό, ώστε τα αρώματα και τα χρώματα να συνδέονται με το όνομα και την αισθητική του χώρου. Εκτός από τα βότανα, θα δείτε και ελιές, αμπέλια, συκιές, αναρριχώμενες τριανταφυλλιές, μπουκαμβίλιες, αγιόκλημα, γιασεμί, γαρύφαλλα και πολλά ακόμα – συνολικά πάνω από 30 είδη φυτών.</span>
+      <span class="en">Outside each room we planted its corresponding herb, so that scents and colors align with the room’s name and character. Beyond the herbs, you’ll see olive trees, vines, fig trees, climbing roses, bougainvilleas, honeysuckle, jasmine, carnations, and more — over 30 plant species in total.</span>
+    </p>
+
+    <p>
+      <span class="gr">Μπροστά από τα δωμάτια απλώνεται ένα παρτέρι μήκους περίπου 60 μέτρων, φυτεμένο με βούρλα και λουλούδια. Εκτός από αισθητική, εξυπηρετεί και πρακτικά: φιλτράρει το νερό από μπάνιο και κουζίνα για επαναχρησιμοποίηση — κάτι πολύτιμο στη Σχοινούσα.</span>
+      <span class="en">In front of the rooms stretches a flower bed about 60 meters long, planted with rushes and flowers. Beyond its beauty, it serves a practical purpose: filtering greywater from bathrooms and kitchens for reuse — precious on Schoinoussa.</span>
+    </p>
+
+    <p>
+      <span class="gr">Ο συνδυασμός τσιμέντου, πέτρας, ξύλου και λουλουδιών φιλοδοξεί να αποτελέσει ένα «παράθυρο» προς έναν πιο απλό, φυσικό τρόπο ζωής – μια Λιτή Πολυτέλεια.</span>
+      <span class="en">The blend of concrete, stone, wood, and flowers aims to be a “window” into a simpler, more natural way of living — an Elegant Simplicity.</span>
+    </p>
   </div>
-
 </section>
 
 <!-- Indoor Rooms SECTION -->
 <section class="content-section from-left">
-  <img src="images/img63.jpeg" alt="Εσωτερικός Χώρος"  class="outdoor-img">
-   <!-- style="
-      display: block;
-      width: 60%;
-      max-width: 600px;
-      margin: 60px auto;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      transform: perspective(800px) scale(1.1) rotateX(0deg) rotateY(-2deg);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-    "
-    onmouseover="this.style.transform='perspective(1800px) scale(1.22) rotateX(0deg) rotateY(-2deg)';
-                 this.style.boxShadow='0 35px 70px rgba(0, 0, 0, 0.45)'"
-    onmouseout="this.style.transform='perspective(800px) scale(1.14) rotateX(0deg) rotateY(-2deg)';
-                this.style.boxShadow='0 22px 45px rgba(0, 0, 0, 0.33)'"
-  >-->
+  <img src="images/img63.jpeg" alt="Εσωτερικός Χώρος" class="outdoor-img">
 
   <div class="content-text">
-    <h2>Εσωτερικός Χώρος</h2>
-    <p>Τα δωμάτια σχεδιάστηκαν με συνδυασμό <strong>απλότητας και διακριτικής πολυτέλειας</strong>. Διαθέτουν υπέρδιπλα κρεβάτια με στρώματα εξαιρετικής ποιότητας.</p>
-    <p>Οι τοίχοι είναι πέτρινοι, με λευκό σοβά, ενώ ο φωτισμός είναι κρυφός, υπό ανάκλαση και ρυθμιζόμενος για ατμόσφαιρα.</p>
-    <p>Όλα τα δωμάτια περιλαμβάνουν:<strong> τηλεόραση, Wi-Fi, ψυγείο με καταψύκτη, τοστιέρα, μηχανή Nespresso, ηλεκτρικό σίδερο, κουζίνα, τραπέζι φαγητού, καρέκλες, ντουλάπα, κλιματισμό και ζεστό νερό.</strong></p>
-    <p>Στην οροφή υπάρχουν δύο ανοίγματα: την ημέρα απομακρύνουν τη ζέστη, ενώ τη νύχτα διοχετεύουν δροσερό θαλασσινό αέρα – για φυσική δροσιά χωρίς μηχανικά μέσα.</p>
-    <p>Το ευρύχωρο μπαλκόνι διαθέτει τραπέζι, πολυθρόνες, ατομική αιώρα, ανεμπόδιστη θέα και απόλυτη ιδιωτικότητα.</p>
-    <p>Τα υλικά είναι φυσικά και οικολογικά: πέτρα, τσιμέντο, ξύλο, γυαλί. Το μπάνιο έχει κατασκευαστεί από Ηρακλείτη – ένα οικολογικό και ανακυκλώσιμο υλικό.</p>
+    <h2>
+      <span class="gr">Εσωτερικός Χώρος</span>
+      <span class="en">Indoor Rooms</span>
+    </h2>
+
+    <p>
+      <span class="gr">Τα δωμάτια σχεδιάστηκαν με συνδυασμό <strong>απλότητας και διακριτικής πολυτέλειας</strong>. Διαθέτουν υπέρδιπλα κρεβάτια με στρώματα εξαιρετικής ποιότητας.</span>
+      <span class="en">The rooms are designed with a balance of <strong>simplicity and understated luxury</strong>, featuring king-size beds with premium mattresses.</span>
+    </p>
+
+    <p>
+      <span class="gr">Οι τοίχοι είναι πέτρινοι, με λευκό σοβά, ενώ ο φωτισμός είναι κρυφός, υπό ανάκλαση και ρυθμιζόμενος για ατμόσφαιρα.</span>
+      <span class="en">The walls are stone with white plaster, and lighting is indirect, reflective, and dimmable to set the mood.</span>
+    </p>
+
+    <p>
+      <span class="gr">Όλα τα δωμάτια περιλαμβάνουν: <strong>τηλεόραση, Wi-Fi, ψυγείο με καταψύκτη, τοστιέρα, μηχανή Nespresso, ηλεκτρικό σίδερο, κουζίνα, τραπέζι φαγητού, καρέκλες, ντουλάπα, κλιματισμό και ζεστό νερό.</strong></span>
+      <span class="en">All rooms include: <strong>TV, Wi-Fi, refrigerator with freezer, toaster, Nespresso machine, electric iron, kitchen, dining table, chairs, wardrobe, air conditioning, and hot water.</strong></span>
+    </p>
+
+    <p>
+      <span class="gr">Στην οροφή υπάρχουν δύο ανοίγματα: την ημέρα απομακρύνουν τη ζέστη, ενώ τη νύχτα διοχετεύουν δροσερό θαλασσινό αέρα – για φυσική δροσιά χωρίς μηχανικά μέσα.</span>
+      <span class="en">Two ceiling openings vent heat by day and bring in cool sea air at night — natural cooling without mechanical systems.</span>
+    </p>
+
+    <p>
+      <span class="gr">Το ευρύχωρο μπαλκόνι διαθέτει τραπέζι, πολυθρόνες, ατομική αιώρα, ανεμπόδιστη θέα και απόλυτη ιδιωτικότητα.</span>
+      <span class="en">The spacious balcony offers a table, armchairs, a private hammock, unobstructed views, and complete privacy.</span>
+    </p>
+
+    <p>
+      <span class="gr">Τα υλικά είναι φυσικά και οικολογικά: πέτρα, τσιμέντο, ξύλο, γυαλί. Το μπάνιο έχει κατασκευαστεί από Ηρακλείτη – ένα οικολογικό και ανακυκλώσιμο υλικό.</span>
+      <span class="en">Materials are natural and eco-friendly: stone, concrete, wood, and glass. The bathroom is built with Heraclith — an ecological, recyclable material.</span>
+    </p>
   </div>
 </section>
+
 
  <!-- gallery -->
 <section id="gallery-rooms" class="gallery-section">
