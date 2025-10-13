@@ -442,6 +442,328 @@ main{margin-top:100px;padding:80px 20px;}
 .beaches-hero h1{
   text-shadow: 0 2px 14px rgba(0,0,0,.45);
 }
+
+
+
+
+
+/* ===== HERO MOBILE REFINEMENT (Full-cover, Fresh, iPhone Friendly) ===== */
+@media (max-width: 600px) {
+  .beaches-hero {
+    position: relative !important;
+    height: 100vh !important;                 /* fill the entire phone screen */
+    min-height: 600px !important;             /* ensure good presence */
+    background: 
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)),
+      url('images/img2010.jpeg') center center / cover no-repeat !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    -webkit-touch-callout: none; /* prevents long-tap highlight on iPhones */
+  }
+
+  /* Hero container adjustments */
+  .hero-content {
+    max-width: 90% !important;
+    margin: 0 auto;
+    padding: 0 12px;
+  }
+
+  /* Title */
+  .beaches-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 6vw, 2.3rem) !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    margin-bottom: 14px;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+    line-height: 1.25;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Subtext - static (no scroll, no animation) */
+  .hero-subtext {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 16px !important;
+    margin-top: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-height: none !important;     /* remove scrolling */
+    overflow: visible !important;    /* no scrollbars */
+  }
+
+  /* Remove any animation for smoother load on iOS Safari */
+  .beaches-hero h1,
+  .hero-subtext {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ===== Tiny iPhones (like SE) ===== */
+@media (max-width: 420px) {
+  .beaches-hero {
+    height: 100vh !important;
+    min-height: 540px !important;
+    background-position: center center !important;
+  }
+
+  .beaches-hero h1 {
+    font-size: clamp(1.6rem, 5.8vw, 2rem) !important;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtext {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    padding: 12px 14px !important;
+  }
+}
+
+/* ===== HERO REIMAGINED FOR MOBILE ===== */
+
+/* hide/show logic */
+.desktop-text { display: block; }
+.mobile-only { display: none; }
+
+@media (max-width: 768px) {
+  .desktop-text { display: none !important; }
+  .mobile-only { display: block !important; }
+}
+
+@media (max-width: 768px) {
+  .beaches-hero {
+    position: relative;
+    height: 95vh;
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)),
+      url('images/img2010.jpeg') center center / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 24px 90px; /* pull text upward nicely */
+  }
+
+  .beaches-hero h1 {
+    font-size: clamp(1.9rem, 6vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+    margin-bottom: 12px;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 10px 18px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+
+
+
+
+/* ===== FINAL FILOTIMIA BEACHES HERO FIX – Clean, Mobile Perfect ===== */
+@media (max-width: 768px) {
+  .beaches-hero {
+    position: relative !important;
+    height: 100vh !important;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+      url('images/img2010.jpeg') center 55% / cover no-repeat !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 20px;
+    box-shadow: inset 0 -80px 80px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+
+  /* Title – smaller, elegant */
+  .beaches-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 5vw, 1.9rem) !important;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    margin-bottom: 14px;
+    max-width: 90%;
+  }
+
+  /* Subtext – simplified, no scroll */
+  .hero-subtext {
+    max-width: 92%;
+    font-size: clamp(0.82rem, 3.5vw, 0.95rem) !important;
+    line-height: 1.55 !important;
+    color: rgba(255,255,255,0.92);
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 14px 16px !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    overflow: visible !important;
+  }
+
+  /* Remove animations & excess height issues */
+  .beaches-hero h1,
+  .hero-subtext {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Tiny phones (iPhone SE, etc.) */
+@media (max-width: 420px) {
+  .beaches-hero {
+    height: 100vh !important;
+    background-position: center 60% !important;
+    padding: 0 14px;
+  }
+
+  .beaches-hero h1 {
+    font-size: clamp(1.3rem, 5vw, 1.7rem) !important;
+    margin-bottom: 10px;
+  }
+
+  .hero-subtext {
+    font-size: clamp(0.8rem, 3.5vw, 0.9rem) !important;
+    padding: 12px 14px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+
+
+
+/* ========== FORCE-OVERRIDE: Mobile hero + Read More (phones only) ========== */
+@media (max-width: 768px) {
+
+  /* Safer targeting with higher specificity + !important to beat earlier rules */
+  html.has-readmore body .beaches-hero {
+    height: 100vh !important;
+    min-height: 560px !important;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+      url('images/img2010.jpeg') center 55% / cover no-repeat !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 18px !important;
+    overflow: hidden !important;
+  }
+
+  /* Title: smaller and crisp */
+  html.has-readmore body .beaches-hero h1 {
+    font-size: clamp(1.3rem, 5.2vw, 1.8rem) !important;
+    line-height: 1.25 !important;
+    margin: 0 0 12px !important;
+    text-shadow: 0 3px 12px rgba(0,0,0,.5) !important;
+  }
+
+  /* Show ~5 lines, hide rest */
+  html.has-readmore body .beaches-hero .hero-subtext {
+    position: relative !important;
+    max-width: 92% !important;
+    font-size: clamp(.82rem, 3.6vw, .95rem) !important;
+    line-height: 1.58 !important;
+    background: rgba(0,0,0,.3) !important;
+    color: rgba(255,255,255,.95) !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+
+    /* THE CLAMP */
+    max-height: 8.4em !important;   /* ≈ 5 lines */
+    overflow: hidden !important;
+
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,.4) !important;
+  }
+
+  /* Fade hint */
+  html.has-readmore body .beaches-hero .hero-subtext::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0; right: 0; bottom: 0;
+    height: 3.2em !important;
+    background: linear-gradient(to top, rgba(0,0,0,.55), transparent) !important;
+    pointer-events: none !important;
+  }
+
+  /* Expanded state */
+  html.has-readmore body .beaches-hero .hero-subtext.expanded {
+    max-height: none !important;
+    overflow: visible !important;
+    padding-bottom: 2.2em !important;
+  }
+  html.has-readmore body .beaches-hero .hero-subtext.expanded::after {
+    opacity: 0 !important;
+  }
+
+  /* Button */
+  html.has-readmore body .beaches-hero .read-more-btn {
+    display: inline-block !important;
+    margin-top: 10px !important;
+    background: rgba(255,255,255,.18) !important;
+    border: 1px solid rgba(255,255,255,.25) !important;
+    color: #fff !important;
+    font-size: .9rem !important;
+    font-weight: 500 !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    transition: background .25s ease, transform .25s ease !important;
+  }
+  html.has-readmore body .beaches-hero .read-more-btn:hover {
+    background: rgba(255,255,255,.3) !important;
+    transform: translateY(-1px) !important;
+  }
+}
+
+/* Desktop/tablet: always full text, no button */
+@media (min-width: 769px) {
+  .hero-subtext { max-height: none !important; overflow: visible !important; }
+  .read-more-btn { display: none !important; }
+}
+
   </style>
 </head>
 
@@ -768,6 +1090,43 @@ main{margin-top:100px;padding:80px 20px;}
 
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+
+<script>
+  // Mobile-only, and adds a class to boost CSS specificity
+  (function () {
+    if (window.innerWidth > 768) return;
+
+    document.documentElement.classList.add('has-readmore');
+
+    const textBlock = document.querySelector('.hero-subtext');
+    if (!textBlock) return;
+
+    // Build the button after the text
+    const btn = document.createElement('button');
+    btn.className = 'read-more-btn';
+    btn.textContent = 'Διαβάστε περισσότερα';
+
+    // Place button right after the paragraph (inside the same hero-content)
+    const parent = textBlock.parentNode;
+    parent.appendChild(btn);
+
+    // Only show button if content is actually longer than the clamp
+    const needsClamp = textBlock.scrollHeight > textBlock.clientHeight + 4;
+    if (!needsClamp) {
+      btn.style.display = 'none';
+      // remove clamp if not needed
+      textBlock.style.maxHeight = 'none';
+      textBlock.style.overflow = 'visible';
+      return;
+    }
+
+    btn.addEventListener('click', () => {
+      const expanded = textBlock.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Κλείσιμο' : 'Διαβάστε περισσότερα';
     });
   })();
 </script>
