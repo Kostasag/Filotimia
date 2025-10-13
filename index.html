@@ -6,6 +6,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&family=Roboto:wght@400;500;700&display=swap&subset=greek" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap&subset=greek" rel="stylesheet">
+
 
   <style>
     /* ===== GENERAL RESET & BASIC STYLES ===== */
@@ -1713,6 +1715,81 @@ body.light-mode .footer-bottom {
 
 
 
+/* ==== MOBILE GALLERY IMPROVEMENTS (paste at end) ==== */
+@media (max-width: 640px) {
+  /* Gallery section padding and spacing */
+  #gallery-rooms.gallery-section {
+    padding: 60px 0 70px !important;
+    background: linear-gradient(180deg, #756d5f 0%, #8d8574 100%) !important;
+  }
+
+  /* Title styling — smaller, centered, more breathable */
+  #gallery-rooms .gallery-title {
+    font-size: 1.6rem !important;
+    line-height: 1.3 !important;
+    padding: 0 4vw;
+    text-align: center;
+    margin-bottom: 32px !important;
+    font-weight: 600 !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  /* Larger, smoother images for mobile view */
+  #gallery-rooms .multi-carousel {
+    --mc-per-view: 1 !important;  /* always one per screen */
+    --mc-gap: 16px !important;
+    padding: 0 44px !important;
+  }
+
+  #gallery-rooms .mc-slide {
+    height: clamp(300px, 70vw, 480px) !important;  /* taller for impact */
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25) !important;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  /* Add subtle tap feedback */
+  #gallery-rooms .mc-slide:active {
+    transform: scale(0.98);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+  }
+
+  /* Image fit and polish */
+  #gallery-rooms .mc-slide img {
+    object-fit: cover !important;
+    object-position: center center !important;
+    transition: transform .5s ease, opacity .3s ease;
+    border-radius: 16px;
+  }
+
+  #gallery-rooms .mc-slide img.is-loaded {
+    opacity: 1 !important;
+  }
+
+  /* Make arrows smaller, lighter, further out from the image */
+  #gallery-rooms .mc-arrow {
+    width: 46px !important;
+    height: 46px !important;
+    background: rgba(122, 111, 88, 0.75) !important;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #gallery-rooms .mc-arrow svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Adjust hit area slightly outward for easier tapping */
+  #gallery-rooms .mc-prev { left: 6px !important; }
+  #gallery-rooms .mc-next { right: 6px !important; }
+}
+
+
 
   </style>
 <style>
@@ -1838,6 +1915,36 @@ body.drawer-open { overflow: hidden; }
     margin-bottom:10px;
   }
 }
+
+
+/* Outdoor section: center image on mobile */
+@media (max-width: 640px) {
+  .content-section.from-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;         /* centers children */
+    gap: 16px;
+    transform: none !important;  /* cancel any slide-in that might offset */
+    opacity: 1 !important;
+  }
+
+  .content-section.from-left .outdoor-img {
+    display: block;
+    max-width: 100%;
+    width: min(92vw, 680px);     /* nicely centered width */
+    height: auto;                /* keep aspect ratio */
+    margin: 0 auto;              /* center */
+    border-radius: 12px;         /* optional polish */
+  }
+
+  .content-section.from-left .content-text {
+    width: 100%;
+    padding: 0 4vw;              /* comfortable side padding */
+    text-align: left;            /* or center if you prefer */
+  }
+}
+
+
 
 
 /* === COMPACT BOOK BOX (MOBILE) === */
@@ -2501,7 +2608,7 @@ section.amenities-section .amenity-item p b{
 .lang-en .en { display: inline; }
 </style>
 
-<!-- Hide the glassy booking box on mobile 
+<!-- Hide the glassy booking box on mobile -->
 <style>
   /* Hide on small screens (match your mobile breakpoints) */
   @media (max-width: 560px) {
@@ -2511,19 +2618,518 @@ section.amenities-section .amenity-item p b{
   /* Optional: also hide on touch-only devices, even if slightly wider */
   @media (hover: none) and (pointer: coarse) {
     #book-box { display: none !important; }
-  } -->
+  } 
+
+/* Hide call button on phones and most touch devices */
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
+  .call-button { display: none !important; }
+}
 
 
 
 
+
+/* ==== REVIEWS SECTION – Modernized, Polished, Responsive ==== */
+.reviews-section {
+  padding: 100px 5vw;
+  background: radial-gradient(circle at top left, #323232 0%, #1e1e1e 100%);
+  color: #f8f8f8;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Title */
+.reviews-title {
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #f5f5f5;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Marquee container */
+.reviews-marquee {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  position: relative;
+}
+
+.reviews-track {
+  display: flex;
+  width: max-content;
+  gap: 32px;
+  animation: scroll-loop 45s linear infinite;
+  will-change: transform;
+}
+
+/* Review Card */
+.review-card {
+  background: linear-gradient(145deg, #252525, #1b1b1b);
+  border-radius: 18px;
+  padding: 28px 24px;
+  min-width: 280px;
+  max-width: 320px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-8px);
+  background: linear-gradient(145deg, #2b2b2b, #1a1a1a);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Score badge */
+.review-score {
+  background: linear-gradient(135deg, #00c3ff, #29ffc6);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 auto 15px;
+  box-shadow: 0 6px 16px rgba(0, 185, 218, 0.3);
+}
+
+/* Review text */
+.review-card p {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e4e4e4;
+  margin-bottom: 10px;
+}
+
+/* Reviewer name */
+.review-card span {
+  display: block;
+  color: #b8b8b8;
+  font-weight: 500;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+/* Booking button */
+.booking-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 55px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #00b9da, #00e0b8);
+  color: #1a1a1a;
+  border-radius: 40px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.booking-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 25px rgba(0, 185, 218, 0.25);
+}
+
+/* Marquee animation */
+@keyframes scroll-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 900px) {
+  .reviews-section {
+    padding: 80px 4vw;
+  }
+  .reviews-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  .reviews-track {
+    animation-duration: 55s; /* slower for smaller screens */
+  }
+}
+
+@media (max-width: 640px) {
+  .reviews-section {
+    padding: 70px 3vw;
+  }
+
+  .review-card {
+    min-width: 86vw;
+    max-width: 88vw;
+    padding: 26px 22px;
+    margin-right: 0;
+  }
+
+  .review-card p {
+    font-size: 0.95rem;
+  }
+
+  .reviews-track {
+    gap: 20px;
+    animation-duration: 60s;
+  }
+
+  .booking-btn {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    margin-top: 40px;
+  }
+}
+
+
+/* === Reviews: Boost readability (paste at end) === */
+.review-card p{
+  color: #f3f6f8 !important;      /* brighter, near-white */
+  font-size: 1.02rem !important;  /* a hair larger */
+  line-height: 1.7 !important;    /* more breathing room */
+  text-shadow: 0 1px 1px rgba(0,0,0,.25); /* subtle lift on dark bg */
+}
+
+.review-card span{
+  color: #e8ecef !important;      /* brighter author line */
+  font-weight: 600 !important;    /* a bit stronger for clarity */
+}
+
+/* Score badge digits: crisper */
+.review-score{
+  color: #fff !important;
+  font-weight: 800 !important;
+}
+
+/* Optional: when users prefer more contrast */
+@media (prefers-contrast: more){
+  .review-card p{ color:#ffffff !important; }
+  .review-card span{ color:#f5f7fa !important; }
+}
+
+/* Mobile tweak: keep it comfy on small screens */
+@media (max-width:640px){
+  .review-card p{
+    font-size: 1.02rem !important;
+    line-height: 1.75 !important;
+  }
+}
+
+
+/* ==== Reviews Title – Sharper, premium, responsive ==== */
+.reviews-title{
+  /* typography */
+  font-family: "Open Sans", "Noto Sans", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial !important;
+  font-weight: 700 !important;                 /* strong but not heavy */
+  letter-spacing: .02em !important;
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem) !important;  /* scales nicely */
+  line-height: 1.2 !important;
+  margin: 0 auto 48px !important;
+  text-transform: none !important;             /* no ALL CAPS */
+  color: #f7f9fb !important;
+
+  /* polish */
+  display: inline-block !important;
+  position: relative !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,.28);     /* subtle lift on dark bg */
+}
+
+/* elegant underline accent */
+.reviews-title::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00c3ff, #29ffc6);
+  box-shadow: 0 2px 10px rgba(0, 195, 255, .35);
+}
+
+/* Optional: softer subtitle tone (if you have bilingual spans inside) */
+.reviews-title .gr, 
+.reviews-title .en{
+  color: inherit !important;   /* inherit the improved color */
+}
+
+/* Smaller devices: a touch more breathing room */
+@media (max-width: 640px){
+  .reviews-title{
+    margin-bottom: 42px !important;
+  }
+  .reviews-title::after{
+    width: 88px;
+    bottom: -12px;
+  }
+}
+
+/* Reviews: clearer, non-italic body text */
+.review-card p {
+  font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+  font-weight: 500 !important;          /* crisp, not heavy */
+  font-size: 1.02rem !important;
+  line-height: 1.7 !important;
+  font-style: normal !important;         /* turn off italics for readability */
+  color: #f5f7fa !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optional: keep only the opening/closing quotes styled */
+.review-card p::before,
+.review-card p::after {
+  content: "“";
+  color: #cfe7ff;
+  font-weight: 600;
+  margin: 0 .1em 0 0;
+}
+.review-card p::after { content: "”"; margin: 0 0 0 .1em; }
+
+.review-card span {                      /* reviewer name */
+  font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial !important;
+  color: #e9edf1 !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em;
+}
+
+/* Mobile comfort */
+@media (max-width:640px){
+  .review-card p { font-size: 1.04rem !important; line-height: 1.75 !important; }
+}
+
+    /* Footer contact column */
+.footer-contact h4{
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.footer-contact .footer-contact-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: #333;
+  text-decoration: none;                  /* no underline by default */
+  transition: color .2s ease, transform .15s ease;
+}
+
+.footer-contact .footer-contact-item i{
+  width: 22px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--brand-2);                  /* matches your theme (#146c94) */
+}
+
+.footer-contact .footer-contact-item span{
+  border-bottom: 1px solid transparent;  /* subtle underline on hover only */
+}
+
+.footer-contact .footer-contact-item:hover{
+  color: var(--brand-2);
+  transform: translateX(2px);
+}
+
+.footer-contact .footer-contact-item:hover span{
+  border-bottom-color: currentColor;
+}
+
+/* Make sure it sits nicely on small screens too */
+@media (max-width: 520px){
+  .footer-contact .footer-contact-item{
+    padding: 8px 0;
+    font-size: 0.98rem;
+  }
+}
+
+
+/* ===== SCROLL TO TOP BUTTON ===== */
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 42px;
+  height: 42px;
+  background-color: #0ea5b3;        /* same as --brand */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;                    /* hidden by default */
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: background-color .3s ease, transform .3s ease;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #146c94;        /* matches your --brand-2 */
+  transform: translateY(-2px);
+}
+
+/* Optional: prevent that tiny white line glitch */
+body {
+  background-color: #f9f9f9;
+  overflow-x: hidden;               /* hides stray horizontal line */
+}
+
+
+/* === Footer: tighter, 2 columns on phones, left-aligned lists === */
+@media (max-width: 640px){
+  .new-footer{
+    padding: 28px 16px 18px !important;
+    background: #fdf5e6;  /* keep your theme */
+  }
+
+  .footer-grid{
+    max-width: 100% !important;
+    grid-template-columns: 1fr 1fr !important; /* 2 columns instead of 1 */
+    gap: 18px 14px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px solid #d9d0bf !important;
+    text-align: left !important;              /* stop centering everything */
+  }
+
+  /* Brand spans full width at top, centered */
+  .footer-brand{
+    grid-column: 1 / -1;
+    text-align: center !important;
+  }
+  .footer-brand img{ margin: 0 auto 8px !important; }
+  .footer-brand h3{ font-size: 1.15rem !important; }
+
+  /* Section headings smaller */
+  .footer-links h4,
+  .footer-contact h4{
+    font-size: 1rem !important;
+    margin: 10px 0 6px !important;
+  }
+
+  /* Links: left aligned, tighter line height */
+  .footer-links a{
+    font-size: .95rem !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+  }
+
+  .footer-contact .footer-contact-item{
+    padding: 4px 0 !important;
+    font-size: .96rem !important;
+  }
+
+  .footer-bottom{
+    font-size: .85rem !important;
+    padding-top: 10px !important;
+  }
+}
+
+/* If you prefer a single column but still left-aligned, use this instead of the 2-column rule above: */
+/*
+@media (max-width: 640px){
+  .footer-grid{ grid-template-columns: 1fr !important; text-align:left !important; }
+  .footer-brand{ text-align:center !important; }
+}
+*/
+
+/* === Keep the scroll-to-top button off the footer on phones === */
+@media (max-width: 640px){
+  #scrollToTopBtn{ bottom: 78px !important; right: 18px !important; }
+}
+/* === Footer: tighter, 2 columns on phones, left-aligned lists === */
+@media (max-width: 640px){
+  .new-footer{
+    padding: 28px 16px 18px !important;
+    background: #fdf5e6;  /* keep your theme */
+  }
+
+  .footer-grid{
+    max-width: 100% !important;
+    grid-template-columns: 1fr 1fr !important; /* 2 columns instead of 1 */
+    gap: 18px 14px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px solid #d9d0bf !important;
+    text-align: left !important;              /* stop centering everything */
+  }
+
+  /* Brand spans full width at top, centered */
+  .footer-brand{
+    grid-column: 1 / -1;
+    text-align: center !important;
+  }
+  .footer-brand img{ margin: 0 auto 8px !important; }
+  .footer-brand h3{ font-size: 1.15rem !important; }
+
+  /* Section headings smaller */
+  .footer-links h4,
+  .footer-contact h4{
+    font-size: 1rem !important;
+    margin: 10px 0 6px !important;
+  }
+
+  /* Links: left aligned, tighter line height */
+  .footer-links a{
+    font-size: .95rem !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+  }
+
+  .footer-contact .footer-contact-item{
+    padding: 4px 0 !important;
+    font-size: .96rem !important;
+  }
+
+  .footer-bottom{
+    font-size: .85rem !important;
+    padding-top: 10px !important;
+  }
+}
+
+/* If you prefer a single column but still left-aligned, use this instead of the 2-column rule above: */
+/*
+@media (max-width: 640px){
+  .footer-grid{ grid-template-columns: 1fr !important; text-align:left !important; }
+  .footer-brand{ text-align:center !important; }
+}
+*/
+
+/* === Keep the scroll-to-top button off the footer on phones === */
+@media (max-width: 640px){
+  #scrollToTopBtn{ bottom: 78px !important; right: 18px !important; }
+}
+
+
+
+
+
+/* Mobile adjustment (keep visual balance on small screens) */
+@media (max-width: 768px) {
+  .video-background-section {
+    height: 50vh !important;
+  }
+  .hero-overlay {
+    bottom: 6vh !important;
+  }
+}
 </style>
 
 </head>
 <body>
   
-
-
-
 <!-- Nav Bar -->
 <div class="navbar">
   <div class="navbar-inner">
@@ -2537,7 +3143,7 @@ section.amenities-section .amenity-item p b{
     </div>
     <div class="nav-right">
       <a href="connections.html">Connections</a>
-      <a href="Untitled-2.html">Booking</a>
+      <a href="beaches.html">Booking</a>
       <a href="contact us.html">Contact Us</a>
     </div>
   </div>
@@ -2560,7 +3166,7 @@ section.amenities-section .amenity-item p b{
     <a href="about us.html">About Us</a>
     <a href="rooms.html">Rooms</a>
     <a href="connections.html">Connections</a>
-    <a href="Untitled-2.html">Booking</a>
+    <a href="beaches.html">Booking</a>
     <a href="contact us.html">Contact Us</a>
   </nav>
 </aside>
@@ -2684,6 +3290,7 @@ section.amenities-section .amenity-item p b{
 
 
 <!-- VIDEO SECTION -->
+ <!-- ===== oRVkLwAtmik ---new video link ===== -->
 <section class="video-background-section">
   <div class="video-overlay"></div>
   <div class="video-iframe-wrapper">
@@ -3092,6 +3699,108 @@ section.amenities-section .amenity-item p b{
         <span>– Stylianos.</span>
       </div>
 
+
+      <!-- 1 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Απολύτως υπέροχο διαμέρισμα. Μακάρι να μπορούσαμε να μείνουμε περισσότερο. Εγκαταστάσεις πρώτης κατηγορίας, πεντακάθαρες, μοντέρνες και φωτεινές. Το προσωπικό ήταν εξαιρετικό και μας μετέφερε από και προς το λιμάνι."</span>
+    <span class="en" style="display:none;">"Absolutely gorgeous apartment. Just wish we could have stayed longer. First-class facilities that were spotlessly clean, modern, and bright. The staff were brilliant and provided us with lifts to and from the port."</span>
+  </p>
+  <span>– Anonymous</span>
+</div>
+
+<!-- 2 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Καταλύματα καλοδιατηρημένα, καινούρια και μοντέρνα, με όμορφη θέα και ήσυχη αλλά κεντρική τοποθεσία. Η ομάδα ήταν πολύ φιλική και εξυπηρετική. Όλα ήταν προσεγμένα, με άψογες εγκαταστάσεις και καθαριότητα. Ο σχεδιασμός του κήπου και της αυλής ήταν επίσης πολύ όμορφος. Έχουμε επισκεφθεί πολλά νησιά στην Ελλάδα και έχουμε γνωρίσει πολλά καταλύματα – το Filotimia βρίσκεται στην κορυφή και το συνιστούμε ανεπιφύλακτα."</span>
+    <span class="en" style="display:none;">"Well-maintained, new, and modern accommodation with a beautiful view and a quiet yet central location. The team was very friendly and helpful. Everything seemed very well-maintained and well-thought-out, and the facilities and cleanliness were top-notch. The design of the garden and courtyard was also very beautiful. We have been to many islands in Greece and have therefore gotten to know many apartments. Filotimia currently leads the rankings and we can recommend the accommodation to everyone."</span>
+  </p>
+  <span>– Johannes</span>
+</div>
+
+<!-- 3 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Πολύ όμορφη κατασκευή, καλά οργανωμένη. Καθαρή, τακτοποιημένη και με όλες τις ανέσεις. Το αίθριο με θέα στη θάλασσα είναι υπέροχο!"</span>
+    <span class="en" style="display:none;">"Very nice structure, well organized. Clean, tidy, and with every comfort. The patio overlooking the sea is beautiful!"</span>
+  </p>
+  <span>– Giuseppina</span>
+</div>
+
+<!-- 4 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Πολύ ευγενικοί ιδιοκτήτες. Πολύ όμορφο κατάλυμα, πεντακάθαρο και ήσυχο. Υπέροχη βεράντα!"</span>
+    <span class="en" style="display:none;">"Very kind owners. Very beautiful accommodation. Spotlessly clean and quiet. Wonderful terrace!"</span>
+  </p>
+  <span>– ΚΟΝΤΡΑ</span>
+</div>
+
+<!-- 5 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Υπέροχο κατάλυμα με έμφαση στην οικολογία! Καλαίσθητοι και άνετοι χώροι, καθαροί και προσεγμένοι. Πολύ ευγενικό, φιλόξενο και διακριτικό προσωπικό. Ό,τι χρειάζεσαι για να χαλαρώσεις και να απολαύσεις τις διακοπές σου στη Σχοινούσα!"</span>
+    <span class="en" style="display:none;">"Wonderful hotel, with an emphasis on ecology! Tasteful and comfortable spaces, clean and well-kept. Very kind, caring, and discreet staff. Everything you need to relax and enjoy your vacation on the beautiful island of Schinoussa!"</span>
+  </p>
+  <span>– Anthi</span>
+</div>
+
+<!-- 6 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Όλα ήταν υπέροχα – άνετα στούντιο με εκπληκτική θέα στη θάλασσα. Η Βασιλική και η οικογένειά της είναι εξαιρετικοί οικοδεσπότες. Υπέροχες διακοπές!"</span>
+    <span class="en" style="display:none;">"Everything is beautiful, comfortable studios with an amazing sea view. Vasiliki and her family are wonderful hosts. Great holiday!"</span>
+  </p>
+  <span>– Barbara</span>
+</div>
+
+<!-- 7 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Το κατάλυμα είναι εντυπωσιακό, αποτελούμενο από μικρά σπίτια με εμφανή πέτρα. Το δωμάτιο ευρύχωρο και φωτεινό, με ευχάριστη διακόσμηση και πλήρως εξοπλισμένη κουζίνα. Το μπάνιο πολύ άνετο, με ωραίο ντους και παράθυρο. Ο εξωτερικός χώρος με τραπέζι, καρέκλες και αιώρα είναι τέλειος για πρωινό ή για ένα ποτό με θέα το πέλαγος – πραγματική απόλαυση!"</span>
+    <span class="en" style="display:none;">"The property is stunning, made up of small houses with exposed stonework. The room is truly spacious and super bright, with very pleasant furnishings and a kitchen area equipped with everything you need for cooking. The bathroom is comfortable with a nice shower and window. A pleasant outdoor space with a table, chairs, and hammock is perfect for breakfast and enjoying the sea view. In the evening, a drink in that wonderful setting is truly good for the soul."</span>
+  </p>
+  <span>– Lorella</span>
+</div>
+
+<!-- 8 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Τοποθεσία με πανοραμική θέα, σε φυσικό και ήσυχο περιβάλλον. Καινούρια κατασκευή, πλήρως ενταγμένη στο τοπίο και άρτια εξοπλισμένη. Πολύ άνετο κρεβάτι, τέλειο ντους και κουζινάκι. Άριστη καθαριότητα και, το σημαντικότερο, η καλοσύνη και η βοήθεια της Βασιλικής – την ευχαριστούμε από καρδιάς!"</span>
+    <span class="en" style="display:none;">"Location with panoramic views, in a natural and quiet environment. Brand-new structure well integrated into the context and well equipped. Very comfortable bed, perfect shower as well as kitchenette. Excellent cleanliness and, last but not least, the kindness and helpfulness of Vasiliki, whom we thank from the bottom of our hearts."</span>
+  </p>
+  <span>– Sabrina</span>
+</div>
+
+<!-- 9 -->
+<div class="review-card">
+  <div class="review-score">9</div>
+  <p>
+    <span class="gr">"Όμορφη θέα, άνετος χώρος, καθαριότητα, ιδιωτικότητα, ησυχία."</span>
+    <span class="en" style="display:none;">"Beautiful view, comfortable space, cleanliness, privacy, quiet."</span>
+  </p>
+  <span>– Kostas</span>
+</div>
+
+<!-- 10 -->
+<div class="review-card">
+  <div class="review-score">10</div>
+  <p>
+    <span class="gr">"Όλα! Απλώς όλα φανταστικά. Εντυπωσιακή κατασκευή με θέα σε ολόκληρο το νησί."</span>
+    <span class="en" style="display:none;">"Everything. Simply everything fantastic. Spectacular structure with views across the entire island."</span>
+  </p>
+  <span>– Giovanna</span>
+</div>
+
+
     </div>
   </div>
 
@@ -3118,19 +3827,21 @@ section.amenities-section .amenity-item p b{
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="new-footer">
   <div class="footer-grid">
+    <!-- Brand -->
     <div class="footer-brand">
-      <img src="images/img17.jpg" alt="Filotimia Logo" />
+      <img src="images/img17.jpg" alt="Filotimia Logo">
       <h3>Filotimia Apartments</h3>
+      <p style="margin-top:6px;font-size:.95rem;color:#555;">
+        <span class="gr">Σχοινούσα, Μικρές Κυκλάδες</span>
+        <span class="en" style="display:none;">Schinoussa, Small Cyclades</span>
+      </p>
     </div>
 
+    <!-- Links -->
     <div class="footer-links">
-      <h4>
-        <span class="gr">Σχετικά & Επικοινωνία</span>
-        <span class="en" style="display:none;">About & Contact</span>
-      </h4>
+      <h4><span class="gr">Σχετικά &amp; Επικοινωνία</span><span class="en" style="display:none;">About &amp; Contact</span></h4>
       <a href="about us.html">
         <span class="gr">Σχετικά με εμάς</span>
         <span class="en" style="display:none;">About Us</span>
@@ -3139,16 +3850,22 @@ section.amenities-section .amenity-item p b{
         <span class="gr">Επικοινωνία</span>
         <span class="en" style="display:none;">Contact</span>
       </a>
+      <a href="connections.html">
+        <span class="gr">Δρομολόγια</span>
+        <span class="en" style="display:none;">Connections</span>
+      </a>
     </div>
 
+    <!-- Services -->
     <div class="footer-links">
-      <h4>
-        <span class="gr">Υπηρεσίες</span>
-        <span class="en" style="display:none;">Services</span>
-      </h4>
+      <h4><span class="gr">Υπηρεσίες</span><span class="en" style="display:none;">Services</span></h4>
       <a href="rooms.html">
         <span class="gr">Δωμάτια</span>
         <span class="en" style="display:none;">Rooms</span>
+      </a>
+      <a href="index.html#booking">
+        <span class="gr">Κρατήσεις</span>
+        <span class="en" style="display:none;">Booking</span>
       </a>
       <a href="#">
         <span class="gr">Όροι Χρήσης</span>
@@ -3156,19 +3873,26 @@ section.amenities-section .amenity-item p b{
       </a>
     </div>
 
+    <!-- Contact (phone + email) -->
+    <div class="footer-contact">
+      <h4><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></h4>
+
+      <a href="tel:+306948813906" class="footer-contact-item" aria-label="Call us">
+        <i class="fa-solid fa-phone"></i>
+        <span>+30 694 881 3906</span>
+      </a>
+
+      <a href="mailto:info@filotimia.gr" class="footer-contact-item" aria-label="Email us">
+        <i class="fa-solid fa-envelope"></i>
+        <span>info@filotimia.gr</span>
+      </a>
+    </div>
+
+    <!-- Social -->
     <div class="footer-links">
-      <h4>
-        <span class="gr">Social</span>
-        <span class="en" style="display:none;">Social</span>
-      </h4>
-      <a href="#">
-        <span class="gr">Instagram</span>
-        <span class="en" style="display:none;">Instagram</span>
-      </a>
-      <a href="#">
-        <span class="gr">YouTube</span>
-        <span class="en" style="display:none;">YouTube</span>
-      </a>
+      <h4>Social</h4>
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
     </div>
   </div>
 
@@ -3628,6 +4352,81 @@ const io = new IntersectionObserver((entries) => {
   backdrop.addEventListener('click',   () => setDrawer(false));
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
 </script>
+
+
+<script>
+/* === Reviews Section: fade/slide animation + pause on hover === */
+(function() {
+  const reviewsTrack = document.querySelector('.reviews-track');
+  if (!reviewsTrack) return;
+
+  // Animate fade-in when visible
+  const reviewsSection = document.querySelector('.reviews-section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        reviewsSection.classList.add('show-section');
+        observer.unobserve(reviewsSection);
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(reviewsSection);
+
+  // Pause marquee on hover (desktop)
+  reviewsTrack.addEventListener('mouseenter', () => {
+    reviewsTrack.style.animationPlayState = 'paused';
+  });
+  reviewsTrack.addEventListener('mouseleave', () => {
+    reviewsTrack.style.animationPlayState = 'running';
+  });
+
+  // Smooth initial reveal effect
+  reviewsSection.style.opacity = 0;
+  reviewsSection.style.transform = 'translateY(40px)';
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      reviewsSection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      reviewsSection.style.opacity = 1;
+      reviewsSection.style.transform = 'translateY(0)';
+    }, 250);
+  });
+})();
+</script>
+
+<script>
+/* Reviews: mobile tap pause/resume */
+(function () {
+  const track = document.querySelector('.reviews-track');
+  if (!track) return;
+
+  let resumeTimer = null;
+
+  // Auto-resume shortly after a touch (good for reading one card)
+  const pauseThenAutoResume = () => {
+    track.style.animationPlayState = 'paused';
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 4000); // auto-resume after 2s (adjust if you like)
+  };
+
+  // Immediate resume on tap anywhere in the marquee
+  const resumeNow = () => {
+    clearTimeout(resumeTimer);
+    track.style.animationPlayState = 'running';
+  };
+
+  // Pause when the user touches a review (mobile)
+  track.addEventListener('touchstart', pauseThenAutoResume, { passive: true });
+
+  // If they tap again, resume immediately
+  track.addEventListener('touchend', resumeNow);
+  track.addEventListener('click', resumeNow); // also works if mobile sends click
+
+  // (Desktop hover pause from earlier remains; mobile has no hover so no conflict)
+})();
+</script>
+
 
 
 </body>

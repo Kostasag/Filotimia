@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Παραλίες | Filotimia Schoinoussa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+   :root{
+  --brand:#0ea5b3;
+  --brand-2:#146c94;
+  --text:#2b2b2b;
+  --bg:#f7f9fb;
+  --card:#ffffff;
+}
+
+/* RESET & BASE */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+}
+
+/* ===== NAVBAR ===== */
+header{
+  position:fixed;top:0;left:0;width:100%;background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.nav-container{
+  max-width:1200px;margin:0 auto;padding:10px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-logo img{height:52px;width:auto;border-radius:10px;}
+nav ul{display:flex;gap:26px;list-style:none;}
+nav ul li a{
+  text-decoration:none;color:#222;font-weight:500;
+  padding:6px 0;transition:color .3s ease;
+}
+nav ul li a:hover,
+nav ul li a.active{color:var(--brand);}
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.menu-toggle span{
+  display:block;width:26px;height:3px;background:#222;border-radius:4px;
+  transition:all .3s ease;
+}
+@media (max-width:820px){
+  nav ul{
+    position:absolute;top:70px;left:0;width:100%;
+    flex-direction:column;background:#fff;border-top:1px solid rgba(0,0,0,.1);
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+  }
+  nav ul.open{max-height:400px;}
+  nav ul li{text-align:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);}
+  .menu-toggle{display:flex;}
+}
+
+/* ===== HERO ===== */
+/* ===== HERO (Aegean Glow – responsive tuned) ===== */
+.beaches-hero{
+  position:relative;
+  height:64vh;                      /* roomy on desktop */
+  min-height:420px;                 /* keep presence on short screens */
+  background:
+    linear-gradient(to bottom, rgba(0,35,45,.45),  rgba(0,60,75,.25)),
+    url('images/img2010.jpeg') center 35% / cover no-repeat;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; color:#fff; overflow:hidden;
+  border-bottom:5px solid var(--brand);
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+  margin-top: 0;                     /* avoid negative pull under navbar */
+  padding-top: max(0px, env(safe-area-inset-top)); /* iOS notch safe */
+}
+
+.beaches-hero::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 30%, rgba(255,255,255,.14), transparent 70%);
+  pointer-events:none;
+}
+
+/* Title chip */
+.beaches-hero h1{
+  position:relative; z-index:2;
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  font-size:clamp(2rem, 3.3vw, 3.2rem);
+  line-height:1.2;
+  letter-spacing:.5px;
+  color:#fff;
+  padding: clamp(14px, 1.6vw, 22px) clamp(22px, 3vw, 36px);
+  border-radius:16px;
+  background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+  text-shadow:0 2px 10px rgba(0,0,0,.45);
+  opacity:0; transform:translateY(14px);
+  animation:fadeUpHero 900ms ease forwards 120ms;
+}
+
+@keyframes fadeUpHero{
+  to{ opacity:1; transform:none; }
+}
+
+/* ===== RESPONSIVE TWEAKS ===== */
+
+/* Large tablets / small laptops */
+@media (max-width: 1024px){
+  .beaches-hero{
+    height:56vh;
+    min-height:380px;
+    background-position:center 38%;
+  }
+}
+
+/* Tablets & big phones */
+@media (max-width: 820px){
+  .beaches-hero{
+    height:50vh;
+    min-height:360px;
+    background-position:center 42%;
+    border-bottom-width:4px;
+  }
+  .beaches-hero h1{
+    font-size: clamp(1.8rem, 4.6vw, 2.4rem);
+    padding: 12px 22px;
+    border-radius:14px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px){
+  .beaches-hero{
+    height:46vh;
+    min-height:320px;
+    background-position:center 46%;
+    box-shadow:0 6px 20px rgba(0,0,0,.18);
+  }
+  .beaches-hero h1{
+    font-size: clamp(1.6rem, 5.6vw, 2rem);
+    padding: 10px 18px;
+    background: rgba(0,0,0,.30); /* a hair darker for readability */
+    border-width: 1px;
+  }
+}
+
+/* Small phones + landscape */
+@media (max-width: 420px), (max-height: 480px){
+  .beaches-hero{
+    height:42vh;
+    min-height:280px;
+    background-position:center 50%;
+    border-bottom-width:3px;
+  }
+  .beaches-hero h1{
+    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
+    padding: 9px 16px;
+    border-radius:12px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .beaches-hero h1{ animation:none; opacity:1; transform:none; }
+}
+
+
+
+/* ===== HERO CONTENT (with descriptive text) ===== */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-subtext {
+  margin-top: 22px;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: clamp(16px, 3vw, 26px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  max-height: 380px;
+  overflow-y: auto; /* if text gets long */
+}
+
+/* Scrollbar styling for aesthetic touch */
+.hero-subtext::-webkit-scrollbar {
+  width: 8px;
+}
+.hero-subtext::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+}
+
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 820px) {
+  .hero-content {
+    max-width: 92%;
+  }
+  .hero-subtext {
+    margin-top: 18px;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero-subtext {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 12px;
+  }
+}
+
+
+/* ===== BEACHES SECTION ===== */
+main{margin-top:100px;padding:80px 20px;}
+.beaches-section {
+  max-width:1150px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+  gap:40px;
+  padding-top:40px;
+}
+
+.beach-card {
+  background:var(--card);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.beach-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 14px 40px rgba(0,0,0,0.15);
+}
+.beach-card img {
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+.beach-text {
+  padding:25px 28px;
+}
+.beach-text h3 {
+  font-family:'Playfair Display',serif;
+  color:var(--brand-2);
+  font-size:1.4rem;
+  margin-bottom:10px;
+}
+.beach-text p {
+  color:#444;
+  font-size:1.03rem;
+  line-height:1.6;
+}
+
+/* ===== FOOTER ===== */
+.new-footer{
+  background:#eaeaea;
+  padding:60px 20px 30px;
+  color:#333;
+  margin-top:80px;
+}
+.footer-grid{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:40px;
+  align-items:flex-start;
+  padding-bottom:30px;
+  border-bottom:1px solid #ccc;
+}
+.footer-brand img{width:50px;height:50px;border-radius:12px;object-fit:cover;margin-bottom:10px;}
+.footer-brand h3{font-size:1.4rem;margin:0;color:#333;}
+.footer-links h4{margin-bottom:12px;font-weight:600;color:#222;}
+.footer-links a{display:block;color:#555;font-size:.95rem;text-decoration:none;margin-bottom:6px;transition:color .3s ease;}
+.footer-links a:hover{color:var(--brand);}
+.footer-bottom{text-align:center;padding-top:20px;font-size:.9rem;color:#666;}
+
+/* ===== FOOTER CONTACT ===== */
+.footer-contact h4{margin-bottom:12px;font-weight:600;color:#222;}
+.footer-contact .footer-contact-item{
+  display:flex;align-items:center;gap:10px;padding:6px 0;
+  color:#333;text-decoration:none;transition:color .2s ease,transform .15s ease;
+}
+.footer-contact .footer-contact-item i{width:22px;text-align:center;font-size:16px;color:var(--brand-2);}
+.footer-contact .footer-contact-item span{border-bottom:1px solid transparent;}
+.footer-contact .footer-contact-item:hover{color:var(--brand-2);transform:translateX(2px);}
+.footer-contact .footer-contact-item:hover span{border-bottom-color:currentColor;}
+
+/* CALL BUTTON */
+.call-button{
+  position:fixed;right:0;top:50%;transform:translateY(-50%);
+  background-color:#2d4fa4;color:white;border-radius:12px 0 0 12px;
+  padding:16px;display:flex;align-items:center;z-index:1000;cursor:pointer;
+  transition:right .4s ease,padding .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.2);
+  text-decoration:none;
+}
+.call-button i{font-size:28px;}
+.call-tooltip{overflow:hidden;max-width:0;opacity:0;margin-left:0;display:flex;flex-direction:column;white-space:nowrap;transition:max-width .5s ease,opacity .4s ease,margin-left .4s ease;}
+.call-tooltip strong{font-size:17px;font-weight:600;margin-bottom:3px;}
+.call-tooltip span{font-size:15px;font-weight:500;text-decoration:underline;}
+.call-button:hover .call-tooltip{max-width:220px;opacity:1;margin-left:14px;}
+
+
+/* ===== LANGUAGE SWITCH (bring it back) ===== */
+.lang-switch{
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 2000; /* higher than header (1000) and hero overlays */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.38);
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+
+.lang-btn{
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font: 600 12px/1 'Poppins', sans-serif;
+  letter-spacing: .4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: transparent;
+  opacity: .9;
+  transition: background .2s ease, opacity .2s ease;
+}
+
+.lang-btn.active{
+  background: rgba(255,255,255,.18);
+  opacity: 1;
+}
+
+.lang-divider{
+  color: #ddd;
+  opacity: .85;
+}
+
+/* keep clear of the mobile menu */
+@media (max-width: 820px){
+  .lang-switch{ top: 12px; right: 12px; }
+}
+
+
+/* ===== SCROLL TO TOP BUTTON ===== */
+#scrollToTopBtn{
+  position: fixed;
+  right: 22px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: var(--brand, #0ea5b3);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;           /* icon size */
+  cursor: pointer;
+  z-index: 1200;             /* above footer/header */
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+  transition: opacity .25s ease, transform .25s ease, background-color .25s ease;
+  opacity: 0;                /* hidden by default */
+  pointer-events: none;      /* not clickable when hidden */
+}
+
+#scrollToTopBtn.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#scrollToTopBtn:hover{
+  background: var(--brand-2, #146c94);
+  transform: translateY(-2px);
+}
+
+#scrollToTopBtn:active{
+  transform: translateY(-1px);
+}
+
+#scrollToTopBtn i{
+  line-height: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #scrollToTopBtn{ transition: none; }
+}
+
+/* Optional: slightly smaller on small phones */
+@media (max-width: 420px){
+  #scrollToTopBtn{
+    right: 16px;
+    bottom: 18px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* Remove the glass chip behind the hero title */
+.beaches-hero h1{
+  background: none !important;
+  border: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Strengthen readability directly on the text */
+.beaches-hero h1{
+  text-shadow: 0 2px 14px rgba(0,0,0,.45);
+}
+  </style>
+</head>
+
+<body>
+
+<!-- Header / Navbar -->
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="images/img17.jpg" alt="Filotimia Logo"></a>
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html"><span class="gr">Αρχική</span><span class="en" style="display:none;">Home</span></a></li>
+        <li><a href="about us.html"><span class="gr">Σχετικά</span><span class="en" style="display:none;">About Us</span></a></li>
+        <li><a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span></a></li>
+        <li><a href="connections.html"><span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span></a></li>
+        <li><a href="index.html#booking"><span class="gr">Κρατήσεις</span><span class="en" style="display:none;">Booking</span></a></li>
+        <li><a href="beaches.html" class="active"><span class="gr">Παραλίες</span><span class="en" style="display:none;">Beaches</span></a></li>
+        <li><a href="contact us.html"><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Language Switch -->
+<div class="lang-switch" aria-label="Language switch">
+  <button class="lang-btn active" data-lang="gr" aria-label="Ελληνικά">ΕΛ</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+</div>
+
+<!-- CALL BUTTON -->
+<a href="tel:+306948813906" class="call-button">
+  <i class="fas fa-headset"></i>
+  <div class="call-tooltip">
+    <strong>Call us</strong>
+    <span>+30 69 4881 3906</span>
+  </div>
+</a>
+
+<main>
+  <section class="beaches-hero">
+  <div class="hero-content">
+    <h1>
+      <span class="gr">Παραλίες της Σχοινούσας</span>
+      <span class="en" style="display:none;">Beaches of Schinoussa</span>
+    </h1>
+
+    <p class="hero-subtext">
+      <span class="gr">
+        Οι παραλίες της Σχοινούσας χαρακτηρίζονται απάτητες και ανήκουν σε ειδικό καθεστώς προστασίας. Παρά το μικρό της μέγεθος διαθέτει μεγάλο αριθμό παραλιών.
+        Από τη Χώρα η πινακίδα δείχνει τις αποστάσεις για τις διάφορες παραλίες με την πιο μακρινή διαδρομή (Λιόλιου) να είναι στα 3.5 χιλιόμετρα, όπου για τον επισκέπτη που έρχεται για πρώτη φορά νομίζει ότι γράφει 35 χλμ. 
+        Στη Σχοινούσα δε χρειάζεσαι αυτοκίνητο, όλες οι παραλίες είναι σε κοντινή απόσταση και προσβάσιμες. 
+        Έχεις την αίσθηση ότι είσαι στο κέντρο του τραπεζιού και έχεις πρόσβαση σε όλα τα πιάτα. 
+        Υπάρχουν πολλές άλλες παραλίες, όλες όμως μας συνδέουν με τη γη και τη θάλασσα και μας δίνουν μια αίσθηση ανεμελιάς, ηρεμίας και την ευκαιρία να ζήσουμε για λίγο αμόλυντα, ερχόμενοι σε επαφή με εκείνα τα πράγματα, 
+        από τα οποία η καθημερινότητα και ο πολιτισμός μας έχουν απομακρύνει και τα νοσταλγούμε.
+      </span>
+
+      <span class="en" style="display:none;">
+        The beaches of Schinoussa are pristine and protected under a special conservation regime. Despite its small size, the island offers a surprisingly large number of beaches. 
+        From Chora, signs show the distances to each beach — the farthest one (Lioliou) being only 3.5 km away, though first-time visitors often think it says 35! 
+        You don’t need a car on Schinoussa — all beaches are close by and easily accessible. 
+        It feels as if you’re sitting at the center of a table with access to every dish. 
+        Each beach connects us with the land and sea, offering a sense of simplicity, calmness, and a chance to live unspoiled, reconnecting with what our daily lives and modern culture have distanced us from — the very things we miss.
+      </span>
+    </p>
+  </div>
+</section>
+
+
+
+  <section class="beaches-section">
+
+
+     <!-- 5 -->
+    <div class="beach-card">
+      <img src="images/img2014.jpeg" alt="Psili Ammos Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Ψιλή Άμμος</span><span class="en" style="display:none;">Psili Ammos Beach</span></h3>
+        <p><span class="gr">Παραλία με ψιλή άμμο και διάφανα νερά, από τις πιο γνωστές του νησιού. Βρίσκεται βορειοανατολικά της Χώρας και προσφέρει εκπληκτική θέα στο πέλαγος.</span>
+        <span class="en" style="display:none;">A fine sandy beach with crystal-clear waters, one of the most famous on the island. Located northeast of Chora, it offers breathtaking sea views.</span></p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="beach-card">
+      <img src="images/img2009.jpeg" alt="Lioliou Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Λιόλου</span><span class="en" style="display:none;">Lioliou Beach</span></h3>
+        <p><span class="gr">Αμμώδης ακτή με ήρεμα νερά και ταβερνάκια, ιδανική για οικογένειες και παιδιά. Προσβάσιμη εύκολα με αυτοκίνητο ή με τα πόδια από τη Χώρα.</span>
+        <span class="en" style="display:none;">A sandy beach with calm waters and nearby tavernas, ideal for families and children. Easily accessible by car or on foot from Chora.</span></p>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="beach-card">
+      <img src="images/img2006.jpeg" alt="Tsigouri Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Τσιγκούρι</span><span class="en" style="display:none;">Tsigouri Beach</span></h3>
+        <p><span class="gr">Η πλησιέστερη παραλία στη Χώρα, με μεγάλη αμμουδιά και ρηχά νερά. Διαθέτει beach bar και θέα προς το ηλιοβασίλεμα.</span>
+          <span class="en" style="display:none;">The closest beach to Chora, with a wide sandy shore and shallow waters. It features a beach bar and sunset views.</span></p>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="beach-card">
+      <img src="images/img2004.jpeg" alt="Almyros Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Αλμυρός</span><span class="en" style="display:none;">Almyros Beach</span></h3>
+        <p><span class="gr">Εξαιρετική παραλία στη νοτιοανατολική πλευρά της Σχοινούσας, με ψιλή άμμο και γαλαζοπράσινα ρηχά νερά. Ιδανική για οικογένειες και παιδιά, με θέα προς το Κουφονήσι.</span>
+        <span class="en" style="display:none;">An excellent beach on the southeastern side of Schinoussa, with fine sand and shallow turquoise waters. Perfect for families and children, offering views towards Koufonissi.</span></p>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="beach-card">
+      <img src="images/img2000.jpeg" alt="Alygaria Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Αλυγαριά</span><span class="en" style="display:none;">Alygaria Beach</span></h3>
+        <p><span class="gr">Βρίσκεται νότια της Χώρας και αποτελείται από τρεις συνεχόμενους μικρούς κολπίσκους με ψιλό βότσαλο και ρηχά νερά. Ιδανική για ζευγάρια και ήσυχες στιγμές.</span>
+        <span class="en" style="display:none;">Located south of Chora, Alygaria consists of three consecutive small coves with fine pebbles and shallow waters. Ideal for couples and peaceful moments.</span></p>
+      </div>
+    </div>
+    
+    <!-- 1 -->
+    <div class="beach-card">
+      <img src="images/img2002.jpeg" alt="Fontana Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Φουντάνα</span><span class="en" style="display:none;">Fontana</span></h3>
+        <p><span class="gr">Στον όρμο της Φουντάνας, στη βορειοανατολική ακτή του νησιού, σχηματίζονται δύο μικρές παραλίες με καταγάλανα νερά και θέα προς Κουφονήσι, Κέρο και Αμοργό. Ορατό σημείο αναφοράς είναι ο μικρός βενετσιάνικος πύργος.</span>
+        <span class="en" style="display:none;">In the bay of Fontana, on the northeastern coast of the island, two small sandy beaches with azure waters offer views of Koufonissi, Keros, and Amorgos. A small Venetian tower is a landmark of the area.</span></p>
+      </div>
+    </div>
+
+     <div class="beach-card">
+      <img src="images/img2008.jpeg" alt="Fontana Beach">
+      <div class="beach-text">
+        <h3>
+  <span class="gr">Παραλία Μερσίνη (Πίσω Άμμος)</span>
+  <span class="en" style="display:none;">Mersini (Piso Ammos) Beach</span>
+</h3>
+<p>
+  <span class="gr">Δίπλα στο λιμάνι θα συναντήσουμε μια παραλία περίπου 60 μέτρων με πάντα ήσυχα νερά, με άμμο και αλμυρίκια. Η παραλία προσφέρει φυσική σκίαση, αλλά ίσως να μην είναι τόσο ήσυχη λόγω της εγγύτητας με το λιμάνι.</span>
+  <span class="en" style="display:none;">Right next to the port you’ll find a beach of about 60 meters with consistently calm waters, sand, and tamarisk trees. It provides natural shade, though it may be less tranquil due to its proximity to the port.</span></p>
+      </div>
+    </div>
+
+    
+    <div class="beach-card">
+      <img src="images/img2005.jpeg" alt="Fontana Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Παραλία Λιβάδι</span><span class="en" style="display:none;">Livadhi Beach</span></h3>
+<p>
+  <span class="gr">Μια ονειρεμένη παραλία στο νότιο τμήμα του νησιού με μεγάλη, φαρδιά αμμουδιά και μια σειρά από αλμυρίκια. Βρισκόμενη στο νότιο τμήμα του νησιού, είναι ο ιδανικός προορισμός για οικογένειες, καθώς δεν επηρεάζεται από τους ισχυρούς βόρειους ανέμους. Απέχει περίπου 1000 μέτρα από τη Χώρα και υπάρχει δυνατότητα πρόσβασης με αυτοκίνητο.</span>
+  <span class="en" style="display:none;"> A dreamy beach in the southern part of the island, featuring a wide sandy shore and a row of tamarisk trees. Located on the island’s southern side, it’s an ideal destination for families, as it’s sheltered from the strong northern winds. It lies about 1 km from Chora and is accessible by car.</span></p>
+      </div>
+    </div>
+
+
+
+    <!-- 2 -->
+    <div class="beach-card">
+      <img src="images/img2013.jpeg" alt="Cavos tou Michali">
+      <div class="beach-text">
+        <h3><span class="gr">Κάβος του Μιχάλη</span><span class="en" style="display:none;">Cavos tou Michali (Michael’s Cape)</span></h3>
+        <p><span class="gr">Προσεγγίζεται μετά τη Λιόλου, ακολουθώντας το μονοπάτι προς τα δεξιά. Εκεί, στη μέση της χερσονήσου, θα συναντήσετε μικρούς κολπίσκους με λευκά βότσαλα και κρυστάλλινα νερά. Ιδανικό μέρος για πεζοπορία και φυσιολάτρες.</span>
+        <span class="en" style="display:none;">Reach it after Lioliou Beach by following the right-hand path. In the middle of the peninsula, small coves with white pebbles and crystal-clear waters await. Ideal for hikers and nature lovers.</span></p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="beach-card">
+      <img src="images/img2007.jpeg" alt="Gerolimnionas Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Γερολιμνιώνας</span><span class="en" style="display:none;">Gerolimnionas Beach</span></h3>
+        <p><span class="gr">Ήσυχη και απομονωμένη παραλία στη δυτική πλευρά της Σχοινούσας, με χοντρή άμμο και καταγάλανα νερά. Προστατευμένη από τους ανέμους, προσφέρει ηρεμία και ιδανικές συνθήκες για κολύμπι και ξεκούραση.</span>
+        <span class="en" style="display:none;">A peaceful, secluded beach on the western side of Schinoussa, with coarse sand and turquoise waters. Sheltered from the wind, it offers tranquility and perfect swimming conditions.</span></p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="beach-card">
+      <img src="images/img2011.jpeg" alt="Fidou Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Φιδού</span><span class="en" style="display:none;">Fidou Beach</span></h3>
+        <p><span class="gr">Η Φιδού είναι μικρή νησίδα κοντά στη Σχοινούσα, συνδεδεμένη με ρηχή λωρίδα άμμου. Παραλία με ψιλή άμμο και θέα στο Αιγαίο, ιδανική για όσους αναζητούν απομόνωση και ησυχία.</span>
+        <span class="en" style="display:none;">Fidou is a small islet near Schinoussa, connected by a narrow sandy passage. Its fine sand and peaceful surroundings make it ideal for those seeking seclusion and calm.</span></p>
+      </div>
+    </div>
+
+   
+
+    <!-- 10 -->
+    <div class="beach-card">
+      <img src="images/img2012.jpeg" alt="Agios Vasilis Beach">
+      <div class="beach-text">
+        <h3><span class="gr">Άγιος Βασίλης</span><span class="en" style="display:none;">Agios Vasilis Beach</span></h3>
+        <p><span class="gr">Όμορφη παραλία με βότσαλα και γαλαζοπράσινα νερά, στο άκρο της χερσονήσου του Αγίου Βασιλείου. Ιδανική για μπάνιο με θέα το Αιγαίο.</span>
+        <span class="en" style="display:none;">A beautiful pebble beach with turquoise waters, located at the edge of Agios Vasilis peninsula. Perfect for swimming with panoramic views of the Aegean.</span></p>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer class="new-footer">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="images/img17.jpg" alt="Filotimia Logo">
+      <h3>Filotimia Apartments</h3>
+      <p style="margin-top:6px;font-size:.95rem;color:#555;">
+        <span class="gr">Σχοινούσα, Μικρές Κυκλάδες</span>
+        <span class="en" style="display:none;">Schinoussa, Small Cyclades</span>
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-links">
+      <h4><span class="gr">Σχετικά &amp; Επικοινωνία</span><span class="en" style="display:none;">About &amp; Contact</span></h4>
+      <a href="about us.html">
+        <span class="gr">Σχετικά με εμάς</span>
+        <span class="en" style="display:none;">About Us</span>
+      </a>
+      <a href="contact us.html">
+        <span class="gr">Επικοινωνία</span>
+        <span class="en" style="display:none;">Contact</span>
+      </a>
+      <a href="connections.html">
+        <span class="gr">Δρομολόγια</span>
+        <span class="en" style="display:none;">Connections</span>
+      </a>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-links">
+      <h4><span class="gr">Υπηρεσίες</span><span class="en" style="display:none;">Services</span></h4>
+      <a href="rooms.html">
+        <span class="gr">Δωμάτια</span>
+        <span class="en" style="display:none;">Rooms</span>
+      </a>
+      <a href="index.html#booking">
+        <span class="gr">Κρατήσεις</span>
+        <span class="en" style="display:none;">Booking</span>
+      </a>
+      <a href="#">
+        <span class="gr">Όροι Χρήσης</span>
+        <span class="en" style="display:none;">Terms of Use</span>
+      </a>
+    </div>
+
+    <!-- Contact (phone + email) -->
+    <div class="footer-contact">
+      <h4><span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact</span></h4>
+
+      <a href="tel:+306948813906" class="footer-contact-item" aria-label="Call us">
+        <i class="fa-solid fa-phone"></i>
+        <span>+30 694 881 3906</span>
+      </a>
+
+      <a href="mailto:info@filotimia.gr" class="footer-contact-item" aria-label="Email us">
+        <i class="fa-solid fa-envelope"></i>
+        <span>info@filotimia.gr</span>
+      </a>
+    </div>
+
+    <!-- Social -->
+    <div class="footer-links">
+      <h4>Social</h4>
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      <span class="gr">© 2025 Filotimia Schoinousa • Όλα τα δικαιώματα κατοχυρωμένα</span>
+      <span class="en" style="display:none;">© 2025 Filotimia Schoinousa • All rights reserved</span>
+    </p>
+  </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scrollToTopBtn" title="Πήγαινε στην αρχή">↑</button>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+  // Mobile menu toggle
+  const menuToggle=document.getElementById('menuToggle');
+  const navMenu=document.getElementById('navMenu');
+  menuToggle.addEventListener('click',()=>{navMenu.classList.toggle('open');});
+
+  // Language switch
+  const langButtons=document.querySelectorAll('.lang-btn');
+  langButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      langButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      setLanguage(btn.dataset.lang);
+    });
+  });
+
+  function setLanguage(lang){
+    document.documentElement.lang=(lang==='gr'?'el':'en');
+    document.querySelectorAll('.gr').forEach(el=>el.style.display=(lang==='gr'?'inline':'none'));
+    document.querySelectorAll('.en').forEach(el=>el.style.display=(lang==='en'?'inline':'none'));
+    localStorage.setItem('siteLang',lang);
+  }
+  setLanguage(localStorage.getItem('siteLang')||'gr');
+</script>
+
+<script>
+  (function(){
+    const btn = document.getElementById('scrollToTopBtn');
+    if(!btn) return;
+
+    const toggleBtn = () => {
+      if (window.scrollY > 400) btn.classList.add('show');
+      else btn.classList.remove('show');
+    };
+
+    window.addEventListener('scroll', toggleBtn, { passive: true });
+    toggleBtn();
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+
+</body>
+</html>
+
