@@ -3295,11 +3295,10 @@ body {
   <div class="video-overlay"></div>
   <div class="video-iframe-wrapper">
     <iframe
-  src="https://www.youtube.com/embed/TEBvtJ4OmaY?autoplay=1&mute=1&loop=1&controls=0&playlist=TEBvtJ4OmaY&modestbranding=1&rel=0&playsinline=1"
+  src="https://www.youtube.com/embed/TEBvtJ4OmaY?autoplay=1&mute=1&loop=1&controls=0&playlist=TEBvtJ4OmaY&modestbranding=1&rel=0&playsinline=1&enablejsapi=1"
   title="Filotimia intro video"
   allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
   allowfullscreen
-  muted
   playsinline
   style="pointer-events:none; width:100vw; height:56.25vw; min-height:100vh; min-width:177.77vh; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); border:none; z-index:-1;"
 ></iframe>
@@ -4428,7 +4427,30 @@ const io = new IntersectionObserver((entries) => {
 })();
 </script>
 
+<script>
+  (function () {
+    const iframe = document.querySelector('.video-iframe-wrapper iframe');
+    if (!iframe) return;
 
+    function ytPlay() {
+      try {
+        iframe.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: "playVideo", args: [] }),
+          "*"
+        );
+      } catch (e) {}
+    }
+
+    // Try when iframe loads
+    iframe.addEventListener('load', ytPlay);
+
+    // If iOS still blocks (Low Power Mode, site setting), start on first tap
+    window.addEventListener('touchstart', function once() {
+      ytPlay();
+      window.removeEventListener('touchstart', once, { passive: true });
+    }, { passive: true });
+  })();
+</script>
 
 </body>
 </html>

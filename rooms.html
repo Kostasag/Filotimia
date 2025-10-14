@@ -781,6 +781,23 @@ body {
   .hero-sub { display: none !important; } /* hide subtitle if too tight */
 }
 
+
+
+
+.video-iframe-wrapper video {
+  width: 100vw;
+  height: 56.25vw; /* 16:9 ratio */
+  min-height: 100vh;
+  min-width: 177.77vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(1.12) contrast(1.05) saturate(1.08);
+}
+
   </style>
 </head>
 <body>
@@ -832,16 +849,9 @@ body {
   </button>
 
    
-  <iframe
-  id="heroVideo"
-  src="https://www.youtube.com/embed/NmyKHIRTxVE?autoplay=1&mute=1&loop=1&controls=0&playlist=NmyKHIRTxVE&modestbranding=1&rel=0&playsinline=1"
-  title="Filotimia drone video"
-  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-  allowfullscreen
-  muted
-  playsinline
-  style="pointer-events:none;"
-></iframe>
+ <video autoplay muted loop playsinline id="heroVideo">
+  <source src="Rooms Filotimia Schoinoussa.mp4" type="video/mp4">
+</video>
 </div>
 
   <div class="hero-overlay">
@@ -1237,43 +1247,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-  let heroPlayer;
-
-  function onYouTubeIframeAPIReady() {
-    heroPlayer = new YT.Player('heroVideo', {
-      playerVars: {
-        autoplay: 1,       // try autoplay
-        controls: 0,
-        loop: 1,
-        playlist: 'NmyKHIRTxVE',
-        rel: 0,
-        playsinline: 1,
-        modestbranding: 1
-      },
-      events: {
-        onReady: (e) => {
-          try {
-            e.target.mute();
-            const p = e.target.playVideo();
-            if (p && p.catch) p.catch(showTapToPlay);  // Safari/Android may reject
-          } catch(_) { showTapToPlay(); }
-        }
-      }
-    });
-  }
-
-  function showTapToPlay() {
-    const btn = document.getElementById('tapToPlay');
-    if (!btn) return;
-    btn.hidden = false;
-    btn.addEventListener('click', () => {
-      try { heroPlayer && heroPlayer.playVideo && heroPlayer.playVideo(); } catch(_) {}
-      btn.hidden = true;
-    }, { once: true });
-  }
-</script>
 
 
 
