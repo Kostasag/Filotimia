@@ -1,6 +1,0 @@
-# Force HTTPS
-http://filotimia.gr/*   https://filotimia.gr/:splat   301!
-http://www.filotimia.gr/*   https://filotimia.gr/:splat   301!
-
-# Redirect old Netlify subdomain
-https://filotimiaa.netlify.app/*   https://filotimia.gr/:splat   301!
