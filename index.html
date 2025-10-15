@@ -1789,6 +1789,70 @@ body.light-mode .footer-bottom {
 }
 
 
+/* ==== MOBILE GALLERY – BIGGER, EDGE-TO-EDGE, NO GAPS ==== */
+@media (max-width: 640px){
+
+  /* 1) Section: a bit taller, less side padding = wider images */
+  #gallery-rooms.gallery-section{
+    padding: 28px 0 40px !important;     /* was 60/70 */
+    background: linear-gradient(180deg,#756d5f 0%, #8d8574 100%) !important;
+  }
+
+  /* 2) Carousel frame: slim side gutters so images fill width */
+  #gallery-rooms .multi-carousel{
+    --mc-per-view: 1 !important;
+    --mc-gap: 12px !important;           /* tighter gap */
+    padding: 0 14px !important;          /* was 44px */
+  }
+
+  /* 3) Slides: noticeably taller; remove any internal margins/gaps */
+  #gallery-rooms .mc-viewport{
+    overflow: hidden;                     /* no scrollbars */
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 0;                       /* kill stray inline gaps */
+  }
+
+  #gallery-rooms .mc-track{
+    gap: var(--mc-gap) !important;
+    padding: 0 !important;                /* remove bottom padding */
+  }
+
+  #gallery-rooms .mc-slide{
+    height: min(82vh, 130vw) !important;  /* taller on phones */
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    background: transparent !important;   /* no black background */
+    margin: 0 !important;
+  }
+
+  /* 4) Images: truly fill the slide, no letterboxing */
+  #gallery-rooms .mc-slide img{
+    display: block;                       /* removes inline gap */
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;         /* fills, no bars */
+    object-position: center center !important;
+    border-radius: 14px !important;
+    background: transparent !important;   /* no black behind jpgs */
+  }
+
+  /* 5) Arrows: smaller & pushed out so they don’t steal width */
+  #gallery-rooms .mc-arrow{
+    width: 42px !important;
+    height: 42px !important;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(122,111,88,.66) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,.25) !important;
+  }
+  #gallery-rooms .mc-prev{ left: 2px !important; }
+  #gallery-rooms .mc-next{ right: 2px !important; }
+
+  /* Optional: if you still see a tiny top gap, this removes it */
+  #gallery-rooms img{ vertical-align: middle; }
+}
 
   </style>
 <style>

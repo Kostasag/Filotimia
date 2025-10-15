@@ -287,6 +287,90 @@ body {
   overflow-x: hidden;               /* hides stray horizontal line */
 }
 
+
+
+/* ===== Active link styling (pill + underline) ===== */
+:root{
+  --brand: #0ea5b3;              /* fallback if not already set */
+  --brand-ink: #08343b;
+  --pill-bg: rgba(14,165,179,.12);
+}
+
+nav ul li a{
+  position: relative;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+/* Hover */
+nav ul li a:hover{
+  color: var(--brand);
+  background: rgba(14,165,179,.08);
+}
+
+/* Active (current page) */
+nav ul li a.active{
+  color: var(--brand-ink);
+  background: var(--pill-bg);
+  font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(14,165,179,.25) inset;
+}
+
+/* Small underline accent for active */
+nav ul li a.active::after{
+  content:"";
+  position:absolute;
+  left:12px; right:12px; bottom:-6px;
+  height:3px; border-radius:2px;
+  background: linear-gradient(90deg, rgba(14,165,179,.0), var(--brand), rgba(14,165,179,.0));
+}
+
+/* Mobile menu keeps same look */
+@media (max-width:820px){
+  nav ul li a{
+    border-radius: 10px;
+  }
+  nav ul li a.active::after{ display:none; } /* no underline in stacked menu */
+}
+
+
+
+
+
+@media (max-width:820px){
+  nav ul{
+    position:absolute;
+    top:70px;
+    left:0;
+    width:100%;
+    flex-direction:column;
+    background:#fff;
+    border-top:1px solid rgba(0,0,0,.1);
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+
+  /* When open — allow it to fit contents */
+  nav ul.open{
+    max-height:80vh;             /* use viewport height instead of fixed px */
+    overflow-y:auto;             /* enable vertical scroll if needed */
+    scrollbar-width:none;        /* hide scrollbar (Firefox) */
+  }
+
+  nav ul.open::-webkit-scrollbar{
+    display:none;                /* hide scrollbar (Chrome/Safari) */
+  }
+
+  nav ul li{
+    text-align:center;
+    padding:10px 0;
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+
+  .menu-toggle{display:flex;}
+}
+
   </style>
 </head>
 <body>
@@ -299,6 +383,7 @@ body {
     <nav>
       <ul id="navMenu">
         <li><a href="index.html"><span class="gr">Αρχική</span><span class="en" style="display:none;">Home</span></a></li>
+        <li><a href="gallery.html"><span class="gr">Γκαλερί</span><span class="en" style="display:none;">Gallery</span></a></li>
         <li><a href="about-us.html"><span class="gr">Σχετικά με εμάς</span><span class="en" style="display:none;">About Us</span></a></li>
         <li><a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span></a></li>
         <li><a href="connections.html"><span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span></a></li>
@@ -574,6 +659,17 @@ body {
       try{ saved = localStorage.getItem('site-lang'); }catch(e){}
       setLanguage(saved === 'en' ? 'en' : 'gr');
     })();
+</script>
+
+<script>
+  (function(){
+    const here = location.pathname.split('/').pop() || 'index.html';
+    const links = document.querySelectorAll('nav a[href]');
+    links.forEach(a => {
+      const target = a.getAttribute('href').split('/').pop();
+      if (target === here) a.classList.add('active');
+    });
+  })();
 </script>
 
 </body>
