@@ -32,20 +32,20 @@ body { min-height: 100vh; }
   --book-bottom: 6vh;
 }
 
-/* (Ensure the hero section is the positioning context) */
-.video-background-section{ position: relative; }
-/* 1) Global knobs */
+/* (Ensure the hero section is the positioning context) 
+.video-background-section{ position: relative; } 
+/* 1) Global knobs 
 :root{
   /* Horizontal nudge for the whole card:
      positive = move RIGHT, negative = move LEFT */
-  --book-x: 0px;
+ /* --book-x: 0px; */
 
-  /* distance from bottom of the hero */
+  /* distance from bottom of the hero 
   --book-bottom: 6vh;
 }
 
-/* (Ensure the hero section is the positioning context) */
-.video-background-section{ position: relative; }
+/* (Ensure the hero section is the positioning context) 
+.video-background-section{ position: relative; } */
 
 
 
@@ -829,8 +829,7 @@ body { min-height: 100vh; }
   border-radius: 16px;
 }
 
-/*Full screen video if not we remove this  */
-.video-background-section {
+/*Full screen video if not we remove this  
   position: relative;
   width: 100%;
   height: 100vh;
@@ -844,7 +843,7 @@ body { min-height: 100vh; }
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.25); /* ελαφριά σκίαση πάνω από το βίντεο */
+  background: rgba(0, 0, 0, 0.25); /* ελαφριά σκίαση πάνω από το βίντεο 
   z-index: 1;
 }
 
@@ -855,21 +854,21 @@ body { min-height: 100vh; }
   height: 100%;
   width: 100%;
   z-index: 0;
-  pointer-events: none; /* Δεν μπορεί ο χρήστης να κλικάρει */
+  pointer-events: none; /* Δεν μπορεί ο χρήστης να κλικάρει 
 }
 
 .video-iframe-wrapper iframe {
   width: 100vw;
-  height: 56.25vw; /* 16:9 */
+  height: 56.25vw; /* 16:9 
   min-height: 100vh;
-  min-width: 177.77vh; /* 16:9 */
+  min-width: 177.77vh; 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: none;
 }
-
+*/
 
 #scrollToTopBtn {
   position: fixed;
@@ -3115,7 +3114,7 @@ body {
 
 
 
-/* Mobile adjustment (keep visual balance on small screens) */
+/* Mobile adjustment (keep visual balance on small screens) 
 @media (max-width: 768px) {
   .video-background-section {
     height: 75vh !important;
@@ -3124,32 +3123,855 @@ body {
     bottom: 6vh !important;
   }
 }
+*/
+
+
+
+
+/* Logo link: no glass, no hover, no shadow */
+.nav-center a{
+  display:inline-block;
+  background:none !important;
+  border:none !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  padding:0 !important;
+  margin:0;
+}
+
+/* Kill any generic hover effects that might target links */
+.nav-center a:hover,
+.nav-center a:focus{
+  background:none !important;
+  box-shadow:none !important;
+  transform:none !important;
+  filter:none !important;
+}
+
+/* Keep the image neatly aligned */
+.nav-center img{
+  display:block;            /* removes inline gap */
+  height:60px;              /* adjust as needed */
+  width:auto;
+  border-radius:12px;       /* keep your rounded logo */
+ 
+}
+
+
+
+
+
+/* ===== RESET OLD VIDEO BACKGROUND ===== */
+.video-background-section,
+.video-iframe-wrapper,
+.video-overlay {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  background: none !important;
+}
+
+/* ===== HERO SLIDESHOW ===== */
+.hero-slideshow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* Full image coverage */
+.hero-images {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-images img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.6s ease-in-out, transform 4s ease-in-out;
+}
+
+.hero-images img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* Gradient overlay for text readability */
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  z-index: 2;
+}
+
+/* Text content */
+.hero-text {
+  position: relative;
+  z-index: 3;
+  max-width: 90%;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #fff;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero-slideshow {
+    height: 90vh;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+  }
+
+  .hero-text h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+
+  .hero-text p {
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .hero-slideshow {
+    height: 85vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5vh;
+  }
+
+  .hero-images img {
+    object-position: center 40%;
+    transform: scale(1.1);
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.75));
+  }
+
+  .hero-text {
+    padding: 0 1rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-slideshow {
+    height: 80vh;
+    padding-bottom: 8vh;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+  }
+}
+
+/* Optional smooth fade on page load */
+.hero-slideshow {
+  animation: fadeInHero 1.5s ease-in;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* === FIX: Full-height hero on mobile (no half-black gap) === */
+.hero,
+.video-background-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000; /* fallback while video loads */
+}
+
+/* Ensure the background video fits all screen sizes */
+.video-background-section video,
+.video-background-section iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 aspect ratio */
+  min-height: 100vh;
+  min-width: 177.77vh;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  background-color: #000;
+}
+
+/* Overlay tint for readability (transparent dark layer) */
+.video-background-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1;
+}
+
+/* Ensure hero text stays above video overlay */
+#welcome-text {
+  position: absolute;
+  z-index: 2;
+}
+
+/* ===== MOBILE FIXES ===== */
+@media (max-width: 768px) {
+  .video-background-section,
+  .hero {
+    height: 100dvh; /* better fit for iOS Safari / Android */
+  }
+
+  .video-background-section video,
+  .video-background-section iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    min-width: 100%;
+    object-fit: cover;
+    transform: none;
+  }
+}
+
+
+
+
+/* ===== HERO SLIDESHOW (Full width & height) ===== */
+.hero-slideshow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BACKGROUND IMAGES ===== */
+.hero-images {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-images img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.6s ease-in-out, transform 4s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.hero-images img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* ===== SOFT DARK OVERLAY ===== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  z-index: 1;
+}
+
+/* ===== TEXT LAYER ===== */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 90%;
+  padding: 0 1rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero-slideshow {
+    height: 90vh;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+  }
+
+  .hero-text h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+
+  .hero-text p {
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .hero-slideshow {
+    height: 85vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 6vh;
+  }
+
+  .hero-images img {
+    object-position: center 40%;
+    transform: scale(1.1);
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.75));
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-slideshow {
+    height: 80vh;
+    padding-bottom: 8vh;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+  }
+}
+
+/* ===== SMOOTH FADE-IN ON LOAD ===== */
+.hero-slideshow {
+  animation: fadeInHero 1.5s ease-in forwards;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ===== HERO SLIDESHOW (Full width & height) ===== */
+.hero-slideshow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BACKGROUND IMAGES ===== */
+.hero-images {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-images img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.6s ease-in-out, transform 4s ease-in-out;
+  will-change: opacity, transform;
+  filter: brightness(1); /* normal brightness */
+}
+
+.hero-images img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* ===== OVERLAY (for readability) ===== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+
+/* ===== TEXT ===== */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 90%;
+  padding: 0 1rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  margin-bottom: 0.75rem;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero-slideshow {
+    height: 90vh;
+  }
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  }
+  .hero-text h1 {
+    font-size: 2.3rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .hero-slideshow {
+    height: 85vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5vh;
+  }
+
+  .hero-images img {
+    object-position: center top; /* show more sky / scenery */
+    filter: brightness(1.15);    /* slightly brighter on mobile */
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35)); /* lighter overlay */
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.95);
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-slideshow {
+    height: 80vh;
+    padding-bottom: 8vh;
+  }
+
+  .hero-images img {
+    filter: brightness(1.25); /* brighter */
+    object-position: center top; /* focus upper image part */
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== FADE-IN ON LOAD ===== */
+.hero-slideshow {
+  animation: fadeInHero 1.5s ease-in forwards;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* ===== HERO SLIDESHOW (Full width & height) ===== */
+.hero-slideshow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BACKGROUND IMAGES ===== */
+.hero-images {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-images img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.6s ease-in-out, transform 4s ease-in-out;
+  will-change: opacity, transform;
+  filter: brightness(1); /* normal brightness */
+}
+
+.hero-images img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* ===== OVERLAY (for readability) ===== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+
+/* ===== TEXT ===== */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 90%;
+  padding: 0 1rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  margin-bottom: 0.75rem;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero-slideshow {
+    height: 90vh;
+  }
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  }
+  .hero-text h1 {
+    font-size: 2.3rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .hero-slideshow {
+    height: 85vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5vh;
+  }
+
+  .hero-images img {
+    object-position: center top; /* show more sky / scenery */
+    filter: brightness(1.15);    /* slightly brighter on mobile */
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35)); /* lighter overlay */
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.95);
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-slideshow {
+    height: 80vh;
+    padding-bottom: 8vh;
+  }
+
+  .hero-images img {
+    filter: brightness(1.25); /* brighter */
+    object-position: center top; /* focus upper image part */
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== FADE-IN ON LOAD ===== */
+.hero-slideshow {
+  animation: fadeInHero 1.5s ease-in forwards;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+
+
+
+/* === MOBILE: show the whole image, lighter overlay, tall hero === */
+@media (max-width: 768px){
+  /* keep hero tall so letterboxing is small */
+  .hero-slideshow{
+    height: 92svh !important;   /* uses safe viewport on iOS */
+    min-height: 540px !important;
+  }
+
+  /* show entire image (no crop) */
+  .hero-images img{
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: none !important;
+  }
+
+  /* simple neutral backdrop behind the image */
+  .hero-images{
+    background: #000 !important;   /* fills any side/top/bottom bars */
+  }
+
+  /* make the dark gradient gentler so photos look brighter */
+  .hero-overlay{
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18),
+      rgba(0,0,0,0.38)
+    ) !important;
+  }
+
+  /* hero text a bit smaller so it doesn’t cover the photo */
+  .hero-text h1{ font-size: clamp(1.3rem, 5.5vw, 1.7rem) !important; }
+  .hero-text p{  font-size: clamp(0.92rem, 3.8vw, 1rem) !important;  }
+}
+
+/* MOBILE: smart "almost contain" layout */
+@media (max-width: 768px){
+  .hero-slideshow{
+    height: 80svh !important;       /* smaller = less vertical black */
+    min-height: 500px !important;
+  }
+
+  .hero-images img{
+    object-fit: cover !important;   /* fills height */
+    object-position: center top !important; /* keep main subject visible */
+    transform: none !important;
+  }
+
+  .hero-overlay{
+    background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.32)) !important;
+  }
+}
+
 </style>
 
 </head>
 <body>
   
-<!-- Nav Bar -->
-<div class="navbar">
+
+<!-- ========== NAVBAR (Desktop) ========== -->
+<div class="navbar" role="navigation" aria-label="Main">
   <div class="navbar-inner">
     <div class="nav-left">
-      <a href="index.html">Home</a>
-      <a href="about us.html">About Us</a>
-      <a href="rooms.html">Rooms</a>
+      <a href="index.html">
+        <span class="gr">Αρχική</span><span class="en" style="display:none;">Home</span>
+      </a>
+      <a href="gallery.html">
+        <span class="gr">Γκαλερί</span><span class="en" style="display:none;">Gallery</span>
+      </a>
+      <a href="about-us.html">
+        <span class="gr">Σχετικά με εμάς</span><span class="en" style="display:none;">About Us</span>
+      </a>
+      <a href="rooms.html">
+        <span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span>
+      </a>
     </div>
+
     <div class="nav-center">
-      <img src="images/img17.jpg" alt="Filotimia Logo" />
+      <a href="index.html" aria-label="Filotimia Home">
+        <img src="images/img17.jpg" alt="Filotimia Logo" />
+      </a>
     </div>
+
     <div class="nav-right">
-      <a href="connections.html">Connections</a>
-      <a href="beaches.html">Beaches</a>
-      <a href="contact us.html">Contact Us</a>
+      <a href="connections.html">
+        <span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span>
+      </a>
+      <a href="beaches.html">
+        <span class="gr">Παραλίες</span><span class="en" style="display:none;">Beaches</span>
+      </a>
+      <a href="contact-us.html">
+        <span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact Us</span>
+      </a>
     </div>
   </div>
 </div>
 
-<!-- MOBILE NAV: hamburger + drawer -->
-<button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+<!-- ========== MOBILE: Hamburger + Drawer ========== -->
+<button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
   <span class="bar"></span>
 </button>
 
@@ -3160,16 +3982,30 @@ body {
     <img src="images/img17.jpg" alt="Filotimia Logo">
     <strong>Filotimia</strong>
   </div>
-  <nav class="drawer-nav">
-    <a href="index.html">Home</a>
-    <a href="about-us.html">About Us</a>
-    <a href="rooms.html">Rooms</a>
-    <a href="connections.html">Connections</a>
-    <a href="beaches.html">Beaches</a>
-    <a href="contact-us.html">Contact Us</a>
+  <nav class="drawer-nav" aria-label="Mobile">
+    <a href="index.html">
+      <span class="gr">Αρχική</span><span class="en" style="display:none;">Home</span>
+    </a>
+    <a href="gallery.html">
+      <span class="gr">Γκαλερί</span><span class="en" style="display:none;">Gallery</span>
+    </a>
+    <a href="about-us.html">
+      <span class="gr">Σχετικά με εμάς</span><span class="en" style="display:none;">About Us</span>
+    </a>
+    <a href="rooms.html">
+      <span class="gr">Δωμάτια</span><span class="en" style="display:none;">Rooms</span>
+    </a>
+    <a href="connections.html">
+      <span class="gr">Δρομολόγια</span><span class="en" style="display:none;">Connections</span>
+    </a>
+    <a href="beaches.html">
+      <span class="gr">Παραλίες</span><span class="en" style="display:none;">Beaches</span>
+    </a>
+    <a href="contact-us.html">
+      <span class="gr">Επικοινωνία</span><span class="en" style="display:none;">Contact Us</span>
+    </a>
   </nav>
 </aside>
-
 
 
 <!-- Language Toggle| -->
@@ -3288,8 +4124,22 @@ body {
 </div>
 
 
+<!-- ===== HERO SECTION (Image Slideshow) ===== -->
+<section class="hero-slideshow">
+  <div class="hero-images">
+    <img src="images/img5000.JPG" alt="Filotimia Schoinoussa view 1" class="active">
+    <img src="images/img5001.jpg" alt="Filotimia Schoinoussa view 2">
+    <img src="images/img5002.jpg" alt="Filotimia Schoinoussa view 3">
+     <img src="images/img202.jpeg" alt="Filotimia Schoinoussa view 4">
+  </div>
+
+  <div class="hero-overlay"></div>
+
+</section>
+
+
 <!-- VIDEO SECTION -->
- <!-- ===== oRVkLwAtmik ---new video link ===== -->
+ <!-- ===== oRVkLwAtmik ---new video link 
 <section class="video-background-section">
   <div class="video-overlay"></div>
   <div class="video-iframe-wrapper">
@@ -3302,7 +4152,7 @@ body {
   style="pointer-events:none; width:100vw; height:56.25vw; min-height:100vh; min-width:177.77vh; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); border:none; z-index:-1;"
 ></iframe>
   </div>
-</section>
+</section> ===== -->
 
 
 <!-- Flipped separator -->
@@ -3398,12 +4248,83 @@ body {
 
 
 
-  <!-- Flipped separator -->
+
+<!-- gallery -->
+<section id="gallery-rooms" class="gallery-section">
+  <div class="gallery-shell">
+    <h2 class="gallery-title">
+      <span class="gr">Γκαλερί</span>
+      <span class="en" style="display:none;">Gallery</span>
+    </h2>
+
+    <div class="multi-carousel" aria-label="Rooms gallery">
+      <button class="mc-arrow mc-prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="mc-viewport" tabindex="0">
+        <ul class="mc-track">
+          <!-- one <li> per image -->
+          <li class="mc-slide"><img src="images/img36.jpg"   alt="gallery" loading="lazy"></li>
+              <li class="mc-slide"><img src="images/img4000.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4001.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4002.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4003.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4004.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4005.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4007.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img40008.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4009.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4010.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4011.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4012.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4013.jpeg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4014.jpeg"   alt="gallery" loading="lazy"></li>
+
+          <li class="mc-slide"><img src="images/img28.jpg"   alt="gallery" loading="lazy"></li>
+        <li class="mc-slide"><img src="images/img414 .jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img415.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img408.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img27.jpg"   alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img4.jpg"    alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img200.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img63.jpeg"  alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img73.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img201.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img66.jpeg"  alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img202.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img203.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img316.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img321.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img308.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img310.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img403.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img305.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img304.jpeg" alt="gallery" loading="lazy"></li>
+          <li class="mc-slide"><img src="images/img206.jpeg" alt="gallery" loading="lazy"></li>
+        </ul>
+      </div>
+
+      <button class="mc-arrow mc-next" aria-label="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+  <!-- Flipped separator 
 <div class="wave-separator svg">
   <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
     <path d="M0,0 C300,100 900,0 1200,100 L1200,0 L0,0 Z"></path>
   </svg>
-</div>
+</div>  --> 
+
 
 <!-- amenities-section -->
 <section class="amenities-section">
@@ -3543,59 +4464,7 @@ body {
 </section>
 
 
- <!-- gallery -->
-<section id="gallery-rooms" class="gallery-section">
-  <div class="gallery-shell">
-    <h2 class="gallery-title">
-      <span class="gr">Γκαλερί</span>
-      <span class="en" style="display:none;">Gallery</span>
-    </h2>
-
-    <div class="multi-carousel" aria-label="Rooms gallery">
-      <button class="mc-arrow mc-prev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <div class="mc-viewport" tabindex="0">
-        <ul class="mc-track">
-          <!-- one <li> per image -->
-          <li class="mc-slide"><img src="images/img36.jpg"   alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img28.jpg"   alt="gallery" loading="lazy"></li>
-        <li class="mc-slide"><img src="images/img414 .jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img415.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img408.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img27.jpg"   alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img4.jpg"    alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img200.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img63.jpeg"  alt="gallery" loading="lazy"></li>
-        <li class="mc-slide"><img src="images/img73.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img201.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img66.jpeg"  alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img202.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img203.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img316.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img321.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img308.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img310.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img403.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img305.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img304.jpeg" alt="gallery" loading="lazy"></li>
-          <li class="mc-slide"><img src="images/img206.jpeg" alt="gallery" loading="lazy"></li>
-        </ul>
-      </div>
-
-      <button class="mc-arrow mc-next" aria-label="Next">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-</section>
+ 
 
 
 <!-- === REVIEWS SECTION === -->
@@ -3972,18 +4841,6 @@ function reveal() {
   });
 }
 
-const hero = document.getElementById("hero");
-const images = ["images/img19.jpg", "images/img21.jpg"];
-let i = 0;
-
-// Εμφανίζει την πρώτη εικόνα
-hero.style.backgroundImage = `url(${images[0]})`;
-
-
-setInterval(() => {
-  i = (i + 1) % images.length;
-  hero.style.backgroundImage = `url(${images[i]})`;
-}, 5000);
 
 // nav bar scroll
 let lastScrollTop = 0;
@@ -4450,6 +5307,34 @@ const io = new IntersectionObserver((entries) => {
     }, { passive: true });
   })();
 </script>
+
+<script>
+  (function() {
+    const slides = document.querySelectorAll('.hero-images img');
+    if (!slides.length) return;
+
+    let index = 0;
+    const intervalTime = 5500; // change every 5.5s
+
+    // Preload images
+    slides.forEach(img => { const i = new Image(); i.src = img.src; });
+
+    function showNext() {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }
+
+    let timer = setInterval(showNext, intervalTime);
+
+    // Pause when not visible (better performance)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(timer);
+      else timer = setInterval(showNext, intervalTime);
+    });
+  })();
+</script>
+
 
 </body>
 </html>
