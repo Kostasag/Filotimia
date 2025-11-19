@@ -3927,688 +3927,6 @@ body {
 }
 
 
-/* === FULL WIDTH ROOMS SHOWCASE SECTION === */
-
-.rooms-slider {
-    position: relative;
-    width: 100%;
-    height: 95vh;
-    overflow: hidden;
-    margin-top: 80px;
-}
-
-.room-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transform: scale(1.03);
-    transition: opacity 0.8s ease, transform 1s ease;
-}
-
-.room-slide.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 2;
-}
-
-.room-content {
-    position: absolute;
-    top: 50%;
-    left: 6%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.38);
-    padding: 30px 36px;
-    border-radius: 14px;
-    backdrop-filter: blur(6px);
-    color: #fff;
-    max-width: 480px;
-    animation: fadeUp 1.2s ease forwards;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.room-content h2 {
-    font-family: Poppins, sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
-    margin-bottom: 12px;
-}
-
-.room-desc {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 18px;
-    opacity: .9;
-}
-
-.room-features {
-    padding-left: 18px;
-    margin-bottom: 20px;
-}
-
-.room-features li {
-    margin: 6px 0;
-    font-size: .95rem;
-}
-
-.room-btn {
-    display: inline-block;
-    background: #0ea5b3;
-    padding: 10px 18px;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: 600;
-    font-size: .95rem;
-    text-decoration: none;
-    transition: background .3s ease;
-}
-
-.room-btn:hover {
-    background: #0cb0c4;
-}
-
-.room-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.45);
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    cursor: pointer;
-    z-index: 10;
-    transition: background .3s ease;
-}
-
-.room-arrow:hover {
-    background: rgba(0, 0, 0, 0.65);
-}
-
-.room-arrow.left {
-    left: 20px;
-}
-
-.room-arrow.right {
-    right: 20px;
-}
-
-
-/* Mobile */
-@media (max-width: 768px) {
-    .rooms-slider {
-        height: 80vh;
-    }
-
-    .room-content {
-        left: 5%;
-        right: 5%;
-        max-width: none;
-    }
-
-    .room-content h2 {
-        font-size: 1.5rem;
-    }
-
-    .room-btn {
-        font-size: .9rem;
-    }
-}
-
-.room-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transform: scale(1.03);
-    transition: opacity 0.8s ease, transform 1s ease;
-    z-index: 1;
-    /* FIXED */
-}
-
-
-/* === FULL-WIDTH ROOM HEROES (INDEX) === */
-
-.room-heroes {
-    margin-top: 40px;
-}
-
-/* Full-width bleed */
-.room-hero {
-    --room-bg-image: none;
-    position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    min-height: 135vh;
-    background-image: var(--room-bg-image);
-    background-size: cover;
-    background-position: center center;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
-
-    opacity: 0;
-    transform: scale(1.02);
-    transition: opacity 0.8s ease, transform 1.1s ease;
-
-
-}
-
-/* fade-in when visible */
-.room-hero.is-visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.room-hero-inner {
-    max-width: 1200px;
-    padding: 80px 7%;
-    display: flex;
-    align-items: center;
-}
-
-.room-hero-text {
-    max-width: 420px;
-}
-
-.room-hero h2 {
-    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 700;
-    font-size: clamp(2rem, 2.4vw + 1rem, 2.6rem);
-    margin: 0 0 10px;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.65);
-}
-
-.room-hero-sub {
-    font-size: 1rem;
-    line-height: 1.65;
-    margin: 0 0 18px;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
-}
-
-.room-hero-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 20px;
-}
-
-.room-hero-list li {
-    position: relative;
-    padding-left: 16px;
-    margin-bottom: 6px;
-    font-size: 0.95rem;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
-}
-
-.room-hero-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #14e1ff;
-}
-
-/* CTA link – underline style */
-.room-hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    font-size: 0.96rem;
-    color: #ffffff;
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 2px;
-}
-
-.room-hero-cta::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), #14e1ffe6);
-    transform-origin: left;
-    transform: scaleX(1);
-    transition: transform 0.25s ease;
-}
-
-.room-hero-cta:hover::after {
-    transform: scaleX(1.08);
-}
-
-/* Arrows */
-.room-hero-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 999px;
-    border: none;
-    background: rgba(0, 0, 0, 0.55);
-    color: #ffffff;
-    font-size: 22px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.25s ease, transform 0.15s ease;
-}
-
-.room-hero-arrow-left {
-    left: 18px;
-}
-
-.room-hero-arrow-right {
-    right: 18px;
-}
-
-.room-hero-arrow:hover {
-    background: rgba(0, 0, 0, 0.76);
-    transform: translateY(-50%) scale(1.08);
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-    .room-hero {
-        min-height: 70vh;
-    }
-
-    .room-hero-inner {
-        padding: 60px 8%;
-    }
-
-    .room-hero-text {
-        max-width: none;
-    }
-}
-
-@media (max-width: 640px) {
-    .room-hero-inner {
-        padding: 50px 12% 70px;
-    }
-
-    .room-hero h2 {
-        font-size: 1.7rem;
-    }
-
-    .room-hero-sub {
-        font-size: 0.95rem;
-    }
-
-    .room-hero-arrow {
-        width: 38px;
-        height: 38px;
-        font-size: 20px;
-    }
-
-    .room-hero-arrow-left {
-        left: 10px;
-    }
-
-    .room-hero-arrow-right {
-        right: 10px;
-    }
-}
-
-
-/* === FIXED ARROW STYLE (MATCHES YOUR HTML CLASS) === */
-
-.room-hero-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 64px;
-    height: 64px;
-    border-radius: 999px;
-    background: rgba(122, 111, 88, 0.85);
-    /* brown circle */
-    border: 1px solid rgba(245, 245, 245, 0.95);
-    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
-    color: #fff;
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-}
-
-.room-hero-arrow:hover {
-    background: rgba(122, 111, 88, 1);
-    transform: translateY(-50%) scale(1.06);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
-}
-
-.room-hero-arrow-left {
-    left: 20px;
-}
-
-.room-hero-arrow-right {
-    right: 20px;
-}
-
-
-@media (max-width: 768px) {
-
-    /* Hide long text + bullet list */
-    .room-hero-text p,
-    .room-hero-text ul {
-        display: none !important;
-    }
-
-    /* tighten layout */
-    .room-hero-text {
-        padding: 18px 20px;
-    }
-
-    .room-hero-text h2 {
-        font-size: 1.4rem;
-    }
-}
-
-
-/* === ROOMS SECTION TITLE === */
-.rooms-heading {
-    max-width: 1200px;
-    margin: 80px auto 32px;
-    padding: 0 16px;
-    font-family: Poppins, sans-serif;
-    justify-content: center;
-    align-items: center;
-}
-
-.rooms-heading h2 {
-    font-size: clamp(2rem, 2.2vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #1f2933;
-    margin: 0 0 8px;
-    position: relative;
-}
-
-
-/* === ROOM HERO ARROWS – DESKTOP STYLE === */
-.room-hero-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 54px;
-    height: 54px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.32);
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    cursor: pointer;
-    outline: none;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: background 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease;
-    z-index: 4;
-}
-
-.room-hero-arrow-left {
-    left: 28px;
-}
-
-.room-hero-arrow-right {
-    right: 28px;
-}
-
-.room-hero-arrow:hover {
-    background: rgba(0, 0, 0, 0.6);
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
-}
-
-.room-hero-arrow:active {
-    transform: translateY(-50%) scale(0.98);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-}
-
-
-.rooms-section-heading {
-    width: 100%;
-    text-align: center;
-    margin: 60px 0 28px;
-}
-
-.rooms-section-heading h2 {
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: 0.08em;
-    color: #232529;
-}
-
-
-/* === ROOM HERO ARROWS – DESKTOP BASE === */
-
-.room-hero-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    /* round, beige button */
-    width: 49px;
-    height: 54px;
-    border-radius: 999px;
-    border: 1px solid rgba(0, 0, 0, 0.18);
-    background: #ffffff;
-    color: #14e1ffe6;
-    font-size: 1.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
-    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-    z-index: 5;
-}
-
-.room-hero-arrow-left {
-    left: 20px;
-}
-
-.room-hero-arrow-right {
-    right: 20px;
-}
-
-.room-hero-arrow:hover {
-    background: #f0e6d6;
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
-}
-
-.room-hero-arrow:active {
-    transform: translateY(-50%) scale(0.97);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
-}
-
-
-/* === MOBILE LAYOUT FOR ROOM HERO === */
-@media (max-width: 768px) {
-
-    /* Make the text block fill the slide so we can push title to top
-       and button to bottom inside it */
-    .room-hero {
-        position: relative;
-    }
-
-    .room-hero-inner {
-        position: relative;
-        height: 100%;
-    }
-
-    .room-hero-text {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* title up, button down */
-        padding: 14px 14px 18px;
-        padding: 6px 14px 18px;
-        /* no extra fancy background – keeping your design simple */
-    }
-
-    /* TITLE – closer to top */
-    .room-hero-text h2,
-    .room-hero-text .room-title {
-        margin: 0;
-        font-size: 1.3rem;
-    }
-
-    /* HIDE paragraph & features on small screens */
-    .room-hero-text .room-desc,
-    .room-hero-text .room-features,
-    .room-hero-text p.room-desc,
-    .room-hero-text ul.room-features {
-        display: none !important;
-    }
-
-    /* BUTTON – near bottom */
-    .room-hero-text .room-btn,
-    .room-hero-text .room-hero-btn {
-        align-self: flex-start;
-        margin-top: auto;
-        margin-bottom: 8px;
-    }
-
-    /* Smaller arrows on mobile */
-    .room-hero-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-        box-shadow: 0 7px 18px rgba(0, 0, 0, 0.28);
-    }
-
-    .room-hero-arrow-left {
-        left: 10px;
-    }
-
-    .room-hero-arrow-right {
-        right: 10px;
-    }
-}
-
-/* === MOBILE LAYOUT FOR ROOM HERO === */
-@media (max-width: 768px) {
-
-    .room-hero {
-        position: relative;
-    }
-
-    .room-hero-inner {
-        position: relative;
-        height: 100%;
-    }
-
-    .room-hero-text {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* vertical center */
-        align-items: center;
-        /* horizontal center */
-        text-align: center;
-        padding: 14px 14px 18px;
-
-        /* IMPORTANT: cancel desktop centering */
-        transform: none;
-        left: auto;
-        top: auto;
-        right: auto;
-        bottom: auto;
-    }
-
-    /* Show just the title + button if you want */
-    .room-hero-text .room-hero-sub,
-    .room-hero-text .room-hero-list {
-        display: none !important;
-    }
-
-    .room-hero-text h2 {
-        margin: 0 0 8px;
-        font-size: 1.3rem;
-    }
-
-    .room-hero-text .room-hero-cta {
-        margin-top: 8px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .room-hero {
-        position: relative;
-    }
-
-    .room-hero-text {
-        position: absolute;
-
-        /* put text at the top of the image */
-        top: -35px;
-        /* adjust ↑ closer or further */
-        left: 45px;
-
-        /* make sure old transforms don’t break layout */
-        transform: none !important;
-
-        width: auto;
-        /* prevent full-width block from shifting */
-        text-align: left;
-        /* optional */
-
-        display: block;
-        /* keeps it simple */
-    }
-
-    .room-hero-text h2 {
-        margin: 0;
-        font-size: 1.3rem;
-    }
-
-    /* Button or details text — move down if needed */
-    .room-hero-cta {
-        margin-top: 10px;
-    }
-
-    /* Hide long descriptions on mobile (optional) */
-    .room-hero-sub,
-    .room-hero-list {
-        display: none !important;
-    }
-}
 
 
 
@@ -4842,6 +4160,8 @@ body {
 }
 
 
+
+
 /* Gallery images */
 .mc-slide {
     overflow: hidden;
@@ -4929,6 +4249,8 @@ body.lang-en .en {
     }
 }
 
+
+
 /* ===================== */
 /*  FOOTER – RESPONSIVE  */
 /* ===================== */
@@ -4994,6 +4316,8 @@ body.lang-en .en {
         padding-top: 10px;
     }
 }
+
+
 
 /* ===========================
    MAP – MOBILE / TABLET
@@ -5203,7 +4527,248 @@ body.lang-en .en {
     left: 0;
     transition: opacity 1.5s ease-in-out;
     /* keep your slideshow smooth */
-}</style>
+}
+
+
+/* =======================================================
+   ROOM HERO – CLEAN PREMIUM VERSION (FULLSCREEN)
+   ======================================================= */
+
+/* Wrapper of all room heroes */
+.room-heroes {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Fullscreen hero section */
+.room-hero {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    height: 110vh; /* fullscreen effect */
+    display: flex;
+    align-items: center;
+
+    /* Dynamic background from inline CSS */
+    background-image: var(--room-bg-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /* Smooth fade-in */
+    opacity: 0;
+    animation: fadeHero 0.8s ease forwards;
+}
+
+/* Fade effect */
+@keyframes fadeHero {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Dark overlay for readability */
+.room-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, 0.6)
+    );
+    z-index: 1;
+}
+
+/* Text content */
+.room-hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.room-hero-text {
+    max-width: 600px;
+    color: #fff;
+}
+
+/* Title */
+.room-hero-text h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+/* Subtitle */
+.room-hero-sub {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Room info list */
+.room-hero-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.room-hero-list li {
+    margin-bottom: 6px;
+}
+
+/* CTA button */
+.room-hero-cta {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #ffffff;
+    color: #000;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.room-hero-cta:hover {
+    background: #f0e6d6;
+}
+
+/* =======================================================
+   MOBILE ADAPTATION
+   ======================================================= */
+@media (max-width: 768px) {
+    .room-hero {
+        height: 80vh;
+        background-position: center top;
+    }
+
+    .room-hero-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .room-hero-sub,
+    .room-hero-list {
+        display: none; /* Cleaner on small screens */
+    }
+
+    .room-hero-cta {
+        margin-top: 12px;
+    }
+}
+
+
+/* FIX 1 — Softer, smoother left shadow */
+.room-hero::before {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.28),
+        rgba(0, 0, 0, 0.08),
+        rgba(0,0,0,0)
+    ) !important;
+}
+
+
+/* FIX 2 — Center the section heading */
+.rooms-heading,
+.rooms-section-heading,
+.rooms-heading h2 {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* FIX 3 — Improve readability inside room-hero text */
+
+.room-hero-text h2 {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+}
+
+.room-hero-sub {
+    font-size: 1rem;
+    opacity: 0.92;
+    line-height: 1.55;
+    margin-bottom: 14px !important;
+}
+
+.room-hero-list {
+    margin: 0 0 18px 0 !important;
+    padding-left: 18px !important;
+}
+
+.room-hero-list li {
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin-bottom: 4px;
+    list-style: disc !important;
+}
+
+/* Make the CTA stand out */
+.room-hero-cta {
+    font-weight: 600 !important;
+    padding: 10px 18px !important;
+}
+
+/* Move hero text slightly left on desktop */
+@media (min-width: 769px) {
+    .room-hero-text {
+        margin-left: -4% !important;  /* adjust between -2% and -6% */
+    }
+}
+
+/* Cinematic soft shadow on the left side of hero */
+.room-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55%;     /* how wide the fade goes */
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.55),   /* strong near text */
+        rgba(0, 0, 0, 0.28),  
+        rgba(0, 0, 0, 0.10),
+        rgba(0, 0, 0, 0)
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* STRONGER left shadow focused on text area */
+.room-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* narrow and strong shadow zone */
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.75),   /* much stronger on left */
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.25),
+        rgba(0, 0, 0, 0.0)
+    );
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+</style>
     
    
 </head>
@@ -5351,19 +4916,18 @@ body.lang-en .en {
 </section>
   
 
-<!-- ==== ROOM TYPES FULL-WIDTH STRIP ==== -->
+
 <section class="room-heroes">
 
     <!-- ROOM 1 -->
     <section class="room-hero" id="room1"
-        data-images="img63.jpeg,img76.jpeg,img57.jpeg"
         style="--room-bg-image:url('images/img57.jpeg');">
 
         <div class="room-hero-inner">
             <div class="room-hero-text">
 
                 <h2>
-                    <span class="gr">Μεγάλο Πέτρινο Διαμέρισμα </span>
+                    <span class="gr">Μεγάλο Πέτρινο Διαμέρισμα</span>
                     <span class="en" style="display:none">Large Stone Apartment</span>
                 </h2>
 
@@ -5386,22 +4950,18 @@ body.lang-en .en {
 
             </div>
         </div>
-
-        <button class="room-hero-arrow room-hero-arrow-left" aria-label="Προηγούμενη εικόνα">&#10094;</button>
-        <button class="room-hero-arrow room-hero-arrow-right" aria-label="Επόμενη εικόνα">&#10095;</button>
     </section>
 
 
     <!-- ROOM 2 -->
     <section class="room-hero" id="room2"
-        data-images="img306.jpeg,img301.jpeg,img304.jpeg,img308.jpeg"
         style="--room-bg-image:url('images/img308.jpeg');">
 
         <div class="room-hero-inner">
             <div class="room-hero-text">
 
                 <h2>
-                    <span class="gr">Ανοιχτό Δίκλινο διαμέρισμα από Πέτρα</span>
+                    <span class="gr">Ανοιχτό Δίκλινο Διαμέρισμα από Πέτρα</span>
                     <span class="en" style="display:none">Open-Plan Stone Double Apartment</span>
                 </h2>
 
@@ -5424,15 +4984,11 @@ body.lang-en .en {
 
             </div>
         </div>
-
-        <button class="room-hero-arrow room-hero-arrow-left" aria-label="Προηγούμενη εικόνα">&#10094;</button>
-        <button class="room-hero-arrow room-hero-arrow-right" aria-label="Επόμενη εικόνα">&#10095;</button>
     </section>
 
 
     <!-- ROOM 3 -->
     <section class="room-hero" id="room3"
-        data-images="img107.jpeg,img106.jpeg"
         style="--room-bg-image:url('images/img106.jpeg');">
 
         <div class="room-hero-inner">
@@ -5462,15 +5018,11 @@ body.lang-en .en {
 
             </div>
         </div>
-
-        <button class="room-hero-arrow room-hero-arrow-left" aria-label="Προηγούμενη εικόνα">&#10094;</button>
-        <button class="room-hero-arrow room-hero-arrow-right" aria-label="Επόμενη εικόνα">&#10095;</button>
     </section>
 
 
     <!-- ROOM 4 -->
     <section class="room-hero" id="room4"
-        data-images="img103.jpeg,img99.jpeg"
         style="--room-bg-image:url('images/img99.jpeg');">
 
         <div class="room-hero-inner">
@@ -5494,18 +5046,16 @@ body.lang-en .en {
                 </ul>
 
                 <a href="rooms.html" class="room-hero-cta">
-                    <span class="gr">Δείτε λεπτομέρειρες</span>
+                    <span class="gr">Δείτε λεπτομέρειες</span>
                     <span class="en" style="display:none">View details</span>
                 </a>
 
             </div>
         </div>
-
-        <button class="room-hero-arrow room-hero-arrow-left" aria-label="Προηγούμενη εικόνα">&#10094;</button>
-        <button class="room-hero-arrow room-hero-arrow-right" aria-label="Επόμενη εικόνα">&#10095;</button>
     </section>
 
 </section>
+
 
 
    
