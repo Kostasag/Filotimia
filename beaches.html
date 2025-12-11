@@ -440,56 +440,6 @@
             border-bottom-color: currentColor
         }
 
-        .call-button {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #2d4fa4;
-            color: #fff;
-            border-radius: 12px 0 0 12px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            cursor: pointer;
-            transition: right .4s ease, padding .3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
-            text-decoration: none
-        }
-
-        .call-button i {
-            font-size: 28px
-        }
-
-        .call-tooltip {
-            overflow: hidden;
-            max-width: 0;
-            opacity: 0;
-            margin-left: 0;
-            display: flex;
-            flex-direction: column;
-            white-space: nowrap;
-            transition: max-width .5s ease, opacity .4s ease, margin-left .4s ease
-        }
-
-        .call-tooltip strong {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 3px
-        }
-
-        .call-tooltip span {
-            font-size: 15px;
-            font-weight: 500;
-            text-decoration: underline
-        }
-
-        .call-button:hover .call-tooltip {
-            max-width: 220px;
-            opacity: 1;
-            margin-left: 14px
-        }
 
         .lang-switch {
             position: fixed;
@@ -1382,42 +1332,672 @@
             }
         }
 
-            
+          
+        /* SHOW LANGUAGE TOGGLE ON MOBILE, HIDE PHONE & BOOK */
+@media (max-width: 960px) {
+  /* Bring header-right back, but only for the language toggle */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;          /* pushes it to the right side */
+  }
+
+  /* Hide the phone + "Book Now" buttons on small screens */
+  .header-right .btn {
+    display: none;
+  }
+
+  /* Make sure the language pill is visible and compact */
+  .lang-toggle {
+    display: inline-flex;
+    padding: 0.12rem 0.18rem;
+    margin-right: 0.4rem;       /* space between lang pill and menu icon */
+  }
+
+  .lang-toggle .lang-btn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* Keep the menu icon on the far right */
+  .menu-toggle {
+    display: inline-flex;
+  }
+}
+
+
+/* ===========================
+   NAVBAR VARIABLES
+   =========================== */
+:root {
+  --nav-brand: #2d4fa4;
+  --nav-brand-soft: #e4ebff;
+  --nav-accent: #0ea5b3;
+  --nav-bg: #f8f5ef;
+  --nav-text: #1f2933;
+  --nav-muted: #6b7280;
+  --nav-radius: 14px;
+  --nav-max-width: 1200px;
+}
+
+/* ===========================
+   HEADER / NAVBAR
+   =========================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(248, 245, 239, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+/* inner container */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.25rem;
+  max-width: 1320px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+/* -------------------
+   Brand (logo + text)
+   ------------------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  margin-right: auto;
+  text-decoration: none;
+  color: var(--nav-text);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.25);
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: #111827;
+}
+
+/* -------------------
+   Main nav links
+   ------------------- */
+nav.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 0.92rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.primary-nav a {
+  position: relative;
+  padding-bottom: 0.15rem;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--nav-text);
+  text-decoration: none;
+}
+
+/* underline animation */
+.primary-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--nav-brand);
+  transition: width 0.22s ease;
+}
+
+.primary-nav a:hover,
+.primary-nav a.active {
+  color: var(--nav-brand);
+}
+
+.primary-nav a:hover::after,
+.primary-nav a.active::after {
+  width: 100%;
+}
+
+/* -------------------
+   Right side (lang + phone + CTA)
+   ------------------- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* pill buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+  background: none;
+  text-decoration: none;
+}
+
+/* phone button */
+.btn-outline {
+  border-color: rgba(148, 163, 184, 0.65);
+  color: var(--nav-brand);
+  background: #ffffff;
+}
+
+.btn-outline:hover {
+  background: var(--nav-brand-soft);
+}
+
+/* primary CTA */
+.btn-primary {
+  background: var(--nav-brand);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.4);
+}
+
+/* -------------------
+   Language toggle pill
+   ------------------- */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: #e5e7eb;
+  border-radius: 999px;
+  padding: 0.12rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.lang-toggle .lang-btn {
+  border: none;
+  background: transparent;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #4b5563;
+  line-height: 1.2;
+}
+
+.lang-toggle .lang-btn.active {
+  background: #ffffff;
+  color: var(--nav-brand);
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.7);
+}
+
+/* -------------------
+   Mobile menu button
+   ------------------- */
+.menu-toggle {
+  display: none;
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: #111827;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: #111827;
+  transition: transform 0.2s ease, top 0.2s ease, opacity 0.15s ease;
+}
+
+.menu-toggle span::before { top: -5px; }
+.menu-toggle span::after  { top:  5px; }
+
+.menu-toggle.open span { background: transparent; }
+
+.menu-toggle.open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ===========================
+   NAV RESPONSIVE
+   =========================== */
+@media (max-width: 960px) {
+  nav.primary-nav {
+    position: fixed;
+    inset: 56px 0 auto 0;
+    background: rgba(248, 245, 239, 0.97);
+    backdrop-filter: blur(10px);
+    padding: 0.9rem 1.25rem 1.2rem;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.25);
+    z-index: 40;
+  }
+
+  nav.primary-nav.open {
+    display: flex;
+  }
+
+  nav.primary-nav a {
+    display: block;
+    padding: 0.75rem 0;
+  }
+
+  .header-right {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .header-inner { gap: 0.5rem; }
+}
+
+/* SHOW LANGUAGE TOGGLE ON MOBILE */
+@media (max-width: 960px) {
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .header-right .btn {
+    display: none;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    padding: 0.12rem 0.18rem;
+    margin-right: 0.4rem;
+  }
+
+  .lang-toggle .lang-btn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+}
+
+/* LANGUAGE VISIBILITY */
+.gr { display: inline; }
+.en { display: none; }
+
+body.lang-en .gr { display: none; }
+body.lang-en .en { display: inline; }
+
+
+/* FIX CARD SPACING + MAKE GRID CLEANER */
+.beaches-section {
+    padding-top: 20px !important;
+    gap: 28px !important;       /* tighter spacing between boxes */
+}
+
+.beach-card {
+    border-radius: 16px !important;
+    overflow: hidden;
+    background: #fff;
+}
+
+.beach-card img {
+    height: 200px !important;   /* more consistent card size */
+}
+
+.beach-text {
+    padding: 20px 22px !important;
+}
+
+/* ==========================
+   BEACH CARDS – CLEAN SPACING
+   ========================== */
+
+/* Base grid: nicer spacing on all screens */
+.beaches-section {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 60px 20px 40px !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px !important;             /* tighter but consistent gap */
+}
+
+/* Card look */
+.beach-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.beach-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+.beach-card img {
+  width: 100%;
+  height: 210px !important;
+  object-fit: cover;
+}
+
+.beach-text {
+  padding: 18px 20px 20px !important;
+}
+
+.beach-text h3 {
+  margin-bottom: 8px;
+}
+
+/* Mobile-specific tweaks */
+@media (max-width: 768px) {
+  .beaches-section {
+    grid-template-columns: 1fr !important;   /* one card per row */
+    padding: 40px 16px 30px !important;
+    gap: 22px !important;
+  }
+
+  .beach-card {
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .beach-card img {
+    height: 190px !important;
+  }
+
+  .beach-text {
+    padding: 16px 16px 18px !important;
+  }
+
+  .beach-text p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+}
+
+/* ==========================
+   HERO – BASE LAYOUT RESET
+   ========================== */
+
+.beaches-hero {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  margin-top: 0 !important;
+  padding: 120px 20px 80px !important;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.6)),
+    url('images/main4.jpg') center 50% / cover no-repeat !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  color: #fff;
+  box-shadow: inset 0 -60px 60px rgba(0, 0, 0, 0.28);
+}
+
+.hero-content {
+  max-width: 880px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+/* Title – same layout for GR & EN */
+.beaches-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.25;
+  margin: 0 auto 18px !important;
+  max-width: 20ch;
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Subtext */
+.hero-subtext {
+  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.96);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 18px 22px;
+  max-width: 820px;
+  margin: 0 auto;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+  max-height: 9.5em;
+  transition: max-height 0.35s ease;
+}
+
+/* Fade at bottom when collapsed */
+.hero-subtext::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3em;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  pointer-events: none;
+}
+
+/* Expanded state */
+.hero-subtext.expanded {
+  max-height: none;
+  padding-bottom: 2.2em;
+}
+
+.hero-subtext.expanded::after {
+  opacity: 0;
+}
+
+/* Read-more button */
+.read-more-btn {
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.read-more-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+/* ==========================
+   HERO – MOBILE OVERRIDES
+   ========================== */
+@media (max-width: 768px) {
+
+  .beaches-hero {
+    min-height: 100vh;
+    padding: 110px 16px 70px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-content {
+    max-width: 92% !important;
+    padding: 0 !important;
+  }
+
+  .beaches-hero h1 {
+    font-size: clamp(1.7rem, 6vw, 2.2rem);
+    margin-bottom: 14px !important;
+    max-width: 22ch;
+  }
+
+  .hero-subtext {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 14px 16px;
+    max-width: 100%;
+    max-height: 9.2em;
+  }
+
+  .read-more-btn {
+    font-size: 0.9rem;
+    padding: 7px 14px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .beaches-hero {
+    padding: 105px 14px 60px !important;
+  }
+
+  .beaches-hero h1 {
+    font-size: clamp(1.5rem, 5.5vw, 1.9rem);
+    margin-bottom: 10px !important;
+  }
+
+  .hero-subtext {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    line-height: 1.5;
+  }
+}
+
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="nav-container"><a href="index.html" class="nav-logo"><img src="images/img17.jpg"
-                    alt="Filotimia Logo"></a>
-            <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="index.html"><span class="gr">Αρχική</span><span class="en"
-                                style="display:none">Home</span></a></li>
-                    <li><a href="gallery.html"><span class="gr">Γκαλερί</span><span class="en"
-                                style="display:none">Gallery</span></a></li>
-                    <li><a href="about-us.html"><span class="gr">Σχετικά</span><span class="en"
-                                style="display:none">About Us</span></a></li>
-                    <li><a href="rooms.html"><span class="gr">Δωμάτια</span><span class="en"
-                                style="display:none">Rooms</span></a></li>
-                    <li><a href="connections.html"><span class="gr">Δρομολόγια</span><span class="en"
-                                style="display:none">Connections</span></a></li>
-                    <li><a href="beaches.html" class="active"><span class="gr">Παραλίες</span><span class="en"
-                                style="display:none">Beaches</span></a></li>
-                    <li><a href="contact-us.html"><span class="gr">Επικοινωνία</span><span class="en"
-                                style="display:none">Contact</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div class="lang-switch" aria-label="Language switch"><button class="lang-btn active" data-lang="gr"
-            aria-label="Ελληνικά">ΕΛ</button> <span class="lang-divider">|</span> <button class="lang-btn"
-            data-lang="en" aria-label="English">EN</button></div><a href="tel:+306948813906" class="call-button"><i
-            class="fas fa-headset"></i>
-        <div class="call-tooltip"><strong>Call us</strong> <span>+30 69 4881 3906</span></div>
+    <header class="site-header">
+  <div class="header-inner">
+    <!-- Brand / logo -->
+    <a href="index.html" class="brand" aria-label="Filotimia Home">
+      <img src="images/img17.jpg" alt="Filotimia logo" class="brand-logo">
+      <span class="brand-title">
+        <span class="gr">Filotimia</span>
+        <span class="en">Filotimia</span>
+      </span>
     </a>
-    <main>
+
+    <!-- Main nav -->
+    <nav class="primary-nav" id="primaryNav">
+      <a href="index.html">
+        <span class="gr">Αρχική</span><span class="en">Home</span>
+      </a>
+      <a href="gallery.html">
+        <span class="gr">Γκαλερί</span><span class="en">Gallery</span>
+      </a>
+      <a href="about-us.html">
+        <span class="gr">Σχετικά με εμάς</span><span class="en">About Us</span>
+      </a>
+      <a href="rooms.html">
+        <span class="gr">Δωμάτια</span><span class="en">Rooms</span>
+      </a>
+      <a href="connections.html">
+        <span class="gr">Δρομολόγια</span><span class="en">Connections</span>
+      </a>
+      <a href="beaches.html">
+        <span class="gr">Παραλίες</span><span class="en">Beaches</span>
+      </a>
+      <a href="contact-us.html">
+        <span class="gr">Επικοινωνία</span><span class="en">Contact Us</span>
+      </a>
+    </nav>
+
+    <!-- Right side: language switch + phone + booking -->
+    <div class="header-right">
+      <div class="lang-toggle">
+        <button type="button" class="lang-btn active" data-lang="gr">GR</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-outline" href="tel:+306948813906">
+        <i class="fa-solid fa-phone"></i>
+        +30 694 881 3906
+      </a>
+      <a class="btn btn-primary"
+         href="https://direct-book.com/properties/filotimia?locale=el"
+         target="_blank" rel="noopener">
+        <span class="gr">Κράτηση</span>
+        <span class="en">Book Now</span>
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</header>
         <section class="beaches-hero">
             <div class="hero-content">
                 <h1><span class="gr">Παραλίες της Σχοινούσας</span> <span class="en" style="display:none">Beaches of
@@ -1610,10 +2190,81 @@
                     style="display:none">© 2025 Filotimia Schoinousa • All rights reserved</span></p>
         </div>
     </footer><button id="scrollToTopBtn" title="Πήγαινε στην αρχή">↑</button>
-    <script>const menuToggle = document.getElementById("menuToggle"), navMenu = document.getElementById("navMenu"); menuToggle.addEventListener("click", () => { navMenu.classList.toggle("open") }); const langButtons = document.querySelectorAll(".lang-btn"); function setLanguage(e) { document.documentElement.lang = "gr" === e ? "el" : "en", document.querySelectorAll(".gr").forEach(n => n.style.display = "gr" === e ? "inline" : "none"), document.querySelectorAll(".en").forEach(n => n.style.display = "en" === e ? "inline" : "none"), localStorage.setItem("siteLang", e) } langButtons.forEach(e => { e.addEventListener("click", () => { langButtons.forEach(e => e.classList.remove("active")), e.classList.add("active"), setLanguage(e.dataset.lang) }) }), setLanguage(localStorage.getItem("siteLang") || "gr")</script>
     <script>!function () { const o = document.getElementById("scrollToTopBtn"); if (!o) return; const s = () => { window.scrollY > 400 ? o.classList.add("show") : o.classList.remove("show") }; window.addEventListener("scroll", s, { passive: !0 }), s(), o.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }) }) }()</script>
     <script>!function () { const t = location.pathname.split("/").pop() || "index.html"; document.querySelectorAll("nav a[href]").forEach(e => { e.getAttribute("href").split("/").pop() === t && e.classList.add("active") }) }()</script>
     <script>document.addEventListener("DOMContentLoaded", () => { const e = document.querySelector(".hero-subtext"), t = document.querySelector(".read-more-btn"); if (!e || !t) return; if (!(e.scrollHeight > e.clientHeight + 4)) return t.style.display = "none", void e.classList.add("expanded"); t.addEventListener("click", () => { e.classList.toggle("expanded"), t.textContent = e.classList.contains("expanded") ? "Κλείσιμο" : "Διαβάστε περισσότερα" }) })</script>
+
+    <script>
+  // Scroll to top (safe)
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+  if (scrollToTopBtn) {
+    window.addEventListener("scroll", () => {
+      scrollToTopBtn.style.display = window.scrollY > 400 ? "block" : "none";
+    });
+    scrollToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const primaryNav = document.getElementById("primaryNav");
+  if (menuToggle && primaryNav) {
+    menuToggle.addEventListener("click", () => {
+      primaryNav.classList.toggle("open");
+      menuToggle.classList.toggle("open");
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", (!expanded).toString());
+    });
+  }
+
+  // Language switch
+  const langButtons = document.querySelectorAll(".lang-toggle .lang-btn");
+
+  function applyLanguage(lang) {
+    document.body.classList.toggle("lang-en", lang === "en");
+    document.documentElement.lang = lang === "gr" ? "el" : "en";
+
+    document.querySelectorAll(".gr").forEach(el => {
+      el.style.display = lang === "gr" ? "inline" : "none";
+    });
+    document.querySelectorAll(".en").forEach(el => {
+      el.style.display = lang === "en" ? "inline" : "none";
+    });
+
+    localStorage.setItem("siteLang", lang);
+  }
+
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      langButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      applyLanguage(btn.dataset.lang);
+    });
+  });
+
+  const savedLang = localStorage.getItem("siteLang") || "gr";
+  langButtons.forEach(b => {
+    if (b.dataset.lang === savedLang) b.classList.add("active");
+  });
+  applyLanguage(savedLang);
+
+  // Active nav link
+  (function () {
+    const current = location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll("nav.primary-nav a[href]").forEach(a => {
+      const hrefLast = a.getAttribute("href").split("/").pop();
+      if (hrefLast === current) a.classList.add("active");
+    });
+  })();
+
+  // Footer year (safe)
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+</script>
+
 </body>
 
 </html>
