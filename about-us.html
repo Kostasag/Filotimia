@@ -2055,6 +2055,81 @@ a:visited {
                 font-size: .98rem
             }
         }
+
+        /* ============================
+   MOBILE/TABLET HEADER TWEAKS
+   ============================ */
+
+/* Compact phone pill */
+.nav-phone {
+  display: none; /* desktop hidden */
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #d1ddff;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--brand);
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+}
+
+.nav-phone i {
+  font-size: 0.9rem;
+}
+
+/* Mobile & small tablets */
+@media (max-width: 900px) {
+  .header-inner {
+    padding-inline: 0.9rem;
+    gap: 0.6rem;
+  }
+
+  /* Right side: phone + lang pill */
+  .header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+
+  /* show compact phone, hide big buttons */
+  .nav-phone {
+    display: inline-flex;
+  }
+
+  .header-right .btn {
+    display: none;
+  }
+
+  /* slightly tighter, more compact language pill */
+  .lang-toggle {
+    padding: 0.12rem 0.16rem;
+    border-radius: 999px;
+    background: #eef0f4;
+    border-color: #cbd5f5;
+  }
+
+  .lang-toggle .lang-btn {
+    padding: 0.18rem 0.55rem;
+    font-size: 0.76rem;
+  }
+
+  /* burger button as a clean round icon */
+  .menu-toggle {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.9);
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+  }
+}
+
     </style>
 </head>
 
@@ -2065,8 +2140,8 @@ a:visited {
     <a href="index.html" class="brand" aria-label="Filotimia Home">
       <img src="images/img17.jpg" alt="Filotimia logo" class="brand-logo">
       <span class="brand-title">
-        <span class="gr">Filotimia</span>
-        <span class="en">Filotimia</span>
+        <span class="gr"></span>
+        <span class="en"></span>
       </span>
     </a>
 
@@ -2097,21 +2172,29 @@ a:visited {
 
     <!-- Right side: language switch + phone + booking -->
     <div class="header-right">
-      <div class="lang-toggle">
-        <button type="button" class="lang-btn active" data-lang="gr">GR</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-      </div>
-      <a class="btn btn-outline" href="tel:+306948813906">
-        <i class="fa-solid fa-phone"></i>
-        +30 694 881 3906
-      </a>
-      <a class="btn btn-primary"
-         href="https://direct-book.com/properties/filotimia?locale=el"
-         target="_blank" rel="noopener">
-        <span class="gr">Κράτηση</span>
-        <span class="en">Book Now</span>
-      </a>
-    </div>
+  <!-- compact phone for mobile/tablet -->
+  <a class="nav-phone" href="tel:+306948813906">
+    <i class="fa-solid fa-phone"></i>
+    <span>+30 694 881 3906</span>
+  </a>
+
+  <div class="lang-toggle">
+    <button type="button" class="lang-btn active" data-lang="gr">GR</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+  </div>
+
+  <!-- big buttons (desktop only) -->
+  <a class="btn btn-outline" href="tel:+306948813906">
+    <i class="fa-solid fa-phone"></i>
+    +30 694 881 3906
+  </a>
+  <a class="btn btn-primary"
+     href="https://direct-book.com/properties/filotimia?locale=el"
+     target="_blank" rel="noopener">
+    <span class="gr">Κράτηση</span>
+    <span class="en">Book Now</span>
+  </a>
+</div>
 
     <!-- Mobile menu button -->
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
