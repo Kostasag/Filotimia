@@ -5,6 +5,20 @@ import { BOOKING_URL, INSTAGRAM_URL, PHONE, PHONE_TEL } from "@/lib/apartments";
 import { useLang, LanguageToggle } from "@/lib/i18n";
 import beachesHero from "@/assets/beaches-hero.jpg";
 
+// Beach card images (in display order)
+import beach1 from "@/assets/img2014.jpeg";   // Psili Ammos
+import beach2 from "@/assets/img2009.jpeg";   // Lioliou
+import beach3 from "@/assets/img2006.jpeg";   // Tsigouri
+import beach4 from "@/assets/img2004.jpeg";   // Almyros
+import beach5 from "@/assets/img2000.jpeg";   // Alygaria
+import beach6 from "@/assets/img2002.jpeg";   // Fontana
+import beach7 from "@/assets/img2008.jpeg";   // Mersini
+import beach8 from "@/assets/img2005.jpeg";   // Livadi
+import beach9 from "@/assets/img2013.jpeg";   // Cavos tou Michali
+import beach10 from "@/assets/img2007.jpeg";  // Gerolimnionas
+import beach11 from "@/assets/img2011.jpeg";  // Fidou
+import beach12 from "@/assets/img2012.jpeg";  // Agios Vasilis
+
 export const Route = createFileRoute("/beaches")({
   head: () => ({
     meta: [
@@ -29,8 +43,6 @@ export const Route = createFileRoute("/beaches")({
   component: BeachesPage,
 });
 
-const IMG = (p: string) => `https://filotimia.gr/images/${p}`;
-
 type Beach = {
   slug: string;
   name: { en: string; el: string };
@@ -42,7 +54,7 @@ const beaches: Beach[] = [
   {
     slug: "psili-ammos",
     name: { en: "Psili Ammos", el: "Ψιλή Άμμος" },
-    image: IMG("img2014.jpeg"),
+    image: beach1,
     description: {
       en: "Fine sand and crystal-clear waters, one of the island's most famous swims. Northeast of Chora, with sweeping views over the open sea.",
       el: "Παραλία με ψιλή άμμο και διάφανα νερά, από τις πιο γνωστές του νησιού. Βρίσκεται βορειοανατολικά της Χώρας και προσφέρει εκπληκτική θέα στο πέλαγος.",
@@ -51,7 +63,7 @@ const beaches: Beach[] = [
   {
     slug: "lioliou",
     name: { en: "Lioliou", el: "Λιόλου" },
-    image: IMG("img2009.jpeg"),
+    image: beach2,
     description: {
       en: "A sandy shore with calm waters and small tavernas — ideal for families. Easy to reach by car or on foot from Chora.",
       el: "Αμμώδης ακτή με ήρεμα νερά και ταβερνάκια, ιδανική για οικογένειες και παιδιά. Προσβάσιμη εύκολα με αυτοκίνητο ή με τα πόδια από τη Χώρα.",
@@ -60,7 +72,7 @@ const beaches: Beach[] = [
   {
     slug: "tsigouri",
     name: { en: "Tsigouri", el: "Τσιγκούρι" },
-    image: IMG("img2006.jpeg"),
+    image: beach3,
     description: {
       en: "The nearest beach to Chora, a wide sandy bay with shallow water, a beach bar and postcard sunset views.",
       el: "Η πλησιέστερη παραλία στη Χώρα, με μεγάλη αμμουδιά και ρηχά νερά. Διαθέτει beach bar και θέα προς το ηλιοβασίλεμα.",
@@ -69,7 +81,7 @@ const beaches: Beach[] = [
   {
     slug: "almyros",
     name: { en: "Almyros", el: "Αλμυρός" },
-    image: IMG("img2004.jpeg"),
+    image: beach4,
     description: {
       en: "A gorgeous beach on the southeastern side of Schinoussa, with fine sand and shallow turquoise water. Wide views towards Koufonissi.",
       el: "Εξαιρετική παραλία στη νοτιοανατολική πλευρά της Σχοινούσας, με ψιλή άμμο και γαλαζοπράσινα ρηχά νερά. Ιδανική για οικογένειες, με θέα προς το Κουφονήσι.",
@@ -78,7 +90,7 @@ const beaches: Beach[] = [
   {
     slug: "alygaria",
     name: { en: "Alygaria", el: "Αλυγαριά" },
-    image: IMG("img2000.jpeg"),
+    image: beach5,
     description: {
       en: "South of Chora, three connected coves of fine pebble and shallow water. Peaceful and understated — perfect for slow mornings.",
       el: "Βρίσκεται νότια της Χώρας και αποτελείται από τρεις συνεχόμενους μικρούς κολπίσκους με ψιλό βότσαλο και ρηχά νερά. Ιδανική για ζευγάρια και ήσυχες στιγμές.",
@@ -87,7 +99,7 @@ const beaches: Beach[] = [
   {
     slug: "fontana",
     name: { en: "Fontana", el: "Φουντάνα" },
-    image: IMG("img2002.jpeg"),
+    image: beach6,
     description: {
       en: "On the northeast coast, two small bays of azure water framed by a Venetian tower, with views to Koufonissi, Keros and Amorgos.",
       el: "Στον όρμο της Φουντάνας, στη βορειοανατολική ακτή, δύο μικρές παραλίες με καταγάλανα νερά και θέα προς Κουφονήσι, Κέρο και Αμοργό. Σημείο αναφοράς ο μικρός βενετσιάνικος πύργος.",
@@ -96,7 +108,7 @@ const beaches: Beach[] = [
   {
     slug: "mersini",
     name: { en: "Mersini (Piso Ammos)", el: "Μερσίνη (Πίσω Άμμος)" },
-    image: IMG("img2008.jpeg"),
+    image: beach7,
     description: {
       en: "A quiet 60-metre strip beside the port, with sand and tamarisk trees offering natural shade all afternoon.",
       el: "Δίπλα στο λιμάνι, μια παραλία περίπου 60 μέτρων με πάντα ήσυχα νερά, άμμο και αρμυρίκια που προσφέρουν φυσική σκίαση.",
@@ -105,7 +117,7 @@ const beaches: Beach[] = [
   {
     slug: "livadi",
     name: { en: "Livadi", el: "Λιβάδι" },
-    image: IMG("img2005.jpeg"),
+    image: beach8,
     description: {
       en: "A dreamy wide beach on the south of the island, sheltered from northern winds and lined with tamarisks. About 1 km from Chora.",
       el: "Μια ονειρεμένη παραλία στο νότιο τμήμα του νησιού με μεγάλη, φαρδιά αμμουδιά και σειρά από αλμυρίκια. Ιδανική για οικογένειες, απέχει περίπου 1 χλμ. από τη Χώρα.",
@@ -114,7 +126,7 @@ const beaches: Beach[] = [
   {
     slug: "kavos-michali",
     name: { en: "Cavos tou Michali", el: "Κάβος του Μιχάλη" },
-    image: IMG("img2013.jpeg"),
+    image: beach9,
     description: {
       en: "Reached after Lioliou on the right-hand path — small coves with white pebbles and crystal water in the middle of the peninsula.",
       el: "Προσεγγίζεται μετά τη Λιόλου, ακολουθώντας το μονοπάτι προς τα δεξιά. Μικροί κολπίσκοι με λευκά βότσαλα και κρυστάλλινα νερά. Ιδανικός για πεζοπορία.",
@@ -123,7 +135,7 @@ const beaches: Beach[] = [
   {
     slug: "gerolimnionas",
     name: { en: "Gerolimnionas", el: "Γερολιμνιώνας" },
-    image: IMG("img2007.jpeg"),
+    image: beach10,
     description: {
       en: "A quiet, secluded beach on the western side of the island. Sheltered from the wind, with coarse sand and glassy turquoise water.",
       el: "Ήσυχη και απομονωμένη παραλία στη δυτική πλευρά της Σχοινούσας, με χοντρή άμμο και καταγάλανα νερά. Προστατευμένη από τους ανέμους.",
@@ -132,7 +144,7 @@ const beaches: Beach[] = [
   {
     slug: "fidou",
     name: { en: "Fidou", el: "Φιδού" },
-    image: IMG("img2011.jpeg"),
+    image: beach11,
     description: {
       en: "A tiny islet linked to Schinoussa by a narrow sandy passage. Fine sand and open Aegean views for anyone chasing seclusion.",
       el: "Η Φιδού είναι μικρή νησίδα κοντά στη Σχοινούσα, συνδεδεμένη με ρηχή λωρίδα άμμου. Ψιλή άμμος και θέα στο Αιγαίο, ιδανική για απομόνωση.",
@@ -141,7 +153,7 @@ const beaches: Beach[] = [
   {
     slug: "agios-vasilis",
     name: { en: "Agios Vasilis", el: "Άγιος Βασίλης" },
-    image: IMG("img2012.jpeg"),
+    image: beach12,
     description: {
       en: "A pebble beach with turquoise water at the edge of the Agios Vasilis peninsula. Perfect for a panoramic Aegean swim.",
       el: "Όμορφη παραλία με βότσαλα και γαλαζοπράσινα νερά, στο άκρο της χερσονήσου του Αγίου Βασιλείου. Ιδανική για μπάνιο με θέα το Αιγαίο.",

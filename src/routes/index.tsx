@@ -38,13 +38,22 @@ import heroApartments from "@/assets/hero-vineyard.jpeg";
 import coastlineSunset from "@/assets/coastline-sunset.png";
 import heroMain from "@/assets/hero-main.jpg";
 import heroInterior from "@/assets/img63.jpeg";
+import galleryStone from "@/assets/img66.jpeg";
+import galleryTerrace from "@/assets/img66-2.jpeg";
+import gallerySeaView from "@/assets/img62.jpeg";
+import galleryDining from "@/assets/img71.jpeg";
+import galleryBedroom from "@/assets/img72.jpeg";
+import galleryVeranda from "@/assets/img76.jpeg";
+import galleryGarden from "@/assets/img68.jpeg";
+import galleryDetail from "@/assets/img52.jpeg";
+import galleryCoolRoom from "@/assets/img114.jpeg";
+import heroVineyard from "@/assets/hero-vineyard.jpeg";
+import heroTerrace from "@/assets/img68.jpeg";
+
 
 export const Route = createFileRoute("/")({
   component: Home,
 });
-
-const IMG = (p: string) => `https://filotimia.gr/images/${p}`;
-
 
 const amenities = [
   { icon: Wifi, label: { en: "Free Wi-Fi", el: "Δωρεάν Wi-Fi" } },
@@ -59,16 +68,18 @@ const amenities = [
 ];
 
 const gallery = [
-  "main.jpg",
-  "img36.jpg",
-  "img4000.jpeg",
-  "img4002.jpeg",
-  "img4004.jpeg",
-  "img4005.jpeg",
-  "img4007.jpeg",
-  "img4009.jpeg",
-  "img4011.jpeg",
-  "img5002.jpg",
+  heroMain,
+  heroInterior,
+  galleryStone,
+  galleryTerrace,
+  gallerySeaView,
+  galleryDining,
+  galleryBedroom,
+  galleryVeranda,
+  galleryGarden,
+  galleryDetail,
+  galleryCoolRoom,
+  heroApartments,
 ];
 
 const reviews = [
@@ -219,30 +230,33 @@ function Hero() {
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 will-change-transform"
-          style={{ transform: `translateY(${parallax * 0.35}px) scale(1.08)` }}
+          style={{ transform: `translateY(${parallax * 0.3}px) scale(1.04)` }}
         >
           <img
             src={heroMain}
             alt="Aegean coastline — Schinoussa"
             className="absolute inset-0 h-full w-full object-cover hero-kenburns-right"
             fetchPriority="high"
+            decoding="async"
+            style={{
+              filter: "contrast(1.04) saturate(1.05)",
+              transform: "translateZ(0)",
+            }}
           />
         </div>
 
-        {/* Editorial color grade */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,22,0.55)_0%,rgba(10,15,22,0.25)_30%,rgba(10,15,22,0.55)_70%,rgba(10,15,22,0.92)_100%)]" />
-        <div className="absolute inset-0 mix-blend-soft-light bg-[linear-gradient(180deg,rgba(233,217,184,0.14),rgba(0,0,0,0.4))]" />
-        {/* Left-side vignette to lift copy */}
-        <div className="absolute inset-y-0 left-0 w-full md:w-3/5 bg-[linear-gradient(90deg,rgba(10,15,22,0.75)_0%,rgba(10,15,22,0.35)_55%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_60%,transparent_35%,rgba(0,0,0,0.5)_100%)]" />
+        {/* Clean editorial grade — lighter, lets the sea breathe */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,22,0.35)_0%,rgba(10,15,22,0.05)_35%,rgba(10,15,22,0.15)_65%,rgba(10,15,22,0.85)_100%)]" />
+        {/* Left column readability wash */}
+        <div className="absolute inset-y-0 left-0 w-full md:w-2/3 bg-[linear-gradient(90deg,rgba(10,15,22,0.7)_0%,rgba(10,15,22,0.25)_45%,transparent_75%)]" />
       </div>
 
       {/* Top hairline meta bar */}
-      <div className="hero-reveal absolute inset-x-0 top-20 md:top-24 z-10 hidden md:flex items-center justify-between px-8 lg:px-12 text-white/70">
+      <div className="hero-reveal absolute inset-x-0 top-20 md:top-24 z-10 hidden md:flex items-center justify-between px-8 lg:px-16 text-white/70">
         <div className="flex items-center gap-3">
           <span className="h-px w-10 bg-[#d4b57c]" />
           <span className="text-[10px] tracking-[0.5em] uppercase">
-            {t({ en: "Est. Schinoussa · Small Cyclades", el: "Σχοινούσα · Μικρές Κυκλάδες" })}
+            {t({ en: "Schinoussa · Small Cyclades", el: "Σχοινούσα · Μικρές Κυκλάδες" })}
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -251,20 +265,19 @@ function Hero() {
         </div>
       </div>
 
-      {/* Editorial content — grid layout */}
-      <div className="relative z-10 mx-auto grid min-h-dvh max-w-7xl grid-cols-1 lg:grid-cols-12 gap-8 px-6 lg:px-12 pb-24 pt-40 md:pt-44 lg:pt-48">
-        <div className="lg:col-span-8 flex flex-col justify-end">
+      {/* Editorial content — single focused column */}
+      <div className="relative z-10 mx-auto flex min-h-dvh max-w-7xl flex-col justify-end px-6 lg:px-16 pb-28 md:pb-32 pt-40">
+        <div className="max-w-3xl">
 
-          <h1 className="hero-reveal hero-reveal-2 mt-6 font-serif text-white leading-[0.98] tracking-[-0.02em] text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5rem]">
+          <h1 className="hero-reveal hero-reveal-2 mt-6 font-serif text-white leading-[0.98] tracking-[-0.02em] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[6rem]">
             {t({ en: "A quiet luxury", el: "Μια ήσυχη" })}
-
             <br />
             <span className="italic font-light text-[#e9d9b8]">
               {t({ en: "by the Aegean.", el: "πολυτέλεια στο Αιγαίο." })}
             </span>
           </h1>
 
-          <p className="hero-reveal hero-reveal-3 mt-8 max-w-xl text-[13px] md:text-[15px] text-white/75 leading-[1.75]">
+          <p className="hero-reveal hero-reveal-3 mt-8 max-w-xl text-[14px] md:text-[15px] text-white/80 leading-[1.75]">
             {t({
               en: "Stone-built apartments woven into a hillside above the sea — a boutique retreat crafted for slow mornings, unhurried afternoons, and evenings measured in soft light.",
               el: "Πέτρινα διαμερίσματα σε μια πλαγιά πάνω από τη θάλασσα — ένα μπουτίκ καταφύγιο φτιαγμένο για αργά πρωινά, ανέμελα απογεύματα και βράδια μετρημένα σε απαλό φως.",
@@ -276,7 +289,7 @@ function Hero() {
               href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
-              className="group relative inline-flex items-center gap-3 rounded-full border border-[#e9d9b8]/80 bg-[#e9d9b8] px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-[#1a2536] transition-all duration-500 hover:bg-transparent hover:text-[#e9d9b8]"
+              className="group relative inline-flex items-center gap-3 rounded-full border border-[#e9d9b8] bg-[#e9d9b8] px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-[#1a2536] transition-all duration-500 hover:bg-transparent hover:text-[#e9d9b8]"
             >
               <span>{t({ en: "Reserve your stay", el: "Κάντε Κράτηση" })}</span>
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
@@ -292,60 +305,114 @@ function Hero() {
               <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
+
+          {/* Inline social proof row */}
+          <div className="hero-reveal hero-reveal-5 mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-white/70">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5 text-[#e9d9b8]">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} className="size-3 fill-current" />
+                ))}
+              </div>
+              <span className="text-[10px] tracking-[0.28em] uppercase">
+                {t({ en: "Loved on Booking", el: "Booking.com" })}
+              </span>
+            </div>
+            <span className="hidden sm:block h-3 w-px bg-white/25" />
+            <span className="text-[10px] tracking-[0.28em] uppercase">
+              {t({ en: "Sea-view balconies", el: "Μπαλκόνια με θέα" })}
+            </span>
+            <span className="hidden sm:block h-3 w-px bg-white/25" />
+            <span className="text-[10px] tracking-[0.28em] uppercase">
+              {t({ en: "Steps from the beach", el: "Δίπλα στην παραλία" })}
+            </span>
+          </div>
         </div>
 
-        {/* Right-column editorial card — floating framed accent image + stats */}
-        <div className="lg:col-span-4 hidden lg:flex flex-col justify-end gap-6">
-          <div className="hero-reveal hero-reveal-3 relative">
-            <div className="absolute -inset-3 border border-[#e9d9b8]/25" />
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img
-                src={heroInterior}
-                alt="Dining table with sea view from inside a Filotimia stone apartment"
-                className="absolute inset-0 h-full w-full object-cover hero-kenburns-left"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-[9px] tracking-[0.5em] uppercase text-[#e9d9b8]/90">
-                  {t({ en: "Inside", el: "Μέσα" })}
+        {/* Canvas gallery cluster — img63, hero-vineyard, img308 */}
+        <div className="hidden lg:block absolute right-0 xl:right-4 top-1/2 -translate-y-1/2">
+          <div className="relative flex flex-col items-center">
+            {/* Frame 1 — img63.jpeg */}
+            <div className="relative z-30 w-52 xl:w-60 -rotate-1 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
+              <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
+                  <img
+                    src={heroInterior}
+                    alt="Filotimia interior detail"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-[linear-gradient(45deg,transparent_48%,#8b7a5a_50%,transparent_52%),linear-gradient(-45deg,transparent_48%,#8b7a5a_50%,transparent_52%)] bg-[length:6px_6px]" />
                 </div>
-                <div className="mt-1 font-serif italic text-lg leading-tight">
-                  {t({ en: "Stone, light, and the open Aegean.", el: "Πέτρα, φως και το ανοιχτό Αιγαίο." })}
+                <div className="absolute bottom-3 left-0 right-0 text-center">
+                  <span className="text-[8px] tracking-[0.3em] uppercase text-[#7a6b52]">
+                    {t({ en: "Interior", el: "Εσωτερικό" })}
+                  </span>
                 </div>
               </div>
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[#d4b57c] shadow-sm ring-2 ring-[#f5f1e8]" />
+            </div>
+
+            {/* Frame 2 — hero-vineyard.jpeg */}
+            <div className="relative z-20 -mt-6 ml-16 xl:ml-20 w-48 xl:w-56 rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
+
+              <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
+                  <img
+                    src={heroVineyard}
+                    alt="Filotimia vineyard view"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-[linear-gradient(45deg,transparent_48%,#8b7a5a_50%,transparent_52%),linear-gradient(-45deg,transparent_48%,#8b7a5a_50%,transparent_52%)] bg-[length:6px_6px]" />
+                </div>
+                <div className="absolute bottom-3 left-0 right-0 text-center">
+                  <span className="text-[8px] tracking-[0.3em] uppercase text-[#7a6b52]">
+                    {t({ en: "Vineyard", el: "Αμπέλι" })}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[#d4b57c] shadow-sm ring-2 ring-[#f5f1e8]" />
+            </div>
+
+            {/* Frame 3 — img68.jpeg */}
+            <div className="relative z-10 -mt-6 -ml-12 xl:-ml-16 w-44 xl:w-52 -rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
+
+              <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
+                  <img
+                    src={heroTerrace}
+                    alt="Filotimia terrace view"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-[linear-gradient(45deg,transparent_48%,#8b7a5a_50%,transparent_52%),linear-gradient(-45deg,transparent_48%,#8b7a5a_50%,transparent_52%)] bg-[length:6px_6px]" />
+                </div>
+                <div className="absolute bottom-3 left-0 right-0 text-center">
+                  <span className="text-[8px] tracking-[0.3em] uppercase text-[#7a6b52]">
+                    {t({ en: "Terrace", el: "Βεράντα" })}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[#d4b57c] shadow-sm ring-2 ring-[#f5f1e8]" />
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* Refined meta chip — mobile/tablet only, keeps social proof visible */}
-      <div className="hero-reveal hero-reveal-5 absolute right-6 top-24 z-10 lg:hidden flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 backdrop-blur-md">
-        <div className="flex items-center gap-0.5 text-[#e9d9b8]">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <Star key={i} className="size-3 fill-current" />
-          ))}
-        </div>
-        <span className="text-[10px] tracking-[0.28em] uppercase text-white/85">
-          {t({ en: "Loved on Booking", el: "Booking.com" })}
-        </span>
-      </div>
+
 
       {/* Bottom hairline signature strip */}
-      <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-[#0a0f16] to-transparent">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-12 py-5 text-white/60">
+      <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-16 py-5 text-white/60">
           <div className="flex items-center gap-3">
             <div className="h-8 w-px bg-white/20 hero-scroll-line" />
             <span className="text-[9px] tracking-[0.5em] uppercase">
               {t({ en: "Scroll to explore", el: "Κύλιση" })}
             </span>
-          </div>
-          <div className="hidden sm:flex items-center gap-6 text-[10px] tracking-[0.35em] uppercase">
-            <span>{t({ en: "Sea view", el: "Θέα Θάλασσα" })}</span>
-            <span className="h-[3px] w-[3px] rounded-full bg-[#d4b57c]" />
-            <span>{t({ en: "Stone architecture", el: "Πέτρινη Αρχιτεκτονική" })}</span>
-            <span className="h-[3px] w-[3px] rounded-full bg-[#d4b57c]" />
-            <span>{t({ en: "Boutique hosting", el: "Μπουτίκ Φιλοξενία" })}</span>
           </div>
         </div>
       </div>
@@ -418,7 +485,7 @@ function About() {
         <Reveal className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-xl">
             <img
-              src={IMG("img4005.jpeg")}
+              src={galleryStone}
               alt="Garden and stone architecture at Filotimia"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -426,7 +493,7 @@ function About() {
           </div>
           <div className="absolute -bottom-8 -left-8 hidden md:block aspect-square w-44 overflow-hidden rounded-2xl border-8 border-cream shadow-xl">
             <img
-              src={IMG("img36.jpg")}
+              src={galleryTerrace}
               alt="Terrace detail"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -605,12 +672,12 @@ function Gallery() {
           {gallery.map((src, i) => (
             <button
               key={src}
-              onClick={() => setLightbox(IMG(src))}
+              onClick={() => setLightbox(src)}
               className="block w-full overflow-hidden rounded-xl bg-stone-light focus:outline-none focus:ring-2 focus:ring-sea"
               aria-label={`Open image ${i + 1}`}
             >
               <img
-                src={IMG(src)}
+                src={src}
                 alt={`Filotimia gallery ${i + 1}`}
                 loading="lazy"
                 className="w-full transition-transform duration-700 hover:scale-105"
@@ -748,7 +815,7 @@ function BookingCTA() {
   return (
     <section id="book" className="relative overflow-hidden py-24 md:py-32">
       <img
-        src={IMG("img5002.jpg")}
+        src={heroApartments}
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"

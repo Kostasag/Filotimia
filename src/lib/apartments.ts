@@ -28,8 +28,6 @@ export const PHONE = "6943102945";
 export const PHONE_TEL = "+306943102945";
 export const EMAIL = "info@filotimia.gr";
 
-const IMG = (p: string) => `https://filotimia.gr/images/${p}`;
-
 export type LocalizedString = { en: string; el: string };
 
 export type Apartment = {
@@ -120,7 +118,7 @@ export const apartments: Apartment[] = [
       ],
     },
     image: img308,
-    gallery: [img308, img304, IMG("img205.jpeg"), IMG("img4002.jpeg"), IMG("img4007.jpeg"), IMG("img4009.jpeg")],
+    gallery: [img308, img304, img66, img66b, img63, img62],
     highlights: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],
     highlightsI18n: {
       en: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],
@@ -157,7 +155,7 @@ export const apartments: Apartment[] = [
       ],
     },
     image: img114,
-    gallery: [img114, img109, img106, img105, IMG("img306.jpeg"), IMG("img4011.jpeg")],
+    gallery: [img114, img109, img106, img105, img99, img104],
     highlights: ["Three single beds", "Naturally cool interior", "Fully equipped kitchen", "Quiet garden setting"],
     highlightsI18n: {
       en: ["Three single beds", "Naturally cool interior", "Fully equipped kitchen", "Quiet garden setting"],
@@ -194,7 +192,7 @@ export const apartments: Apartment[] = [
       ],
     },
     image: img90,
-    gallery: [img90, img99, img104, img91, IMG("img4004.jpeg"), IMG("img4000.jpeg")],
+    gallery: [img90, img99, img104, img91, img109, img105],
     highlights: ["King-size bed", "Naturally cool interior", "Modern rainfall shower", "Kitchenette"],
     highlightsI18n: {
       en: ["King-size bed", "Naturally cool interior", "Modern rainfall shower", "Kitchenette"],

@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "../lib/i18n";
+import heroMain from "../assets/hero-main.jpg";
 
 function NotFoundComponent() {
   return (
@@ -86,9 +87,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Luxury stone apartments with sea views in Schinoussa, Small Cyclades.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://filotimia.gr/images/main.jpg" },
+      { property: "og:image", content: heroMain },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://filotimia.gr/images/main.jpg" },
+      { name: "twitter:image", content: heroMain },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -99,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap",
       },
-      { rel: "preload", as: "image", href: "https://filotimia.gr/images/main.jpg", fetchpriority: "high" },
+      { rel: "preload", as: "image", href: heroMain, fetchPriority: "high" },
     ],
   }),
   shellComponent: RootShell,
