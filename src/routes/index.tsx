@@ -490,7 +490,7 @@ function About() {
         <Reveal className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-xl">
             <img
-              src={galleryStone}
+              src={aboutSmall}
               alt="Garden and stone architecture at Filotimia"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -498,7 +498,7 @@ function About() {
           </div>
           <div className="absolute -bottom-8 -left-8 hidden md:block aspect-square w-44 overflow-hidden rounded-2xl border-8 border-cream shadow-xl">
             <img
-              src={aboutSmall}
+              src={galleryStone}
               alt="Filotimia detail"
               className="h-full w-full object-cover"
               loading="lazy"
