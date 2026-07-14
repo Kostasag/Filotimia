@@ -57,6 +57,7 @@ import galleryCoolRoom from "@/assets/img114.jpeg";
 import heroVineyard from "@/assets/hero-vineyard.jpeg";
 import heroTerrace from "@/assets/img68.jpeg";
 import heroApartments from "@/assets/hero-vineyard.jpeg";
+import beachesHero from "@/assets/beaches-hero.jpg";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -300,7 +301,7 @@ function Hero() {
       {/* Backdrop image — full bleed, subtle */}
       <div className="absolute inset-0">
         <img
-          src={heroMain}
+          src={beachesHero}
           alt="Aegean coastline — Schinoussa"
           className="absolute inset-0 h-full w-full object-cover hero-kenburns-right"
           fetchPriority="high"
@@ -333,22 +334,16 @@ function Hero() {
           <div className="hero-reveal hero-reveal-2 flex items-center gap-4 text-[10px] tracking-[0.5em] uppercase text-[#e9d9b8]">
             <span>N°01</span>
             <span className="h-px w-10 bg-[#e9d9b8]/50" />
-            <span>{t({ en: "A stay by the sea", el: "Μια διαμονή στη θάλασσα" })}</span>
+            <span>{t({ en: "Your Island Escape", el: "Η απόδρασή σας στη Σχοινούσα" })}</span>
           </div>
 
-          <h1 className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[9rem]">
+          <h1 className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[7rem]">
             <span className="block">{t({ en: "Where the", el: "Εκεί όπου το" })}</span>
             <span className="block italic font-light text-[#e9d9b8]">
               {t({ en: "Aegean rests.", el: "Αιγαίο ησυχάζει." })}
             </span>
           </h1>
 
-          <p className="hero-reveal hero-reveal-4 mt-10 max-w-xl text-[14px] md:text-[15px] leading-[1.85] text-white/80">
-            {t({
-              en: "Stone-built apartments woven into a hillside above the sea — a boutique retreat crafted for slow mornings, unhurried afternoons, and evenings measured in soft light.",
-              el: "Πέτρινα διαμερίσματα σε μια πλαγιά πάνω από τη θάλασσα — ένα μπουτίκ καταφύγιο φτιαγμένο για αργά πρωινά, ανέμελα απογεύματα και βράδια μετρημένα σε απαλό φως.",
-            })}
-          </p>
 
           <div className="hero-reveal hero-reveal-5 mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
             <a
@@ -610,80 +605,105 @@ function Apartments() {
           </p>
         </Reveal>
 
-        <div className="mt-16 md:mt-24 grid grid-cols-1 gap-10 md:gap-12">
+        <div className="mt-20 md:mt-28 space-y-24 md:space-y-36">
           {apartments.map((a, i) => {
             const flip = i % 2 === 1;
+            const RoomContent = () => (
+              <>
+                <div className="flex items-center gap-4">
+                  <span className="font-serif italic text-3xl text-sea/60">{romans[i]}</span>
+                  <div className="h-px flex-1 max-w-20 bg-navy/10" />
+                </div>
+                <h3 className="mt-5 font-serif text-2xl md:text-3xl lg:text-4xl text-navy leading-[1.05]">
+                  {t(a.nameI18n)}
+                </h3>
+                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.25em] text-navy/60">
+                  <span className="inline-flex items-center gap-2">
+                    <Users className="size-3.5" strokeWidth={1.5} /> {a.guests} {t({ en: "guests", el: "άτομα" })}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <Ruler className="size-3.5" strokeWidth={1.5} /> {t(a.sizeI18n)}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <BedDouble className="size-3.5" strokeWidth={1.5} /> {t(a.bedI18n)}
+                  </span>
+                </div>
+                <p className="mt-6 text-[15px] leading-[1.85] text-navy/75">{t(a.descI18n)}</p>
+                <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <Link
+                    to="/rooms/$slug"
+                    params={{ slug: a.slug }}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/link inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.28em] text-navy transition-colors hover:text-sea"
+                  >
+                    {t({ en: "View Details & Book", el: "Λεπτομέρειες & Κράτηση" })}
+                    <ArrowUpRight className="size-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  </Link>
+                  <span className="hidden sm:inline h-4 w-px bg-navy/20" />
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] uppercase tracking-[0.28em] text-navy/60 hover:text-navy transition-colors"
+                  >
+                    {t({ en: "Reserve now", el: "Κάντε κράτηση" })}
+                  </a>
+                </div>
+              </>
+            );
+
             return (
               <Reveal key={a.slug}>
-                <article
-                  className={`group relative overflow-hidden rounded-2xl bg-white border border-navy/5 shadow-[0_12px_40px_-20px_rgba(14,22,34,0.12)] transition-shadow duration-500 hover:shadow-[0_24px_60px_-24px_rgba(14,22,34,0.18)] grid grid-cols-1 lg:grid-cols-12 items-stretch ${
-                    flip ? "lg:[&>*:first-child]:order-2" : ""
-                  }`}
-                >
-                  {/* Image side */}
-                  <div className="lg:col-span-7 relative overflow-hidden bg-stone-light">
-                    <div className="aspect-[4/3] lg:aspect-auto lg:absolute lg:inset-0">
-                      <img
-                        src={a.image}
-                        alt={t(a.nameI18n)}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.05]"
-                      />
+                <article className="group relative">
+                  {/* Watermark chapter number */}
+                  <span
+                    className={`pointer-events-none absolute top-0 z-0 font-serif text-[8rem] md:text-[12rem] leading-none italic text-navy/[0.04] select-none transition-transform duration-[1400ms] group-hover:translate-x-2 ${
+                      flip ? "right-0 lg:right-8" : "left-0 lg:left-8"
+                    }`}
+                    aria-hidden="true"
+                  >
+                    {romans[i]}
+                  </span>
+
+                  {/* Floating image + text composition */}
+                  <div className="relative grid grid-cols-1 lg:grid-cols-12 lg:items-center gap-0">
+                    {/* Image + desktop panel */}
+                    <div
+                      className={`relative z-10 lg:col-span-8 ${
+                        flip ? "lg:col-start-5" : "lg:col-start-1"
+                      }`}
+                    >
+                      <div className="relative aspect-[16/10] overflow-hidden bg-stone-light">
+                        <img
+                          src={a.image}
+                          alt={t(a.nameI18n)}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                        />
+                        <span className="absolute left-4 top-4 md:left-5 md:top-5 font-serif text-[10px] tracking-[0.3em] uppercase text-white/90">
+                          N°0{i + 1}
+                        </span>
+                      </div>
+
+                      {/* Desktop floating panel — positioned away from the image */}
+                      <div
+                        className={`hidden lg:block absolute z-20 bottom-8 w-[48%] max-w-[360px] bg-[#faf9f6]/95 backdrop-blur-sm p-8 lg:p-10 border border-navy/10 shadow-[0_25px_60px_-20px_rgba(14,22,34,0.12)] ${
+                          flip ? "left-0 -translate-x-[55%]" : "right-0 translate-x-[55%]"
+                        }`}
+                      >
+                        <RoomContent />
+                      </div>
                     </div>
-                    <span className="absolute left-4 top-4 md:left-5 md:top-5 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1.5 font-serif text-[10px] tracking-[0.3em] uppercase text-navy shadow-sm">
-                      N°0{i + 1}
-                    </span>
-                    {/* subtle gradient overlay for mobile text contrast */}
-                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/25 to-transparent lg:hidden" />
+
+                    {/* Mobile panel below image */}
+                    <div className="lg:hidden relative z-20 mt-10 mx-5 md:mx-10 bg-[#faf9f6] p-7 md:p-9 border border-navy/10 shadow-[0_20px_50px_-15px_rgba(14,22,34,0.1)]">
+                      <RoomContent />
+                    </div>
                   </div>
 
-                  {/* Text side */}
-                  <div className="lg:col-span-5 flex flex-col justify-center p-7 md:p-10 lg:p-12">
-                    <div className="flex items-center gap-3">
-                      <span className="font-serif italic text-3xl text-sea/70">
-                        {romans[i]}
-                      </span>
-                      <div className="h-px flex-1 max-w-16 bg-navy/10" />
-                    </div>
-                    <h3 className="mt-4 font-serif text-2xl md:text-3xl lg:text-4xl text-navy leading-[1.05]">
-                      {t(a.nameI18n)}
-                    </h3>
-
-                    <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.25em] text-navy/60">
-                      <span className="inline-flex items-center gap-2">
-                        <Users className="size-3.5" strokeWidth={1.5} /> {a.guests} {t({ en: "guests", el: "άτομα" })}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <Ruler className="size-3.5" strokeWidth={1.5} /> {t(a.sizeI18n)}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <BedDouble className="size-3.5" strokeWidth={1.5} /> {t(a.bedI18n)}
-                      </span>
-                    </div>
-
-                    <p className="mt-5 text-[15px] leading-[1.8] text-navy/75">{t(a.descI18n)}</p>
-
-                    <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                      <Link
-                        to="/rooms/$slug"
-                        params={{ slug: a.slug }}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group/link inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-[11px] font-medium uppercase tracking-[0.25em] text-white transition-all duration-500 hover:bg-sea"
-                      >
-                        {t({ en: "View Details & Book", el: "Λεπτομέρειες & Κράτηση" })}
-                        <ArrowUpRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                      </Link>
-                      <a
-                        href={BOOKING_URL}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[11px] uppercase tracking-[0.25em] text-navy/70 hover:text-navy transition-colors underline-offset-4 hover:underline"
-                      >
-                        {t({ en: "Reserve now", el: "Κάντε κράτηση" })}
-                      </a>
-                    </div>
-                  </div>
+                  {/* Subtle divider line */}
+                  <div className="absolute -bottom-12 left-0 right-0 h-px bg-navy/5 lg:hidden" />
                 </article>
               </Reveal>
             );
@@ -715,16 +735,16 @@ function Amenities() {
             </div>
             <h2 className="mt-6 font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.02] tracking-[-0.015em]">
               {t({
-                en: "Everything you need. Nothing more.",
-                el: "Ό,τι χρειάζεστε. Τίποτα περιττό.",
+                en: "Everything you need.",
+                el: "Ό,τι χρειάζεστε.",
               })}
             </h2>
           </Reveal>
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={150}>
             <p className="text-[15px] leading-[1.85] text-white/75">
               {t({
-                en: "Every comfort is quietly present — considered, unobtrusive, and made for a slow, restorative stay by the sea.",
-                el: "Κάθε άνεση είναι διακριτικά παρούσα — προσεγμένη, χωρίς επίδειξη, για μια ήρεμη και αναζωογονητική διαμονή δίπλα στη θάλασσα.",
+                en: "Everything you need for a comfortable and relaxing stay in Schinoussa.",
+                el: "Όλες οι απαραίτητες παροχές για μια άνετη και ξέγνοιαστη διαμονή στη Σχοινούσα.",
               })}
             </p>
           </Reveal>
@@ -920,8 +940,8 @@ function Location() {
               n="VI"
               eyebrow={{ en: "Location", el: "Τοποθεσία" }}
               title={{
-                en: "Where the Aegean slows down.",
-                el: "Εκεί όπου το Αιγαίο κυλά πιο αργά.",
+                en: "Our Location",
+                el: "Πού θα μας βρείτε",
               }}
             />
             <p className="mt-8 text-[15px] leading-[1.85] text-navy/75">
@@ -942,7 +962,7 @@ function Location() {
               </div>
               <div>
                 <dt className="text-[10px] uppercase tracking-[0.35em] text-navy/50">
-                  {t({ en: "Messaria", el: "Μεσσαριά" })}
+                  {t({ en: "Port", el: "Λιμάνι" })}
                 </dt>
                 <dd className="mt-2 font-serif text-2xl text-navy">
                   {t({ en: "~2.5 km", el: "~2,5 χλμ." })}
