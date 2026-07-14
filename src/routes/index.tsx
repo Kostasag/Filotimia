@@ -23,6 +23,9 @@ import {
   Users,
   Ruler,
   BedDouble,
+  Bus,
+  Zap,
+  CircleParking,
 } from "lucide-react";
 import {
   apartments,
@@ -40,6 +43,7 @@ import heroMain from "@/assets/hero-main.jpg";
 import heroInterior from "@/assets/img63.jpeg";
 import galleryStone from "@/assets/img66.jpeg";
 import galleryTerrace from "@/assets/img66-2.jpeg";
+import aboutSmall from "@/assets/img4011.jpeg";
 import gallerySeaView from "@/assets/img62.jpeg";
 import galleryDining from "@/assets/img71.jpeg";
 import galleryBedroom from "@/assets/img72.jpeg";
@@ -65,6 +69,9 @@ const amenities = [
   { icon: Tv, label: { en: "Smart TV", el: "Smart TV" } },
   { icon: Coffee, label: { en: "Coffee Machine", el: "Καφετιέρα" } },
   { icon: WashingMachine, label: { en: "Laundry on request", el: "Πλύσιμο ρούχων κατόπιν αιτήματος" } },
+  { icon: Bus, label: { en: "Free transfer", el: "Δωρεάν μεταφορά" } },
+  { icon: Zap, label: { en: "EV charging station", el: "Σταθμός φόρτισης ηλεκτρικών αυτοκινήτων" } },
+  { icon: CircleParking, label: { en: "Parking space", el: "Χώρος στάθμευσης" } },
 ];
 
 const gallery = [
@@ -329,11 +336,11 @@ function Hero() {
           </div>
         </div>
 
-        {/* Canvas gallery cluster — img63, hero-vineyard, img308 */}
+        {/* Canvas gallery cluster — img63, hero-vineyard, img68 */}
         <div className="hidden lg:block absolute right-0 xl:right-4 top-1/2 -translate-y-1/2">
           <div className="relative flex flex-col items-center">
             {/* Frame 1 — img63.jpeg */}
-            <div className="relative z-30 w-52 xl:w-60 -rotate-1 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
+            <div className="relative z-30 w-56 xl:w-64 -rotate-1 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
               <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
                   <img
@@ -355,8 +362,7 @@ function Hero() {
             </div>
 
             {/* Frame 2 — hero-vineyard.jpeg */}
-            <div className="relative z-20 -mt-6 ml-16 xl:ml-20 w-48 xl:w-56 rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
-
+            <div className="relative z-20 -mt-3 ml-16 xl:ml-20 w-52 xl:w-60 rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
               <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
                   <img
@@ -378,8 +384,7 @@ function Hero() {
             </div>
 
             {/* Frame 3 — img68.jpeg */}
-            <div className="relative z-10 -mt-6 -ml-12 xl:-ml-16 w-44 xl:w-52 -rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
-
+            <div className="relative z-10 -mt-3 -ml-12 xl:-ml-16 w-48 xl:w-56 -rotate-2 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
               <div className="rounded-sm bg-[#f5f1e8] p-2.5 pb-9 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.45)]">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#e6e0d2]">
                   <img
@@ -493,8 +498,8 @@ function About() {
           </div>
           <div className="absolute -bottom-8 -left-8 hidden md:block aspect-square w-44 overflow-hidden rounded-2xl border-8 border-cream shadow-xl">
             <img
-              src={galleryTerrace}
-              alt="Terrace detail"
+              src={aboutSmall}
+              alt="Filotimia detail"
               className="h-full w-full object-cover"
               loading="lazy"
             />
