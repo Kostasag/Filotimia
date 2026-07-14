@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, X, Menu, MapPin } from "lucide-react";
 import { BOOKING_URL, INSTAGRAM_URL, PHONE, PHONE_TEL } from "@/lib/apartments";
 import { useLang, LanguageToggle } from "@/lib/i18n";
-import beachesHero from "@/assets/beaches-hero.jpg.asset.json";
+import beachesHero from "@/assets/beaches-hero.jpg";
 
 export const Route = createFileRoute("/beaches")({
   head: () => ({
@@ -21,9 +21,9 @@ export const Route = createFileRoute("/beaches")({
           "Untouched coves, turquoise waters and peaceful escapes on Schinoussa, Small Cyclades.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:image", content: beachesHero.url },
+      { property: "og:image", content: beachesHero },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: beachesHero.url },
+      { name: "twitter:image", content: beachesHero },
     ],
   }),
   component: BeachesPage,
@@ -250,7 +250,7 @@ function BeachesHero() {
   return (
     <section className="relative min-h-[85vh] w-full overflow-hidden">
       <img
-        src={beachesHero.url}
+        src={beachesHero}
         alt={t({ en: "Sunset over the Aegean at Schinoussa", el: "Ηλιοβασίλεμα στο Αιγαίο, Σχοινούσα" })}
         className="absolute inset-0 h-full w-full object-cover"
         fetchPriority="high"
@@ -327,7 +327,7 @@ function BeachesCTA() {
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
       <img
-        src={beachesHero.url}
+        src={beachesHero}
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"

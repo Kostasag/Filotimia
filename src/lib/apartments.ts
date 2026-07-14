@@ -1,22 +1,22 @@
-import img66 from "@/assets/img66.jpeg.asset.json";
-import img90 from "@/assets/img90.jpeg.asset.json";
-import img114 from "@/assets/img114.jpeg.asset.json";
-import img52 from "@/assets/img52.jpeg.asset.json";
-import img62 from "@/assets/img62.jpeg.asset.json";
-import img63 from "@/assets/img63.jpeg.asset.json";
-import img66b from "@/assets/img66-2.jpeg.asset.json";
-import img68 from "@/assets/img68.jpeg.asset.json";
-import img71 from "@/assets/img71.jpeg.asset.json";
-import img72 from "@/assets/img72.jpeg.asset.json";
-import img76 from "@/assets/img76.jpeg.asset.json";
-import img308 from "@/assets/img308.jpeg.asset.json";
-import img304 from "@/assets/img304.jpeg.asset.json";
-import img109 from "@/assets/img109.jpeg.asset.json";
-import img106 from "@/assets/img106.jpeg.asset.json";
-import img105 from "@/assets/img105.jpeg.asset.json";
-import img99 from "@/assets/img99.jpeg.asset.json";
-import img104 from "@/assets/img104.jpeg.asset.json";
-import img91 from "@/assets/img91.jpeg.asset.json";
+import img66 from "@/assets/img66.jpeg";
+import img90 from "@/assets/img90.jpeg";
+import img114 from "@/assets/img114.jpeg";
+import img52 from "@/assets/img52.jpeg";
+import img62 from "@/assets/img62.jpeg";
+import img63 from "@/assets/img63.jpeg";
+import img66b from "@/assets/img66-2.jpeg";
+import img68 from "@/assets/img68.jpeg";
+import img71 from "@/assets/img71.jpeg";
+import img72 from "@/assets/img72.jpeg";
+import img76 from "@/assets/img76.jpeg";
+import img308 from "@/assets/img308.jpeg";
+import img304 from "@/assets/img304.jpeg";
+import img109 from "@/assets/img109.jpeg";
+import img106 from "@/assets/img106.jpeg";
+import img105 from "@/assets/img105.jpeg";
+import img99 from "@/assets/img99.jpeg";
+import img104 from "@/assets/img104.jpeg";
+import img91 from "@/assets/img91.jpeg";
 
 export const BOOKING_URL =
   "https://direct-book.com/properties/filotimia?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR";
@@ -82,8 +82,8 @@ export const apartments: Apartment[] = [
         "Ένας ξεχωριστός καθιστικός χώρος με καναπέ-κρεβάτι φιλοξενεί άνετα οικογένειες ή μικρές παρέες, ενώ η πλήρως εξοπλισμένη κουζίνα σας προσκαλεί σε ήρεμα πρωινά με καφέ και τη θαλασσινή αύρα.",
       ],
     },
-    image: img66.url,
-    gallery: [img66.url, img66b.url, img63.url, img62.url, img71.url, img72.url, img76.url, img68.url, img52.url],
+    image: img66,
+    gallery: [img66, img66b, img63, img62, img71, img72, img76, img68, img52],
     highlights: ["Private terrace with sea view", "Separate living area", "Sofa bed for 2 extra guests", "Bathroom with rainfall shower"],
     highlightsI18n: {
       en: ["Private terrace with sea view", "Separate living area", "Sofa bed for 2 extra guests", "Bathroom with rainfall shower"],
@@ -119,8 +119,8 @@ export const apartments: Apartment[] = [
         "Βγείτε στην ιδιωτική σας βεράντα για αργά πρωινά, απεριτίφ στο ηλιοβασίλεμα και ήσυχα βράδια κάτω από τα αστέρια.",
       ],
     },
-    image: img308.url,
-    gallery: [img308.url, img304.url, IMG("img205.jpeg"), IMG("img4002.jpeg"), IMG("img4007.jpeg"), IMG("img4009.jpeg")],
+    image: img308,
+    gallery: [img308, img304, IMG("img205.jpeg"), IMG("img4002.jpeg"), IMG("img4007.jpeg"), IMG("img4009.jpeg")],
     highlights: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],
     highlightsI18n: {
       en: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],
@@ -156,8 +156,8 @@ export const apartments: Apartment[] = [
         "Μια συμπαγής κουζίνα, γωνιά φαγητού και ένα μοντέρνο μπάνιο ολοκληρώνουν μια γαλήνια, μίνιμαλ διαμονή, λίγα βήματα από τον κεντρικό κήπο.",
       ],
     },
-    image: img114.url,
-    gallery: [img114.url, img109.url, img106.url, img105.url, IMG("img306.jpeg"), IMG("img4011.jpeg")],
+    image: img114,
+    gallery: [img114, img109, img106, img105, IMG("img306.jpeg"), IMG("img4011.jpeg")],
     highlights: ["Three single beds", "Naturally cool interior", "Fully equipped kitchen", "Quiet garden setting"],
     highlightsI18n: {
       en: ["Three single beds", "Naturally cool interior", "Fully equipped kitchen", "Quiet garden setting"],
@@ -193,8 +193,8 @@ export const apartments: Apartment[] = [
         "Ξύλο, λινό και πέτρα σε γήινους τόνους δημιουργούν μια στοχαστική ατμόσφαιρα — ιδανική για ζευγάρια που αναζητούν ιδιωτικότητα και ηρεμία.",
       ],
     },
-    image: img90.url,
-    gallery: [img90.url, img99.url, img104.url, img91.url, IMG("img4004.jpeg"), IMG("img4000.jpeg")],
+    image: img90,
+    gallery: [img90, img99, img104, img91, IMG("img4004.jpeg"), IMG("img4000.jpeg")],
     highlights: ["King-size bed", "Naturally cool interior", "Modern rainfall shower", "Kitchenette"],
     highlightsI18n: {
       en: ["King-size bed", "Naturally cool interior", "Modern rainfall shower", "Kitchenette"],

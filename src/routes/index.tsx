@@ -34,10 +34,10 @@ import {
   GOOGLE_MAPS_URL,
 } from "@/lib/apartments";
 import { useLang, LanguageToggle } from "@/lib/i18n";
-import heroApartments from "@/assets/hero-vineyard.jpeg.asset.json";
-import coastlineSunset from "@/assets/coastline-sunset.png.asset.json";
-import heroMain from "@/assets/hero-main.jpg.asset.json";
-import heroInterior from "@/assets/img63.jpeg.asset.json";
+import heroApartments from "@/assets/hero-vineyard.jpeg";
+import coastlineSunset from "@/assets/coastline-sunset.png";
+import heroMain from "@/assets/hero-main.jpg";
+import heroInterior from "@/assets/img63.jpeg";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -222,7 +222,7 @@ function Hero() {
           style={{ transform: `translateY(${parallax * 0.35}px) scale(1.08)` }}
         >
           <img
-            src={heroMain.url}
+            src={heroMain}
             alt="Aegean coastline — Schinoussa"
             className="absolute inset-0 h-full w-full object-cover hero-kenburns-right"
             fetchPriority="high"
@@ -300,7 +300,7 @@ function Hero() {
             <div className="absolute -inset-3 border border-[#e9d9b8]/25" />
             <div className="relative aspect-[4/5] overflow-hidden">
               <img
-                src={heroInterior.url}
+                src={heroInterior}
                 alt="Dining table with sea view from inside a Filotimia stone apartment"
                 className="absolute inset-0 h-full w-full object-cover hero-kenburns-left"
               />
@@ -443,7 +443,7 @@ function BeachesTeaser() {
   return (
     <section className="relative overflow-hidden py-24 md:py-32">
       <img
-        src={coastlineSunset.url}
+        src={coastlineSunset}
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"
