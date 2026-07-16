@@ -338,9 +338,12 @@ function Hero() {
           </div>
 
           <h1 className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]">
-            <span className="block">{t({ en: "Where the", el: "Εκεί όπου το" })}</span>
-            <span className="block italic font-light text-[#e9d9b8]">
-              {t({ en: "Aegean rests.", el: "Αιγαίο ησυχάζει." })}
+            <span className="block">
+              {t({ en: "Explore Schinoussa", el: "Ανακαλύψτε τη Σχοινούσα." })}
+            </span>
+
+            <span className="mt-8 block italic font-light text-[#e9d9b8]">
+              {t({ en: "Explore Filotimia.", el: "Ανακαλύψτε τη Φιλοτιμία." })}
             </span>
           </h1>
 
@@ -724,7 +727,9 @@ function OutdoorLiving() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <Reveal className="lg:col-span-6">
             <div className="flex items-center gap-4 text-[10px] tracking-[0.45em] uppercase text-[#8a7548]">
-              <span className="font-serif italic text-lg text-navy/60 normal-case tracking-normal">Ch. IV</span>
+              <span className="font-serif italic text-lg text-navy/60 normal-case tracking-normal">
+                Ch. IV
+              </span>
               <span className="h-px flex-1 max-w-16 bg-navy/25" />
               <span>{t({ en: "Outdoor Living", el: "Εξωτερικοί Χώροι" })}</span>
             </div>
@@ -786,7 +791,10 @@ function OutdoorLiving() {
             <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_30px_60px_-35px_rgba(0,33,71,0.35)]">
               <img
                 src={outdoorExterior}
-                alt={t({ en: "Stone apartments and gardens", el: "Πέτρινα διαμερίσματα και κήποι" })}
+                alt={t({
+                  en: "Stone apartments and gardens",
+                  el: "Πέτρινα διαμερίσματα και κήποι",
+                })}
                 loading="lazy"
                 className="w-full h-[48vh] object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.05]"
               />
@@ -800,7 +808,10 @@ function OutdoorLiving() {
             <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_30px_60px_-35px_rgba(0,33,71,0.35)]">
               <img
                 src={outdoorVineyard2}
-                alt={t({ en: "Vineyard beside the apartments", el: "Αμπελώνας δίπλα στα διαμερίσματα" })}
+                alt={t({
+                  en: "Vineyard beside the apartments",
+                  el: "Αμπελώνας δίπλα στα διαμερίσματα",
+                })}
                 loading="lazy"
                 className="w-full h-[56vh] object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04]"
               />
@@ -816,15 +827,25 @@ function OutdoorLiving() {
           <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_40px_80px_-40px_rgba(0,33,71,0.35)]">
             <img
               src={outdoorVineyard1}
-              alt={t({ en: "Vineyard rows leading to the sea", el: "Σειρές αμπελώνα προς τη θάλασσα" })}
+              alt={t({
+                en: "Vineyard rows leading to the sea",
+                el: "Σειρές αμπελώνα προς τη θάλασσα",
+              })}
               loading="lazy"
               className="w-full h-[52vh] md:h-[62vh] object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-[1.03]"
             />
-            <figcaption className="absolute bottom-6 left-6 max-w-md rounded-xl bg-white/85 backdrop-blur px-5 py-4 shadow-sm">
+            <figcaption
+              className="
+    static mt-4 rounded-xl bg-white px-5 py-4 shadow-sm
+    md:absolute md:bottom-6 md:left-6 md:mt-0
+    md:max-w-md md:bg-white/85 md:backdrop-blur
+  "
+            >
               <div className="text-[10px] tracking-[0.4em] uppercase text-[#8a7548]">
                 {t({ en: "Our vineyard", el: "Ο αμπελώνας μας" })}
               </div>
-              <p className="mt-2 font-serif italic text-navy text-lg leading-snug">
+
+              <p className="mt-2 font-serif italic text-lg leading-snug text-navy">
                 {t({
                   en: "Young vines rooted in island soil — a walk of a few steps from your door.",
                   el: "Νεαρά κλήματα ριζωμένα στο νησιώτικο χώμα — λίγα βήματα από την πόρτα σας.",
@@ -841,7 +862,10 @@ function OutdoorLiving() {
           <div className="relative overflow-hidden">
             <img
               src={outdoorNight}
-              alt={t({ en: "Filotimia at night, softly lit", el: "Το Filotimia το βράδυ, με απαλό φωτισμό" })}
+              alt={t({
+                en: "Filotimia at night, softly lit",
+                el: "Το Filotimia το βράδυ, με απαλό φωτισμό",
+              })}
               loading="lazy"
               className="w-full h-[70vh] md:h-[85vh] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.04]"
             />
@@ -1040,12 +1064,6 @@ function Location() {
                 el: "Η τοποθεσίας μας",
               }}
             />
-            <p className="mt-8 text-[15px] leading-[1.85] text-navy/75">
-              {t({
-                en: "Schinoussa is a walkable island of two villages, Chora and Messaria, surrounded by crystalline waters, golden beaches, and raw Cycladic landscapes. Filotimia sits moments from the sea, a short walk from tavernas, and just minutes from the port.",
-                el: "Η Σχοινούσα είναι ένα ήσυχο κυκλαδίτικο νησί με δύο παραδοσιακούς οικισμούς, τη Χώρα και τη Μεσσαριά, που περιβάλλεται από κρυστάλλινα νερά, χρυσαφένιες παραλίες και αυθεντικά κυκλαδίτικα τοπία. Τα Filotimia Apartments βρίσκονται σε ιδανική τοποθεσία, λίγα μόλις λεπτά από τη θάλασσα, σε κοντινή απόσταση με τα πόδια από παραδοσιακές ταβέρνες και μόλις λίγα λεπτά από το λιμάνι.",
-              })}
-            </p>
 
             <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-navy/15 pt-8">
               <div>
