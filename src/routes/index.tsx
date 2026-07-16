@@ -330,7 +330,7 @@ function Hero() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-6 lg:px-12 pt-40 pb-28 md:pb-28 lg:grid-cols-12">
+      <div className="relative z-10 mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-6 lg:px-12 pt-24 md:pt-40 pb-20 md:pb-28 lg:grid-cols-12">
         {/* Headline */}
         <div className="lg:col-span-8 lg:col-start-1">
           <div className="hero-reveal hero-reveal-2 flex items-center gap-4 text-[10px] tracking-[0.5em] uppercase text-[#e9d9b8]">
@@ -338,7 +338,7 @@ function Hero() {
           </div>
 
           <h1
-            className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[1.75rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]
+            className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[1.55rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]
 "
           >
             <span className="block">{t({ en: "Where the", el: "Εκεί όπου το" })}</span>
@@ -352,14 +352,20 @@ function Hero() {
               href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
-              className="group relative inline-flex items-center gap-3 rounded-full border border-[#e9d9b8] bg-[#e9d9b8] px-8 py-4 text-[11px] font-medium uppercase tracking-[0.3em] text-[#1a2536] transition-all duration-500 hover:bg-transparent hover:text-[#e9d9b8]"
+              className="group relative inline-flex items-center gap-2 rounded-full border border-[#e9d9b8] bg-[#e9d9b8]
+              px-5 py-3 md:px-8 md:py-4
+              text-[10px] md:text-[11px]
+              font-medium uppercase tracking-[0.22em] md:tracking-[0.3em]
+              text-[#1a2536] transition-all duration-500
+              hover:bg-transparent hover:text-[#e9d9b8]"
             >
               <span>{t({ en: "Reserve your stay", el: "Κάντε Κράτηση" })}</span>
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="#apartments"
-              className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.3em] text-white/85 hover:text-white transition-colors"
+              className="group inline-flex items-center gap-2 text-[10px] md:text-[11px]
+tracking-[0.22em] md:tracking-[0.3em]font-medium uppercase tracking-[0.3em] text-white/85 hover:text-white transition-colors"
             >
               <span className="relative">
                 {t({ en: "Discover the apartments", el: "Δείτε τα Δωμάτια" })}
@@ -372,8 +378,6 @@ function Hero() {
 
         {/* Editorial image composition — curated collage: interior, vineyard, balconies */}
         <div className="hero-reveal hero-reveal-4 hidden lg:block lg:col-span-5 lg:col-start-8 relative h-[48vh] group/hero-imgs">
-
-
           {/* i. Dominant interior portrait — left column, generous breathing room */}
           <div className="absolute left-0 top-[6%] w-[46%] h-[50%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_32px_55px_-28px_rgba(0,0,0,0.42)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:-translate-y-2 group-hover/hero-imgs:shadow-[0_42px_72px_-24px_rgba(0,0,0,0.34)] z-10">
             <img
@@ -447,19 +451,11 @@ function Hero() {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="aspect-square overflow-hidden">
+          <div className="flex">
+            <div className="h-full overflow-hidden">
               <img
                 src={outdoorPergola}
                 alt="Filotimia pergola"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden">
-              <img
-                src={heroTerrace}
-                alt="Filotimia terrace"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
