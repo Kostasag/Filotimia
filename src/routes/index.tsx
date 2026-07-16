@@ -337,10 +337,7 @@ function Hero() {
             <span>N°01</span>
           </div>
 
-          <h1
-            className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[1.55rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]
-"
-          >
+          <h1 className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]">
             <span className="block">{t({ en: "Where the", el: "Εκεί όπου το" })}</span>
             <span className="block italic font-light text-[#e9d9b8]">
               {t({ en: "Aegean rests.", el: "Αιγαίο ησυχάζει." })}
@@ -353,11 +350,11 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               className="group relative inline-flex items-center gap-2 rounded-full border border-[#e9d9b8] bg-[#e9d9b8]
-              px-5 py-3 md:px-8 md:py-4
-              text-[10px] md:text-[11px]
-              font-medium uppercase tracking-[0.22em] md:tracking-[0.3em]
-              text-[#1a2536] transition-all duration-500
-              hover:bg-transparent hover:text-[#e9d9b8]"
+px-4 py-2.5 md:px-8 md:py-4
+text-[9px] md:text-[11px]
+font-medium uppercase tracking-[0.18em] md:tracking-[0.3em]
+text-[#1a2536] transition-all duration-500
+hover:bg-transparent hover:text-[#e9d9b8]"
             >
               <span>{t({ en: "Reserve your stay", el: "Κάντε Κράτηση" })}</span>
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
@@ -365,7 +362,7 @@ function Hero() {
             <a
               href="#apartments"
               className="group inline-flex items-center gap-2 text-[10px] md:text-[11px]
-tracking-[0.22em] md:tracking-[0.3em]font-medium uppercase tracking-[0.3em] text-white/85 hover:text-white transition-colors"
+tracking-[0.22em] md:tracking-[0.3em] font-medium uppercase text-white/85 hover:text-white transition-colors"
             >
               <span className="relative">
                 {t({ en: "Discover the apartments", el: "Δείτε τα Δωμάτια" })}
@@ -373,101 +370,6 @@ tracking-[0.22em] md:tracking-[0.3em]font-medium uppercase tracking-[0.3em] text
               </span>
               <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
             </a>
-          </div>
-        </div>
-
-        {/* Editorial image composition — curated collage: interior, vineyard, balconies */}
-        <div className="hero-reveal hero-reveal-4 hidden lg:block lg:col-span-5 lg:col-start-8 relative h-[48vh] group/hero-imgs">
-          {/* i. Dominant interior portrait — left column, generous breathing room */}
-          <div className="absolute left-0 top-[6%] w-[46%] h-[50%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_32px_55px_-28px_rgba(0,0,0,0.42)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:-translate-y-2 group-hover/hero-imgs:shadow-[0_42px_72px_-24px_rgba(0,0,0,0.34)] z-10">
-            <img
-              src={heroInterior}
-              alt="Filotimia interior"
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover scale-[1.05] transition-transform duration-[2400ms] ease-out group-hover/hero-imgs:scale-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-            <div className="absolute left-4 bottom-4 flex items-center gap-3 text-white/90">
-              <span className="font-serif italic text-sm">i.</span>
-              <span className="h-px w-5 bg-white/50" />
-              <span className="text-[9px] tracking-[0.45em] uppercase">
-                {t({ en: "The Interior", el: "Το Εσωτερικό" })}
-              </span>
-            </div>
-          </div>
-
-          {/* ii. Landscape vineyard — upper right column, aligned with clear separation */}
-          <div className="absolute left-[54%] top-[6%] w-[46%] h-[28%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_28px_50px_-24px_rgba(0,0,0,0.38)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:-translate-y-1 group-hover/hero-imgs:shadow-[0_36px_60px_-20px_rgba(0,0,0,0.32)] z-10">
-            <img
-              src={heroVineyard}
-              alt="Filotimia vineyard and apartments"
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover scale-[1.06] transition-transform duration-[2400ms] ease-out group-hover/hero-imgs:scale-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-            <div className="absolute left-3 bottom-3 flex items-center gap-3 text-white/90">
-              <span className="font-serif italic text-sm">ii.</span>
-              <span className="h-px w-4 bg-white/50" />
-              <span className="text-[9px] tracking-[0.45em] uppercase">
-                {t({ en: "The View", el: "Η Θέα" })}
-              </span>
-            </div>
-          </div>
-
-          {/* iii. Balconies and terraces — lower right column, moved right and lower for breathing space */}
-          <div className="absolute left-[54%] bottom-[25%] w-[46%] h-[34%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_28px_50px_-24px_rgba(0,0,0,0.38)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:translate-y-1 group-hover/hero-imgs:shadow-[0_36px_60px_-20px_rgba(0,0,0,0.32)] z-10">
-            <img
-              src={outdoorPergola}
-              alt="Filotimia balconies and terraces"
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover scale-[1.05] transition-transform duration-[2600ms] ease-out group-hover/hero-imgs:scale-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-            <div className="absolute left-3 bottom-3 flex items-center gap-3 text-white/90">
-              <span className="font-serif italic text-sm">iii.</span>
-              <span className="h-px w-4 bg-white/50" />
-              <span className="text-[9px] tracking-[0.45em] uppercase">
-                {t({ en: "The Balcony", el: "Το Μπαλκόνι" })}
-              </span>
-            </div>
-          </div>
-
-          {/* Discreet caption plate */}
-          <div className="absolute left-0 -bottom-1 flex items-center gap-3 text-white/70"></div>
-        </div>
-      </div>
-
-      {/* Mobile secondary image */}
-      <div className="lg:hidden relative z-10 -mt-8 mx-6 mb-16">
-        <div className="grid grid-cols-3 gap-2">
-          <div className="col-span-2 aspect-[4/5] overflow-hidden">
-            <img
-              src={heroInterior}
-              alt="Filotimia interior"
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="flex">
-            <div className="h-full overflow-hidden">
-              <img
-                src={outdoorPergola}
-                alt="Filotimia pergola"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="col-span-3 aspect-[21/9] overflow-hidden">
-            <img
-              src={heroVineyard}
-              alt="Filotimia vineyard"
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
           </div>
         </div>
       </div>
