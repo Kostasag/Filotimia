@@ -10,13 +10,16 @@ import img71 from "@/assets/img71.jpeg";
 import img72 from "@/assets/img72.jpeg";
 import img76 from "@/assets/img76.jpeg";
 import img308 from "@/assets/img308.jpeg";
-import img304 from "@/assets/img304.jpeg";
 import img109 from "@/assets/img109.jpeg";
 import img106 from "@/assets/img106.jpeg";
 import img105 from "@/assets/img105.jpeg";
 import img99 from "@/assets/img99.jpeg";
 import img104 from "@/assets/img104.jpeg";
 import img91 from "@/assets/img91.jpeg";
+import img304 from "@/assets/img304.jpeg";
+import IMG_0917 from "@/assets/IMG_0917.jpeg";
+import IMG_0961 from "@/assets/IMG_0961.jpeg";
+import IMG_0841 from "@/assets/IMG_0841.jpeg";
 
 export const BOOKING_URL =
   "https://direct-book.com/properties/filotimia?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR";
@@ -117,8 +120,9 @@ export const apartments: Apartment[] = [
         "Βγείτε στην ιδιωτική σας βεράντα για αργά πρωινά, απεριτίφ στο ηλιοβασίλεμα και ήσυχα βράδια κάτω από τα αστέρια.",
       ],
     },
+
     image: img308,
-    gallery: [img308, img304, img66, img66b, img63, img62],
+    gallery: [img308, IMG_0917, IMG_0961, IMG_0841],
     highlights: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],
     highlightsI18n: {
       en: ["Open-plan layout", "Private veranda", "Aegean sea view", "Custom stone details"],

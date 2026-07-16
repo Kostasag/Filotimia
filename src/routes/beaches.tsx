@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, X, Menu, MapPin } from "lucide-react";
-import { BOOKING_URL, INSTAGRAM_URL, PHONE, PHONE_TEL } from "@/lib/apartments";
+import { ArrowRight, X, Menu, MapPin, Instagram, Facebook, Mail, Phone, Map as MapIcon } from "lucide-react";
+import { BOOKING_URL, INSTAGRAM_URL, GOOGLE_MAPS_URL, PHONE, PHONE_TEL } from "@/lib/apartments";
 import { useLang, LanguageToggle } from "@/lib/i18n";
+
+
 import beachesHero from "@/assets/beaches-hero.jpg";
 
 import beach1 from "@/assets/img2014.jpeg"; // Psili Ammos
@@ -17,6 +19,7 @@ import beach9 from "@/assets/img2013.jpeg"; // Cavos tou Michali
 import beach10 from "@/assets/img2007.jpeg"; // Gerolimnionas
 import beach11 from "@/assets/img2011.jpeg"; // Fidou
 import beach12 from "@/assets/img2012.jpeg"; // Agios Vasilis
+
 
 export const Route = createFileRoute("/beaches")({
   head: () => ({
@@ -45,8 +48,8 @@ type Beach = {
   slug: string;
   name: { en: string; el: string };
   image: string;
-  tag: { en: string; el: string };
-  detail: { en: string; el: string };
+  tag?: { en: string; el: string };
+  detail?: { en: string; el: string };
   description: { en: string; el: string };
 };
 
@@ -55,8 +58,6 @@ const beaches: Beach[] = [
     slug: "psili-ammos",
     name: { en: "Psili Ammos", el: "Ψιλή Άμμος" },
     image: beach1,
-    tag: { en: "Wild Beauty", el: "Άγρια Ομορφιά" },
-    detail: { en: "Fine white sand", el: "Ψιλή άσπρη άμμος" },
     description: {
       en: "Fine sand and crystal-clear waters, one of the island's most famous swims. Northeast of Chora, with sweeping views over the open sea.",
       el: "Παραλία με ψιλή άμμο και διάφανα νερά, από τις πιο γνωστές του νησιού. Βρίσκεται βορειοανατολικά της Χώρας και προσφέρει εκπληκτική θέα στο πέλαγος.",
@@ -66,8 +67,6 @@ const beaches: Beach[] = [
     slug: "lioliou",
     name: { en: "Lioliou", el: "Λιόλου" },
     image: beach2,
-    tag: { en: "Family Friendly", el: "Οικογενειακή" },
-    detail: { en: "Tavernas nearby", el: "Ταβερνάκια κοντά" },
     description: {
       en: "A sandy shore with calm waters and small tavernas — ideal for families. Easy to reach by car or on foot from Chora.",
       el: "Αμμώδης ακτή με ήρεμα νερά και ταβερνάκια, ιδανική για οικογένειες και παιδιά. Προσβάσιμη εύκολα με αυτοκίνητο ή με τα πόδια από τη Χώρα.",
@@ -77,8 +76,6 @@ const beaches: Beach[] = [
     slug: "tsigouri",
     name: { en: "Tsigouri", el: "Τσιγκούρι" },
     image: beach3,
-    tag: { en: "Local Favorite", el: "Αγαπημένη" },
-    detail: { en: "Shallow waters", el: "Ρηχά νερά" },
     description: {
       en: "The nearest beach to Chora, a wide sandy bay with shallow water, a beach bar and postcard sunset views.",
       el: "Η πλησιέστερη παραλία στη Χώρα, με μεγάλη αμμουδιά και ρηχά νερά. Διαθέτει beach bar και θέα προς το ηλιοβασίλεμα.",
@@ -88,8 +85,6 @@ const beaches: Beach[] = [
     slug: "almyros",
     name: { en: "Almyros", el: "Αλμυρός" },
     image: beach4,
-    tag: { en: "Southeast Gem", el: "Πετράδι Νοτιοανατολικά" },
-    detail: { en: "Views to Koufonissi", el: "Θέα προς Κουφονήσι" },
     description: {
       en: "A gorgeous beach on the southeastern side of Schinoussa, with fine sand and shallow turquoise water. Wide views towards Koufonissi.",
       el: "Εξαιρετική παραλία στη νοτιοανατολική πλευρά της Σχοινούσας, με ψιλή άμμο και γαλαζοπράσινα ρηχά νερά. Ιδανική για οικογένειες, με θέα προς το Κουφονήσι.",
@@ -99,8 +94,6 @@ const beaches: Beach[] = [
     slug: "alygaria",
     name: { en: "Alygaria", el: "Αλυγαριά" },
     image: beach5,
-    tag: { en: "Quiet Coves", el: "Ήσυχοι Όρμοι" },
-    detail: { en: "Three connected coves", el: "Τρεις συνεχόμενοι κόλποι" },
     description: {
       en: "South of Chora, three connected coves of fine pebble and shallow water. Peaceful and understated — perfect for slow mornings.",
       el: "Βρίσκεται νότια της Χώρας και αποτελείται από τρεις συνεχόμενους μικρούς κολπίσκους με ψιλό βότσαλο και ρηχά νερά. Ιδανική για ζευγάρια και ήσυχες στιγμές.",
@@ -110,8 +103,6 @@ const beaches: Beach[] = [
     slug: "fontana",
     name: { en: "Fontana", el: "Φουντάνα" },
     image: beach6,
-    tag: { en: "Historic Coast", el: "Ιστορική Ακτή" },
-    detail: { en: "Venetian tower", el: "Βενετσιάνικος πύργος" },
     description: {
       en: "On the northeast coast, two small bays of azure water framed by a Venetian tower, with views to Koufonissi, Keros and Amorgos.",
       el: "Στον όρμο της Φουντάνας, στη βορειοανατολική ακτή, δύο μικρές παραλίες με καταγάλανα νερά και θέα προς Κουφονήσι, Κέρο και Αμοργό. Σημείο αναφοράς ο μικρός βενετσιάνικος πύργος.",
@@ -121,8 +112,6 @@ const beaches: Beach[] = [
     slug: "mersini",
     name: { en: "Mersini (Piso Ammos)", el: "Μερσίνη (Πίσω Άμμος)" },
     image: beach7,
-    tag: { en: "Portside Calm", el: "Ήρεμη δίπλα στο Λιμάνι" },
-    detail: { en: "Natural shade", el: "Φυσική σκίαση" },
     description: {
       en: "A quiet 60-metre strip beside the port, with sand and tamarisk trees offering natural shade all afternoon.",
       el: "Δίπλα στο λιμάνι, μια παραλία περίπου 60 μέτρων με πάντα ήσυχα νερά, άμμο και αρμυρίκια που προσφέρουν φυσική σκίαση.",
@@ -132,8 +121,6 @@ const beaches: Beach[] = [
     slug: "livadi",
     name: { en: "Livadi", el: "Λιβάδι" },
     image: beach8,
-    tag: { en: "Dreamy Wide Bay", el: "Ονειρική Φαρδιά Ακτή" },
-    detail: { en: "Sheltered from wind", el: "Προστατευμένη από αέρα" },
     description: {
       en: "A dreamy wide beach on the south of the island, sheltered from northern winds and lined with tamarisks. About 1 km from Chora.",
       el: "Μια ονειρεμένη παραλία στο νότιο τμήμα του νησιού με μεγάλη, φαρδιά αμμουδιά και σειρά από αλμυρίκια. Ιδανική για οικογένειες, απέχει περίπου 1 χλμ. από τη Χώρα.",
@@ -143,8 +130,6 @@ const beaches: Beach[] = [
     slug: "kavos-michali",
     name: { en: "Cavos tou Michali", el: "Κάβος του Μιχάλη" },
     image: beach9,
-    tag: { en: "Walking Path", el: "Με τα Πόδια" },
-    detail: { en: "White pebbles", el: "Λευκά βότσαλα" },
     description: {
       en: "Reached after Lioliou on the right-hand path — small coves with white pebbles and crystal water in the middle of the peninsula.",
       el: "Προσεγγίζεται μετά τη Λιόλου, ακολουθώντας το μονοπάτι προς τα δεξιά. Μικροί κολπίσκοι με λευκά βότσαλα και κρυστάλλινα νερά. Ιδανικός για πεζοπορία.",
@@ -154,8 +139,6 @@ const beaches: Beach[] = [
     slug: "gerolimnionas",
     name: { en: "Gerolimnionas", el: "Γερολιμνιώνας" },
     image: beach10,
-    tag: { en: "Secluded West", el: "Απομονωμένη Δύση" },
-    detail: { en: "Glassy turquoise water", el: "Καθρέφτινα γαλάζια νερά" },
     description: {
       en: "A quiet, secluded beach on the western side of the island. Sheltered from the wind, with coarse sand and glassy turquoise water.",
       el: "Ήσυχη και απομονωμένη παραλία στη δυτική πλευρά της Σχοινούσας, με χοντρή άμμο και καταγάλανα νερά. Προστατευμένη από τους ανέμους.",
@@ -165,8 +148,6 @@ const beaches: Beach[] = [
     slug: "fidou",
     name: { en: "Fidou", el: "Φιδού" },
     image: beach11,
-    tag: { en: "Islet Escape", el: "Απόδραση σε Νησίδα" },
-    detail: { en: "Sandy passage", el: "Λωρίδα άμμου" },
     description: {
       en: "A tiny islet linked to Schinoussa by a narrow sandy passage. Fine sand and open Aegean views for anyone chasing seclusion.",
       el: "Η Φιδού είναι μικρή νησίδα κοντά στη Σχοινούσα, συνδεδεμένη με ρηχή λωρίδα άμμου. Ψιλή άμμος και θέα στο Αιγαίο, ιδανική για απομόνωση.",
@@ -176,8 +157,6 @@ const beaches: Beach[] = [
     slug: "agios-vasilis",
     name: { en: "Agios Vasilis", el: "Άγιος Βασίλης" },
     image: beach12,
-    tag: { en: "Panoramic Swim", el: "Πανοραμικό Μπάνιο" },
-    detail: { en: "Turquoise pebbles", el: "Γαλάζια βότσαλα" },
     description: {
       en: "A pebble beach with turquoise water at the edge of the Agios Vasilis peninsula. Perfect for a panoramic Aegean swim.",
       el: "Όμορφη παραλία με βότσαλα και γαλαζοπράσινα νερά, στο άκρο της χερσονήσου του Αγίου Βασιλείου. Ιδανική για μπάνιο με θέα το Αιγαίο.",
@@ -189,6 +168,7 @@ const beachNavLinks = [
   { to: "/", label: { en: "Home", el: "Αρχική" }, hash: "" },
   { to: "/", label: { en: "Rooms", el: "Δωμάτια" }, hash: "#apartments" },
   { to: "/beaches", label: { en: "Beaches", el: "Παραλίες" }, hash: "" },
+  { to: "/connections", label: { en: "Getting Here", el: "Πρόσβαση" }, hash: "" },
   { to: "/", label: { en: "Gallery", el: "Γκαλερί" }, hash: "#gallery" },
   { to: "/", label: { en: "Contact", el: "Επικοινωνία" }, hash: "#contact" },
 ];
@@ -288,26 +268,26 @@ function BeachesHero() {
           {t({ en: "The Shores of Schinoussa", el: "Οι Ακτές της Σχοινούσας" })}
         </span>
         <h1 className="font-serif text-5xl leading-[1.05] md:text-7xl lg:text-8xl text-cream">
-          {t({ en: "Coastal", el: "Παράκτιες" })} <span className="italic">{t({ en: "Whispers", el: "Ψίθυροι" })}</span>
+          {t({ en: "Discover", el: "Ανακαλύψτε" })}{" "}
+          <span className="italic">{t({ en: "the Beaches", el: "τις Παραλίες" })}</span>
         </h1>
         <div className="flex items-center justify-center gap-4 my-8 md:my-10">
           <div className="h-px w-12 bg-cream/50" />
           <p className="text-cream/80 text-xs uppercase tracking-[0.25em] font-medium">
-            {t({ en: "Twelve Pristine Escapes", el: "Δώδεκα Ανέγγιχτες Αποδράσεις" })}
+            {t({ en: "Each beach has its own character", el: "Κάθε παραλία έχει τη δική της ομορφιά" })}
           </p>
           <div className="h-px w-12 bg-cream/50" />
         </div>
         <p className="max-w-2xl text-base md:text-lg text-cream/90 leading-relaxed">
           {t({
-            en: "A curated journey through the island's most evocative coves, from the calm shallows of Tsigouri to the silent dunes of Psili Ammos.",
-            el: "Ένα επιλεγμένο ταξίδι στους πιο εκφραστικούς όρμους του νησιού, από τα ήρεμα ρηχά νερά του Τσιγκουριού μέχρι τις σιωπηλές αμμουδιές της Ψιλής Άμμου.",
+            en: "Within minutes you'll discover some of the island's most beautiful beaches, with crystal-clear waters and a peaceful atmosphere.",
+            el: "Σε λίγα μόνο λεπτά θα βρεθείτε σε μερικές από τις πιο όμορφες παραλίες του νησιού, με γαλαζοπράσινα νερά και μοναδική ηρεμία.",
           })}
         </p>
       </div>
     </section>
   );
 }
-
 
 function BeachSection({ beach, index, reversed }: { beach: Beach; index: number; reversed: boolean }) {
   const { t } = useLang();
@@ -346,19 +326,21 @@ function BeachSection({ beach, index, reversed }: { beach: Beach; index: number;
           >
             {number}
           </span>
-          <span className="text-sea text-xs font-bold uppercase tracking-[0.2em] mb-4 block">{t(beach.tag)}</span>
+          {beach.tag && <span className="text-sea text-xs font-bold uppercase tracking-[0.2em] mb-4 block">{t(beach.tag)}</span>}
           <h2 className="font-serif text-4xl md:text-5xl text-navy mb-6">{t(beach.name)}</h2>
           <p className="text-navy/70 leading-relaxed mb-8 text-base md:text-lg">{t(beach.description)}</p>
-          <div
-            className={`inline-flex flex-col gap-1 ${
-              reversed ? "md:border-r-2 border-l-2 md:border-l-0" : "border-l-2"
-            } border-sand pl-6 md:py-2 ${reversed ? "md:pr-6 md:pl-0" : ""}`}
-          >
-            <span className="text-[10px] uppercase tracking-[0.2em] text-navy/50 font-bold">
-              {t({ en: "Note", el: "Σημείωση" })}
-            </span>
-            <span className="text-sm text-navy">{t(beach.detail)}</span>
-          </div>
+          {beach.detail && (
+            <div
+              className={`inline-flex flex-col gap-1 ${
+                reversed ? "md:border-r-2 border-l-2 md:border-l-0" : "border-l-2"
+              } border-sand pl-6 md:py-2 ${reversed ? "md:pr-6 md:pl-0" : ""}`}
+            >
+              <span className="text-[10px] uppercase tracking-[0.2em] text-navy/50 font-bold">
+                {t({ en: "Note", el: "Σημείωση" })}
+              </span>
+              <span className="text-sm text-navy">{t(beach.detail)}</span>
+            </div>
+          )}
         </div>
       </div>
     </article>
@@ -449,37 +431,104 @@ function BeachesCTA() {
 function BeachesFooter() {
   const { t } = useLang();
   return (
-    <footer className="bg-cream text-foreground border-t border-border/40">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          <div>
-            <div className="font-serif text-3xl text-navy">Filotimia</div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy/70">
+    <footer id="contact" className="bg-[#0e1622] text-white/85">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-20">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="font-serif text-4xl italic text-white">Filotimia</div>
+            <p className="mt-6 max-w-sm text-[14px] leading-[1.85] text-white/60">
               {t({
-                en: "Boutique stone apartments on Schinoussa, minutes from the island's finest beaches.",
-                el: "Πέτρινα διαμερίσματα boutique στη Σχοινούσα, λίγα λεπτά από τις πιο όμορφες παραλίες.",
+                en: "Luxury stone apartments on Schinoussa, Small Cyclades. A quiet island escape shaped by authentic Greek hospitality.",
+                el: "Πολυτελή πέτρινα διαμερίσματα στη Σχοινούσα, Μικρές Κυκλάδες. Μια ήσυχη νησιωτική απόδραση με αυθεντική ελληνική φιλοξενία.",
               })}
             </p>
-          </div>
-          <div className="text-sm space-y-3">
-            <div className="flex items-center gap-2 text-navy/80">
-              <MapPin className="size-4 text-sea" /> Schinoussa, Small Cyclades
+            <div className="mt-8 flex gap-3">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="grid size-10 place-items-center rounded-full border border-white/20 hover:bg-white hover:text-navy transition-colors"
+              >
+                <Instagram className="size-4" />
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="grid size-10 place-items-center rounded-full border border-white/20 hover:bg-white hover:text-navy transition-colors"
+              >
+                <Facebook className="size-4" />
+              </a>
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Google Maps"
+                className="grid size-10 place-items-center rounded-full border border-white/20 hover:bg-white hover:text-navy transition-colors"
+              >
+                <MapIcon className="size-4" />
+              </a>
             </div>
-            <a href={`tel:${PHONE_TEL}`} className="block text-navy/80 hover:text-navy">
-              {PHONE}
-            </a>
-            <a href="mailto:info@filotimia.gr" className="block text-navy/80 hover:text-navy">
-              info@filotimia.gr
-            </a>
           </div>
-          <div className="text-sm">
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="text-navy hover:opacity-80">
-              @filotimia_
-            </a>
+
+          <div className="lg:col-span-3">
+            <h3 className="text-[10px] uppercase tracking-[0.35em] text-white/40">
+              {t({ en: "Explore", el: "Εξερεύνηση" })}
+            </h3>
+            <ul className="mt-6 space-y-3 text-sm">
+              {beachNavLinks.map((l) => (
+                <li key={`${l.to}${l.hash}`}>
+                  <Link to={l.to} hash={l.hash || undefined} className="text-white/75 hover:text-white transition-colors">
+                    {t(l.label)}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="text-[#e9d9b8] font-medium">
+                  {t({ en: "Book Now", el: "Κράτηση" })}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-4">
+            <h3 className="text-[10px] uppercase tracking-[0.35em] text-white/40">
+              {t({ en: "Contact", el: "Επικοινωνία" })}
+            </h3>
+            <ul className="mt-6 space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-[#e9d9b8]" />
+                <span className="text-white/75">
+                  {t({
+                    en: "Schinoussa, Small Cyclades, Greece",
+                    el: "Σχοινούσα, Μικρές Κυκλάδες, Ελλάδα",
+                  })}
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="mt-0.5 size-4 shrink-0 text-[#e9d9b8]" />
+                <a href={`tel:${PHONE_TEL}`} className="text-white/75 hover:text-white">
+                  {PHONE}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="mt-0.5 size-4 shrink-0 text-[#e9d9b8]" />
+                <a href="mailto:info@filotimia.gr" className="text-white/75 hover:text-white">
+                  info@filotimia.gr
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-border pt-6 text-xs text-muted-foreground text-center">
-          © {new Date().getFullYear()} Filotimia Apartments · Schinoussa, Greece
+
+        <div className="mt-16 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 pt-8 text-[11px] tracking-[0.2em] uppercase text-white/40">
+          <p>
+            © {new Date().getFullYear()} Filotimia Apartments ·{" "}
+            {t({ en: "All rights reserved.", el: "Με επιφύλαξη κάθε νόμιμου δικαιώματος." })}
+          </p>
+          <p>Schinoussa · Small Cyclades · Greece</p>
         </div>
       </div>
     </footer>

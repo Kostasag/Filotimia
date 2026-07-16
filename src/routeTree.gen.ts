@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as BeachesRouteImport } from './routes/beaches'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RoomsSlugRouteImport } from './routes/rooms.$slug'
 
+const ConnectionsRoute = ConnectionsRouteImport.update({
+  id: '/connections',
+  path: '/connections',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BeachesRoute = BeachesRouteImport.update({
   id: '/beaches',
   path: '/beaches',
@@ -32,35 +38,46 @@ const RoomsSlugRoute = RoomsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/beaches': typeof BeachesRoute
+  '/connections': typeof ConnectionsRoute
   '/rooms/$slug': typeof RoomsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/beaches': typeof BeachesRoute
+  '/connections': typeof ConnectionsRoute
   '/rooms/$slug': typeof RoomsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/beaches': typeof BeachesRoute
+  '/connections': typeof ConnectionsRoute
   '/rooms/$slug': typeof RoomsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/beaches' | '/rooms/$slug'
+  fullPaths: '/' | '/beaches' | '/connections' | '/rooms/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/beaches' | '/rooms/$slug'
-  id: '__root__' | '/' | '/beaches' | '/rooms/$slug'
+  to: '/' | '/beaches' | '/connections' | '/rooms/$slug'
+  id: '__root__' | '/' | '/beaches' | '/connections' | '/rooms/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BeachesRoute: typeof BeachesRoute
+  ConnectionsRoute: typeof ConnectionsRoute
   RoomsSlugRoute: typeof RoomsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/connections': {
+      id: '/connections'
+      path: '/connections'
+      fullPath: '/connections'
+      preLoaderRoute: typeof ConnectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/beaches': {
       id: '/beaches'
       path: '/beaches'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BeachesRoute: BeachesRoute,
+  ConnectionsRoute: ConnectionsRoute,
   RoomsSlugRoute: RoomsSlugRoute,
 }
 export const routeTree = rootRouteImport

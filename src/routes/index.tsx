@@ -58,6 +58,12 @@ import heroVineyard from "@/assets/hero-vineyard.jpeg";
 import heroTerrace from "@/assets/img68.jpeg";
 import heroApartments from "@/assets/hero-vineyard.jpeg";
 import beachesHero from "@/assets/beaches-hero.jpg";
+import outdoorPergola from "@/assets/outdoor-pergola.jpeg";
+import pergolaConstruction from "@/assets/pergola-construction.jpeg";
+import outdoorExterior from "@/assets/outdoor-exterior.jpeg";
+import outdoorVineyard1 from "@/assets/outdoor-vineyard1.jpeg";
+import outdoorVineyard2 from "@/assets/outdoor-vineyard2.jpeg";
+import outdoorNight from "@/assets/outdoor-night.jpeg";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -91,6 +97,15 @@ const gallery = [
   galleryDetail,
   galleryCoolRoom,
   heroVineyard,
+  heroTerrace,
+  heroApartments,
+  beachesHero,
+  outdoorPergola,
+  pergolaConstruction,
+  outdoorExterior,
+  outdoorVineyard1,
+  outdoorVineyard2,
+  outdoorNight,
 ];
 
 const reviews = [
@@ -124,6 +139,7 @@ const navLinks = [
   { href: "#home", label: { en: "Home", el: "Αρχική" } },
   { href: "#apartments", label: { en: "Apartments", el: "Δωμάτια" } },
   { href: "/beaches", label: { en: "Beaches", el: "Παραλίες" }, external: true },
+  { href: "/connections", label: { en: "Getting Here", el: "Πρόσβαση" }, external: true },
   { href: "#gallery", label: { en: "Gallery", el: "Γκαλερί" } },
   { href: "#location", label: { en: "Location", el: "Τοποθεσία" } },
   { href: "#contact", label: { en: "Contact", el: "Επικοινωνία" } },
@@ -133,15 +149,7 @@ const romans = ["I", "II", "III", "IV", "V", "VI"];
 
 /* ---------------------------- Reveal helper ---------------------------- */
 
-function Reveal({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}) {
+function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -191,9 +199,7 @@ function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open
-          ? "bg-[#faf6ee]/95 backdrop-blur-md border-b border-[#e8dfcf]"
-          : "bg-transparent"
+        scrolled || open ? "bg-[#faf6ee]/95 backdrop-blur-md border-b border-[#e8dfcf]" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 lg:px-10 py-5">
@@ -209,7 +215,7 @@ function Nav() {
               light ? "text-white/70" : "text-navy/50"
             }`}
           >
-            — Schinoussa
+
           </span>
         </a>
 
@@ -316,34 +322,30 @@ function Hero() {
       {/* Top meta bar */}
       <div className="absolute inset-x-0 top-24 z-10 hidden md:flex items-center justify-between px-6 lg:px-12 text-white/70 hero-reveal">
         <div className="flex items-center gap-3">
-          <span className="h-px w-8 bg-[#d4b57c]" />
-          <span className="text-[10px] tracking-[0.45em] uppercase">
-            {t({ en: "Est. Schinoussa · Small Cyclades", el: "Σχοινούσα · Μικρές Κυκλάδες" })}
-          </span>
+          <span className="text-[10px] tracking-[0.45em] uppercase"></span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] tracking-[0.4em] uppercase">36.88° N · 25.51° E</span>
-          <span className="h-px w-8 bg-[#d4b57c]" />
         </div>
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-6 lg:px-12 pt-40 pb-24 md:pb-28 lg:grid-cols-12">
+      <div className="relative z-10 mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-6 lg:px-12 pt-40 pb-28 md:pb-28 lg:grid-cols-12">
         {/* Headline */}
         <div className="lg:col-span-8 lg:col-start-1">
           <div className="hero-reveal hero-reveal-2 flex items-center gap-4 text-[10px] tracking-[0.5em] uppercase text-[#e9d9b8]">
             <span>N°01</span>
-            <span className="h-px w-10 bg-[#e9d9b8]/50" />
-            <span>{t({ en: "Your Island Escape", el: "Η απόδρασή σας στη Σχοινούσα" })}</span>
           </div>
 
-          <h1 className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[7rem]">
+          <h1
+            className="hero-reveal hero-reveal-3 mt-6 font-serif leading-[0.92] tracking-[-0.02em] text-[1.75rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem]
+"
+          >
             <span className="block">{t({ en: "Where the", el: "Εκεί όπου το" })}</span>
             <span className="block italic font-light text-[#e9d9b8]">
               {t({ en: "Aegean rests.", el: "Αιγαίο ησυχάζει." })}
             </span>
           </h1>
-
 
           <div className="hero-reveal hero-reveal-5 mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
             <a
@@ -368,45 +370,69 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right-side image stack — asymmetric, minimal */}
-        <div className="hero-reveal hero-reveal-4 hidden lg:block lg:col-span-4 lg:col-start-9 relative h-[70vh]">
-          <div className="absolute right-0 top-4 w-[62%]">
-            <div className="relative aspect-[3/4] overflow-hidden shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
-              <img
-                src={heroInterior}
-                alt="Filotimia interior"
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
-              />
-              <div className="absolute bottom-3 right-3 text-[9px] tracking-[0.35em] uppercase text-white/85">
+        {/* Editorial image composition — curated collage: interior, vineyard, balconies */}
+        <div className="hero-reveal hero-reveal-4 hidden lg:block lg:col-span-5 lg:col-start-8 relative h-[48vh] group/hero-imgs">
+
+
+          {/* i. Dominant interior portrait — left column, generous breathing room */}
+          <div className="absolute left-0 top-[6%] w-[46%] h-[50%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_32px_55px_-28px_rgba(0,0,0,0.42)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:-translate-y-2 group-hover/hero-imgs:shadow-[0_42px_72px_-24px_rgba(0,0,0,0.34)] z-10">
+            <img
+              src={heroInterior}
+              alt="Filotimia interior"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover scale-[1.05] transition-transform duration-[2400ms] ease-out group-hover/hero-imgs:scale-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            <div className="absolute left-4 bottom-4 flex items-center gap-3 text-white/90">
+              <span className="font-serif italic text-sm">i.</span>
+              <span className="h-px w-5 bg-white/50" />
+              <span className="text-[9px] tracking-[0.45em] uppercase">
                 {t({ en: "The Interior", el: "Το Εσωτερικό" })}
-              </div>
+              </span>
             </div>
           </div>
-          <div className="absolute left-0 bottom-8 w-[58%]">
-            <div className="relative aspect-[4/5] overflow-hidden shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
-              <img
-                src={heroTerrace}
-                alt="Filotimia terrace"
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
-              />
-              <div className="absolute bottom-3 left-3 text-[9px] tracking-[0.35em] uppercase text-white/85">
-                {t({ en: "The Terrace", el: "Η Βεράντα" })}
-              </div>
+
+          {/* ii. Landscape vineyard — upper right column, aligned with clear separation */}
+          <div className="absolute left-[54%] top-[6%] w-[46%] h-[28%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_28px_50px_-24px_rgba(0,0,0,0.38)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:-translate-y-1 group-hover/hero-imgs:shadow-[0_36px_60px_-20px_rgba(0,0,0,0.32)] z-10">
+            <img
+              src={heroVineyard}
+              alt="Filotimia vineyard and apartments"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover scale-[1.06] transition-transform duration-[2400ms] ease-out group-hover/hero-imgs:scale-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            <div className="absolute left-3 bottom-3 flex items-center gap-3 text-white/90">
+              <span className="font-serif italic text-sm">ii.</span>
+              <span className="h-px w-4 bg-white/50" />
+              <span className="text-[9px] tracking-[0.45em] uppercase">
+                {t({ en: "The View", el: "Η Θέα" })}
+              </span>
             </div>
           </div>
-          {/* Tiny signature card */}
-          <div className="absolute right-6 bottom-0 w-32 rotate-3 bg-[#faf6ee] p-2 pb-6 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]">
-            <div className="aspect-square overflow-hidden">
-              <img src={heroVineyard} alt="Filotimia vineyard" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <div className="absolute bottom-1.5 left-0 right-0 text-center text-[7px] tracking-[0.35em] uppercase text-[#7a6b52]">
-              {t({ en: "Vineyard", el: "Αμπέλι" })}
+
+          {/* iii. Balconies and terraces — lower right column, moved right and lower for breathing space */}
+          <div className="absolute left-[54%] bottom-[25%] w-[46%] h-[34%] overflow-hidden rounded-[2px] ring-1 ring-[#f9f6f0]/25 shadow-[0_28px_50px_-24px_rgba(0,0,0,0.38)] transition-all duration-[1600ms] ease-out group-hover/hero-imgs:translate-y-1 group-hover/hero-imgs:shadow-[0_36px_60px_-20px_rgba(0,0,0,0.32)] z-10">
+            <img
+              src={outdoorPergola}
+              alt="Filotimia balconies and terraces"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover scale-[1.05] transition-transform duration-[2600ms] ease-out group-hover/hero-imgs:scale-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+            <div className="absolute left-3 bottom-3 flex items-center gap-3 text-white/90">
+              <span className="font-serif italic text-sm">iii.</span>
+              <span className="h-px w-4 bg-white/50" />
+              <span className="text-[9px] tracking-[0.45em] uppercase">
+                {t({ en: "The Balcony", el: "Το Μπαλκόνι" })}
+              </span>
             </div>
           </div>
+
+          {/* Discreet caption plate */}
+          <div className="absolute left-0 -bottom-1 flex items-center gap-3 text-white/70"></div>
         </div>
       </div>
 
@@ -414,15 +440,38 @@ function Hero() {
       <div className="lg:hidden relative z-10 -mt-8 mx-6 mb-16">
         <div className="grid grid-cols-3 gap-2">
           <div className="col-span-2 aspect-[4/5] overflow-hidden">
-            <img src={heroInterior} alt="Filotimia interior" loading="lazy" className="h-full w-full object-cover" />
+            <img
+              src={heroInterior}
+              alt="Filotimia interior"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
           <div className="flex flex-col gap-2">
             <div className="aspect-square overflow-hidden">
-              <img src={heroTerrace} alt="Filotimia terrace" loading="lazy" className="h-full w-full object-cover" />
+              <img
+                src={outdoorPergola}
+                alt="Filotimia pergola"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="aspect-square overflow-hidden">
-              <img src={heroVineyard} alt="Filotimia vineyard" loading="lazy" className="h-full w-full object-cover" />
+              <img
+                src={heroTerrace}
+                alt="Filotimia terrace"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
+          </div>
+          <div className="col-span-3 aspect-[21/9] overflow-hidden">
+            <img
+              src={heroVineyard}
+              alt="Filotimia vineyard"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </div>
@@ -472,15 +521,11 @@ function Chapter({
   return (
     <div className={className}>
       <div className="flex items-center gap-4 text-[10px] tracking-[0.5em] uppercase text-sea">
-        <span className="font-serif italic text-lg text-navy/60 normal-case tracking-normal">
-          Ch. {n}
-        </span>
+        <span className="font-serif italic text-lg text-navy/60 normal-case tracking-normal">Ch. {n}</span>
         <span className="h-px flex-1 max-w-16 bg-navy/20" />
         <span>{t(eyebrow)}</span>
       </div>
-      <h2 className="mt-6 font-serif text-4xl md:text-6xl leading-[1.02] tracking-[-0.015em] text-navy">
-        {t(title)}
-      </h2>
+      <h2 className="mt-6 font-serif text-4xl md:text-6xl leading-[1.02] tracking-[-0.015em] text-navy">{t(title)}</h2>
     </div>
   );
 }
@@ -498,7 +543,7 @@ function About() {
             <div className="relative">
               <div className="relative aspect-[4/5] overflow-hidden">
                 <img
-                  src={aboutSmall}
+                  src={heroMain}
                   alt="Filotimia stone architecture"
                   loading="lazy"
                   className="h-full w-full object-cover"
@@ -506,7 +551,7 @@ function About() {
               </div>
               <div className="absolute -bottom-10 -right-6 md:-right-12 w-44 md:w-56 aspect-[3/4] overflow-hidden border-[10px] border-[#faf6ee] shadow-2xl">
                 <img
-                  src={galleryStone}
+                  src={aboutSmall}
                   alt="Filotimia stone doorway"
                   loading="lazy"
                   className="h-full w-full object-cover"
@@ -669,11 +714,7 @@ function Apartments() {
                   {/* Floating image + text composition */}
                   <div className="relative grid grid-cols-1 lg:grid-cols-12 lg:items-center gap-0">
                     {/* Image + desktop panel */}
-                    <div
-                      className={`relative z-10 lg:col-span-8 ${
-                        flip ? "lg:col-start-5" : "lg:col-start-1"
-                      }`}
-                    >
+                    <div className={`relative z-10 lg:col-span-8 ${flip ? "lg:col-start-5" : "lg:col-start-1"}`}>
                       <div className="relative aspect-[16/10] overflow-hidden bg-stone-light">
                         <img
                           src={a.image}
@@ -727,9 +768,7 @@ function Amenities() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <Reveal className="lg:col-span-6">
             <div className="flex items-center gap-4 text-[10px] tracking-[0.45em] uppercase text-[#e9d9b8]">
-              <span className="font-serif italic text-lg text-white/60 normal-case tracking-normal">
-                Ch. III
-              </span>
+              <span className="font-serif italic text-lg text-white/60 normal-case tracking-normal">Ch. III</span>
               <span className="h-px flex-1 max-w-16 bg-white/25" />
               <span>{t({ en: "Amenities", el: "Παροχές" })}</span>
             </div>
@@ -743,8 +782,8 @@ function Amenities() {
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={150}>
             <p className="text-[15px] leading-[1.85] text-white/75">
               {t({
-                en: "Everything you need for a comfortable and relaxing stay in Schinoussa.",
-                el: "Όλες οι απαραίτητες παροχές για μια άνετη και ξέγνοιαστη διαμονή στη Σχοινούσα.",
+                en: "Everything you need for a comfortable stay.",
+                el: "Όλα όσα χρειάζεστε για μια άνετη διαμονή.",
               })}
             </p>
           </Reveal>
@@ -759,9 +798,7 @@ function Amenities() {
                   <a.icon className="size-5 md:size-6 text-[#e9d9b8]" strokeWidth={1.3} />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-serif text-lg md:text-xl leading-tight text-white block">
-                    {t(a.label)}
-                  </span>
+                  <span className="font-serif text-lg md:text-xl leading-tight text-white block">{t(a.label)}</span>
                   <span className="mt-1.5 font-serif italic text-[11px] text-white/30 tracking-wide">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -770,6 +807,171 @@ function Amenities() {
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------- Outdoor Living --------------------------- */
+
+function OutdoorLiving() {
+  const { t } = useLang();
+  return (
+    <section id="outdoor" className="relative overflow-hidden bg-[#faf6ee] py-28 md:py-40">
+      {/* subtle background texture */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_10%,rgba(0,33,71,0.05),transparent_70%)]" />
+
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-12">
+        {/* Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+          <Reveal className="lg:col-span-6">
+            <div className="flex items-center gap-4 text-[10px] tracking-[0.45em] uppercase text-[#8a7548]">
+              <span className="font-serif italic text-lg text-navy/60 normal-case tracking-normal">Ch. IV</span>
+              <span className="h-px flex-1 max-w-16 bg-navy/25" />
+              <span>{t({ en: "Outdoor Living", el: "Εξωτερικοί Χώροι" })}</span>
+            </div>
+            <h2 className="mt-6 font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.02] tracking-[-0.015em] text-navy">
+              {t({ en: "More Than a Stay", el: "Περισσότερα από μια διαμονή" })}
+            </h2>
+          </Reveal>
+          <Reveal className="lg:col-span-5 lg:col-start-8" delay={150}>
+            <p className="text-[15px] leading-[1.85] text-navy/70">
+              {t({
+                en: "Discover the outdoor spaces that make every day at Filotimia feel relaxed, authentic and connected to the island.",
+                el: "Ανακαλύψτε τους εξωτερικούς χώρους που κάνουν κάθε στιγμή στο Filotimia ξεχωριστή, μέσα στη φύση και τη γαλήνη της Σχοινούσας.",
+              })}
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Editorial composition — pergola hero + copy */}
+        <div className="mt-20 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          <Reveal className="lg:col-span-7 group">
+            <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_40px_80px_-40px_rgba(0,33,71,0.35)]">
+              <img
+                src={pergolaConstruction}
+                alt={t({ en: "Pergola lounge with sea view", el: "Πέργκολα με θέα στη θάλασσα" })}
+                loading="lazy"
+                className="w-full h-[62vh] md:h-[72vh] object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04]"
+              />
+              <figcaption className="absolute bottom-5 left-5 flex items-center gap-3 rounded-full bg-white/85 backdrop-blur px-4 py-2 text-[10px] tracking-[0.35em] uppercase text-navy shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#c9a94a]" />
+                {t({ en: "Pergola", el: "Πέργκολα" })}
+              </figcaption>
+            </figure>
+          </Reveal>
+
+          <Reveal className="lg:col-span-5" delay={150}>
+            <p className="font-serif italic text-2xl md:text-3xl leading-[1.35] text-navy">
+              {t({
+                en: "Surrounded by gardens, stone architecture and our vineyard, Filotimia offers a peaceful place to relax.",
+                el: "Ανάμεσα στους κήπους, την κυκλαδίτικη πέτρα και τον αμπελώνα μας, το Filotimia προσφέρει έναν ήρεμο χώρο για χαλάρωση.",
+              })}
+            </p>
+            <p className="mt-6 text-[15px] leading-[1.85] text-navy/70">
+              {t({
+                en: "Enjoy your morning coffee beneath the pergola, stroll through the gardens, or simply relax and take in the peaceful surroundings.",
+                el: "Απολαύστε τον πρωινό σας καφέ κάτω από την πέργκολα, περπατήστε στους κήπους ή απλώς χαλαρώστε και απολαύστε την ηρεμία του χώρου.",
+              })}
+            </p>
+            <div className="mt-8 flex items-center gap-4 text-[10px] tracking-[0.4em] uppercase text-navy/50">
+              <span>i.</span>
+              <span className="h-px flex-1 max-w-16 bg-navy/20" />
+              <span>{t({ en: "A place to breathe", el: "Ένας χώρος για ανάσα" })}</span>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Split — exterior + vineyard perspective */}
+        <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+          <Reveal className="md:col-span-5 md:mt-16 group">
+            <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_30px_60px_-35px_rgba(0,33,71,0.35)]">
+              <img
+                src={outdoorExterior}
+                alt={t({ en: "Stone apartments and gardens", el: "Πέτρινα διαμερίσματα και κήποι" })}
+                loading="lazy"
+                className="w-full h-[48vh] object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.05]"
+              />
+              <figcaption className="absolute top-5 left-5 rounded-full bg-white/85 backdrop-blur px-4 py-2 text-[10px] tracking-[0.35em] uppercase text-navy shadow-sm">
+                {t({ en: "Gardens", el: "Κήποι" })}
+              </figcaption>
+            </figure>
+          </Reveal>
+
+          <Reveal className="md:col-span-7 group" delay={120}>
+            <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_30px_60px_-35px_rgba(0,33,71,0.35)]">
+              <img
+                src={outdoorVineyard2}
+                alt={t({ en: "Vineyard beside the apartments", el: "Αμπελώνας δίπλα στα διαμερίσματα" })}
+                loading="lazy"
+                className="w-full h-[56vh] object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04]"
+              />
+              <figcaption className="absolute bottom-5 right-5 rounded-full bg-white/85 backdrop-blur px-4 py-2 text-[10px] tracking-[0.35em] uppercase text-navy shadow-sm">
+                {t({ en: "Vineyard", el: "Αμπελώνας" })}
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+
+        {/* Wide vineyard panorama */}
+        <Reveal className="mt-8 md:mt-12 group">
+          <figure className="relative overflow-hidden rounded-2xl ring-1 ring-white/60 shadow-[0_40px_80px_-40px_rgba(0,33,71,0.35)]">
+            <img
+              src={outdoorVineyard1}
+              alt={t({ en: "Vineyard rows leading to the sea", el: "Σειρές αμπελώνα προς τη θάλασσα" })}
+              loading="lazy"
+              className="w-full h-[52vh] md:h-[62vh] object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-[1.03]"
+            />
+            <figcaption className="absolute bottom-6 left-6 max-w-md rounded-xl bg-white/85 backdrop-blur px-5 py-4 shadow-sm">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-[#8a7548]">
+                {t({ en: "Our vineyard", el: "Ο αμπελώνας μας" })}
+              </div>
+              <p className="mt-2 font-serif italic text-navy text-lg leading-snug">
+                {t({
+                  en: "Young vines rooted in island soil — a walk of a few steps from your door.",
+                  el: "Νεαρά κλήματα ριζωμένα στο νησιώτικο χώμα — λίγα βήματα από την πόρτα σας.",
+                })}
+              </p>
+            </figcaption>
+          </figure>
+        </Reveal>
+      </div>
+
+      {/* Full-width night closing image */}
+      <div className="mt-20 md:mt-28">
+        <Reveal className="group relative block">
+          <div className="relative overflow-hidden">
+            <img
+              src={outdoorNight}
+              alt={t({ en: "Filotimia at night, softly lit", el: "Το Filotimia το βράδυ, με απαλό φωτισμό" })}
+              loading="lazy"
+              className="w-full h-[70vh] md:h-[85vh] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.04]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/40" />
+            <div className="absolute inset-0 flex items-end">
+              <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-12 pb-14 md:pb-20">
+                <div className="max-w-2xl text-white">
+                  <div className="flex items-center gap-4 text-[10px] tracking-[0.45em] uppercase text-[#e9d9b8]">
+                    <span>{t({ en: "Evening Atmosphere", el: "Βραδινή Ατμόσφαιρα" })}</span>
+                    <span className="h-px flex-1 max-w-16 bg-white/40" />
+                  </div>
+                  <h3 className="mt-5 font-serif text-3xl md:text-5xl leading-[1.05] tracking-[-0.015em]">
+                    {t({
+                      en: "Evening Atmosphere",
+                      el: "Βραδινή Ατμόσφαιρα",
+                    })}
+                  </h3>
+                  <p className="mt-5 text-[15px] leading-[1.85] text-white/80">
+                    {t({
+                      en: "As evening falls, warm lighting creates a peaceful and welcoming atmosphere.",
+                      el: "Όταν πέφτει το βράδυ, ο διακριτικός φωτισμός δημιουργεί μια ήρεμη και φιλόξενη ατμόσφαιρα.",
+                    })}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -916,11 +1118,7 @@ function Gallery() {
           >
             <X className="size-8" />
           </button>
-          <img
-            src={lightbox}
-            alt="Enlarged"
-            className="max-h-[90vh] max-w-[92vw] object-contain"
-          />
+          <img src={lightbox} alt="Enlarged" className="max-h-[90vh] max-w-[92vw] object-contain" />
         </div>
       )}
     </section>
@@ -941,7 +1139,7 @@ function Location() {
               eyebrow={{ en: "Location", el: "Τοποθεσία" }}
               title={{
                 en: "Our Location",
-                el: "Πού θα μας βρείτε",
+                el: "Η τοποθεσίας μας",
               }}
             />
             <p className="mt-8 text-[15px] leading-[1.85] text-navy/75">
@@ -954,7 +1152,7 @@ function Location() {
             <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-navy/15 pt-8">
               <div>
                 <dt className="text-[10px] uppercase tracking-[0.35em] text-navy/50">
-                  {t({ en: "Port", el: "Λιμάνι" })}
+                  {t({ en: "Chora", el: "Χώρα" })}
                 </dt>
                 <dd className="mt-2 font-serif text-2xl text-navy">
                   {t({ en: "~1 km · Chora", el: "~1 χλμ. · Χώρα" })}
@@ -964,9 +1162,7 @@ function Location() {
                 <dt className="text-[10px] uppercase tracking-[0.35em] text-navy/50">
                   {t({ en: "Port", el: "Λιμάνι" })}
                 </dt>
-                <dd className="mt-2 font-serif text-2xl text-navy">
-                  {t({ en: "~2.5 km", el: "~2,5 χλμ." })}
-                </dd>
+                <dd className="mt-2 font-serif text-2xl text-navy">{t({ en: "~2.5 km", el: "~2,5 χλμ." })}</dd>
               </div>
               <div>
                 <dt className="text-[10px] uppercase tracking-[0.35em] text-navy/50">
@@ -1039,10 +1235,7 @@ function Reviews() {
             ))}
           </div>
 
-          <blockquote
-            key={i}
-            className="mt-10 font-serif italic text-3xl md:text-5xl leading-[1.15] text-navy fade-in"
-          >
+          <blockquote key={i} className="mt-10 font-serif italic text-3xl md:text-5xl leading-[1.15] text-navy fade-in">
             “{t(r.quote)}”
           </blockquote>
 
@@ -1066,9 +1259,7 @@ function Reviews() {
                   key={k}
                   onClick={() => setI(k)}
                   aria-label={`Review ${k + 1}`}
-                  className={`h-[3px] transition-all ${
-                    k === i ? "w-8 bg-navy" : "w-3 bg-navy/25"
-                  }`}
+                  className={`h-[3px] transition-all ${k === i ? "w-8 bg-navy" : "w-3 bg-navy/25"}`}
                 />
               ))}
             </div>
@@ -1222,12 +1413,7 @@ function Footer() {
                 </li>
               ))}
               <li>
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[#e9d9b8] font-medium"
-                >
+                <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="text-[#e9d9b8] font-medium">
                   {t({ en: "Book Now", el: "Κράτηση" })}
                 </a>
               </li>
@@ -1286,6 +1472,7 @@ function Home() {
       <About />
       <Apartments />
       <Amenities />
+      <OutdoorLiving />
       <BeachesTeaser />
       <Gallery />
       <Location />
