@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filotimia About</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+  /* Layout: a guide in the site's voice. Full-bleed sunset opener, a short intro with three figures, an index of the nine beaches,
+     then one beach per band: photograph(s) in the arched window on one side, name and a few words on the other, sides alternating. */
+  :root {
+    --stone: #eeece3; --ivory: #f8f6ef; --olive: #263d34; --olive-2: #4d5d50; --sage: #838d76; --aegean: #5b7d88; --sand: #e3d6b6; --cream: #f5f0e6;
+    --rule: rgba(38,61,52,.18);
+    --display: "Playfair Display", Georgia, serif;
+    --body: "DM Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --ease: cubic-bezier(.22,.7,.12,1);
+    --gx: clamp(24px, 5vw, 6.25rem);
+    --cx: clamp(24px, 12vw, 15rem);
+    --mist: rgba(245,240,230,.78);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--stone); color: var(--olive); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 1px solid var(--aegean); outline-offset: 4px; }
+  .label { font-size: .66rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+  .gut { padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+
+  /* top bar */
+  .bar { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: calc(14px + env(safe-area-inset-top, 0px)) 14px; color: var(--cream); transition: background .5s, color .5s, border-color .5s; border-bottom: 1px solid transparent; }
+  .bar { transition: background .5s, color .5s, border-color .5s, transform .6s var(--ease), opacity .5s; }
+  .bar.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+  .bar.solid { background: #eeece3; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--olive); border-color: rgba(38,61,52,.1); }
+  .blogo { display: flex; align-items: center; gap: 12px; }
+  .blogo svg { height: 32px; width: auto; }
+  .blogo span { font-family: var(--display); font-size: .98rem; letter-spacing: .3em; }
+  .btools { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 2.125rem); }
+  .lang { display: flex; gap: 8px; opacity: .7; }
+  .lang button { letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; opacity: .6; }
+  .lang button[aria-pressed="true"] { opacity: 1; }
+  .home { display: inline-flex; align-items: center; gap: 10px; }
+  .home svg { width: 20px; height: 10px; transition: transform .4s var(--ease); }
+  .home:hover svg { transform: translateX(-4px); }
+  .burger { width: 26px; height: 18px; display: grid; align-content: space-between; }
+  .burger i { display: block; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+  .burger:hover i:nth-child(2) { transform: translateX(5px); }
+  @media (max-width: 640px) { .blogo span { display: none; } }
+
+  /* phones: a small booking pill in the top bar */
+  .bbook { display: none; }
+  @media (max-width: 720px) { .bbook { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border: 1px solid currentColor; border-radius: 999px; font-size: .56rem; letter-spacing: .16em; font-weight: 600; text-transform: uppercase; white-space: nowrap; opacity: .9; } .bar .home span { display: none; } }
+  /* menu overlay */
+  .menu { position: fixed; inset: 0; z-index: 20; background: rgba(14,23,29,.96); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: grid; align-content: center; gap: 8px;
+    padding-left: max(var(--cx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease); }
+  .menu.open { clip-path: inset(0 0 0 0); }
+  .menu a.big { font-family: var(--display); font-size: clamp(2.1rem, min(5.4vw, 8.5vh), 4.6rem); line-height: 1.1; color: var(--cream); width: max-content; max-width: 100%; transition: color .3s, transform .5s var(--ease); }
+  .menu a.big:hover { color: var(--sand); transform: translateX(10px); }
+  .menu .close { position: absolute; top: calc(28px + env(safe-area-inset-top, 0px)); right: max(var(--gx), env(safe-area-inset-right, 0px)); color: var(--cream); }
+  .menu .row { margin-top: 32px; display: flex; gap: 28px; flex-wrap: wrap; color: var(--mist); }
+
+  /* reveal */
+  .rv { transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .rv.pre { opacity: 0; transform: translateY(30px); }
+
+  /* end */
+  .end { background: var(--olive); color: var(--cream); padding-block: clamp(80px, 10vw, 8.75rem) clamp(40px, 5vw, 4.375rem); }
+  .end .cta { padding-bottom: 0 !important; }
+  .end .cta { display: grid; gap: 26px; justify-items: start; padding-bottom: clamp(60px, 8vw, 6.25rem); }
+  .end h3 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.6vw, 5.5rem); line-height: 1; letter-spacing: -.022em; margin: 0; }
+  .end h3 em { color: #c9cfba; }
+  .end .go { display: inline-flex; align-items: center; gap: 16px; padding: 18px 24px; background: var(--cream); color: var(--olive); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; border-radius: 2px; }
+  .end .go svg { width: 24px; height: 12px; transition: transform .4s var(--ease); }
+  .end .go:hover svg { transform: translateX(5px); }
+  .end .foot { display: flex; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.5); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.14); }
+
+  /* ---------- Footer: deep olive, four quiet columns, the name set large as a signature ---------- */
+  .sfoot { position: relative; z-index: 2; background: #1d2e26; color: #f5f0e6; overflow: hidden;
+    padding-block: clamp(64px, 8vw, 6.875rem) 26px; padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .fwrap { max-width: 90rem; margin: 0 auto; }
+  .fgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 44px; padding-bottom: clamp(40px, 6vw, 5rem); }
+  .fbrand { grid-column: 1 / span 4; display: grid; gap: 22px; align-content: start; }
+  .femblem { width: 64px; height: auto; }
+  .fsocial { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .fsocial a { display: inline-grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(245,240,230,.2); border-radius: 50%; color: rgba(245,240,230,.85);
+    font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; transition: background .35s, color .35s, border-color .35s; }
+  .fsocial a svg { width: 22px; height: 22px; transition: transform .45s var(--ease); }
+  .fsocial a:hover { background: #f5f0e6; color: #263d34; border-color: #f5f0e6; }
+  .fsocial a:hover svg { transform: rotate(-8deg) scale(1.06); }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: #263d34; color: #f5f0e6; padding: 10px 16px; border-radius: 2px; font-size: .9rem; }
+  .skip:focus { top: 12px; }
+  .flegal { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fcopy { color: rgba(245,240,230,.62); }
+  .flegal a, .flegal button { color: rgba(245,240,230,.72); font: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(245,240,230,.25); text-underline-offset: 4px; }
+  .flegal a:hover, .flegal button:hover { color: #f5f0e6; }
+  .fbar { color: rgba(245,240,230,.62) !important; }
+  .fcol .label { color: rgba(245,240,230,.62) !important; }
+  .fbrand p { margin: 0; color: rgba(245,240,230,.65); line-height: 1.7; max-width: 30ch; }
+  .fcol { grid-column: span 2; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .fcol:nth-of-type(1) { grid-column: 7 / span 2; }
+  .fcol .label { color: rgba(245,240,230,.45); margin-bottom: 6px; }
+  .fcol a { color: rgba(245,240,230,.85); width: fit-content; max-width: 100%; overflow-wrap: anywhere; position: relative; transition: color .3s; }
+  .fcol a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  .fcol a:hover { color: #f5f0e6; }
+  .fcol a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .flang { margin-top: 10px; color: rgba(245,240,230,.45); }
+  .flang button[aria-pressed="true"] { color: #f5f0e6; }
+  .fword { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 15.5vw, 18.75rem); line-height: .78; letter-spacing: .08em; margin-right: -.08em; text-align: center; white-space: nowrap;
+    color: transparent; -webkit-text-stroke: 1px rgba(245,240,230,.22); user-select: none; margin-bottom: clamp(18px, 2.4vw, 2.125rem); }
+  .fbar { display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.45); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fup { color: rgba(245,240,230,.7); letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; transition: color .3s; }
+  .fup:hover { color: #f5f0e6; }
+  @media (max-width: 980px) {
+    .fbrand { grid-column: 1 / -1; }
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 4; }
+  }
+  @media (max-width: 560px) {
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 6; }
+    .fcol:last-of-type { grid-column: 1 / -1; }
+    .fbar { flex-direction: column; align-items: flex-start; }
+  }
+  .totop { position: fixed; z-index: 14; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 52px; display: grid; place-items: center;
+    color: #eeece3; mix-blend-mode: difference; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
+  .totop.show { opacity: .9; pointer-events: auto; }
+  .totop svg { width: 22px; height: 34px; }
+
+  @media (max-width: 900px) {
+    .intro .lead, .intro .body { grid-column: 1 / -1; }
+    .intro { padding-top: clamp(150px, 32vw, 13.75rem); }
+    .sketch { width: 150%; max-width: none; right: -32%; top: clamp(-150px, -30vw, -110px); opacity: .32;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%); mask-image: linear-gradient(180deg, #000 55%, transparent 92%); }
+    .index ol { grid-template-columns: 1fr 1fr; }
+    .gal, .beach.flip .gal { grid-column: 1 / -1; grid-row: 1; margin-left: 0; margin-right: 0; }
+    .thumbs, .beach.flip .thumbs { padding-left: 0; padding-right: 0; }
+    .txt, .beach.flip .txt { grid-column: 1 / -1; grid-row: 3; }
+    /* phones: name first, then the photo, then the text */
+    .mhead { display: grid; gap: 10px; grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px; }
+    .mhead b { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 3.6rem); line-height: 1; letter-spacing: -.02em; color: var(--olive); }
+    .gal, .beach.flip .gal { grid-row: 2; }
+    .mhead .lat { font-family: var(--display); font-style: italic; color: var(--aegean); font-size: 1.1rem; }
+    .mhead .no { display: flex; align-items: center; gap: 14px; color: var(--olive-2); margin-bottom: 6px; }
+    .mhead .no::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+    .txt .no, .txt h2, .txt .lat { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+  @media (min-width: 901px) { .mhead { display: none; } }
+  @media (max-width: 560px) {
+    .index ol { grid-template-columns: 1fr; }
+    .figs { grid-template-columns: 1fr; gap: 20px; }
+    .win, .beach.flip .win { aspect-ratio: 4 / 5; }
+    .wf::before, .beach.flip .wf::before { inset: 12px -10px -12px 10px; }
+    .thumbs button { width: 54px; height: 42px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .opener .rise { animation: none; opacity: 1; transform: none; }
+    .rv, .rv.pre { transition: none; opacity: 1; transform: none; }
+    .win img { transition: none; }
+  }
+
+
+  /* ================= About us — editorial: coloured bands, words beside collages of photographs ================= */
+  :root { --terra: #a8744a; --clay: #6e4128; --warm: #f2eadb; }
+  em { font-style: italic; }
+  main { background: var(--stone); }
+  .rv { transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
+  .rv.pre { opacity: 0; transform: translate3d(0, 34px, 0); }
+  .a2-f.rv.pre { transform: translate3d(0, 50px, 0) scale(.98); }
+  .ph { position: relative; overflow: hidden; background: #d9d3c4; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
+  .ph.soon { display: grid; place-items: center; align-content: center; gap: 14px; background: linear-gradient(160deg, #e9e2d3, #d8cfbd); color: #7d7462; text-align: center; padding: 20px;
+    font-family: var(--display); font-style: italic; font-size: .98rem; box-shadow: inset 0 0 0 1px rgba(38,61,52,.08); }
+  .ph.soon svg { width: 38px; height: auto; opacity: .6; }
+  main .label { color: var(--terra); }
+
+  /* ---------- hero: the clay band ---------- */
+  .a2-hero { background: var(--clay); color: #f5f0e6; min-height: 78vh; min-height: 78svh; display: grid; place-items: center; text-align: center;
+    padding-block: calc(120px + env(safe-area-inset-top, 0px)) clamp(70px, 9vw, 8rem); }
+  .a2-hin { display: grid; justify-items: center; gap: clamp(14px, 2vw, 1.5rem); max-width: 46rem; }
+  .a2-hero .label { color: rgba(245,240,230,.75); }
+  .a2-hero h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(64px, 10vw, 10rem); line-height: .92; letter-spacing: -.035em; }
+  .a2-hero h1 em { color: #e3c9a8; }
+  .a2-hero .pron { font-family: var(--display); font-style: italic; color: rgba(245,240,230,.7); font-size: 1.05rem; }
+  .a2-hero p { margin: 0; max-width: 46ch; color: rgba(245,240,230,.85); line-height: 1.8; font-size: clamp(1rem, 1.15vw, 1.12rem); }
+  .a2-hero p b { font-family: var(--display); font-style: italic; font-weight: 400; color: #f5f0e6; }
+  .a2-hero h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(64px, 10vw, 10rem); line-height: .92; letter-spacing: -.035em; }
+  .a2-hero h2 em { color: #e3c9a8; }
+  .a2-hero .more { max-width: 52ch; padding-top: clamp(18px, 2vw, 1.5rem); border-top: 1px solid rgba(245,240,230,.22); font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 1.4vw, 1.35rem); line-height: 1.6; color: #f5f0e6; }
+  .a2-hero { min-height: 0; padding-block: clamp(30px, 4vw, 3.5rem) clamp(80px, 10vw, 9rem); }
+  .a2-close blockquote.cl-quote { max-width: 26ch; padding-left: clamp(18px, 2vw, 28px); font-size: clamp(1.7rem, 3.2vw, 3.2rem); line-height: 1.25; color: #f5f0e6; }
+  .a2-close h2.cl-head { max-width: 24ch; font-size: clamp(1.9rem, 3.4vw, 3.4rem); line-height: 1.15; text-wrap: balance; }
+
+  /* ---------- the collage: words top left, a small upright photo top right, a large photo off the left edge, two below on the right ---------- */
+  .a2-col { padding-block: clamp(80px, 10vw, 9rem); overflow: hidden; }
+  .a2-grid { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 2rem); row-gap: clamp(36px, 5vw, 4.5rem); }
+  .a2-text { display: grid; gap: 18px; align-content: start; color: var(--olive); }
+  .a2-text h2, .a2-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 3vw, 3.2rem); line-height: 1.08; letter-spacing: -.015em; text-wrap: balance; }
+  .a2-text h2 em, .a2-head h2 em { color: var(--terra); }
+  .a2-text p, .a2-head p { margin: 0; color: var(--olive-2); line-height: 1.8; max-width: 44ch; }
+  .a2-f { margin: 0; }
+  .a2-f .ph { box-shadow: 0 36px 70px -46px rgba(14,23,29,.55); }
+  .t1 { grid-column: 2 / span 5; grid-row: 1; padding-top: clamp(0px, 2vw, 2rem); }
+  .c1 { grid-column: 8 / span 4; grid-row: 1; } .c1 .ph { aspect-ratio: 4 / 5; }
+  .c2 { grid-column: 1 / span 6; grid-row: 2; margin-left: calc(-1 * max(var(--gx), env(safe-area-inset-left, 0px))); align-self: start; } .c2 .ph { aspect-ratio: 5 / 4; }
+  .c3 { grid-column: 8 / span 2; grid-row: 2; align-self: end; } .c3 .ph { aspect-ratio: 3 / 4; }
+  .c4 { grid-column: 10 / span 3; grid-row: 2; align-self: end; margin-right: calc(-1 * max(var(--gx), env(safe-area-inset-right, 0px))); } .c4 .ph { aspect-ratio: 3 / 4; }
+  /* mirrored */
+  .a2-col.alt .t1 { grid-column: 7 / span 5; }
+  .a2-col.alt .c1 { grid-column: 2 / span 4; }
+  .a2-col.alt .c2 { grid-column: 7 / span 6; margin-left: 0; margin-right: calc(-1 * max(var(--gx), env(safe-area-inset-right, 0px))); }
+  .a2-col.alt .c3 { grid-column: 1 / span 3; margin-left: calc(-1 * max(var(--gx), env(safe-area-inset-left, 0px))); margin-right: 0; }
+  .a2-col.alt .c4 { grid-column: 4 / span 2; margin-right: 0; }
+  .a2-mats { list-style: none; margin: 6px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+  .a2-mats li { padding: 11px 0; border-bottom: 1px solid var(--rule); font-family: var(--display); font-size: 1.1rem; }
+  .a2-pillars { list-style: none; margin: clamp(70px, 9vw, 8rem) auto 0; padding: 0; max-width: 90rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--olive); }
+  .a2-pillars li { padding: 26px 24px 0 0; display: grid; gap: 10px; align-content: start; }
+  .a2-pillars li + li { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .a2-pillars b { font-size: .7rem; letter-spacing: .16em; color: var(--terra); font-weight: 600; }
+  .a2-pillars h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(1.3rem, 1.7vw, 1.7rem); color: var(--olive); }
+  .a2-pillars p { margin: 0; color: var(--olive-2); line-height: 1.7; font-size: .95rem; }
+
+  /* ---------- the three meanings on an olive band ---------- */
+  .a2-vals { background: var(--olive); color: #f5f0e6; padding-block: clamp(90px, 11vw, 10rem); text-align: center; display: grid; justify-items: center; gap: clamp(24px, 3vw, 2.5rem); }
+  .a2-vals .label { color: rgba(245,240,230,.7); }
+  .a2-vals ol { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(4px, 1vw, .75rem); }
+  .a2-vals li { display: flex; align-items: baseline; justify-content: center; gap: 18px; }
+  .a2-vals li span { font-size: .7rem; letter-spacing: .16em; color: rgba(245,240,230,.55); }
+  .a2-vals li b { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7vw, 7rem); line-height: 1.02; letter-spacing: -.025em; }
+  .a2-vals li:nth-child(2) b { font-style: italic; color: #e3c9a8; }
+  .a2-vals p { margin: 0; max-width: 34rem; color: rgba(245,240,230,.8); font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.4rem); padding-top: 22px; border-top: 1px solid rgba(245,240,230,.25); }
+  .a2-vals p em { color: #e3c9a8; }
+
+  /* ---------- welcome: a large faint word, a row of photographs that runs off the edge, laid over a deep olive band with the words ---------- */
+  /* the bar sits on the light welcome at the top: dark text until it turns solid */
+  .bar:not(.solid) { color: var(--olive); }
+  .welcome { --cw: clamp(280px, 33vw, 42rem); position: relative; background: var(--stone); padding-top: calc(clamp(110px, 12vw, 10rem) + env(safe-area-inset-top, 0px)); overflow: hidden; }
+  .wc-head { margin: 0 0 clamp(24px, 3vw, 3rem); display: grid; justify-items: center; text-align: center; font-weight: 400; }
+  .wc-big { font-family: var(--display); font-size: clamp(76px, 14vw, 15rem); line-height: .82; letter-spacing: -.03em; color: rgba(168,116,74,.2); white-space: nowrap; user-select: none;
+    animation: wcIn 1.6s var(--ease) both; }
+  .wc-sub { margin-top: calc(clamp(20px, 3.4vw, 3.6rem) * -1); font-family: var(--display); font-size: clamp(28px, 3.4vw, 3.6rem); line-height: 1.1; letter-spacing: -.015em; color: var(--olive);
+    animation: wcIn 1.4s var(--ease) .25s both; }
+  .wc-sub em { color: var(--terra); }
+  @keyframes wcIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  .welcome .wc-car { animation: wcIn 1.4s var(--ease) .45s both; }
+  .welcome .wc-text p:first-child { font-family: var(--display); font-size: clamp(1.15rem, 1.5vw, 1.45rem); line-height: 1.55; color: #f5f0e6; }
+  .wc-stage { position: relative; display: grid; grid-template-columns: minmax(0, 34%) minmax(0, 1fr); align-items: start; }
+  .wc-band { position: absolute; left: 0; right: 0; top: calc(var(--cw) * .5); bottom: 0; background: linear-gradient(180deg, #38545f 0%, #2c4550 100%); }
+  .wc-band::before { content: ""; position: absolute; inset: 0; opacity: .5; background: radial-gradient(ellipse 60% 80% at 85% 10%, rgba(227,201,168,.16), transparent 70%); }
+  .wc-text { position: relative; z-index: 1; grid-column: 1; grid-row: 1; padding-top: calc(var(--cw) * .5 + clamp(48px, 6vw, 5.5rem)); padding-bottom: clamp(56px, 7vw, 6rem); padding-right: clamp(20px, 3vw, 3rem);
+    color: #f5f0e6; display: grid; gap: 18px; align-content: start; }
+  .wc-text h2 { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 3vw, 3.2rem); line-height: 1; letter-spacing: -.02em; }
+  .wc-text h2 em { color: #e3c9a8; }
+  .wc-text p { margin: 0; max-width: 42ch; color: rgba(245,240,230,.86); line-height: 1.75; font-size: clamp(.95rem, 1.02vw, 1.05rem); }
+  .wc-text .wc-2 { padding-top: 16px; border-top: 1px solid rgba(245,240,230,.2); color: rgba(245,240,230,.7); }
+  .wc-car { position: relative; z-index: 1; grid-column: 2; grid-row: 1; min-width: 0; }
+  .wc-track { list-style: none; margin: 0; padding: 0 max(var(--gx), env(safe-area-inset-right, 0px)) 4px 0; display: flex; gap: clamp(10px, 1vw, 1rem); overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; cursor: grab; outline: none; }
+  .wc-track::-webkit-scrollbar { display: none; }
+  .wc-track.drag { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+  .wc-s { flex: 0 0 var(--cw); scroll-snap-align: start; }
+  .wc-s figure { margin: 0; display: grid; gap: 12px; }
+  .wc-s .ph { aspect-ratio: 3 / 2; box-shadow: 0 30px 60px -40px rgba(14,23,29,.6); }
+  .wc-s img { user-select: none; -webkit-user-drag: none; }
+  .wc-s:hover img { transform: scale(1.04); }
+  .wc-s figcaption { color: rgba(245,240,230,.62); }
+  .wc-dots { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 4px; padding: clamp(28px, 3vw, 2.75rem) max(var(--gx), env(safe-area-inset-right, 0px)) 0 0; }
+  .wc-dots button { width: 22px; height: 22px; display: grid; place-items: center; }
+  .wc-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgba(245,240,230,.75); transition: background .35s, transform .35s var(--ease); }
+  .wc-dots button[aria-current="true"]::before { background: #f5f0e6; transform: scale(1.15); }
+  /* beside the words: three small facts and a link to the rooms */
+  .wc-extra { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap; padding: clamp(40px, 5vw, 4.5rem) max(var(--gx), env(safe-area-inset-right, 0px)) clamp(56px, 7vw, 6rem) clamp(24px, 6vw, 7rem); color: #f5f0e6; }
+  .wc-facts { list-style: none; margin: 0; padding: 0; display: flex; gap: clamp(28px, 4vw, 4.5rem); }
+  .wc-facts li { display: grid; gap: 8px; padding-left: 18px; border-left: 1px solid rgba(245,240,230,.25); }
+  .wc-facts b { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 3.6vw, 3.8rem); line-height: 1; }
+  .wc-facts small { font-size: .4em; margin-left: 3px; }
+  .wc-facts span { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(245,240,230,.65); }
+  .wc-link { display: inline-flex; align-items: center; gap: 14px; padding-bottom: 6px; border-bottom: 1px solid rgba(245,240,230,.6); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
+  .wc-link svg { width: 24px; height: 12px; transition: transform .4s var(--ease); } .wc-link:hover svg { transform: translateX(5px); }
+
+  /* ---------- 01 philosophy: words and principles on the left, three photographs laid on the right ---------- */
+  .a2-phil { padding-block: clamp(90px, 11vw, 10rem); }
+  .a2-pw { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(30px, 6vw, 7rem); align-items: start; }
+  .a2-ptext { display: grid; gap: 20px; align-content: start; color: var(--olive); position: sticky; top: 110px; }
+  .a2-ptext h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 3vw, 3.2rem); line-height: 1.08; letter-spacing: -.015em; text-wrap: balance; }
+  .a2-ptext h2 em { color: var(--terra); }
+  .a2-ptext > p { margin: 0; color: var(--olive-2); line-height: 1.8; max-width: 44ch; }
+  .a2-plist { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--olive); }
+  .a2-plist li { display: grid; grid-template-columns: 46px 1fr; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+  .a2-plist b { font-size: .7rem; letter-spacing: .16em; color: var(--terra); font-weight: 600; padding-top: 6px; }
+  .a2-plist h3 { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: clamp(1.25rem, 1.6vw, 1.6rem); }
+  .a2-plist p { margin: 0; color: var(--olive-2); line-height: 1.65; font-size: .95rem; }
+  .a2-pimgs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 1.5rem); }
+  .a2-pf { margin: 0; } .a2-pf .ph { box-shadow: 0 36px 70px -46px rgba(14,23,29,.55); }
+  .a2-pf.p1 { grid-column: 1 / -1; } .a2-pf.p1 .ph { aspect-ratio: 16 / 10; }
+  .a2-pf.p2 { grid-column: 1 / span 3; } .a2-pf.p2 .ph { aspect-ratio: 4 / 5; }
+  .a2-pf.p3 { grid-column: 4 / span 3; margin-top: clamp(40px, 8vw, 8rem); } .a2-pf.p3 .ph { aspect-ratio: 4 / 5; }
+
+  /* ---------- the motto ---------- */
+  .a2-motto { padding-block: clamp(100px, 12vw, 11rem); text-align: center; display: grid; justify-items: center; gap: 18px; color: var(--olive); }
+  .a2-motto h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(64px, 11vw, 11rem); line-height: .95; letter-spacing: -.03em; }
+  .a2-motto h2 em { color: var(--terra); }
+  .meet { overflow: hidden; padding-inline: 6px; } .meet .mv-l, .meet .mv-r { display: inline-block; will-change: transform, opacity; }
+  .a2-motto .tr { font-family: var(--display); font-style: italic; color: var(--olive-2); font-size: clamp(1.1rem, 1.5vw, 1.4rem); }
+  .a2-motto p { margin: 8px 0 0; max-width: 52ch; color: var(--olive-2); line-height: 1.8; }
+
+  /* ---------- herbs ---------- */
+  .a2-herbs, .a2-eco { padding-block: clamp(80px, 10vw, 9rem); }
+  .a2-head { max-width: 90rem; margin: 0 auto clamp(40px, 5vw, 4.5rem); display: grid; gap: 16px; }
+  .a2-hgrid { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .hcard { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 18px 16px 20px; display: grid; gap: 10px; align-content: start; background: rgba(255,255,255,.25); transition: background .4s; }
+  .hcard:hover { background: color-mix(in srgb, var(--c) 9%, #f8f6ef); }
+  .hcard .top { display: flex; justify-content: space-between; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--olive-2); }
+  .hph { position: relative; aspect-ratio: 4 / 5; overflow: hidden; display: grid; place-items: center; margin: 4px 0 6px; }
+  .hph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .hph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,23,29,0) 55%, rgba(14,23,29,.35)); opacity: 0; transition: opacity .6s; }
+  .has-ph .hph svg { position: absolute; z-index: 1; right: 10px; bottom: 10px; width: 22%; margin: 0; stroke: #f5f0e6; opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
+  .has-ph:hover .hph img { transform: scale(1.05); }
+  .has-ph:hover .hph::after, .has-ph:hover .hph svg { opacity: 1; transform: none; }
+  .hph.none { background: color-mix(in srgb, var(--c) 6%, transparent); }
+  .hcard svg { width: 54%; height: auto; justify-self: center; margin: 6px 0; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .hcard svg * { vector-effect: non-scaling-stroke; }
+  .hcard h3 { margin: 0; font-family: var(--display); font-weight: 400; font-style: italic; font-size: 1.25rem; color: var(--c); }
+  .hcard .lat { font-family: var(--display); font-style: italic; font-size: .85rem; color: var(--olive-2); }
+
+  /* ---------- sustainability ---------- */
+  .a2-steps { list-style: none; margin: 0 auto; padding: 0; max-width: 90rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 2rem); }
+  .a2-steps li { display: grid; gap: 12px; align-content: start; }
+  .a2-steps .ph { aspect-ratio: 4 / 5; box-shadow: 0 30px 60px -44px rgba(14,23,29,.5); }
+  .a2-steps b { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 3.4vw, 3.6rem); line-height: 1; color: var(--terra); margin-top: 8px; }
+  .a2-steps h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(1.15rem, 1.4vw, 1.4rem); line-height: 1.25; color: var(--olive); }
+  .a2-steps p { margin: 0; color: var(--olive-2); line-height: 1.7; font-size: .95rem; }
+  .a2-steps p:empty { display: none; }
+
+  /* ---------- closing ---------- */
+  .a2-close { position: relative; min-height: 92vh; min-height: 92svh; display: grid; align-items: end; overflow: hidden; color: #f5f0e6; background: #121c18; }
+  .a2-close > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .a2-close::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,23,29,.15) 0%, rgba(14,23,29,.25) 40%, rgba(14,23,29,.85) 100%); }
+  .a2-cin { position: relative; z-index: 1; max-width: 90rem; width: 100%; margin: 0 auto; box-sizing: border-box; padding-block: 0 clamp(60px, 9vh, 7rem); display: grid; gap: 20px; justify-items: start; }
+  .a2-close .label { color: rgba(245,240,230,.75); }
+  .a2-close h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 4.6vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; max-width: 14ch; }
+  .a2-close h2 em { color: #e3c9a8; }
+  .a2-close p { margin: 0; max-width: 46ch; color: rgba(245,240,230,.85); line-height: 1.8; }
+  .a2-close blockquote { margin: 0; padding-left: 22px; border-left: 2px solid #e3c9a8; font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 1.6vw, 1.45rem); line-height: 1.5; max-width: 36ch; }
+  .a2-go { display: inline-flex; align-items: center; gap: 16px; padding: 18px 26px; background: #f5f0e6; color: var(--olive); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; border-radius: 2px; transition: background .3s; }
+  .a2-go svg { width: 24px; height: 12px; transition: transform .4s var(--ease); }
+  .a2-go:hover { background: #fff; } .a2-go:hover svg { transform: translateX(5px); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1100px) { .a2-hgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .a2-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) {
+    .a2-grid { grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 30px; }
+    .t1, .a2-col.alt .t1 { grid-column: 1 / -1; grid-row: auto; }
+    .c1, .a2-col.alt .c1 { grid-column: 1 / -1; grid-row: auto; } .c1 .ph { aspect-ratio: 4 / 3; }
+    .c2, .a2-col.alt .c2 { grid-column: 1 / -1; grid-row: auto; margin: 0 calc(-1 * max(24px, env(safe-area-inset-left, 0px))); }
+    .c3, .a2-col.alt .c3 { grid-column: 1; grid-row: auto; margin: 0; }
+    .c4, .a2-col.alt .c4 { grid-column: 2; grid-row: auto; margin: 0; }
+    .a2-pillars { grid-template-columns: 1fr 1fr; row-gap: 26px; }
+    .a2-pillars li, .a2-pillars li + li { padding: 20px 14px 0 0; border-left: 0; }
+    .a2-pillars li:nth-child(2n) { padding-left: 14px; border-left: 1px solid var(--rule); }
+    .welcome { --cw: min(78vw, 460px); }
+    .wc-big { font-size: 13.5vw; }
+    .wc-stage { display: flex; flex-direction: column; }
+    .wc-band { top: calc(var(--cw) * .38); }
+    .wc-car { order: 1; align-self: stretch; width: 100%; }
+    .wc-track { padding-left: max(24px, env(safe-area-inset-left, 0px)); scroll-padding-left: max(24px, env(safe-area-inset-left, 0px)); }
+    .wc-dots { justify-content: center; padding-right: 0; padding-top: 22px; }
+    .wc-text { order: 2; padding: 34px max(24px, env(safe-area-inset-right, 0px)) 64px max(24px, env(safe-area-inset-left, 0px)); }
+    .a2-hgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .a2-pw { grid-template-columns: 1fr; }
+    .a2-ptext { position: static; }
+    .a2-pf.p3 { margin-top: 30px; }
+    .wc-extra { padding: 0 24px 60px; order: 3; }
+    .wc-facts { gap: 14px 16px; flex-wrap: wrap; flex: 1 1 100%; min-width: 0; } .wc-facts li { padding-left: 12px; } .wc-facts b { font-size: 2rem; } .wc-facts span { font-size: .6rem; letter-spacing: .14em; }
+  }
+  @media (max-width: 560px) {
+    .a2-hero h1, .a2-hero h2 { font-size: clamp(56px, 18vw, 5rem); }
+    .wc-sub { margin-top: -10px; }
+    .a2-steps { grid-template-columns: 1fr; }
+    .a2-steps .ph { aspect-ratio: 4 / 3; }
+    .a2-vals li b { font-size: clamp(38px, 12vw, 3.4rem); }
+    .a2-motto h2 { font-size: clamp(52px, 17vw, 5rem); }
+  }
+  @media (prefers-reduced-motion: reduce) { .wc-big, .wc-sub, .welcome .wc-car { animation: none; } .rv { transition: none; } .ph img { transition: none; } .wc-track { scroll-behavior: auto; } }
+
+  /* ---------- 02 materials: a numbered palette on the left, one large photograph on the right that changes with it ---------- */
+  .a2-mat { padding-block: clamp(90px, 11vw, 10rem); background: #ebe6db; }
+  .mt-head { max-width: 90rem; margin: 0 auto clamp(46px, 6vw, 5.5rem); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px clamp(30px, 6vw, 7rem); align-items: end; color: var(--olive); }
+  .mt-head .label { display: block; margin-bottom: 18px; }
+  .mt-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 5vw, 5.4rem); line-height: 1; letter-spacing: -.025em; }
+  .mt-head h2 em { color: var(--terra); }
+  .mt-head p { margin: 0; color: var(--olive-2); line-height: 1.8; max-width: 44ch; }
+  .mt-body { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(30px, 6vw, 7rem); align-items: center; }
+  .mt-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(38,61,52,.25); }
+  .mt-list li { border-bottom: 1px solid rgba(38,61,52,.18); }
+  .mt-list button { width: 100%; display: grid; grid-template-columns: 52px auto 1fr; align-items: center; gap: 16px; padding: clamp(16px, 2.2vw, 1.6rem) 0; text-align: left; color: var(--olive); }
+  .mt-list .n { font-size: .7rem; letter-spacing: .16em; font-weight: 600; color: rgba(38,61,52,.45); transition: color .4s; }
+  .mt-list .nm { font-family: var(--display); font-size: clamp(1.6rem, 2.8vw, 2.9rem); line-height: 1.05; letter-spacing: -.015em; color: rgba(38,61,52,.42); transition: color .5s, transform .6s var(--ease); }
+  .mt-list .ln { height: 1px; background: var(--terra); transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease); }
+  .mt-list p { margin: 0; max-height: 0; overflow: hidden; padding-left: 68px; color: var(--olive-2); line-height: 1.7; transition: max-height .6s var(--ease), padding .6s var(--ease); }
+  .mt-list button[aria-pressed="true"] .n { color: var(--terra); }
+  .mt-list button[aria-pressed="true"] .nm { color: var(--olive); font-style: italic; transform: translateX(6px); }
+  .mt-list button[aria-pressed="true"] .ln { transform: scaleX(1); }
+  .mt-list button[aria-pressed="true"] + p { max-height: 6em; padding-bottom: 18px; }
+  .mt-list button:hover .nm { color: var(--olive); }
+  .mt-fig { margin: 0; display: grid; gap: 14px; }
+  .mt-ph { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #d9d3c4; box-shadow: 0 50px 90px -60px rgba(14,23,29,.6); }
+  .mt-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease), transform 2.4s var(--ease); }
+  .mt-ph img.on { opacity: 1; transform: none; }
+  .mt-fig figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .mt-cap { font-family: var(--display); font-style: italic; color: var(--olive); font-size: 1.1rem; }
+  @media (max-width: 900px) {
+    .mt-head { grid-template-columns: 1fr; }
+    .mt-body { grid-template-columns: 1fr; gap: 28px; }
+    .mt-fig { order: -1; } .mt-ph { aspect-ratio: 4 / 3; }
+    .mt-list button { grid-template-columns: 40px auto 1fr; }
+    .mt-list p { padding-left: 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .mt-ph img { transition: opacity .3s; transform: none; } }
+  /* the meaning of filotimo on a light sand ground */
+  .a2-hero { background: #e6dccb !important; color: var(--olive) !important; }
+  .a2-hero h2 { color: var(--olive); } .a2-hero h2 em { color: var(--terra) !important; }
+  .a2-hero .pron { color: rgba(38,61,52,.6) !important; }
+  .a2-hero p { color: var(--olive-2) !important; } .a2-hero p b { color: var(--olive) !important; }
+  .a2-hero .more { color: var(--olive) !important; border-top-color: rgba(38,61,52,.22) !important; }
+  /* the motto on the deep olive ground */
+  .a2-motto { background: var(--olive); color: #f5f0e6; }
+  .a2-motto .label { color: rgba(245,240,230,.7) !important; }
+  .a2-motto h2 { color: #f5f0e6; } .a2-motto h2 em { color: #e3c9a8; }
+  .a2-motto .tr { color: rgba(245,240,230,.8); }
+  .a2-motto p { color: rgba(245,240,230,.82); }
+
+  /* welcome: the two lines a little apart; the motto on two lines; soft arrival of photographs */
+  .wc-sub { margin-top: clamp(14px, 1.6vw, 1.6rem); letter-spacing: .01em; font-size: clamp(32px, 3.9vw, 4.2rem); }
+  .wc-head { margin-bottom: clamp(34px, 4vw, 4rem); }
+  .wc-s figure { gap: 0; } .wc-s figcaption { display: none; }
+  .a2-motto h2.two { line-height: .92; } .a2-motto h2.two .mv-l, .a2-motto h2.two .mv-r { display: block; }
+  .a2-motto h2.two .mv-r { margin-top: .04em; }
+  .a2-pf.p1 .ph { aspect-ratio: 16 / 9; }
+  img.lz { opacity: 0; transition: opacity .9s cubic-bezier(.22,.7,.12,1); } img.lz.ok { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { img.lz { opacity: 1; transition: none; } }
+  @media (max-width: 700px) { .wc-sub { margin-top: 12px; font-size: clamp(30px, 8.6vw, 2.6rem); } .a2-pf.p1 .ph { aspect-ratio: 3 / 2; } }
+  @media (max-width: 700px) { .wc-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; } .wc-facts li { padding-left: 10px; } .wc-facts b { font-size: 1.8rem; } .wc-facts span { font-size: .54rem; letter-spacing: .1em; } }
+
+  /* sustainability on phones and tablets: each photograph and its words held together in one card, the number laid on the photograph */
+  @media (max-width: 1100px) {
+    .a2-steps { gap: 18px; }
+    .a2-steps li { position: relative; gap: 0; background: #fbf8f1; box-shadow: 0 24px 50px -36px rgba(14,23,29,.45); border: 1px solid rgba(38,61,52,.1); }
+    .a2-steps .ph { box-shadow: none; aspect-ratio: 4 / 3; }
+    .a2-steps b { position: absolute; left: 14px; top: 14px; margin: 0; z-index: 1; min-width: 44px; height: 44px; padding: 0 10px; display: grid; place-items: center; border-radius: 999px;
+      background: rgba(251,248,241,.94); font-size: 1.25rem; box-shadow: 0 8px 20px -10px rgba(14,23,29,.5); }
+    .a2-steps h3 { padding: 18px 20px 0; }
+    .a2-steps p { padding: 8px 20px 0; }
+    .a2-steps li::after { content: ""; display: block; height: 20px; }
+  }
+  .a2-hgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 72rem; } @media (max-width: 700px) { .a2-hgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+</style>
+<script src="a11y.js?v=5"></script>
+</head>
+<body data-legal="legal.html">
+<a class="skip" href="#content" data-i="skip">Μετάβαση στο περιεχόμενο</a>
+
+<header class="bar gut" id="bar">
+  <a class="blogo" href="./" aria-label="Filotimia, home">
+    <svg viewBox="264 26 192 166" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M296 179V97a64 64 0 0 1 128 0v82"/><path d="M296 107 270 98v67l26 10ZM424 107l26-9v67l-26 10Z"/><path d="M288 181h144"/></g><path d="M308 132q26-6 52 0t52 0M314 150q23-5 46 0t46 0" fill="none" stroke="#5b7d88" stroke-width="6" stroke-linecap="round"/><circle cx="360" cy="108" r="12" fill="#c9a876"/></svg>
+    <span>FILOTIMIA</span>
+  </a>
+  <div class="btools label">
+    <a class="home" href="./"><svg viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 5H1M5 1 1 5l4 4"/></svg><span data-i="home">Αρχική</span></a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+    <a class="bbook" href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener" data-i="bookS">Κράτηση</a>
+    <button type="button" class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button type="button" class="close label" id="close" data-i="close">Κλείσιμο</button>
+  <a class="big" href="#h1" data-i="nav1">Σχετικά με εμάς</a>
+  <a class="big" href="rooms.html" data-i="nav2">Δωμάτια</a>
+  <a class="big" href="gallery.html" data-i="nav3">Γκαλερί</a>
+  <a class="big" href="access.html" data-i="nav4">Πρόσβαση</a>
+  <a class="big" href="beaches.html" data-i="nav5">Παραλίες</a>
+  <div class="row label">
+    <a href="./#contact" data-i="enquire">Επικοινωνία</a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+  </div>
+</div>
+
+
+<main id="content" tabindex="-1">
+<!-- ============ welcome, at the very top ============ -->
+<section class="welcome" id="welcome" aria-labelledby="h1">
+  <h1 class="wc-head" id="h1"><span class="wc-big" data-i="welBig">Καλώς ήρθατε</span><span class="wc-sub" data-i="welT">στη <em>Φιλοτιμία</em></span></h1>
+  <div class="wc-stage">
+    <div class="wc-band" aria-hidden="true"></div>
+    <div class="wc-text gut">
+      <p data-i="welcome">Καλώς ήρθες στα δωμάτια της Φιλοτιμίας. Ελπίζουμε η διαμονή σου να αποτελέσει ένα βάλσαμο για όσα προηγήθηκαν και μια πηγή ανανέωσης και δύναμης για όσα έπονται μετά τις διακοπές.</p>
+      <p class="wc-2" data-i="welcome2">Το όνομα «Φιλοτιμία» εκφράζει το φιλότιμο: να κάνεις τα πράγματα με υπευθυνότητα, προθυμία και γενναιοδωρία. Και αυτό κάνουμε για εσάς.</p>
+    </div>
+    <div class="wc-car">
+      <ul class="wc-track" id="wcTrack" tabindex="0" aria-label="Photographs">
+        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-2.jpg" alt="The blue door of the Lavender room with its wooden name sign" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-24.jpg" alt="The shared pergola with its tables and the hills beyond" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-1.jpg" alt="The Lavender room, with bougainvillea climbing the stone" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-16.jpg" alt="Island stone in the shade of the pergola" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-11.jpg" alt="A bedroom with stone walls and a blue window" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-7.jpg" alt="The vineyard in autumn colours" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/sage-10.jpg" alt="A shaded veranda looking out to the Aegean" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+        <li class="wc-s"><figure><div class="ph"><img src="p/drone-30.jpg" alt="A veranda with a hammock, lit at night" loading="lazy" decoding="async" draggable="false"></div></figure></li>
+      </ul>
+      <div class="wc-dots" id="wcDots" role="group" aria-label="Photos"></div>
+      <div class="wc-extra">
+        <ul class="wc-facts">
+          <li><b>8</b><span data-i="wfRooms">πέτρινα δωμάτια</span></li>
+          <li><b>4</b><span data-i="wfTypes">τύποι δωματίων</span></li>
+          <li><b>2,5<small>km</small></b><span data-i="wfIsle">από τη Χώρα</span></li>
+        </ul>
+        <a class="wc-link" href="rooms.html"><span data-i="wfLink">Δείτε τα δωμάτια</span><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 philosophy: the words and the four principles beside two photographs ============ -->
+<section class="a2-phil gut" aria-labelledby="s1-h">
+  <div class="a2-pw">
+    <div class="a2-ptext">
+      <span class="label rv" data-i="s1L">01 — Η φιλοσοφία μας</span>
+      <h2 id="s1-h" class="rv" data-i="s1H">Κατασκευαστικά, θελήσαμε να αφήσουμε το <em>μικρότερο</em> δυνατό αποτύπωμα.</h2>
+      <p class="rv" data-i="s1P">Δημιουργήσαμε έναν χώρο που σέβεται το κυκλαδίτικο τοπίο.</p>
+      <ol class="a2-plist">
+        <li class="rv"><b>01</b><div><h3 data-i="p1H">Λιτή Πολυτέλεια</h3><p data-i="p1P"></p></div></li>
+        <li class="rv"><b>02</b><div><h3 data-i="p2H">Αυθεντικότητα</h3><p data-i="p2P"></p></div></li>
+        <li class="rv"><b>03</b><div><h3 data-i="p3H">Βιωσιμότητα</h3><p data-i="p3P"></p></div></li>
+        <li class="rv"><b>04</b><div><h3 data-i="p4H">Φιλοξενία</h3><p data-i="p4P"></p></div></li>
+      </ol>
+    </div>
+    <div class="a2-pimgs">
+      <figure class="a2-pf p1 rv"><div class="ph"><img src="p/drone-20.jpg" alt="Filotimia from above, among the fields of Mesaria" loading="lazy" decoding="async"></div></figure>
+      <figure class="a2-pf p2 rv"><div class="ph"><img src="p/exterior-12.jpg" alt="The stone rooms and their verandas" loading="lazy" decoding="async"></div></figure>
+      <figure class="a2-pf p3 rv"><div class="ph"><img src="p/exterior-36.jpg" alt="The garden and the stone walls of Filotimia" loading="lazy" decoding="async"></div></figure>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- ============ the motto ============ -->
+<section class="a2-motto gut" id="motto" aria-labelledby="mo-h">
+  <span class="label rv" data-i="moL">Η φιλοσοφία πίσω από τον χώρο</span>
+  <h2 id="mo-h" class="meet two" lang="grc"><span class="mv-l">Μηδέν</span> <em class="mv-r">ἄγαν</em></h2>
+  <span class="tr rv" data-i="moTr">«Τίποτε υπερβολικό»</span>
+  <p class="rv" data-i="moP"></p>
+</section>
+
+<!-- ============ 02 materials: a palette of five materials; each one brings up its own photograph ============ -->
+<section class="a2-mat gut" id="materials" aria-labelledby="s2-h">
+  <div class="mt-head">
+    <div class="rv"><span class="label" data-i="s2L">02 — Φυσικά Υλικά και Αυθεντικότητα</span>
+      <h2 id="s2-h" data-i="s2H">Χτισμένο από το <em>ίδιο το νησί</em>.</h2></div>
+    <p class="rv" data-i="s2P"></p>
+  </div>
+  <div class="mt-body">
+    <ol class="mt-list rv" id="mtList">
+        <li><button type="button" data-k="0" aria-pressed="true"><span class="n">01</span><span class="nm" data-i="m1">Τσιμέντο</span><span class="ln" aria-hidden="true"></span></button></li>
+        <li><button type="button" data-k="1" aria-pressed="false"><span class="n">02</span><span class="nm" data-i="m2">Πέτρα από τη Σχοινούσα</span><span class="ln" aria-hidden="true"></span></button></li>
+        <li><button type="button" data-k="2" aria-pressed="false"><span class="n">03</span><span class="nm" data-i="m3">Ξύλο</span><span class="ln" aria-hidden="true"></span></button></li>
+        <li><button type="button" data-k="3" aria-pressed="false"><span class="n">04</span><span class="nm" data-i="m4">Γυαλί</span><span class="ln" aria-hidden="true"></span></button></li>
+        <li><button type="button" data-k="4" aria-pressed="false"><span class="n">05</span><span class="nm" data-i="m5">Έμμεσος φωτισμός</span><span class="ln" aria-hidden="true"></span></button></li>
+    </ol>
+    <figure class="mt-fig rv">
+      <div class="mt-ph" id="mtPh">
+        <img src="p/lavender-24.jpg" alt="" loading="lazy" decoding="async" class="on">
+        <img src="p/exterior-16.jpg" alt="" loading="lazy" decoding="async" class="">
+        <img src="p/sage-26.jpg" alt="" loading="lazy" decoding="async" class="">
+        <img src="p/lavender-15.jpg" alt="" loading="lazy" decoding="async" class="">
+        <img src="p/rosmary-5.jpg" alt="" loading="lazy" decoding="async" class="">
+      </div>
+      <figcaption><span class="label" id="mtNo">01 / 05</span><span id="mtName" class="mt-cap">Τσιμέντο</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 03 herbs: twelve plants on a grid ============ -->
+<section class="a2-herbs gut" aria-labelledby="s3-h">
+  <div class="a2-head rv">
+    <span class="label" data-i="s3L">03 — Τοπική Φύτευση</span>
+    <h2 id="s3-h" data-i="s3H">Δώδεκα <em>βότανα</em>, ένα για κάθε δωμάτιο.</h2>
+    <p data-i="s3P"></p>
+  </div>
+  <div class="a2-hgrid" id="hbTrack"></div>
+</section>
+
+<!-- ============ 04 sustainability: four steps ============ -->
+<section class="a2-eco gut" id="eco" aria-labelledby="s4-h">
+  <div class="a2-head rv">
+    <span class="label" data-i="s4L">04 — Βιωσιμότητα στην Πράξη</span>
+    <h2 id="s4-h" data-i="s4H">Ένας μικρός <em>κύκλος</em> που δεν σπαταλά τίποτα.</h2>
+  </div>
+  <ol class="a2-steps">
+    <li class="rv"><div class="ph"><img src="p/exterior-28.jpg" alt="" loading="lazy" decoding="async"></div><b>01</b><h3 data-i="e1T"></h3><p data-i="e1P"></p></li>
+    <li class="rv"><div class="ph"><img src="p/exterior-34.jpg" alt="" loading="lazy" decoding="async"></div><b>02</b><h3 data-i="e2T"></h3><p data-i="e2P"></p></li>
+    <li class="rv"><div class="ph"><img src="p/exterior-7.jpg" alt="The olive trees and the small vineyard" loading="lazy" decoding="async"></div><b>34</b><h3 data-i="e3T"></h3><p data-i="e3P"></p></li>
+    <li class="rv"><div class="ph"><img src="p/drone-18.jpg" alt="" loading="lazy" decoding="async"></div><b>EV</b><h3 data-i="e4T"></h3><p data-i="e4P"></p></li>
+  </ol>
+</section>
+
+<!-- ============ closing: the house at night, the words and the booking link ============ -->
+<section class="a2-close" id="closing" aria-labelledby="cl-h">
+  <img src="p/drone-27.jpg" alt="Filotimia lit up at dusk" loading="lazy" decoding="async">
+  <div class="a2-cin gut">
+    <blockquote id="cl-h" class="rv cl-quote" data-i="clQ"></blockquote>
+  </div>
+</section>
+</main>
+
+<footer class="sfoot" aria-label="Footer">
+  <div class="fwrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <svg class="femblem" viewBox="264 26 192 166" aria-hidden="true"><defs><clipPath id="fv"><path d="M303 178V97a57 57 0 0 1 114 0v81Z"/></clipPath></defs><g stroke-linecap="round" stroke-linejoin="round"><g clip-path="url(#fv)"><rect x="302" y="35" width="116" height="145" fill="#f3eee1"/><circle cx="360" cy="113" r="13" fill="#d5b58b"/><path d="M300 130q30-5 59 0t59 0" fill="none" stroke="#78969a" stroke-width="3.5"/><path d="M301 143q28-5 57 0t59 0m-112 12q30-4 58 0t58 0" fill="none" stroke="#93aa9f" stroke-width="3"/></g><path d="M296 179V97a64 64 0 0 1 128 0v82" fill="none" stroke="#f5f0e6" stroke-width="5"/><path d="M296 107 270 98v67l26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M424 107 450 98v67l-26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M288 181h144M304 189h112" fill="none" stroke="#f5f0e6" stroke-width="5"/></g></svg>
+        <p data-i="fTag">Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.</p>
+        <span class="fcopy label">© 2026 Filotimia</span>
+        <div class="fsocial">
+          <a href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener" aria-label="Filotimia Apartments on Google Maps" title="Google Maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.4"/></svg>
+          </a>
+          <a href="https://www.booking.com/hotel/gr/filotimia.el.html" target="_blank" rel="noopener" aria-label="Filotimia on Booking.com" title="Booking.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><text x="12.6" y="17.4" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="16" fill="currentColor">B.</text></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="fcol" aria-label="Footer menu">
+        <span class="label" data-i="fMenu">Μενού</span>
+        <a href="about.html" data-i="nav1">Σχετικά με εμάς</a>
+        <a href="rooms.html" data-i="nav2">Δωμάτια</a>
+        <a href="gallery.html" data-i="nav3">Γκαλερί</a>
+        <a href="access.html" data-i="nav4">Πρόσβαση</a>
+        <a href="beaches.html" data-i="nav5">Παραλίες</a>
+      </nav>
+      <div class="fcol">
+        <span class="label" data-i="fContact">Επικοινωνία</span>
+        <a href="mailto:info@filotimia.gr">info@filotimia.gr</a>
+        <a href="tel:+306943102945">+30 694 310 2945</a>
+        <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener"><span data-i="fMap">Δείτε στον χάρτη</span> ↗</a>
+      </div>
+      <div class="fcol">
+        <span class="label" data-i="fBook">Κράτηση</span>
+        <a href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener"><span data-i="bL">Απευθείας κράτηση</span> ↗</a>
+        <a href="./#contact" data-i="enquire">Επικοινωνία</a>
+        <div class="lang flang label" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="false">GR</button></div>
+      </div>
+    </div>
+    <div class="fword" aria-hidden="true">FILOTIMIA</div>
+    <nav class="flegal label" aria-="Legal">
+        <a href="legal.html#terms" data-i="lgTerms">Όροι και προϋποθέσεις</a>
+        <a href="legal.html#privacy" data-i="lgPriv">Πολιτική απορρήτου</a>
+        <a href="legal.html#cookies" data-i="lgCook">Cookies</a>
+        <button type="button" data-cookie-settings data-i="lgSet">Ρυθμίσεις cookies</button>
+        <a href="legal.html#accessibility" data-i="lgA11y">Προσβασιμότητα</a>
+      </nav>
+  </div>
+</footer>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top"><svg viewBox="0 0 22 34" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 33V2M3 10l8-8 8 8"/></svg></button>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp01 = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ss = function (a, b, x) { x = clamp01((x - a) / (b - a)); return x * x * (3 - 2 * x); };
+  var T = {
+    el: { bookS: 'Κράτηση', home: 'Αρχική', book: 'Κράτηση', openL: 'Οδηγός παραλιών', openH: 'Οι παραλίες της <em>Σχοινούσας</em>.', introL: 'Απάτητες · Προστατευόμενες · Κοντά',
+      lead: 'Οι παραλίες της Σχοινούσας είναι απάτητες και ανήκουν σε ειδικό καθεστώς προστασίας. Παρά το μικρό της μέγεθος, το νησί έχει μεγάλο αριθμό παραλιών.',
+      body: 'Από τη Χώρα, η πινακίδα δείχνει τις αποστάσεις για κάθε παραλία, με την πιο μακρινή διαδρομή (Λιόλιου) να είναι στα 3,5 χιλιόμετρα. Οι αποστάσεις είναι μικρές: οι περισσότερες φτάνονται σε λίγα λεπτά, με τα πόδια ή με αυτοκίνητο. Μια επιστροφή στη φύση και στην αυθεντικότητα.',
+      f1: 'Παραλίες σε αυτόν τον οδηγό', f2: 'Η πιο μακρινή, η Λιόλιου', f3: 'Το Λιβάδι από τη Χώρα', map: 'Δείτε στον χάρτη', photo: 'Φωτογραφία',
+      stayL: 'Η Φιλοτιμία, στη Μεσαριά', stayP: 'Λίγα λεπτά από <em>κάθε παραλία</em>.',
+      lgTerms: 'Όροι και προϋποθέσεις', lgPriv: 'Πολιτική απορρήτου', lgCook: 'Cookies', lgSet: 'Ρυθμίσεις cookies', lgA11y: 'Προσβασιμότητα', skip: 'Μετάβαση στο περιεχόμενο', 
+      endH: 'Μείνετε κοντά <em>σε όλες</em>.', endGo: 'Απευθείας κράτηση', footP: 'Σχοινούσα, Μικρές Κυκλάδες',
+      fTag: 'Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.', fMenu: 'Μενού', fContact: 'Επικοινωνία', fMap: 'Δείτε στον χάρτη', fBook: 'Κράτηση', fTop: 'Επιστροφή στην κορυφή',
+      nav1: 'Σχετικά με εμάς', nav2: 'Δωμάτια', nav3: 'Γκαλερί', nav4: 'Πρόσβαση', nav5: 'Παραλίες', close: 'Κλείσιμο', enquire: 'Επικοινωνία', bL: 'Απευθείας κράτηση', cFoot: 'Σχοινούσα, Μικρές Κυκλάδες' },
+    en: { bookS: 'Book', home: 'Home', book: 'Book', openL: 'Beach guide', openH: 'The beaches of <em>Schoinoussa</em>.', introL: 'Unspoilt · Protected · Close by',
+      lead: 'The beaches of Schoinoussa are unspoilt and under special protection. Small as it is, the island has a great number of them.',
+      body: 'In Chora, a signpost shows the distance to every beach, the farthest route (Lioliou) being 3.5 kilometres. Distances are short: most are a few minutes away, on foot or by car. A return to nature and to the authentic.',
+      f1: 'Beaches in this guide', f2: 'The farthest, Lioliou', f3: 'Livadi from Chora', map: 'View on the map', photo: 'Photo',
+      stayL: 'Filotimia, in Mesaria', stayP: 'A few minutes from <em>every beach</em>.',
+      lgTerms: 'Terms and conditions', lgPriv: 'Privacy policy', lgCook: 'Cookies', lgSet: 'Cookie settings', lgA11y: 'Accessibility', skip: 'Skip to content', 
+      endH: 'Stay close <em>to them all</em>.', endGo: 'Book direct', footP: 'Schoinoussa, Small Cyclades',
+      fTag: 'Stone rooms with Aegean views on Schoinoussa, in the Small Cyclades.', fMenu: 'Menu', fContact: 'Contact', fMap: 'View on the map', fBook: 'Booking', fTop: 'Back to top',
+      nav1: 'About us', nav2: 'Rooms', nav3: 'Gallery', nav4: 'Getting here', nav5: 'Beaches', close: 'Close', enquire: 'Contact', bL: 'Book direct', cFoot: 'Schoinoussa, Small Cyclades' }
+  };
+  Object.assign(T.el, {
+    aL: 'Σχετικά με εμάς', aH: 'Φιλο<em>τιμία</em>.',
+    aDict: '<b>φιλότιμο</b>, το — να κάνεις τα πράγματα με υπευθυνότητα, προθυμία και γενναιοδωρία. Το χαρακτηριστικό που θα επέλεγε κάποιος για την ελληνική ψυχή.',
+    ph1: 'Φωτογραφία σύντομα · Η είσοδος', phSoon: 'Φωτογραφία σύντομα', cue: 'Κύλιση',
+    welcome: 'Καλώς ήρθες στα δωμάτια της Φιλοτιμίας. Ελπίζουμε η διαμονή σου να αποτελέσει ένα βάλσαμο για όσα προηγήθηκαν και μια πηγή ανανέωσης και δύναμης για όσα έπονται μετά τις διακοπές.',
+    welcome2: 'Το όνομα «Φιλοτιμία» εκφράζει το φιλότιμο: να κάνεις τα πράγματα με υπευθυνότητα, προθυμία και γενναιοδωρία. Το χαρακτηριστικό που θα επέλεγε κάποιος για την ελληνική ψυχή.',
+    s1L: '01 — Η φιλοσοφία μας', s1H: 'Κατασκευαστικά, θελήσαμε να αφήσουμε το <em>μικρότερο</em> δυνατό αποτύπωμα.',
+    s1P: 'Δημιουργήσαμε έναν χώρο που σέβεται το κυκλαδίτικο τοπίο — απλότητα, αυθεντικότητα, βιωσιμότητα και φιλοξενία.',
+    p1H: 'Λιτή Πολυτέλεια', p1P: 'Όλες οι ανέσεις χωρίς κανένα υπερβολικό στοιχείο.',
+    p2H: 'Αυθεντικότητα', p2P: 'Φυσικά υλικά που δένουν αρμονικά με το τοπίο.',
+    p3H: 'Βιωσιμότητα', p3P: 'Ελάχιστο περιβαλλοντικό αποτύπωμα σε κάθε πτυχή της κατασκευής.',
+    p4H: 'Φιλοξενία', p4P: 'Σας υποδεχόμαστε με χαμόγελο, σεβασμό και γενναιοδωρία.',
+    moL: 'Η φιλοσοφία πίσω από τον χώρο', moTr: '«Τίποτε υπερβολικό»',
+    moP: 'Δημιουργήσαμε τα δωμάτιά μας με πυξίδα τη «Λιτή Πολυτέλεια»: την παροχή όλων των ανέσεων με τη λογική του «Μηδέν ἄγαν». Αρχές που μας ενέπνευσαν στη δημιουργία της Φιλοτιμίας.',
+    s2L: '02 — Φυσικά Υλικά και Αυθεντικότητα', s2H: 'Χτισμένο από το <em>ίδιο το νησί</em>.',
+    s2P: 'Χρησιμοποιήσαμε φυσικά υλικά — τσιμέντο, ξύλο, γυαλί και πέτρα από τη Σχοινούσα — ώστε κάθε χώρος να αποπνέει αυθεντικότητα και να δένει αρμονικά με το τοπίο.',
+    m1: 'Τσιμέντο', m1d: '', m2: 'Πέτρα από τη Σχοινούσα', m2d: '', m3: 'Ξύλο', m3d: 'Πόρτες και κουφώματα',
+    m4: 'Γυαλί', m4d: '', m5: 'Έμμεσος φωτισμός', m5d: '', stones: 'πέτρες',
+    s3L: '03 — Τοπική Φύτευση και Κυκλαδίτικος Χαρακτήρας', s3H: 'Οκτώ <em>βότανα</em>, ένα για κάθε δωμάτιο.',
+    s3P: 'Κάθε δωμάτιο φέρει το όνομα ενός ελληνικού βοτάνου. Έξω από κάθε δωμάτιο ανθίζει το αντίστοιχο φυτό, ώστε τα αρώματα και τα χρώματά του να γίνονται μέρος της εμπειρίας φιλοξενίας.',
+    herb: 'Βότανο', room: 'Δωμάτιο',
+    s4L: '04 — Βιωσιμότητα στην Πράξη', s4H: 'Ένας μικρός <em>κύκλος</em> που δεν σπαταλά τίποτα.',
+    s4P: 'Ακολουθήστε τη διαδρομή του νερού, βήμα βήμα: από τα δωμάτια στο φίλτρο, στον κήπο και στα δέντρα.',
+    e1T: 'Φυσικό φίλτρο καθαρισμού γκρίζων νερών', e2T: 'Ανακύκλωση νερού για πότισμα φυτών', e3T: 'Ελιές και μικρό αμπέλι', e4T: 'Σταθμός φόρτισης ηλεκτρικών οχημάτων',
+    e1P: 'Τα γκρίζα νερά από τους νιπτήρες και τα ντους δεν πάνε χαμένα: περνούν από ένα φυσικό φίλτρο που τα καθαρίζει.',
+    e2P: 'Το καθαρό νερό επιστρέφει στη γη και ποτίζει τα φυτά, τα βότανα και τα δέντρα του κήπου.',
+    e3P: '',
+    e4P: '',
+    e3B: 'ελιές', e3H: 'ελιές και μικρό αμπέλι',
+    clH: 'Απλότητα, γαλήνη και <em>ειλικρίνεια</em>.',
+    clP: 'Με θέα το Αιγαίο και σεβασμό στη φύση, η Φιλοτιμία προσφέρει μια εμπειρία φιλοξενίας που συνδυάζει απλότητα, γαλήνη και ειλικρίνεια.',
+    md1: 'Λείες, ήσυχες επιφάνειες στα δάπεδα και στις βεράντες.', md2: 'Πέτρα από το ίδιο το νησί, χτισμένη με το χέρι στους τοίχους.', md3: 'Πόρτες και κουφώματα που ζεσταίνουν τον χώρο.', md4: 'Μεγάλα ανοίγματα που φέρνουν μέσα το φως και τη θάλασσα.', md5: 'Χαμηλό, ζεστό φως που αναδεικνύει την πέτρα το βράδυ.', wfRooms: 'πέτρινα δωμάτια', wfTypes: 'τύποι δωματίων', wfIsle: 'από τη Χώρα', wfLink: 'Δείτε τα δωμάτια', welBig: 'Καλώς ήρθατε', welT: 'στη <em>Φιλοτιμία</em>', aMore: 'Για εμάς το φιλότιμο δεν είναι μια λέξη, είναι ο τρόπος που φιλοξενούμε. Να προσέχουμε τις μικρές λεπτομέρειες, να είμαστε εκεί όταν μας χρειάζεστε και να δίνουμε πάντα λίγο περισσότερο από όσο περιμένετε.', clL: 'Φιλοτιμία · Σχοινούσα', ovL: 'Τι σημαίνει φιλότιμο', v1: 'Υπευθυνότητα', v1d: '', v2: 'Προθυμία', v2d: '', v3: 'Γενναιοδωρία', v3d: '', ovEnd: 'Αυτό είναι το <em>φιλότιμο</em>. Αυτό κάνουμε για εσάς.',
+    clQ: '«Τέλος, θα σας υποδεχτούμε και θα σας περιποιηθούμε με χαμόγελο, προθυμία και σεβασμό, ώστε να αισθανθείτε σαν στο σπίτι σας.»'
+  });
+  Object.assign(T.en, {
+    aL: 'About us', aH: 'Filo<em>timia</em>.',
+    aDict: '<b>filotimo</b>, n. — doing things with responsibility, willingness and generosity. The trait many would choose to describe the Greek soul.',
+    ph1: 'Photo coming soon · The entrance', phSoon: 'Photo coming soon', cue: 'Scroll',
+    welcome: 'Welcome to the rooms of Filotimia. We hope your stay will be a balm for everything that came before, and a source of renewal and strength for all that follows the holidays.',
+    welcome2: 'The name “Filotimia” comes from filotimo: doing things with responsibility, willingness and generosity. The quality many would choose to describe the Greek soul.',
+    s1L: '01 — Our philosophy', s1H: 'In building it, we wanted to leave the <em>smallest</em> possible footprint.',
+    s1P: 'We created a place that respects the Cycladic landscape — simplicity, authenticity, sustainability and hospitality.',
+    p1H: 'Simple luxury', p1P: 'Every comfort, without anything excessive.',
+    p2H: 'Authenticity', p2P: 'Natural materials in harmony with the landscape.',
+    p3H: 'Sustainability', p3P: 'A minimal environmental footprint in every part of the build.',
+    p4H: 'Hospitality', p4P: 'We welcome you with a smile, respect and generosity.',
+    moL: 'The philosophy behind the place', moTr: '“Nothing in excess”',
+    moP: 'We created our rooms guided by “simple luxury”: every comfort, in the spirit of “Mēdèn ágan”. These principles inspired us in creating Filotimia.',
+    s2L: '02 — Natural materials and authenticity', s2H: 'Built from <em>the island itself</em>.',
+    s2P: 'We used natural materials — concrete, wood, glass and stone from Schoinoussa — so that every space feels authentic and sits in harmony with the landscape.',
+    m1: 'Concrete', m1d: '', m2: 'Stone from Schoinoussa', m2d: '', m3: 'Wood', m3d: 'Doors and frames',
+    m4: 'Glass', m4d: '', m5: 'Indirect lighting', m5d: '', stones: 'stones',
+    s3L: '03 — Local planting and Cycladic character', s3H: 'Eight <em>herbs</em>, one for every room.',
+    s3P: 'Every room is named after a Greek herb. Outside each room the same plant grows, so its scents and colours become part of your stay.',
+    herb: 'Herb', room: 'Room',
+    s4L: '04 — Sustainability in practice', s4H: 'A small <em>cycle</em> that wastes nothing.',
+    s4P: 'Follow the water, step by step: from the rooms to the filter, to the garden and the trees.',
+    e1T: 'Natural filter for grey water', e2T: 'Recycled water for the plants', e3T: 'Olive trees and a small vineyard', e4T: 'Electric vehicle charging',
+    e1P: 'Grey water from basins and showers is not wasted: it passes through a natural filter that cleans it.',
+    e2P: 'The clean water returns to the ground and waters the plants, the herbs and the trees of the garden.',
+    e3P: '',
+    e4P: '',
+    e3B: 'olive trees', e3H: 'olive trees and a small vineyard',
+    clH: 'Simplicity, calm and <em>sincerity</em>.',
+    clP: 'Looking out over the Aegean and with respect for nature, Filotimia offers a stay that brings together simplicity, calm and sincerity.',
+    md1: 'Smooth, quiet surfaces on the floors and verandas.', md2: 'Stone from the island itself, laid by hand in the walls.', md3: 'Doors and frames that warm the space.', md4: 'Large openings that bring in the light and the sea.', md5: 'Low, warm light that brings out the stone at night.', wfRooms: 'stone rooms', wfTypes: 'room types', wfIsle: 'from Chora', wfLink: 'See the rooms', welBig: 'Welcome', welT: 'to <em>Filotimia</em>', aMore: 'For us, filotimo is not just a word; it is the way we host. Taking care of the small details, being there when you need us, and always giving a little more than you expect.', clL: 'Filotimia · Schoinoussa', ovL: 'What filotimo means', v1: 'Responsibility', v1d: '', v2: 'Willingness', v2d: '', v3: 'Generosity', v3d: '', ovEnd: 'This is <em>filotimo</em>. This is what we do for you.',
+    clQ: '“Finally, we will welcome you and look after you with a smile, willingness and respect, so that you feel at home.”'
+  });
+  var lang = 'el';
+  try { var sv = sessionStorage.getItem('aegean-lang'); if (sv === 'en' || sv === 'el') lang = sv; } catch (e) {}
+
+  /* ---------- herbs: twelve rooms, twelve plants, each drawn as a small line sprig ---------- */
+  var HERBS = [
+    { img: 'about/herbs/geranium.jpg', el: 'Αμπαρόριζα', en: 'Rose geranium', lat: 'Pelargonium graveolens', c: '#b06f82', t: 'geranium' },
+    { img: 'about/herbs/spearmint.jpg', el: 'Μέντα', en: 'Mint', lat: 'Mentha × piperita', c: '#5f9a7a', t: 'narrow' },
+    { img: 'about/herbs/labdanum.jpg', el: 'Λάβδανος', en: 'Rockrose', lat: 'Cistus creticus', c: '#b0607a', t: 'flower' },
+    { img: 'about/herbs/rosemary.jpg', el: 'Δεντρολίβανο', en: 'Rosemary', lat: 'Salvia rosmarinus', c: '#5f735a', t: 'needle' },
+    { img: 'about/herbs/lavender.jpg', el: 'Λεβάντα', en: 'Lavender', lat: 'Lavandula angustifolia', c: '#8a6fa3', t: 'spike' },
+    { img: 'about/herbs/sage.jpg', el: 'Φασκόμηλο', en: 'Greek sage', lat: 'Salvia fruticosa', c: '#7a8f86', t: 'long' },
+    { img: 'about/herbs/oregano.jpg', el: 'Ρίγανη', en: 'Oregano', lat: 'Origanum vulgare', c: '#7f8a4a', t: 'cluster' },
+    { img: 'about/herbs/basil.jpg', el: 'Βασιλικός', en: 'Basil', lat: 'Ocimum basilicum', c: '#5f8a4e', t: 'pair' }
+  ];
+  function leaf(x, y, dx, dy, w) {
+    var mx = x + dx / 2, my = y + dy / 2, nx = -dy * w, ny = dx * w;
+    return 'M' + x.toFixed(1) + ' ' + y.toFixed(1) + 'Q' + (mx + nx).toFixed(1) + ' ' + (my + ny).toFixed(1) + ' ' + (x + dx).toFixed(1) + ' ' + (y + dy).toFixed(1) + 'Q' + (mx - nx).toFixed(1) + ' ' + (my - ny).toFixed(1) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1);
+  }
+  function P(d, cls) { return '<path pathLength="1" class="sp' + (cls ? ' ' + cls : '') + '" d="' + d + '"/>'; }
+  function sprig(h) {
+    var out = P('M60 196C58 150 64 100 60 30', 'stem'), t = h.t, i, y, s;
+    if (t === 'spike') {
+      out += P(leaf(60, 180, -26, -10, .18)) + P(leaf(60, 172, 26, -12, .18)) + P(leaf(60, 150, -22, -12, .18)) + P(leaf(60, 142, 22, -12, .18));
+      for (i = 0; i < 9; i++) { y = 40 + i * 9; out += '<ellipse pathLength="1" class="sp" cx="' + (i % 2 ? 64 : 56) + '" cy="' + y + '" rx="4" ry="6"/>'; }
+    } else if (t === 'needle' || t === 'whorl') {
+      for (i = 0; i < 16; i++) { y = 186 - i * 9.5; s = 16 - i * .55; out += P('M60 ' + y + 'l' + (-s) + ' ' + (-s * .45) + 'M60 ' + (y - 4) + 'l' + s + ' ' + (-s * .45)); }
+      if (t === 'whorl') for (i = 0; i < 3; i++) { y = 60 + i * 34; out += '<circle pathLength="1" class="sp" cx="60" cy="' + y + '" r="7"/>'; }
+      else out += '<circle pathLength="1" class="sp" cx="60" cy="34" r="6"/><circle pathLength="1" class="sp" cx="52" cy="40" r="4"/><circle pathLength="1" class="sp" cx="68" cy="40" r="4"/>';
+    } else if (t === 'flower') {
+      out += P(leaf(60, 170, -30, -14, .3)) + P(leaf(60, 160, 30, -16, .3)) + P(leaf(60, 120, -26, -16, .3)) + P(leaf(60, 112, 26, -16, .3));
+      for (i = 0; i < 5; i++) { var a = i * 72 * Math.PI / 180; out += '<circle pathLength="1" class="sp" cx="' + (60 + Math.cos(a) * 13).toFixed(1) + '" cy="' + (34 + Math.sin(a) * 13).toFixed(1) + '" r="11"/>'; }
+      out += '<circle pathLength="1" class="sp" cx="60" cy="34" r="4"/>';
+    } else if (t === 'geranium') {
+      [[60, 168, -1], [60, 132, 1], [60, 100, -1]].forEach(function (L) {
+        var cx = L[0] + L[2] * 24, cy = L[1] - 8;
+        out += P('M60 ' + L[1] + 'L' + cx + ' ' + cy) + P('M' + (cx - 14) + ' ' + cy + 'c0-12 8-16 14-10 6-6 14-2 14 10-4 8-24 10-28 0z');
+      });
+      for (i = 0; i < 6; i++) { var b = i * 60 * Math.PI / 180; out += '<circle pathLength="1" class="sp" cx="' + (60 + Math.cos(b) * 10).toFixed(1) + '" cy="' + (36 + Math.sin(b) * 10).toFixed(1) + '" r="5"/>'; }
+    } else if (t === 'cluster') {
+      for (i = 0; i < 5; i++) { y = 176 - i * 26; s = 18 - i * 2; out += P(leaf(60, y, -s, -s * .5, .42)) + P(leaf(60, y, s, -s * .5, .42)); }
+      out += '<circle pathLength="1" class="sp" cx="60" cy="34" r="6"/><circle pathLength="1" class="sp" cx="50" cy="42" r="5"/><circle pathLength="1" class="sp" cx="70" cy="42" r="5"/><circle pathLength="1" class="sp" cx="60" cy="48" r="4"/>';
+    } else {
+      var n = t === 'long' ? 4 : 5, w = t === 'narrow' ? .2 : t === 'round' ? .5 : t === 'long' ? .24 : .38, L0 = t === 'long' ? 34 : t === 'round' ? 16 : 26;
+      for (i = 0; i < n; i++) { y = 178 - i * (t === 'long' ? 36 : 30); s = L0 - i * 3; out += P(leaf(60, y, -s, -s * .55, w)) + P(leaf(60, y, s, -s * .55, w)); }
+      out += P(leaf(60, 36, -8, -12, .35)) + P(leaf(60, 36, 8, -12, .35));
+    }
+    return '<svg viewBox="0 0 120 200" aria-hidden="true">' + out + '</svg>';
+  }
+  var hbTrack = $('hbTrack');
+  function buildHerbs() {
+    hbTrack.innerHTML = HERBS.map(function (h, i) {
+      return '<article class="hcard rv' + (h.img ? ' has-ph' : '') + '" style="--c:' + h.c + '"><div class="top"><span>No. ' + String(i + 1).padStart(2, '0') + '</span></div>' + (h.img ? '<div class="hph"><img src="' + h.img + '" alt="' + h.en + ' (' + h.lat + ') growing at Filotimia" loading="lazy">' + sprig(h) + '</div>' : '<div class="hph none">' + sprig(h) + '</div>') +
+        '<h3>' + h[lang === 'en' ? 'en' : 'el'] + '</h3><span class="lat">' + h.lat + '</span></article>';
+    }).join('');
+  }
+  function render() {
+    var l = lang;
+    document.querySelectorAll('[data-i]').forEach(function (el) { var v = T[l][el.dataset.i]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang button').forEach(function (bt) { bt.setAttribute('aria-pressed', bt.dataset.lang === l ? 'true' : 'false'); });
+    buildHerbs(); reveals(); if (window.__mtPick) window.__mtPick();
+  }
+  document.querySelectorAll('.lang button').forEach(function (bt) {
+    bt.addEventListener('click', function () { lang = bt.dataset.lang; try { sessionStorage.setItem('aegean-lang', lang); } catch (e) {} render(); });
+  });
+  /* ---------- gentle reveals: each block rises in as it reaches the screen, collage photos one after another ---------- */
+  var io = ('IntersectionObserver' in window && !reduced) ? new IntersectionObserver(function (es) {
+    var k = 0; es.forEach(function (e) { if (e.isIntersecting) { var el = e.target; setTimeout(function () { el.classList.remove('pre'); }, (k++) * 110); io.unobserve(el); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  function reveals() { if (!io) return; document.querySelectorAll('.rv').forEach(function (el) { if (el.dataset.seen) return; el.dataset.seen = 1; if (el.getBoundingClientRect().top > innerHeight * 0.95) { el.classList.add('pre'); io.observe(el); } }); }
+  /* two halves of a heading travel in from opposite sides and meet as it scrolls into view */
+  (function () {
+    var hs = Array.prototype.slice.call(document.querySelectorAll('.meet')), tk = false;
+    var e3 = function (x) { x = Math.max(0, Math.min(1, x)); return 1 - Math.pow(1 - x, 3); };
+    function fx() {
+      tk = false; var vh = innerHeight || 1;
+      hs.forEach(function (h) {
+        var r = h.getBoundingClientRect(); if (r.bottom < -vh * 0.2 || r.top > vh * 1.2) return;
+        var p = reduced ? 1 : e3((vh - r.top) / (vh * 0.85)), L = h.querySelector('.mv-l'), R = h.querySelector('.mv-r');
+        L.style.transform = 'translate3d(' + ((1 - p) * -16).toFixed(2) + 'vw,0,0)'; L.style.opacity = Math.min(1, p * 1.6).toFixed(3);
+        R.style.transform = 'translate3d(' + ((1 - p) * 16).toFixed(2) + 'vw,0,0)'; R.style.opacity = Math.min(1, Math.max(0, p * 1.6 - 0.15)).toFixed(3);
+      });
+    }
+    addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(fx); } }, { passive: true }); addEventListener('resize', fx); fx();
+  })();
+  /* ---------- materials: hover or tap a material to bring up its photograph; it moves on by itself while on screen ---------- */
+  (function () {
+    var list = $('mtList'); if (!list) return;
+    var bs = Array.prototype.slice.call(list.querySelectorAll('button')), ims = Array.prototype.slice.call($('mtPh').children), cur = 0, idle = 0, vis = false;
+    function pick(i) { cur = (i + bs.length) % bs.length; bs.forEach(function (b, j) { b.setAttribute('aria-pressed', j === cur ? 'true' : 'false'); }); ims.forEach(function (im, j) { im.classList.toggle('on', j === cur); });
+      $('mtNo').textContent = '0' + (cur + 1) + ' / 0' + bs.length; $('mtName').textContent = bs[cur].querySelector('.nm').textContent; }
+    bs.forEach(function (b, i) {
+      b.addEventListener('click', function () { idle = Date.now(); pick(i); });
+      b.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { idle = Date.now(); pick(i); } });
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }, { threshold: 0.35 }).observe(list); else vis = true;
+    (function auto() { setTimeout(function () { if (vis && !reduced && Date.now() - idle > 8000) pick(cur + 1); auto(); }, 4500); })();
+    window.__mtPick = function () { pick(cur); };
+  })();
+  /* ---------- a slow drift on the large collage photos ---------- */
+  var drift = Array.prototype.slice.call(document.querySelectorAll('.a2-f .ph img')), dk = false;
+  function driftFx() { dk = false; if (reduced) return; var vh = innerHeight || 1; drift.forEach(function (im) { var r = im.parentNode.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; var t = clamp01((vh - r.top) / (vh + r.height)); im.style.transform = 'scale(1.08) translate3d(0,' + ((0.5 - t) * 6).toFixed(2) + '%,0)'; }); }
+  addEventListener('scroll', function () { if (!dk) { dk = true; requestAnimationFrame(driftFx); } }, { passive: true }); driftFx();
+  /* ---------- bar and menu ---------- */
+  var bar = $('bar'), top = $('totop'), menu = $('menu'), lastY = scrollY, acc = 0;
+  function onScroll() {
+    var y = scrollY, h = innerHeight || 1, dy = y - lastY; lastY = y;
+    top.classList.toggle('show', y > h * 1.2);
+    bar.classList.toggle('solid', y > h * 0.6);
+    if (y < h * 0.4 || menu.classList.contains('open')) { acc = 0; bar.classList.remove('hide'); return; }
+    acc = (dy > 0) === (acc > 0) ? acc + dy : dy;
+    if (acc > 14) bar.classList.add('hide'); else if (acc < -14) bar.classList.remove('hide');
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  top.addEventListener('click', function () { scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+  var burger = $('burger');
+  function toggleMenu(open) { menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', open ? 'false' : 'true'); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function () { toggleMenu(true); });
+  $('close').addEventListener('click', function () { toggleMenu(false); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
+
+  /* welcome carousel: swipe or drag, dots to jump, and it moves on by itself every few seconds while on screen */
+  (function () {
+    var tr = $('wcTrack'), dots = $('wcDots'); if (!tr) return;
+    var sl = Array.prototype.slice.call(tr.children), cur = 0, idle = 0, vis = false, timer = null;
+    dots.innerHTML = sl.map(function (_, i) { return '<button type="button" aria-label="' + (i + 1) + ' / ' + sl.length + '"></button>'; }).join('');
+    var db = Array.prototype.slice.call(dots.children);
+    function step() { return sl.length > 1 ? sl[1].offsetLeft - sl[0].offsetLeft : tr.clientWidth; }
+    function mark() { var i = Math.round(tr.scrollLeft / step()); i = Math.max(0, Math.min(sl.length - 1, i)); if (tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 4) i = sl.length - 1; cur = i; db.forEach(function (d, j) { d.setAttribute('aria-current', j === i ? 'true' : 'false'); }); }
+    function go(i) { cur = (i + sl.length) % sl.length; tr.scrollTo({ left: cur * step(), behavior: reduced ? 'auto' : 'smooth' }); }
+    db.forEach(function (d, i) { d.addEventListener('click', function () { idle = Date.now(); go(i); }); });
+    var mt = null; tr.addEventListener('scroll', function () { clearTimeout(mt); mt = setTimeout(mark, 60); }, { passive: true });
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) { tr.addEventListener(ev, function () { idle = Date.now(); }, { passive: true }); });
+    tr.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
+    // drag with the mouse on computers
+    var dx = null, sx0 = 0;
+    tr.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; dx = e.clientX; sx0 = tr.scrollLeft; tr.classList.add('drag'); tr.setPointerCapture(e.pointerId); });
+    tr.addEventListener('pointermove', function (e) { if (dx == null) return; tr.scrollLeft = sx0 - (e.clientX - dx); });
+    function up() { if (dx == null) return; dx = null; tr.classList.remove('drag'); go(Math.round(tr.scrollLeft / step())); }
+    tr.addEventListener('pointerup', up); tr.addEventListener('pointercancel', up);
+    function tick() { clearTimeout(timer); timer = setTimeout(function () { if (vis && !reduced && Date.now() - idle > 7000) { var last = tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 4; go(last ? 0 : cur + 1); } tick(); }, 4200); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }, { threshold: 0.4 }).observe(tr); else vis = true;
+    mark(); tick(); addEventListener('resize', mark);
+  })();
+
+  render();
+})();
+</script>
+<script>
+/* soft arrival for the photographs as they come in */
+(function () {
+  var SKIP = '.mt-ph, .lbox, #lbox';
+  function arm(im) {
+    if (im.dataset.lz || (im.closest && im.closest(SKIP))) return; im.dataset.lz = '1';
+    if (im.complete && im.naturalWidth) return;
+    im.classList.add('lz');
+    var ok = function () { im.classList.add('ok'); };
+    if (im.decode) im.addEventListener('load', function () { im.decode().then(ok, ok); }, { once: true }); else im.addEventListener('load', ok, { once: true });
+    im.addEventListener('error', ok, { once: true });
+  }
+  function scan() { Array.prototype.forEach.call(document.querySelectorAll('img[loading="lazy"]'), arm); }
+  var q = false; scan(); new MutationObserver(function () { if (q) return; q = true; requestAnimationFrame(function () { q = false; scan(); }); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+<script src="consent.js"></script>
+</body>
+</html>

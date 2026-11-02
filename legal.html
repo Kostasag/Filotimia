@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filotimia Legal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+  /* Layout: a quiet reading page. Sticky contents list on the left, the text in one comfortable column on the right. */
+  :root { --stone: #eeece3; --ivory: #f8f6ef; --olive: #263d34; --olive-2: #4d5d50; --sage: #838d76; --cream: #f5f0e6;
+    --rule: rgba(38,61,52,.18); --display: "Playfair Display", Georgia, serif; --body: "DM Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --ease: cubic-bezier(.22,.7,.12,1); --gx: clamp(24px, 5vw, 6.25rem); color-scheme: light; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--stone); color: var(--olive); font-family: var(--body); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--olive); color: var(--cream); padding: 10px 16px; border-radius: 2px; text-decoration: none; }
+  .skip:focus { top: 12px; }
+  .gut { padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .label { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+  .bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px;
+    background: #eeece3; border-bottom: 1px solid rgba(38,61,52,.1); }
+  .blogo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .blogo svg { height: 30px; width: auto; }
+  .blogo span { font-family: var(--display); letter-spacing: .3em; }
+  .tools { display: flex; align-items: center; gap: 24px; }
+  .home { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .home svg { width: 20px; height: 10px; }
+  .lang { display: flex; gap: 8px; align-items: center; }
+  .lang button { font: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 4px 2px; cursor: pointer; color: var(--olive-2); }
+  .lang button[aria-pressed="true"] { color: var(--olive); text-decoration: underline; text-underline-offset: 4px; }
+  .head { padding-block: clamp(60px, 9vw, 8.125rem) clamp(40px, 5vw, 4.375rem); max-width: 90rem; margin: 0 auto; }
+  .head h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 6vw, 6rem); line-height: 1; letter-spacing: -.022em; margin: 16px 0 18px; }
+  .head h1 em { color: var(--sage); }
+  .head p { margin: 0; color: var(--olive-2); max-width: 60ch; }
+  .layout { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 4.5rem); padding-bottom: clamp(80px, 10vw, 8.75rem); }
+  .toc { position: sticky; top: 90px; align-self: start; display: grid; gap: 4px; border-top: 1px solid var(--rule); padding-top: 18px; }
+  .toc a { text-decoration: none; padding: 8px 0; color: var(--olive-2); font-family: var(--display); font-size: 1.15rem; border-bottom: 1px solid var(--rule); }
+  .toc a:hover, .toc a:focus-visible { color: var(--olive); }
+  article { min-width: 0; max-width: 70ch; }
+  article section { padding-top: 10px; margin-bottom: clamp(48px, 6vw, 5rem); scroll-margin-top: 90px; }
+  article h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.1; margin: 0 0 6px; }
+  article .no { color: var(--olive-2); display: block; margin-bottom: 10px; }
+  article h3 { font-size: 1.02rem; margin: 28px 0 6px; }
+  article p, article li { color: #33463d; }
+  article ul, article ol { padding-left: 1.2em; }
+  article li { margin: 6px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 14px 0; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; }
+  .tbl { overflow-x: auto; }
+  .note { background: var(--ivory); border-left: 2px solid var(--sage); padding: 14px 18px; margin: 18px 0; }
+  .cbtn { font: inherit; cursor: pointer; background: var(--olive); color: var(--cream); border: 0; padding: 12px 18px; border-radius: 2px; letter-spacing: .14em; text-transform: uppercase; font-size: .72rem; font-weight: 600; }
+  .upd { color: var(--olive-2); font-size: .85rem; }
+  footer { background: #1d2e26; color: rgba(245,240,230,.75); padding-block: 26px; }
+  footer .in { max-width: 90rem; margin: 0 auto; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+  footer a { color: rgba(245,240,230,.9); }
+  [hidden] { display: none !important; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .toc { position: static; } .blogo span { display: none; } }
+</style>
+<script src="a11y.js?v=4"></script>
+</head>
+<body data-legal="legal.html">
+<a class="skip" href="#main" data-l="skip">Μετάβαση στο περιεχόμενο</a>
+
+<header class="bar gut">
+  <a class="blogo" href="./" aria-label="Filotimia, αρχική">
+    <svg viewBox="264 26 192 166" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M296 179V97a64 64 0 0 1 128 0v82"/><path d="M296 107 270 98v67l26 10ZM424 107l26-9v67l-26 10Z"/><path d="M288 181h144"/></g><path d="M308 132q26-6 52 0t52 0M314 150q23-5 46 0t46 0" fill="none" stroke="#5b7d88" stroke-width="6" stroke-linecap="round"/><circle cx="360" cy="108" r="12" fill="#c9a876"/></svg>
+    <span>FILOTIMIA</span>
+  </a>
+  <div class="tools label">
+    <a class="home" href="./"><svg viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 5H1M5 1 1 5l4 4"/></svg><span data-l="home">Αρχική</span></a>
+    <div class="lang" role="group" aria-label="Language / Γλώσσα"><button type="button" data-lang="en" aria-pressed="false">EN</button><span aria-hidden="true">/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ======================= ΕΛΛΗΝΙΚΑ ======================= -->
+<div lang="el" data-v="el">
+  <div class="head gut">
+    <span class="label">Filotimia · Νομικά</span>
+    <h1>Όροι, απόρρητο και <em>cookies</em>.</h1>
+    <p>Οι όροι διαμονής, ο τρόπος που χειριζόμαστε τα δεδομένα σας, τα cookies και η προσβασιμότητα της σελίδας, σε ένα σημείο.</p>
+  </div>
+  <div class="layout gut">
+    <nav class="toc" aria-label="Περιεχόμενα">
+      <a href="#terms">01 Όροι και προϋποθέσεις</a>
+      <a href="#privacy">02 Πολιτική απορρήτου</a>
+      <a href="#cookies">03 Πολιτική cookies</a>
+      <a href="#accessibility">04 Προσβασιμότητα</a>
+    </nav>
+    <article>
+      <section id="terms" aria-labelledby="t-el">
+        <span class="no label">01</span>
+        <h2 id="t-el">Όροι και προϋποθέσεις</h2>
+        <p>Για τους σκοπούς των παρόντων όρων, η εταιρεία <strong>ΦΙΛΟΤΙΜΙΑ Ε.Ε.</strong> αναφέρεται εφεξής ως «η Εταιρεία» ή «το Κατάλυμα».</p>
+        <h3>Διαμονή</h3>
+        <ul>
+          <li>Δεν επιτρέπονται συγκεντρώσεις ή πάρτι οποιασδήποτε μορφής στα δωμάτια. Το Κατάλυμα διατηρεί το δικαίωμα να απομακρύνει επιπλέον άτομα που διαμένουν στο δωμάτιο.</li>
+          <li>Η κράτηση δεν μεταβιβάζεται σε τρίτους.</li>
+          <li>Σε περίπτωση μη εμφάνισης (no-show), χρεώνεται ποσό ίσο με τη χρέωση μίας νύχτας (συμπεριλαμβανομένων των ισχυόντων φόρων) στην κάρτα που δόθηκε κατά την κράτηση, ή σύμφωνα με τους όρους της εκάστοτε προσφοράς.</li>
+          <li>Οι επισκέπτες οφείλουν να επιδεικνύουν πρωτότυπο έγγραφο ταυτοποίησης κατά την άφιξη.</li>
+          <li>Οι ειδικοί όροι κάθε προσφοράς ισχύουν για τις αντίστοιχες κρατήσεις και, σε περίπτωση αντίφασης, υπερισχύουν.</li>
+          <li>Σε περίπτωση διαφοράς στον τελικό λογαριασμό μετά την παροχή των υπηρεσιών, ισχύουν οι όροι του λογαριασμού.</li>
+        </ul>
+        <h3>Συμπεριφορά, ασφάλεια και υγιεινή</h3>
+        <ul>
+          <li>Το Κατάλυμα μπορεί να ζητήσει από επισκέπτες να αποχωρήσουν λόγω συμπεριφοράς ή για λόγους ασφάλειας ή υγείας, ιδίως αν δεν τηρούν τις οδηγίες του προσωπικού, εκφράζονται με τρόπο που προσβάλλει ή εισάγει διακρίσεις, ή παρενοχλούν ή θέτουν σε κίνδυνο άλλους επισκέπτες.</li>
+          <li>Οι επισκέπτες δεν επιτρέπεται σε καμία περίπτωση να θέτουν σε κίνδυνο την υγεία, την ασφάλεια και την προστασία του Καταλύματος.</li>
+          <li>Οι επισκέπτες οφείλουν να διατηρούν την καθαριότητα και την υγιεινή και να τηρούν τις οδηγίες ασφάλειας και υγιεινής του Καταλύματος. Ο επισκέπτης ευθύνεται για κάθε παραβίασή τους.</li>
+          <li>Ο εξοπλισμός και τα αντικείμενα του Καταλύματος πρέπει να χρησιμοποιούνται με προσοχή. Το Κατάλυμα μπορεί να χρεώσει ζημιές σε κινητή ή ακίνητη περιουσία, εφόσον αποδεδειγμένα προκλήθηκαν από τον επισκέπτη.</li>
+          <li>Αν έχετε αλλεργία, ευαισθησία ή δυσανεξία (για παράδειγμα σε ύφασμα, υλικό, προϊόν καθαρισμού ή τρόφιμο), παρακαλούμε ενημερώστε μας πριν από την άφιξή σας.</li>
+        </ul>
+        <h3>Τιμαλφή και απολεσθέντα</h3>
+        <ul>
+          <li>Τα τιμαλφή σας μπορούν να φυλαχθούν στη θυρίδα ασφαλείας του δωματίου ή, κατόπιν αιτήματος, από το Κατάλυμα.</li>
+          <li>Για ιδιαίτερα πολύτιμα αντικείμενα, ενημερώστε μας πριν από τη φύλαξη. Το Κατάλυμα μπορεί να αρνηθεί τη φύλαξή τους.</li>
+          <li>Κάνουμε ό,τι είναι δυνατόν για ένα ασφαλές περιβάλλον και ζητάμε το ίδιο από τους επισκέπτες μας. Το Κατάλυμα δεν φέρει ευθύνη για προσωπικά αντικείμενα που χάνονται ή κλέβονται εξαιτίας πράξεων ή παραλείψεων των ίδιων των επισκεπτών.</li>
+          <li>Τα απολεσθέντα αντικείμενα καταγράφονται και φυλάσσονται με ασφάλεια, και στη συνέχεια απορρίπτονται ή δωρίζονται. Το Κατάλυμα δεν υποχρεούται να επικοινωνήσει με τον κάτοχο. Τα ευπαθή αντικείμενα φυλάσσονται μόνο έως το τέλος της ημέρας αναχώρησης.</li>
+          <li>Τα αντικείμενα παραλαμβάνονται με έγκυρη ταυτότητα, ή αποστέλλονται με έξοδα του επισκέπτη.</li>
+        </ul>
+        <h3>Ευθύνη και αλλαγές</h3>
+        <ul>
+          <li>Το Κατάλυμα δεν φέρει ευθύνη για απώλεια, καθυστέρηση, τραυματισμό, ζημία, επιπλέον έξοδα ή ταλαιπωρία που οφείλονται σε γεγονότα εκτός του ελέγχου του, όπως καθυστερήσεις ή ακυρώσεις πτήσεων και πλοίων, κοινωνικές αναταραχές, απεργίες, κλοπές, τρομοκρατικές ενέργειες, φυσικές καταστροφές, πόλεμο, πυρκαγιά, πλημμύρα, πράξεις αρχών, αλλαγές κανονισμών, βλάβες μηχανημάτων ή εργασίες συντήρησης.</li>
+          <li>Η Εταιρεία μπορεί να τροποποιεί τους παρόντες όρους χωρίς προειδοποίηση. Οι αλλαγές δημοσιεύονται αμέσως σε αυτή τη σελίδα.</li>
+        </ul>
+      </section>
+
+      <section id="privacy" aria-labelledby="p-el">
+        <span class="no label">02</span>
+        <h2 id="p-el">Πολιτική απορρήτου (GDPR)</h2>
+        <p>Η προστασία των προσωπικών σας δεδομένων είναι για εμάς προτεραιότητα. Τα δεδομένα σας χρησιμοποιούνται μόνο για τον σκοπό για τον οποίο μας τα δίνετε, σύμφωνα με τον Γενικό Κανονισμό για την Προστασία Δεδομένων (ΕΕ) 2016/679 και την ελληνική νομοθεσία (ν. 4624/2019).</p>
+        <h3>Υπεύθυνος επεξεργασίας</h3>
+        <p>ΦΙΛΟΤΙΜΙΑ Ε.Ε. · Μεσαριά, Σχοινούσα, Τ.Κ. 843 00, Κυκλάδες · <a href="mailto:info@filotimia.gr">info@filotimia.gr</a> · +30 694 310 2945</p>
+        <h3>Ποια δεδομένα συλλέγουμε</h3>
+        <ul>
+          <li>Ονοματεπώνυμο</li><li>Διεύθυνση κατοικίας και χώρα</li><li>Τηλέφωνο και email επικοινωνίας</li><li>Στοιχεία πληρωμής (π.χ. πιστωτική κάρτα), μόνο για την κράτηση</li><li>Στοιχεία ταυτότητας κατά την άφιξη, όπως απαιτεί ο νόμος</li>
+        </ul>
+        <p>Η ιστοσελίδα από μόνη της <strong>δεν συλλέγει</strong> προσωπικά δεδομένα: δεν έχει φόρμες, λογαριασμούς χρηστών, εργαλεία στατιστικών ή διαφήμισης.</p>
+        <h3>Για ποιο σκοπό και με ποια νομική βάση</h3>
+        <ul>
+          <li><strong>Κράτηση και διαμονή</strong>: εκτέλεση της σύμβασης μαζί σας (άρθρο 6 παρ. 1 β' ΓΚΠΔ).</li>
+          <li><strong>Τιμολόγηση και υποχρεώσεις προς τις αρχές</strong>: συμμόρφωση με νομική υποχρέωση (άρθρο 6 παρ. 1 γ').</li>
+          <li><strong>Απάντηση στα μηνύματά σας</strong>: το έννομο συμφέρον μας να σας απαντήσουμε (άρθρο 6 παρ. 1 στ').</li>
+        </ul>
+        <h3>Με ποιους τα μοιραζόμαστε</h3>
+        <p>Μόνο με όσους είναι απαραίτητο για την κράτηση: την πλατφόρμα απευθείας κρατήσεων (direct-book.com), πλατφόρμες όπως το Booking.com όταν κάνετε κράτηση μέσω αυτών, τον πάροχο πληρωμών, τον λογιστή μας και τις δημόσιες αρχές όπου το απαιτεί ο νόμος. Δεν πουλάμε και δεν δίνουμε δεδομένα για διαφημιστικούς σκοπούς.</p>
+        <h3>Πόσο καιρό τα κρατάμε</h3>
+        <p>Όσο χρειάζεται για την κράτηση και τη διαμονή σας, και στη συνέχεια μόνο για όσο χρόνο ορίζει η φορολογική και λογιστική νομοθεσία.</p>
+        <h3>Πώς τα προστατεύουμε</h3>
+        <ul>
+          <li><strong>Κρυπτογράφηση</strong>: τα ευαίσθητα δεδομένα, όπως τα στοιχεία πληρωμής, μεταφέρονται μέσω ασφαλών συνδέσεων (SSL/TLS).</li>
+          <li><strong>Περιορισμένη πρόσβαση</strong>: πρόσβαση έχει μόνο εξουσιοδοτημένο προσωπικό.</li>
+        </ul>
+        <h3>Τα δικαιώματά σας</h3>
+        <ol>
+          <li>Πρόσβαση στα δεδομένα σας.</li><li>Διόρθωση ανακριβών στοιχείων.</li><li>Διαγραφή («δικαίωμα στη λήθη»).</li><li>Περιορισμός της επεξεργασίας.</li><li>Φορητότητα των δεδομένων.</li><li>Εναντίωση στην επεξεργασία.</li><li>Ανάκληση της συγκατάθεσής σας ανά πάσα στιγμή.</li>
+        </ol>
+        <p>Για να ασκήσετε τα δικαιώματά σας, γράψτε μας στο <a href="mailto:info@filotimia.gr">info@filotimia.gr</a>. Έχετε επίσης δικαίωμα να υποβάλετε καταγγελία στην <strong>Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα</strong> (<a href="https://www.dpa.gr" target="_blank" rel="noopener">www.dpa.gr</a>).</p>
+      </section>
+
+      <section id="cookies" aria-labelledby="c-el">
+        <span class="no label">03</span>
+        <h2 id="c-el">Πολιτική cookies</h2>
+        <p>Η σελίδα χρησιμοποιεί <strong>μόνο απολύτως απαραίτητη αποθήκευση</strong> στον browser σας. Δεν χρησιμοποιούμε cookies στατιστικών, διαφήμισης ή παρακολούθησης, και δεν σας ταυτοποιούμε.</p>
+        <div class="tbl"><table>
+          <thead><tr><th scope="col">Όνομα</th><th scope="col">Σκοπός</th><th scope="col">Τύπος</th><th scope="col">Διάρκεια</th></tr></thead>
+          <tbody>
+            <tr><td>aegean-lang</td><td>Θυμάται τη γλώσσα που επιλέξατε όσο περιηγείστε</td><td>Απαραίτητο · αποθήκευση συνεδρίας</td><td>Μέχρι να κλείσετε το πρόγραμμα περιήγησης</td></tr>
+            <tr><td>filotimia-consent</td><td>Θυμάται την απάντησή σας στην ειδοποίηση cookies</td><td>Απαραίτητο · τοπική αποθήκευση</td><td>Μέχρι να το διαγράψετε</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Υπηρεσίες τρίτων</h3>
+        <ul>
+          <li><strong>Χάρτες Google</strong>: στη σελίδα Πρόσβαση ο χάρτης φορτώνεται μόνο όταν το ζητήσετε. Τότε η Google λαμβάνει τη διεύθυνση IP σας και μπορεί να ορίσει δικά της cookies. Η επιλογή σας αποθηκεύεται τοπικά (filotimia-maps).</li>
+          <li><strong>Google Fonts</strong>: οι γραμματοσειρές φορτώνονται από διακομιστές της Google, που λαμβάνουν τη διεύθυνση IP σας για να τις παραδώσουν.</li>
+          <li><strong>Σύνδεσμοι</strong> προς direct-book.com, Booking.com, Google Maps και Instagram ανοίγουν σε δικές τους σελίδες, με δικές τους πολιτικές cookies.</li>
+        </ul>
+        <p>Μπορείτε να διαγράψετε την τοπική αποθήκευση από τις ρυθμίσεις του browser σας ή να αλλάξετε τις επιλογές σας εδώ:</p>
+        <p><button type="button" class="cbtn" data-cookie-settings>Ρυθμίσεις cookies</button></p>
+      </section>
+
+      <section id="accessibility" aria-labelledby="a-el">
+        <span class="no label">04</span>
+        <h2 id="a-el">Προσβασιμότητα</h2>
+        <p>Θέλουμε η σελίδα να μπορεί να τη χρησιμοποιήσει ο καθένας. Στόχος μας είναι η συμμόρφωση με τις οδηγίες WCAG 2.1, επίπεδο AA.</p>
+        <ul>
+          <li>Λειτουργεί πλήρως με πληκτρολόγιο, με ορατή ένδειξη εστίασης και σύνδεσμο «Μετάβαση στο περιεχόμενο».</li>
+          <li>Οι εικόνες έχουν περιγραφές και τα κουμπιά ονόματα για αναγνώστες οθόνης.</li>
+          <li>Αν έχετε ενεργοποιήσει τη μείωση κίνησης στη συσκευή σας, τα εφέ κίνησης σταματούν.</li>
+          <li>Οι γκαλερί που αλλάζουν μόνες τους σταματούν όταν τις εστιάζετε ή περνάτε από πάνω τους το ποντίκι.</li>
+          <li>Ο ήχος είναι πάντα κλειστός, μέχρι να τον ανοίξετε εσείς.</li>
+        </ul>
+        <p>Αν συναντήσετε κάποιο εμπόδιο, γράψτε μας στο <a href="mailto:info@filotimia.gr">info@filotimia.gr</a> και θα το διορθώσουμε.</p>
+      </section>
+      <p class="upd">Τελευταία ενημέρωση: Οκτώβριος 2026</p>
+    </article>
+  </div>
+</div>
+
+<!-- ======================= ENGLISH ======================= -->
+<div lang="en" data-v="en" hidden>
+  <div class="head gut">
+    <span class="label">Filotimia · Legal</span>
+    <h1>Terms, privacy and <em>cookies</em>.</h1>
+    <p>Our terms of stay, how we handle your data, cookies and this site's accessibility, in one place.</p>
+  </div>
+  <div class="layout gut">
+    <nav class="toc" aria-label="Contents">
+      <a href="#terms-en">01 Terms and conditions</a>
+      <a href="#privacy-en">02 Privacy policy</a>
+      <a href="#cookies-en">03 Cookie policy</a>
+      <a href="#accessibility-en">04 Accessibility</a>
+    </nav>
+    <article>
+      <section id="terms-en" aria-labelledby="t-en">
+        <span class="no label">01</span>
+        <h2 id="t-en">Terms and conditions</h2>
+        <p>For the purposes of these Terms and Conditions, the company <strong>ΦΙΛΟΤΙΜΙΑ Ε.Ε.</strong> is referred to as "the Company" or "the Property".</p>
+        <h3>Your stay</h3>
+        <ul>
+          <li>No gatherings or parties of any nature are allowed in the rooms. The Property reserves the right to evict any additional occupants in the room.</li>
+          <li>This reservation is not transferable.</li>
+          <li>In the event of a no-show, a fee of one night's room charge (inclusive of any applicable government tax) will be charged to the credit card provided at the time of reservation, or as per the revised conditions of the offer.</li>
+          <li>Guests must produce an original proof of identity on arrival.</li>
+          <li>Special terms of an offer apply to the respective bookings and, in case of conflict, prevail.</li>
+          <li>In case of conflict in the bill provided after the services, the terms of the bill prevail.</li>
+        </ul>
+        <h3>Conduct, safety and hygiene</h3>
+        <ul>
+          <li>The Property reserves the right to send guests away because of their conduct or for safety, security or medical reasons, in particular if guests do not follow the instructions of staff, express themselves in a discriminating manner, or harass or endanger other guests.</li>
+          <li>Guests may not compromise the health, safety and security of the Property at any time.</li>
+          <li>Guests should keep the room clean and tidy and follow the Property's safety, security and hygiene advice. The guest is solely responsible for any breach.</li>
+          <li>The Property's furnishings and equipment must not be damaged or destroyed. The Property may charge for damage to movable or immovable property where it is proven to have been caused by the guest.</li>
+          <li>If you have any allergy, sensitivity or intolerance (for example to a fabric, material, cleaning product or food), please let us know before you arrive.</li>
+        </ul>
+        <h3>Valuables and lost property</h3>
+        <ul>
+          <li>Valuables can be kept in the safety deposit box in your room or, on request, by the Property.</li>
+          <li>Please tell us before storing exceptionally valuable items. The Property may refuse to store them.</li>
+          <li>We do everything possible to keep the premises safe and ask our guests to do the same. The Property takes no responsibility for personal possessions lost, stolen or misplaced due to the acts or omissions of guests themselves.</li>
+          <li>Lost property is logged and kept in a secure place, and is later disposed of or donated to charity. The Property is not obliged to contact owners. Perishable items left in rooms are only kept until the end of the day of check-out.</li>
+          <li>Items can be collected with valid identification, or posted at the guest's expense.</li>
+        </ul>
+        <h3>Liability and changes</h3>
+        <ul>
+          <li>The Property accepts no liability for any loss, delay, injury, damage, additional expense or inconvenience caused by events beyond its control, including flight or ferry delays and cancellations, civil disturbance, strikes, theft, terrorism, natural disaster, war, fire, floods, acts of authorities, changes in regulations, failure of machinery or equipment, or maintenance works.</li>
+          <li>The Company may change these terms at any time without prior notice. Changes are published on this page immediately.</li>
+        </ul>
+      </section>
+
+      <section id="privacy-en" aria-labelledby="p-en">
+        <span class="no label">02</span>
+        <h2 id="p-en">Privacy policy (GDPR)</h2>
+        <p>Protecting your personal data is a priority for us. Your data is used only for the purpose for which you give it to us, in line with the General Data Protection Regulation (EU) 2016/679 and Greek law (Law 4624/2019).</p>
+        <h3>Data controller</h3>
+        <p>ΦΙΛΟΤΙΜΙΑ Ε.Ε. · Messaria, Schoinoussa, 843 00, Cyclades, Greece · <a href="mailto:info@filotimia.gr">info@filotimia.gr</a> · +30 694 310 2945</p>
+        <h3>What we collect</h3>
+        <ul>
+          <li>Full name</li><li>Home address and country</li><li>Phone number and email</li><li>Payment details (e.g. credit card), for the booking only</li><li>Identity details on arrival, as required by law</li>
+        </ul>
+        <p>This website itself <strong>does not collect</strong> personal data: it has no forms, user accounts, analytics or advertising tools.</p>
+        <h3>Why, and on what legal basis</h3>
+        <ul>
+          <li><strong>Your booking and stay</strong>: performance of our contract with you (GDPR Art. 6(1)(b)).</li>
+          <li><strong>Invoicing and legal duties</strong>: compliance with a legal obligation (Art. 6(1)(c)).</li>
+          <li><strong>Answering your messages</strong>: our legitimate interest in replying to you (Art. 6(1)(f)).</li>
+        </ul>
+        <h3>Who we share it with</h3>
+        <p>Only those needed for your booking: the direct booking platform (direct-book.com), platforms such as Booking.com when you book through them, the payment provider, our accountant, and public authorities where the law requires. We never sell your data or share it for advertising.</p>
+        <h3>How long we keep it</h3>
+        <p>For as long as needed for your booking and stay, and afterwards only for as long as tax and accounting law requires.</p>
+        <h3>How we protect it</h3>
+        <ul>
+          <li><strong>Encryption</strong>: sensitive data such as payment details is transmitted over secure connections (SSL/TLS).</li>
+          <li><strong>Restricted access</strong>: only authorised staff can access your data.</li>
+        </ul>
+        <h3>Your rights</h3>
+        <ol>
+          <li>Access your personal data.</li><li>Correct inaccurate information.</li><li>Request deletion (the right to be forgotten).</li><li>Restrict processing.</li><li>Data portability.</li><li>Object to processing.</li><li>Withdraw your consent at any time.</li>
+        </ol>
+        <p>To use any of these rights, email <a href="mailto:info@filotimia.gr">info@filotimia.gr</a>. You can also complain to the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noopener">www.dpa.gr</a>).</p>
+      </section>
+
+      <section id="cookies-en" aria-labelledby="c-en">
+        <span class="no label">03</span>
+        <h2 id="c-en">Cookie policy</h2>
+        <p>This site uses <strong>only strictly necessary storage</strong> in your browser. We do not use analytics, advertising or tracking cookies, and we do not identify you.</p>
+        <div class="tbl"><table>
+          <thead><tr><th scope="col">Name</th><th scope="col">Purpose</th><th scope="col">Type</th><th scope="col">Duration</th></tr></thead>
+          <tbody>
+            <tr><td>aegean-lang</td><td>Remembers the language you chose while you browse</td><td>Necessary · session storage</td><td>Until you close the browser</td></tr>
+            <tr><td>filotimia-consent</td><td>Remembers your answer to the cookie notice</td><td>Necessary · local storage</td><td>Until you clear it</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Third-party services</h3>
+        <ul>
+          <li><strong>Google Maps</strong>: on the Getting here page the map only loads when you ask for it. Google then receives your IP address and may set its own cookies. Your choice is stored locally (filotimia-maps).</li>
+          <li><strong>Google Fonts</strong>: the typefaces are loaded from Google's servers, which receive your IP address to deliver them.</li>
+          <li><strong>Links</strong> to direct-book.com, Booking.com, Google Maps and Instagram open their own pages, with their own cookie policies.</li>
+        </ul>
+        <p>You can clear local storage in your browser settings, or review your choice here:</p>
+        <p><button type="button" class="cbtn" data-cookie-settings>Cookie settings</button></p>
+      </section>
+
+      <section id="accessibility-en" aria-labelledby="a-en">
+        <span class="no label">04</span>
+        <h2 id="a-en">Accessibility</h2>
+        <p>We want everyone to be able to use this site. We aim to meet the WCAG 2.1 guidelines at level AA.</p>
+        <ul>
+          <li>Fully usable with a keyboard, with a visible focus outline and a "Skip to content" link.</li>
+          <li>Images have descriptions and buttons have names for screen readers.</li>
+          <li>If you have turned on reduced motion on your device, motion effects stop.</li>
+          <li>Galleries that advance on their own pause when you focus them or hover over them.</li>
+          <li>Sound is always off until you turn it on.</li>
+        </ul>
+        <p>If something gets in your way, email <a href="mailto:info@filotimia.gr">info@filotimia.gr</a> and we will fix it.</p>
+      </section>
+      <p class="upd">Last updated: October 2026</p>
+    </article>
+  </div>
+</div>
+</main>
+
+<footer class="gut">
+  <div class="in label">
+    <span>© 2026 Filotimia</span>
+    <a href="./" data-l="home">Αρχική</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var L = { el: { skip: 'Μετάβαση στο περιεχόμενο', home: 'Αρχική' }, en: { skip: 'Skip to content', home: 'Home' } };
+  var lang = 'el';
+  try { var v = sessionStorage.getItem('aegean-lang'); if (v === 'en' || v === 'el') lang = v; } catch (e) {}
+  if (/(-en)$/.test(location.hash)) lang = 'en';
+  function set(l) {
+    lang = l; document.documentElement.lang = l;
+    document.querySelectorAll('[data-v]').forEach(function (d) { d.hidden = d.dataset.v !== l; });
+    document.querySelectorAll('[data-l]').forEach(function (el) { el.textContent = L[l][el.dataset.l]; });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lang === l ? 'true' : 'false'); });
+    try { sessionStorage.setItem('aegean-lang', l); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.lang); }); });
+  set(lang);
+  // a link like legal.html#cookies while English is shown jumps to the English section
+  function fixHash() { var h = location.hash.slice(1); if (lang === 'en' && h && !/-en$/.test(h)) { var t = document.getElementById(h + '-en'); if (t) t.scrollIntoView(); } }
+  addEventListener('load', fixHash);
+})();
+</script>
+<script src="consent.js"></script>
+</body>
+</html>

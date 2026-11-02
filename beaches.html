@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filotimia Beaches</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+  /* Layout: a guide in the site's voice. Full-bleed sunset opener, a short intro with three figures, an index of the nine beaches,
+     then one beach per band: photograph(s) in the arched window on one side, name and a few words on the other, sides alternating. */
+  :root {
+    --stone: #eeece3; --ivory: #f8f6ef; --olive: #263d34; --olive-2: #4d5d50; --sage: #838d76; --aegean: #5b7d88; --sand: #e3d6b6; --cream: #f5f0e6;
+    --rule: rgba(38,61,52,.18);
+    --display: "Playfair Display", Georgia, serif;
+    --body: "DM Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --ease: cubic-bezier(.22,.7,.12,1);
+    --gx: clamp(24px, 5vw, 6.25rem);
+    --cx: clamp(24px, 12vw, 15rem);
+    --mist: rgba(245,240,230,.78);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--stone); color: var(--olive); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 1px solid var(--aegean); outline-offset: 4px; }
+  .label { font-size: .66rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+  .gut { padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+
+  /* top bar */
+  .bar { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: calc(14px + env(safe-area-inset-top, 0px)) 14px; color: var(--cream); transition: background .5s, color .5s, border-color .5s; border-bottom: 1px solid transparent; }
+  .bar { transition: background .5s, color .5s, border-color .5s, transform .6s var(--ease), opacity .5s; }
+  .bar.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+  .bar.solid { background: #eeece3; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--olive); border-color: rgba(38,61,52,.1); }
+  .blogo { display: flex; align-items: center; gap: 12px; }
+  .blogo svg { height: 32px; width: auto; }
+  .blogo span { font-family: var(--display); font-size: .98rem; letter-spacing: .3em; }
+  .btools { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 2.125rem); }
+  .lang { display: flex; gap: 8px; opacity: .7; }
+  .lang button { letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; opacity: .6; }
+  .lang button[aria-pressed="true"] { opacity: 1; }
+  .home { display: inline-flex; align-items: center; gap: 10px; }
+  .home svg { width: 20px; height: 10px; transition: transform .4s var(--ease); }
+  .home:hover svg { transform: translateX(-4px); }
+  .burger { width: 26px; height: 18px; display: grid; align-content: space-between; }
+  .burger i { display: block; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+  .burger:hover i:nth-child(2) { transform: translateX(5px); }
+  @media (max-width: 640px) { .blogo span { display: none; } }
+
+  /* phones: a small booking pill in the top bar */
+  .bbook { display: none; }
+  @media (max-width: 720px) { .bbook { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border: 1px solid currentColor; border-radius: 999px; font-size: .56rem; letter-spacing: .16em; font-weight: 600; text-transform: uppercase; white-space: nowrap; opacity: .9; } .bar .home span { display: none; } }
+  /* opener */
+  .opener { position: fixed; top: 0; left: 0; right: 0; z-index: 0; height: 92vh; height: 92svh; min-height: 520px; overflow: hidden; background: #1d2e26; color: var(--cream); display: grid; align-content: end; }
+  .opener img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transform-origin: 50% 60%; will-change: transform; }
+  .op-shade { position: absolute; inset: 0; z-index: 1; background: rgba(14,23,29,1); opacity: 0; pointer-events: none; }
+  .opener .in { will-change: transform, opacity; }
+  /* the opener stays still while the page rises over it, like the main hero */
+  .op-space { height: 92vh; height: 92svh; min-height: 520px; }
+  .intro, .index, #list, .stay, .end { position: relative; z-index: 2; }
+  .intro, .index, #list { background: var(--stone); }
+  .intro { box-shadow: 0 -30px 70px -30px rgba(14,23,29,.5); }
+  @keyframes settle { to { transform: scale(1); } }
+  .opener::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,23,29,.35) 0%, rgba(14,23,29,0) 30%, rgba(14,23,29,.1) 55%, rgba(14,23,29,.7) 100%); }
+  .opener .in { position: relative; z-index: 2; padding-block: 0 clamp(48px, 9vh, 6rem); display: grid; gap: 18px; }
+  .opener .label { color: rgba(245,240,230,.8); display: flex; align-items: center; gap: 14px; }
+  .opener .label::before { content: ""; width: 36px; height: 1px; background: currentColor; }
+  .opener h1 { font-family: var(--display); font-weight: 400; font-size: clamp(48px, 7.4vw, 7.75rem); line-height: .95; letter-spacing: -.025em; margin: 0; max-width: 12ch; }
+  .opener h1 em { color: var(--sand); }
+  .opener .rise { opacity: 0; transform: translateY(24px); animation: rise 1.2s var(--ease) forwards; }
+  .opener .rise:nth-child(2) { animation-delay: .15s; } .opener .rise:nth-child(3) { animation-delay: .3s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* intro */
+  .intro { padding-block: clamp(80px, 10vw, 9.375rem) clamp(60px, 7vw, 6.25rem); overflow: hidden; }
+  .wrap { max-width: 90rem; margin: 0 auto; }
+  .intro .grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 48px; }
+  .intro .grid > :not(.sketch) { position: relative; z-index: 1; }
+  .sketch { position: absolute; z-index: 0; right: -3%; top: clamp(-150px, -9vw, -70px); width: min(60%, 900px); height: auto; opacity: .3; pointer-events: none; user-select: none;
+    -webkit-mask-image: radial-gradient(ellipse 70% 75% at 55% 45%, #000 55%, transparent 100%); mask-image: radial-gradient(ellipse 70% 75% at 55% 45%, #000 55%, transparent 100%); }
+  .intro .top { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--olive-2); padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+  .intro .lead { grid-column: 1 / span 7; margin: 0; font-family: var(--display); font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.45; letter-spacing: -.005em; }
+  .intro .body { grid-column: 9 / span 4; margin: 0; color: var(--olive-2); line-height: 1.75; }
+  .figs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .fig b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 4.2rem); line-height: 1; letter-spacing: -.02em; }
+  .fig span { display: block; margin-top: 10px; color: var(--olive-2); }
+
+  /* index */
+  .index { padding-block: 0 clamp(60px, 8vw, 6.875rem); }
+  .index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); border-top: 1px solid var(--rule); }
+  .index li { border-bottom: 1px solid var(--rule); }
+  .index a { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: baseline; gap: 10px; padding-block: 18px; transition: color .3s; }
+  .index a .n { font-size: .66rem; letter-spacing: .14em; color: var(--olive-2); font-variant-numeric: tabular-nums; }
+  .index a .nm { font-family: var(--display); font-size: clamp(1.3rem, 1.9vw, 1.8rem); transition: transform .5s var(--ease); }
+  .index a .ar { color: var(--olive-2); transition: transform .5s var(--ease); }
+  .index a:hover .nm { font-style: italic; transform: translateX(6px); }
+  .index a:hover .ar { transform: translateY(3px); }
+
+  /* beaches */
+  .beach { padding-block: clamp(60px, 8vw, 7.5rem); border-top: 1px solid var(--rule); }
+  .beach:nth-child(even) { background: var(--ivory); }
+  .beach .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 36px; align-items: center; }
+  .gal { grid-column: 1 / span 7; min-width: 0; margin-left: calc(-.5 * max(var(--gx), env(safe-area-inset-left, 0px))); }
+  .txt { grid-column: 9 / span 4; display: grid; gap: 16px; min-width: 0; }
+  .beach.flip .gal { grid-column: 6 / span 7; grid-row: 1; margin-left: 0; margin-right: calc(-.5 * max(var(--gx), env(safe-area-inset-right, 0px))); }
+  .beach.flip .win { clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)); }
+  .beach.flip .wf::before { inset: 18px 18px -18px -18px; clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)); }
+  .beach.flip .wf .tick { right: auto; left: 6px; }
+  .beach.flip:hover .wf::before { transform: translate(6px, -6px); }
+  .beach.flip .txt { grid-column: 1 / span 4; grid-row: 1; }
+  .wf { --cut: clamp(36px, 5vw, 4.75rem); position: relative; isolation: isolate; }
+  .wf::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid rgba(38,61,52,.28); z-index: -1; pointer-events: none;
+    clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); transition: transform .8s var(--ease); }
+  .wf .tick { position: absolute; z-index: 2; top: 6px; right: 6px; width: calc(var(--cut) - 10px); text-align: center; font-size: .62rem; letter-spacing: .14em; color: var(--olive-2); font-variant-numeric: tabular-nums; }
+  .beach:hover .wf::before { transform: translate(-6px, -6px); }
+  .win { position: relative; aspect-ratio: 4 / 3; clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); overflow: hidden; background: #c9cfc4; touch-action: pan-y; }
+  .win img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .9s ease; }
+  .win img.on { opacity: 1; }
+  .thumbs { display: flex; gap: 10px; margin-top: 30px; padding-left: calc(.5 * max(var(--gx), env(safe-area-inset-left, 0px))); align-items: center; }
+  .thumbs button { width: 64px; height: 48px; border-radius: 3px; overflow: hidden; opacity: .5; outline-offset: 3px; transition: opacity .3s; position: relative; }
+  .thumbs button img { width: 100%; height: 100%; object-fit: cover; }
+  .thumbs button[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 1px var(--olive); }
+  .thumbs button:hover { opacity: .9; }
+  .beach.flip .thumbs { padding-left: 0; padding-right: calc(.5 * max(var(--gx), env(safe-area-inset-right, 0px))); }
+  .thumbs .cnt { margin-left: auto; color: var(--olive-2); font-variant-numeric: tabular-nums; }
+  .txt .no { display: flex; align-items: center; gap: 14px; color: var(--olive-2); }
+  .txt .no::after { content: none; }
+  @media (min-width: 901px) { .beach:not(.flip) .txt .no { justify-content: flex-end; } }
+  @media (max-width: 900px) { .txt .no::after { content: ""; flex: 1; height: 1px; background: var(--rule); } }
+  .beach .grid { position: relative; }
+  .link { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; color: var(--sage); }
+  .link path { fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+  .link .dot { fill: var(--stone); stroke: currentColor; stroke-width: 1; }
+  .beach:nth-child(even) .link .dot { fill: var(--ivory); }
+  .link .end { fill: currentColor; stroke: none; }
+  .beach .gal, .beach .txt { position: relative; z-index: 1; }
+  .beach.drawn .link path { animation: drawLine 1.6s var(--ease) forwards; }
+  .link path { stroke-dasharray: var(--len, 1000); stroke-dashoffset: var(--len, 1000); }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @media (max-width: 900px) { .link { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .link path { stroke-dashoffset: 0 !important; animation: none !important; } }
+  .txt h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 4.4vw, 4.4rem); line-height: 1; letter-spacing: -.02em; margin: 0; }
+  .txt .lat { font-family: var(--display); font-style: italic; color: var(--aegean); font-size: 1.1rem; }
+  .txt p { margin: 4px 0 0; color: var(--olive-2); line-height: 1.75; max-width: 44ch; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .tags span { font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; padding: 7px 11px; border: 1px solid var(--rule); border-radius: 999px; color: var(--olive); }
+  .map { justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; padding-bottom: 5px; border-bottom: 1px solid currentColor; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; }
+  .bsk { display: block; width: min(100%, 380px); height: auto; margin-top: clamp(24px, 3vw, 2.75rem); opacity: .3; pointer-events: none; user-select: none; }
+  @media (max-width: 900px) { .bsk { width: min(78%, 360px); } }
+  .map svg { width: 12px; height: 12px; transition: transform .4s var(--ease); }
+  .map:hover svg { transform: translate(2px, -2px); }
+
+  /* menu overlay */
+  .menu { position: fixed; inset: 0; z-index: 20; background: rgba(14,23,29,.96); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: grid; align-content: center; gap: 8px;
+    padding-left: max(var(--cx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease); }
+  .menu.open { clip-path: inset(0 0 0 0); }
+  .menu a.big { font-family: var(--display); font-size: clamp(2.1rem, min(5.4vw, 8.5vh), 4.6rem); line-height: 1.1; color: var(--cream); width: max-content; max-width: 100%; transition: color .3s, transform .5s var(--ease); }
+  .menu a.big:hover { color: var(--sand); transform: translateX(10px); }
+  .menu .close { position: absolute; top: calc(28px + env(safe-area-inset-top, 0px)); right: max(var(--gx), env(safe-area-inset-right, 0px)); color: var(--cream); }
+  .menu .row { margin-top: 32px; display: flex; gap: 28px; flex-wrap: wrap; color: var(--mist); }
+
+  /* reveal */
+  .rv { transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .rv.pre { opacity: 0; transform: translateY(30px); }
+
+  /* drone photograph of the rooms, just before the closing band */
+  /* closing band: the house seen from above in an arched window, and a signpost of the beaches beside it, like the one in Chora */
+  .stay { position: relative; overflow: hidden; color: var(--cream); background: #1d2e26; padding-block: clamp(80px, 11vw, 10rem); }
+  .stay::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 22% 55%, rgba(227,201,168,.12), transparent 70%); pointer-events: none; }
+  .stay-w { position: relative; max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 8rem); align-items: center; }
+  .stay-ph { position: relative; margin: 0; width: min(100%, 34rem); justify-self: center; }
+  .stay-arch { position: relative; aspect-ratio: 100 / 140; overflow: hidden; border-radius: 50% 50% 4px 4px / 35.7% 35.7% 4px 4px; background: #263d34; box-shadow: 0 60px 120px -50px rgba(0,0,0,.7); }
+  .stay-arch img { position: absolute; left: -8%; top: -6%; width: 116%; height: 112%; object-fit: cover; object-position: 50% 50%; max-width: none; will-change: transform; }
+  .stay-ph::before { content: ""; position: absolute; left: -14px; right: -14px; top: -14px; aspect-ratio: 100 / 140; height: auto; width: calc(100% + 28px); border: 1px solid rgba(227,201,168,.5); border-radius: 50% 50% 6px 6px / 35.7% 35.7% 6px 6px; pointer-events: none;
+    clip-path: inset(100% 0 0 0); transition: clip-path 2s cubic-bezier(.65,0,.2,1) .3s; }
+  .stay-ph:not(.pre)::before { clip-path: inset(0 0 0 0); }
+  .stay-ph figcaption { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; color: rgba(245,240,230,.7); }
+  .stay-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--sand); }
+  .stay-dot::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--sand); animation: stayPing 2.6s ease-out infinite; }
+  @keyframes stayPing { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+  .stay-t { display: grid; gap: clamp(30px, 4vw, 3.5rem); }
+  .stay-h { margin: 0; font-family: var(--display); font-size: clamp(40px, 4.8vw, 5rem); line-height: 1.02; letter-spacing: -.02em; max-width: 12ch; }
+  .stay-h em { color: var(--sand); }
+  .post ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 3vw, 3rem); border-top: 1px solid rgba(245,240,230,.2); max-width: 34rem; }
+  .post li { opacity: 0; transform: translate3d(0, 12px, 0); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .post:not(.pre) li { opacity: 1; transform: none; }
+  .post li:nth-child(2) { transition-delay: .06s; } .post li:nth-child(3) { transition-delay: .12s; } .post li:nth-child(4) { transition-delay: .18s; } .post li:nth-child(5) { transition-delay: .24s; }
+  .post li:nth-child(6) { transition-delay: .3s; } .post li:nth-child(7) { transition-delay: .36s; } .post li:nth-child(8) { transition-delay: .42s; } .post li:nth-child(n+9) { transition-delay: .48s; }
+  .post a { display: flex; align-items: baseline; gap: 12px; padding: 13px 0; border-bottom: 1px solid rgba(245,240,230,.2); color: rgba(245,240,230,.9); transition: color .3s, padding .4s cubic-bezier(.2,.7,.2,1); }
+  .post a:hover, .post a:focus-visible { color: var(--sand); padding-left: 6px; }
+  .post .n { font-size: .6rem; letter-spacing: .14em; color: rgba(245,240,230,.45); font-variant-numeric: tabular-nums; }
+  .post .nm { font-family: var(--display); font-size: clamp(1.05rem, 1.25vw, 1.25rem); line-height: 1.2; }
+  @media (max-width: 900px) {
+    .stay-w { grid-template-columns: 1fr; gap: 50px; }
+    .stay-ph { width: min(84%, 24rem); }
+    .stay-h { font-size: clamp(36px, 10vw, 3.4rem); }
+    .post ul { max-width: none; } .post .nm { font-size: 1.05rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .stay-dot::after { animation: none; } .post li { opacity: 1; transform: none; transition: none; } .stay-ph::before { clip-path: none; transition: none; } }
+
+  /* end */
+  .end { background: var(--olive); color: var(--cream); padding-block: clamp(80px, 10vw, 8.75rem) clamp(40px, 5vw, 4.375rem); }
+  .end .cta { padding-bottom: 0 !important; }
+  .end .cta { display: grid; gap: 26px; justify-items: start; padding-bottom: clamp(60px, 8vw, 6.25rem); }
+  .end h3 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.6vw, 5.5rem); line-height: 1; letter-spacing: -.022em; margin: 0; }
+  .end h3 em { color: #c9cfba; }
+  .end .go { display: inline-flex; align-items: center; gap: 16px; padding: 18px 24px; background: var(--cream); color: var(--olive); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; border-radius: 2px; }
+  .end .go svg { width: 24px; height: 12px; transition: transform .4s var(--ease); }
+  .end .go:hover svg { transform: translateX(5px); }
+  .end .foot { display: flex; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.5); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.14); }
+
+  /* ---------- Footer: deep olive, four quiet columns, the name set large as a signature ---------- */
+  .sfoot { position: relative; z-index: 2; background: #1d2e26; color: #f5f0e6; overflow: hidden;
+    padding-block: clamp(64px, 8vw, 6.875rem) 26px; padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .fwrap { max-width: 90rem; margin: 0 auto; }
+  .fgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 44px; padding-bottom: clamp(40px, 6vw, 5rem); }
+  .fbrand { grid-column: 1 / span 4; display: grid; gap: 22px; align-content: start; }
+  .femblem { width: 64px; height: auto; }
+  .fsocial { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .fsocial a { display: inline-grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(245,240,230,.2); border-radius: 50%; color: rgba(245,240,230,.85);
+    font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; transition: background .35s, color .35s, border-color .35s; }
+  .fsocial a svg { width: 22px; height: 22px; transition: transform .45s var(--ease); }
+  .fsocial a:hover { background: #f5f0e6; color: #263d34; border-color: #f5f0e6; }
+  .fsocial a:hover svg { transform: rotate(-8deg) scale(1.06); }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: #263d34; color: #f5f0e6; padding: 10px 16px; border-radius: 2px; font-size: .9rem; }
+  .skip:focus { top: 12px; }
+  .flegal { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fcopy { color: rgba(245,240,230,.62); }
+  .flegal a, .flegal button { color: rgba(245,240,230,.72); font: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(245,240,230,.25); text-underline-offset: 4px; }
+  .flegal a:hover, .flegal button:hover { color: #f5f0e6; }
+  .fbar { color: rgba(245,240,230,.62) !important; }
+  .fcol .label { color: rgba(245,240,230,.62) !important; }
+  .fbrand p { margin: 0; color: rgba(245,240,230,.65); line-height: 1.7; max-width: 30ch; }
+  .fcol { grid-column: span 2; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .fcol:nth-of-type(1) { grid-column: 7 / span 2; }
+  .fcol .label { color: rgba(245,240,230,.45); margin-bottom: 6px; }
+  .fcol a { color: rgba(245,240,230,.85); width: fit-content; max-width: 100%; overflow-wrap: anywhere; position: relative; transition: color .3s; }
+  .fcol a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  .fcol a:hover { color: #f5f0e6; }
+  .fcol a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .flang { margin-top: 10px; color: rgba(245,240,230,.45); }
+  .flang button[aria-pressed="true"] { color: #f5f0e6; }
+  .fword { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 15.5vw, 18.75rem); line-height: .78; letter-spacing: .08em; margin-right: -.08em; text-align: center; white-space: nowrap;
+    color: transparent; -webkit-text-stroke: 1px rgba(245,240,230,.22); user-select: none; margin-bottom: clamp(18px, 2.4vw, 2.125rem); }
+  .fbar { display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.45); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fup { color: rgba(245,240,230,.7); letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; transition: color .3s; }
+  .fup:hover { color: #f5f0e6; }
+  @media (max-width: 980px) {
+    .fbrand { grid-column: 1 / -1; }
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 4; }
+  }
+  @media (max-width: 560px) {
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 6; }
+    .fcol:last-of-type { grid-column: 1 / -1; }
+    .fbar { flex-direction: column; align-items: flex-start; }
+  }
+  .totop { position: fixed; z-index: 14; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 52px; display: grid; place-items: center;
+    color: #eeece3; mix-blend-mode: difference; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
+  .totop.show { opacity: .9; pointer-events: auto; }
+  .totop svg { width: 22px; height: 34px; }
+
+  @media (max-width: 900px) {
+    .intro .lead, .intro .body { grid-column: 1 / -1; }
+    .intro { padding-top: clamp(150px, 32vw, 13.75rem); }
+    .sketch { width: 150%; max-width: none; right: -32%; top: clamp(-150px, -30vw, -110px); opacity: .32;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%); mask-image: linear-gradient(180deg, #000 55%, transparent 92%); }
+    .index ol { grid-template-columns: 1fr 1fr; }
+    .gal, .beach.flip .gal { grid-column: 1 / -1; grid-row: 1; margin-left: 0; margin-right: 0; }
+    .thumbs, .beach.flip .thumbs { padding-left: 0; padding-right: 0; }
+    .txt, .beach.flip .txt { grid-column: 1 / -1; grid-row: 3; }
+    /* phones: name first, then the photo, then the text */
+    .mhead { display: grid; gap: 10px; grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px; }
+    .mhead b { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 3.6rem); line-height: 1; letter-spacing: -.02em; color: var(--olive); }
+    .gal, .beach.flip .gal { grid-row: 2; }
+    .mhead .lat { font-family: var(--display); font-style: italic; color: var(--aegean); font-size: 1.1rem; }
+    .mhead .no { display: flex; align-items: center; gap: 14px; color: var(--olive-2); margin-bottom: 6px; }
+    .mhead .no::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+    .txt .no, .txt h2, .txt .lat { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+  @media (min-width: 901px) { .mhead { display: none; } }
+  @media (max-width: 560px) {
+    .index ol { grid-template-columns: 1fr; }
+    .figs { grid-template-columns: 1fr; gap: 20px; }
+    .win, .beach.flip .win { aspect-ratio: 4 / 5; }
+    .wf::before, .beach.flip .wf::before { inset: 12px -10px -12px 10px; }
+    .thumbs button { width: 54px; height: 42px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .opener .rise { animation: none; opacity: 1; transform: none; }
+    .rv, .rv.pre { transition: none; opacity: 1; transform: none; }
+    .win img { transition: none; }
+  }
+
+</style>
+<script src="a11y.js?v=5"></script>
+</head>
+<body data-legal="legal.html">
+<a class="skip" href="#content" data-i="skip">Μετάβαση στο περιεχόμενο</a>
+
+<header class="bar gut" id="bar">
+  <a class="blogo" href="./" aria-label="Filotimia, home">
+    <svg viewBox="264 26 192 166" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M296 179V97a64 64 0 0 1 128 0v82"/><path d="M296 107 270 98v67l26 10ZM424 107l26-9v67l-26 10Z"/><path d="M288 181h144"/></g><path d="M308 132q26-6 52 0t52 0M314 150q23-5 46 0t46 0" fill="none" stroke="#5b7d88" stroke-width="6" stroke-linecap="round"/><circle cx="360" cy="108" r="12" fill="#c9a876"/></svg>
+    <span>FILOTIMIA</span>
+  </a>
+  <div class="btools label">
+    <a class="home" href="./"><svg viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 5H1M5 1 1 5l4 4"/></svg><span data-i="home">Αρχική</span></a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+    <a class="bbook" href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener" data-i="bookS">Κράτηση</a>
+    <button type="button" class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button type="button" class="close label" id="close" data-i="close">Κλείσιμο</button>
+  <a class="big" href="about.html" data-i="nav1">Σχετικά με εμάς</a>
+  <a class="big" href="rooms.html" data-i="nav2">Δωμάτια</a>
+  <a class="big" href="gallery.html" data-i="nav3">Γκαλερί</a>
+  <a class="big" href="access.html" data-i="nav4">Πρόσβαση</a>
+  <a class="big" href="#h1" data-i="nav5">Παραλίες</a>
+  <div class="row label">
+    <a href="./#contact" data-i="enquire">Επικοινωνία</a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+  </div>
+</div>
+
+<section class="opener gut" id="opener" aria-labelledby="h1">
+  <img id="opImg" src="beaches/main.jpg" alt="Sunset over the Aegean, seen between two rocks on Schoinoussa">
+  <div class="op-shade" id="opShade"></div>
+  <div class="in wrap" id="opIn" style="width:100%">
+    <h1 id="h1" class="rise" data-i="openH">Οι παραλίες της <em>Σχοινούσας</em>.</h1>
+  </div>
+</section>
+
+<div class="op-space" aria-hidden="true"></div>
+
+<section class="intro gut" id="content" tabindex="-1">
+  <div class="wrap grid">
+    <img class="sketch" src="beaches/sketch.svg" alt="" aria-hidden="true">
+    <div class="top label"><span>01 — 09</span></div>
+    <p class="lead rv" data-i="lead">Οι παραλίες της Σχοινούσας είναι απάτητες και ανήκουν σε ειδικό καθεστώς προστασίας. Παρά το μικρό της μέγεθος, το νησί έχει μεγάλο αριθμό παραλιών.</p>
+    <p class="body rv" data-i="body">Από τη Χώρα, η πινακίδα δείχνει τις αποστάσεις για κάθε παραλία, με την πιο μακρινή διαδρομή (Λιόλιου) να είναι στα 3,5 χιλιόμετρα. Οι αποστάσεις είναι μικρές: οι περισσότερες φτάνονται σε λίγα λεπτά, με τα πόδια ή με αυτοκίνητο. Μια επιστροφή στη φύση και στην αυθεντικότητα.</p>
+    <div class="figs rv">
+      <div class="fig"><b>9</b><span class="label" data-i="f1">Παραλίες σε αυτόν τον οδηγό</span></div>
+      <div class="fig"><b>3,5 km</b><span class="label" data-i="f2">Η πιο μακρινή, η Λιόλιου</span></div>
+      <div class="fig"><b>~1 km</b><span class="label" data-i="f3">Το Λιβάδι από τη Χώρα</span></div>
+    </div>
+  </div>
+</section>
+
+<nav class="index gut" aria-label="Beaches">
+  <div class="wrap"><ol id="idx"></ol></div>
+</nav>
+
+<main id="list"></main>
+
+<section class="stay" id="stay" aria-labelledby="stay-h">
+  <div class="stay-w gut">
+    <figure class="stay-ph rv"><div class="stay-arch"><img id="stayImg" src="g/drone-2.jpg" alt="Drone view of the Filotimia stone rooms on Schoinoussa, with the sea and Naxos behind" loading="lazy" decoding="async"></div></figure>
+    <div class="stay-t">
+      <p id="stay-h" class="stay-h rv" data-i="stayP">Λίγα λεπτά από <em>κάθε παραλία</em>.</p>
+      <div class="post rv" aria-label="Beaches"><ul id="post"></ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="sfoot" aria-label="Footer">
+  <div class="fwrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <svg class="femblem" viewBox="264 26 192 166" aria-hidden="true"><defs><clipPath id="fv"><path d="M303 178V97a57 57 0 0 1 114 0v81Z"/></clipPath></defs><g stroke-linecap="round" stroke-linejoin="round"><g clip-path="url(#fv)"><rect x="302" y="35" width="116" height="145" fill="#f3eee1"/><circle cx="360" cy="113" r="13" fill="#d5b58b"/><path d="M300 130q30-5 59 0t59 0" fill="none" stroke="#78969a" stroke-width="3.5"/><path d="M301 143q28-5 57 0t59 0m-112 12q30-4 58 0t58 0" fill="none" stroke="#93aa9f" stroke-width="3"/></g><path d="M296 179V97a64 64 0 0 1 128 0v82" fill="none" stroke="#f5f0e6" stroke-width="5"/><path d="M296 107 270 98v67l26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M424 107 450 98v67l-26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M288 181h144M304 189h112" fill="none" stroke="#f5f0e6" stroke-width="5"/></g></svg>
+        <p data-i="fTag">Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.</p>
+        <span class="fcopy label">© 2026 Filotimia</span>
+        <div class="fsocial">
+          <a href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener" aria-label="Filotimia Apartments on Google Maps" title="Google Maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.4"/></svg>
+          </a>
+          <a href="https://www.booking.com/hotel/gr/filotimia.el.html" target="_blank" rel="noopener" aria-label="Filotimia on Booking.com" title="Booking.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><text x="12.6" y="17.4" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="16" fill="currentColor">B.</text></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="fcol" aria-label="Footer menu">
+        <span class="label" data-i="fMenu">Μενού</span>
+        <a href="about.html" data-i="nav1">Σχετικά με εμάς</a>
+        <a href="rooms.html" data-i="nav2">Δωμάτια</a>
+        <a href="gallery.html" data-i="nav3">Γκαλερί</a>
+        <a href="access.html" data-i="nav4">Πρόσβαση</a>
+        <a href="#h1" data-i="nav5">Παραλίες</a>
+      </nav>
+      <div class="fcol">
+        <span class="label" data-i="fContact">Επικοινωνία</span>
+        <a href="mailto:info@filotimia.gr">info@filotimia.gr</a>
+        <a href="tel:+306943102945">+30 694 310 2945</a>
+        <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener"><span data-i="fMap">Δείτε στον χάρτη</span> ↗</a>
+      </div>
+      <div class="fcol">
+        <span class="label" data-i="fBook">Κράτηση</span>
+        <a href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener"><span data-i="bL">Απευθείας κράτηση</span> ↗</a>
+        <a href="./#contact" data-i="enquire">Επικοινωνία</a>
+        <div class="lang flang label" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="false">GR</button></div>
+      </div>
+    </div>
+    <div class="fword" aria-hidden="true">FILOTIMIA</div>
+    <nav class="flegal label" aria-="Legal">
+        <a href="legal.html#terms" data-i="lgTerms">Όροι και προϋποθέσεις</a>
+        <a href="legal.html#privacy" data-i="lgPriv">Πολιτική απορρήτου</a>
+        <a href="legal.html#cookies" data-i="lgCook">Cookies</a>
+        <button type="button" data-cookie-settings data-i="lgSet">Ρυθμίσεις cookies</button>
+        <a href="legal.html#accessibility" data-i="lgA11y">Προσβασιμότητα</a>
+      </nav>
+  </div>
+</footer>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top"><svg viewBox="0 0 22 34" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 33V2M3 10l8-8 8 8"/></svg></button>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ARR = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg>';
+
+  var B = [
+    { k: 'psili-ammos', n: 2, el: 'Ψιλή Άμμος', lat: 'Psili Ammos', en: 'Psili Ammos', q: 'Psili Ammos Beach Schoinoussa',
+      t: { el: 'Παραλία με ψιλή άμμο και διάφανα νερά, από τις πιο γνωστές του νησιού. Βρίσκεται βορειοανατολικά της Χώρας και προσφέρει εκπληκτική θέα στο πέλαγος.',
+           en: 'Fine sand and clear water at one of the island’s best-known beaches. It lies north-east of Chora, with a wide view of the open sea.' },
+      tags: { el: ['Ψιλή άμμος', 'Διάφανα νερά', 'ΒΑ της Χώρας'], en: ['Fine sand', 'Clear water', 'North-east of Chora'] } },
+    { k: 'lioliou', n: 2, el: 'Λιόλιου', lat: 'Lioliou', en: 'Lioliou', q: 'Lioliou Beach Schoinoussa',
+      t: { el: 'Αμμώδης ακτή με ήρεμα νερά και ταβερνάκια, ιδανική για οικογένειες και παιδιά. Προσβάσιμη εύκολα με αυτοκίνητο ή με τα πόδια από τη Χώρα.',
+           en: 'A sandy shore with calm water and small tavernas, ideal for families with children. Easy to reach by car or on foot from Chora.' },
+      tags: { el: ['Άμμος', 'Ταβερνάκια', 'Για οικογένειες', '3,5 km'], en: ['Sand', 'Tavernas', 'Family friendly', '3.5 km'] } },
+    { k: 'almyros', n: 1, el: 'Αλμυρός', lat: 'Almyros', en: 'Almyros', q: 'Almyros Beach Schoinoussa',
+      t: { el: 'Εξαιρετική παραλία στη νοτιοανατολική πλευρά της Σχοινούσας, με ψιλή άμμο και γαλαζοπράσινα ρηχά νερά. Ιδανική για οικογένειες και παιδιά, με θέα προς το Κουφονήσι.',
+           en: 'A lovely beach on the south-east side of Schoinoussa, with fine sand and shallow turquoise water. Ideal for families, with a view towards Koufonisi.' },
+      tags: { el: ['Ψιλή άμμος', 'Ρηχά νερά', 'Θέα στο Κουφονήσι'], en: ['Fine sand', 'Shallow water', 'View of Koufonisi'] } },
+    { k: 'alygaria', n: 4, el: 'Αλυγαριά', lat: 'Alygaria', en: 'Alygaria', q: 'Alygaria Beach Schoinoussa',
+      t: { el: 'Νότια της Χώρας, τρεις συνεχόμενοι μικροί κολπίσκοι με ψιλό βότσαλο και ρηχά νερά. Ιδανική για ζευγάρια και ήσυχες στιγμές.',
+           en: 'South of Chora, three small coves in a row with fine pebbles and shallow water. Made for couples and quiet moments.' },
+      tags: { el: ['Τρεις κολπίσκοι', 'Ψιλό βότσαλο', 'Ρηχά νερά'], en: ['Three coves', 'Fine pebbles', 'Shallow water'] } },
+    { k: 'fontana', n: 1, el: 'Φουντάνα', lat: 'Fontana', en: 'Fontana', q: 'Fontana Beach Schoinoussa',
+      t: { el: 'Στον όρμο της Φουντάνας, στη βορειοανατολική ακτή, σχηματίζονται δύο μικρές παραλίες με καταγάλανα νερά και θέα προς Κουφονήσι, Κέρο και Αμοργό. Σημείο αναφοράς, ο μικρός βενετσιάνικος πύργος.',
+           en: 'In Fontana bay on the north-east coast, two small beaches with deep-blue water and views of Koufonisi, Keros and Amorgos. The small Venetian tower is your landmark.' },
+      tags: { el: ['Δύο παραλίες', 'Θέα σε Κέρο & Αμοργό', 'Βενετσιάνικος πύργος'], en: ['Two beaches', 'View of Keros & Amorgos', 'Venetian tower'] } },
+    { k: 'piso-ammos', n: 1, el: 'Πίσω Άμμος', lat: 'Mersini · Piso Ammos', en: 'Piso Ammos', q: 'Piso Ammos Beach Mersini Schoinoussa',
+      t: { el: 'Δίπλα στο λιμάνι, μια παραλία περίπου 60 μέτρων με άμμο, αλμυρίκια και πάντα ήσυχα νερά. Προσφέρει φυσική σκιά, αν και λόγω του λιμανιού μπορεί να έχει λίγη κίνηση.',
+           en: 'Right by the port, a stretch of about 60 metres with sand, tamarisks and always-calm water. Natural shade, though being next to the harbour it can be a little livelier.' },
+      tags: { el: ['Δίπλα στο λιμάνι', 'Φυσική σκιά', 'Ήσυχα νερά'], en: ['By the port', 'Natural shade', 'Calm water'] } },
+    { k: 'livadi', n: 2, ord: [2, 1], el: 'Λιβάδι', lat: 'Livadi', en: 'Livadi', q: 'Livadi Beach Schoinoussa',
+      t: { el: 'Μια ονειρεμένη παραλία στο νότιο τμήμα του νησιού, με μεγάλη, φαρδιά αμμουδιά και μια σειρά από αλμυρίκια. Δεν επηρεάζεται από τους δυνατούς βοριάδες, γι’ αυτό είναι ιδανική για οικογένειες. Απέχει περίπου 1 km από τη Χώρα και φτάνει εκεί και αυτοκίνητο.',
+           en: 'A dreamy beach in the south of the island, with a long, wide stretch of sand lined with tamarisks. Sheltered from the strong north winds, it is ideal for families. About 1 km from Chora, and reachable by car.' },
+      tags: { el: ['Φαρδιά αμμουδιά', 'Απάνεμη από βοριάδες', '~1 km'], en: ['Wide sandy beach', 'Sheltered from north winds', '~1 km'] } },
+    { k: 'gerolimnionas', n: 1, el: 'Γερολιμνιώνας', lat: 'Gerolimnionas', en: 'Gerolimnionas', q: 'Gerolimnionas Beach Schoinoussa',
+      t: { el: 'Ήσυχη και απομονωμένη παραλία στη δυτική πλευρά της Σχοινούσας, με χοντρή άμμο και καταγάλανα νερά. Προστατευμένη από τους ανέμους, ιδανική για κολύμπι και ξεκούραση.',
+           en: 'A quiet, secluded beach on the west side of Schoinoussa, with coarse sand and deep-blue water. Sheltered from the wind, perfect for swimming and rest.' },
+      tags: { el: ['Απομονωμένη', 'Χοντρή άμμος', 'Απάνεμη'], en: ['Secluded', 'Coarse sand', 'Sheltered'] } },
+    { k: 'fykio', n: 2, el: 'Φύκιο', lat: 'Fykio', en: 'Fykio', q: 'Fykio Beach Schoinoussa',
+      t: { el: 'Μικρή, πανέμορφη παραλία, ιδανική για ήρεμες βουτιές.',
+           en: 'A small, beautiful beach, perfect for calm swims.' },
+      tags: { el: ['Μικρή παραλία', 'Ήρεμα νερά'], en: ['Small beach', 'Calm water'] } }
+  ];
+
+  var T = {
+    el: { bookS: 'Κράτηση', home: 'Αρχική', book: 'Κράτηση', openL: 'Οδηγός παραλιών', openH: 'Οι παραλίες της <em>Σχοινούσας</em>.', introL: 'Απάτητες · Προστατευόμενες · Κοντά',
+      lead: 'Οι παραλίες της Σχοινούσας είναι απάτητες και ανήκουν σε ειδικό καθεστώς προστασίας. Παρά το μικρό της μέγεθος, το νησί έχει μεγάλο αριθμό παραλιών.',
+      body: 'Από τη Χώρα, η πινακίδα δείχνει τις αποστάσεις για κάθε παραλία, με την πιο μακρινή διαδρομή (Λιόλιου) να είναι στα 3,5 χιλιόμετρα. Οι αποστάσεις είναι μικρές: οι περισσότερες φτάνονται σε λίγα λεπτά, με τα πόδια ή με αυτοκίνητο. Μια επιστροφή στη φύση και στην αυθεντικότητα.',
+      f1: 'Παραλίες σε αυτόν τον οδηγό', f2: 'Η πιο μακρινή, η Λιόλιου', f3: 'Το Λιβάδι από τη Χώρα', map: 'Δείτε στον χάρτη', photo: 'Φωτογραφία',
+      stayL: 'Η Φιλοτιμία, στη Μεσαριά', stayP: 'Λίγα λεπτά από <em>κάθε παραλία</em>.',
+      lgTerms: 'Όροι και προϋποθέσεις', lgPriv: 'Πολιτική απορρήτου', lgCook: 'Cookies', lgSet: 'Ρυθμίσεις cookies', lgA11y: 'Προσβασιμότητα', skip: 'Μετάβαση στο περιεχόμενο', 
+      endH: 'Μείνετε κοντά <em>σε όλες</em>.', endGo: 'Απευθείας κράτηση', footP: 'Σχοινούσα, Μικρές Κυκλάδες',
+      fTag: 'Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.', fMenu: 'Μενού', fContact: 'Επικοινωνία', fMap: 'Δείτε στον χάρτη', fBook: 'Κράτηση', fTop: 'Επιστροφή στην κορυφή',
+      nav1: 'Σχετικά με εμάς', nav2: 'Δωμάτια', nav3: 'Γκαλερί', nav4: 'Πρόσβαση', nav5: 'Παραλίες', close: 'Κλείσιμο', enquire: 'Επικοινωνία', bL: 'Απευθείας κράτηση', cFoot: 'Σχοινούσα, Μικρές Κυκλάδες' },
+    en: { bookS: 'Book', home: 'Home', book: 'Book', openL: 'Beach guide', openH: 'The beaches of <em>Schoinoussa</em>.', introL: 'Unspoilt · Protected · Close by',
+      lead: 'The beaches of Schoinoussa are unspoilt and under special protection. Small as it is, the island has a great number of them.',
+      body: 'In Chora, a signpost shows the distance to every beach, the farthest route (Lioliou) being 3.5 kilometres. Distances are short: most are a few minutes away, on foot or by car. A return to nature and to the authentic.',
+      f1: 'Beaches in this guide', f2: 'The farthest, Lioliou', f3: 'Livadi from Chora', map: 'View on the map', photo: 'Photo',
+      stayL: 'Filotimia, in Mesaria', stayP: 'A few minutes from <em>every beach</em>.',
+      lgTerms: 'Terms and conditions', lgPriv: 'Privacy policy', lgCook: 'Cookies', lgSet: 'Cookie settings', lgA11y: 'Accessibility', skip: 'Skip to content', 
+      endH: 'Stay close <em>to them all</em>.', endGo: 'Book direct', footP: 'Schoinoussa, Small Cyclades',
+      fTag: 'Stone rooms with Aegean views on Schoinoussa, in the Small Cyclades.', fMenu: 'Menu', fContact: 'Contact', fMap: 'View on the map', fBook: 'Booking', fTop: 'Back to top',
+      nav1: 'About us', nav2: 'Rooms', nav3: 'Gallery', nav4: 'Getting here', nav5: 'Beaches', close: 'Close', enquire: 'Contact', bL: 'Book direct', cFoot: 'Schoinoussa, Small Cyclades' }
+  };
+  var lang = 'el';
+  try { var sv = sessionStorage.getItem('aegean-lang'); if (sv === 'en' || sv === 'el') lang = sv; } catch (e) {}
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function render() {
+    var l = lang;
+    $('idx').innerHTML = B.map(function (b, i) {
+      return '<li><a href="#' + b.k + '"><span class="n">' + pad(i + 1) + '</span><span class="nm">' + b[l] + '</span><span class="ar" aria-hidden="true">↓</span></a></li>';
+    }).join('');
+    var po = $('post'); if (po) po.innerHTML = B.map(function (b, i) { return '<li><a href="#' + b.k + '"><span class="n">' + pad(i + 1) + '</span><span class="nm">' + b[l] + '</span></a></li>'; }).join('');
+    $('list').innerHTML = B.map(function (b, i) {
+      var imgs = '', th = '';
+      for (var j = 1; j <= b.n; j++) {
+        var src = 'beaches/' + b.k + '-' + (b.ord ? b.ord[j - 1] : j) + '.jpg', alt = b[l] + ' — ' + T[l].photo + ' ' + j;
+        imgs += '<img src="' + src + '" alt="' + alt + '" loading="lazy"' + (j === 1 ? ' class="on"' : '') + '>';
+        th += '<button type="button" data-j="' + (j - 1) + '" aria-label="' + alt + '"' + (j === 1 ? ' aria-current="true"' : '') + '><img src="' + src + '" alt="" loading="lazy"></button>';
+      }
+      return '<article class="beach' + (i % 2 ? ' flip' : '') + ' gut" id="' + b.k + '"><div class="wrap grid">' +
+        '<svg class="link" aria-hidden="true"><path d=""/><circle class="end" r="2.5"/></svg>' +
+        '<div class="mhead rv" aria-hidden="true"><span class="no label">' + pad(i + 1) + ' / 09</span><b>' + b[l] + '</b><span class="lat">' + b.lat + '</span></div>' +
+        '<div class="gal rv"><div class="wf"><div class="win" data-n="' + b.n + '">' + imgs + '</div></div>' +
+          (b.n > 1 ? '<div class="thumbs">' + th + '<span class="cnt label"><b>01</b> / ' + pad(b.n) + '</span></div>' : '') + '</div>' +
+        '<div class="txt rv"><span class="no label">' + pad(i + 1) + ' / 09</span>' +
+          '<h2>' + b[l] + '</h2><span class="lat">' + b.lat + '</span>' +
+          '<p>' + b.t[l] + '</p>' +
+          '<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=' + encodeURIComponent(b.q) + '" target="_blank" rel="noopener">' + T[l].map + ARR + '</a>' +
+        '</div></div></article>';
+    }).join('');
+    document.querySelectorAll('[data-i]').forEach(function (el) { var v = T[l][el.dataset.i]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang button').forEach(function (bt) { bt.setAttribute('aria-pressed', bt.dataset.lang === l ? 'true' : 'false'); });
+    wire(); reveal(); links(); observeLinks(); setTimeout(links, 600);
+  }
+
+  /* galleries: thumbnails, swipe, plain fade */
+  function wire() {
+    document.querySelectorAll('.beach').forEach(function (art) {
+      var win = art.querySelector('.win'), imgs = win.querySelectorAll('img'), n = imgs.length, cur = 0;
+      if (n < 2) return;
+      var btns = art.querySelectorAll('.thumbs button'), cnt = art.querySelector('.cnt');
+      function go(i) {
+        cur = (i + n) % n;
+        imgs.forEach(function (im, j) { im.classList.toggle('on', j === cur); });
+        btns.forEach(function (bt, j) { bt.setAttribute('aria-current', j === cur ? 'true' : 'false'); });
+        cnt.innerHTML = '<b>' + pad(cur + 1) + '</b> / ' + pad(n);
+      }
+      btns.forEach(function (bt) { bt.addEventListener('click', function () { go(+bt.dataset.j); }); });
+      var sx = null;
+      win.addEventListener('pointerdown', function (e) { sx = e.clientX; });
+      win.addEventListener('pointerup', function (e) { if (sx == null) return; var dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); });
+    });
+  }
+
+  /* a single smooth line from each beach's number rule to its photograph */
+  function links() {
+    document.querySelectorAll('.beach').forEach(function (art) {
+      var svg = art.querySelector('.link'), grid = art.querySelector('.grid');
+      if (!svg || getComputedStyle(svg).display === 'none') return;
+      var g = grid.getBoundingClientRect(), no = art.querySelector('.txt .no').getBoundingClientRect(), wf = art.querySelector('.wf').getBoundingClientRect();
+      var flip = art.classList.contains('flip'), dir = flip ? 1 : -1, off = innerWidth <= 560 ? 10 : 18;
+      var sy = no.top + no.height / 2 - g.top, ey = wf.top + wf.height * 0.5 - g.top;
+      var sx = (flip ? no.right : no.left) - g.left + dir * 10;           // just past the number
+      var lead0 = '';
+      {   // a straight run along the number's row, so the line always meets the number
+        var rg = document.createRange(); rg.selectNodeContents(art.querySelector('.txt .no')); var tr = rg.getBoundingClientRect();
+        if (tr.width) {
+          var tx = flip ? tr.right - g.left + 12 : tr.left - g.left - 12;
+          if (flip ? tx < sx - 4 : tx > sx + 4) lead0 = 'M' + tx.toFixed(1) + ' ' + sy.toFixed(1) + ' H' + sx.toFixed(1) + ' ';
+        }
+      }
+      var ex = (flip ? wf.left - off : wf.right + off) - g.left;          // on the outline
+      var run = Math.abs(ex - sx), lead = Math.min(40, run * 0.18);       // short straight lead-out and lead-in
+      var x1 = sx + dir * lead, x2 = ex - dir * lead, k = Math.abs(x2 - x1) * 0.5;
+      var d = (lead0 || 'M' + sx.toFixed(1) + ' ' + sy.toFixed(1) + ' ') + 'H' + x1.toFixed(1) +
+              ' C' + (x1 + dir * k).toFixed(1) + ' ' + sy.toFixed(1) + ' ' + (x2 - dir * k).toFixed(1) + ' ' + ey.toFixed(1) + ' ' + x2.toFixed(1) + ' ' + ey.toFixed(1) +
+              ' H' + ex.toFixed(1);
+      var path = svg.querySelector('path'); path.setAttribute('d', d);
+      var len = Math.ceil(path.getTotalLength()); svg.style.setProperty('--len', len);
+      svg.querySelector('.end').setAttribute('cx', ex); svg.querySelector('.end').setAttribute('cy', ey);
+    });
+  }
+  var lt; addEventListener('resize', function () { clearTimeout(lt); lt = setTimeout(links, 120); });
+  var lio = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('drawn'); lio.unobserve(e.target); } });
+  }, { threshold: 0.35 }) : null;
+  function observeLinks() { document.querySelectorAll('.beach').forEach(function (a) { if (lio) lio.observe(a); else a.classList.add('drawn'); }); }
+
+  /* reveal blocks that start below the fold */
+  var io = ('IntersectionObserver' in window && !reduced) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); clearTimeout(lt); lt = setTimeout(links, 1100); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  function reveal() {
+    if (!io) return;
+    document.querySelectorAll('.rv').forEach(function (el) {
+      if (el.dataset.seen) return; el.dataset.seen = '1';
+      if (el.getBoundingClientRect().top > (innerHeight || 0) * 0.9) { el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  document.querySelectorAll('.lang button').forEach(function (bt) {
+    bt.addEventListener('click', function () { lang = bt.dataset.lang; try { sessionStorage.setItem('aegean-lang', lang); } catch (e) {} render(); });
+  });
+
+  // bar turns solid once the opener is behind; arrow appears further down
+  var bar = $('bar'), top = $('totop'), menu = $('menu');
+  var lastY = scrollY, acc = 0;
+  function onScroll() {
+    var y = scrollY, h = innerHeight || 1, dy = y - lastY; lastY = y;
+    bar.classList.toggle('solid', y > h * 0.6);
+    top.classList.toggle('show', y > h * 1.2);
+    if (y < h * 0.6 || (menu && menu.classList.contains('open'))) { acc = 0; bar.classList.remove('hide'); return; }
+    acc = (dy > 0) === (acc > 0) ? acc + dy : dy;
+    if (acc > 14) bar.classList.add('hide'); else if (acc < -14) bar.classList.remove('hide');
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  /* opener: as the page rises over it, the photo pushes in and darkens and the title lifts away */
+  (function () {
+    var op = $('opener'), img = $('opImg'), sh = $('opShade'), tin = $('opIn'); if (!op) return;
+    var sp = 0, t0 = performance.now();
+    (function fx(now) {
+      requestAnimationFrame(fx);
+      var h = op.offsetHeight || innerHeight || 1, target = Math.min(1.2, Math.max(0, scrollY / h));
+      sp += (target - sp) * (reduced ? 1 : 0.1);
+      op.style.visibility = sp > 1.05 ? 'hidden' : 'visible';
+      if (sp > 1.05) return;
+      var settle = reduced ? 1 : Math.min(1, (now - t0) / 2400), e = 1 - Math.pow(1 - settle, 3);
+      // a slow, endless zoom: in over ~16 s, then gently back out
+      var kb = reduced ? 0 : 0.1 * (0.5 - 0.5 * Math.cos((now - t0) / 16000 * Math.PI));
+      if (!reduced) img.style.transform = 'scale(' + (1 + 0.06 * (1 - e) + kb + sp * 0.12).toFixed(4) + ')';
+      sh.style.opacity = Math.min(0.7, sp * 0.7).toFixed(3);
+      tin.style.transform = reduced ? '' : 'translate3d(0,' + (-sp * 90).toFixed(1) + 'px,0)';
+      tin.style.opacity = Math.max(0, 1 - sp * 1.4).toFixed(3);
+    })(performance.now());
+  })();
+  var stayImg = $('stayImg');
+  addEventListener('scroll', function () { if (reduced || !stayImg) return; var r = stayImg.parentNode.getBoundingClientRect(), h = innerHeight || 1; if (r.bottom < 0 || r.top > h) return;
+    var t = Math.max(0, Math.min(1, (h - r.top) / (h + r.height))); stayImg.style.transform = 'translate3d(0,' + ((0.5 - t) * 8).toFixed(2) + '%,0) scale(' + (1.06 - t * 0.06).toFixed(4) + ')'; }, { passive: true });
+  top.addEventListener('click', function () { scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+  var burger = $('burger');
+  function toggleMenu(open) { menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', open ? 'false' : 'true'); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function () { toggleMenu(true); });
+  $('close').addEventListener('click', function () { toggleMenu(false); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
+
+  render();
+  addEventListener('load', links);
+})();
+</script>
+<script src="consent.js"></script>
+</body>
+</html>
