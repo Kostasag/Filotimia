@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Filotimia Rooms</title>
+<title>Filotimia Rooms</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1d2e26">
 <link rel="preload" as="image" href="r/hero.jpg" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
@@ -487,6 +487,25 @@
 
   .rh-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   @media (min-width: 901px) { .rh-t > p { grid-column: -2; } }
+  /* phones: the panorama sits on top as a wide picture that drifts slowly from one end of the row to the other; words and the four types follow below */
+  @media (max-width: 700px) {
+    .rh { height: auto; min-height: 0; overflow: hidden; background: #1d2e26; }
+    .rh-img { top: 0; bottom: auto; left: 0; right: auto; height: 64svh; min-height: 400px; width: auto; aspect-ratio: 3600 / 1727; max-width: none; object-fit: cover; animation: rhIn 1.6s var(--ease) both, rhPan 28s cubic-bezier(.45,.05,.55,.95) 1.2s infinite alternate; will-change: transform; filter: none; }
+    @keyframes rhIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes rhPan { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-100% + 100vw), 0, 0); } }
+    .rh-shade { inset: 0 0 auto 0; height: max(64svh, 400px); background: linear-gradient(180deg, rgba(14,23,29,.45) 0%, rgba(14,23,29,0) 22%, rgba(29,46,38,0) 62%, rgba(29,46,38,.85) 90%, #1d2e26 100%); }
+    .rh-in { height: auto; padding-top: calc(max(64svh, 400px) - 70px); padding-bottom: 40px; gap: 26px; }
+    .rh-t p { border-left: 0; padding-left: 0; font-size: 1rem; line-height: 1.7; }
+    .rh-idx { display: block; margin: 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-top: 1px solid rgba(245,240,230,.22); }
+    .rh-idx li + li a, .rh-idx li:nth-child(3) a, .rh-idx li:nth-child(n+3) a { border-left: 0; border-top: 0; }
+    .rh-idx a, .rh-idx li:first-child a { display: grid; grid-template-columns: 2rem 1fr auto; align-items: baseline; gap: 0 12px; padding: 15px 0; border-bottom: 1px solid rgba(245,240,230,.16); }
+    .rh-idx li:last-child a { border-bottom: 0; }
+    .rh-idx a:hover, .rh-idx li:first-child a:hover { padding-left: 0; background: none; }
+    .rh-idx .n { grid-row: auto; font-size: .95rem; }
+    .rh-idx .t { font-size: 1.12rem; line-height: 1.2; }
+    .rh-idx .s { font-size: .56rem; letter-spacing: .14em; text-align: right; white-space: nowrap; }
+  }
+  @media (max-width: 700px) and (prefers-reduced-motion: reduce) { .rh-img { animation: none; transform: translate3d(calc(-50% + 50vw), 0, 0); } }
 
 </style>
 <script src="a11y.js?v=5"></script>
