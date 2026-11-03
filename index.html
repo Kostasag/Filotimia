@@ -44,13 +44,13 @@
   .stage { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--ink); }
   .stage { background: #20313c url(hero-1.jpg) 50% 50% / cover no-repeat; }
   #gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: transparent; transition: opacity .4s; }
-  .dw { position: absolute; inset: 0; overflow: hidden; background: var(--ink); }
-  .dw img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; will-change: transform; user-select: none; -webkit-user-drag: none; filter: saturate(1.04) contrast(1.03); }
+  .dw { position: absolute; inset: 0; overflow: hidden; background: #26302c; contain: strict; isolation: isolate; }
+  .dw img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; user-select: none; -webkit-user-drag: none; }
   .dw .dwB { opacity: 0; }
-  .dw .dwC { position: absolute; inset: 0; overflow: hidden; clip-path: inset(50% 50% 0 50%); -webkit-clip-path: inset(50% 50% 0 50%); visibility: hidden; }
+  .dw .dwC { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 0 100% 0); -webkit-clip-path: inset(0 0 100% 0); will-change: clip-path; }
   .dw .dwC img { inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 60%; }
   .dw .dwE, .dw .dwF { background: var(--ink); opacity: 0; }
-  .dw .dwG { position: absolute; inset: 0; overflow: hidden; clip-path: inset(100% 0 0 0); -webkit-clip-path: inset(100% 0 0 0); visibility: hidden; box-shadow: 0 -40px 80px rgba(14,23,29,.35); }
+  .dw .dwG { position: absolute; inset: 0; overflow: hidden; clip-path: inset(100% 0 0 0); -webkit-clip-path: inset(100% 0 0 0); will-change: clip-path; }
   .dw .dwG img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; transform-origin: 50% 100%; }
   .dw i { position: absolute; inset: 0; pointer-events: none; }
   .dw .dwV { background: radial-gradient(ellipse 75% 70% at 50% 50%, rgba(14,23,29,0) 45%, rgba(14,23,29,.32) 100%); }
@@ -1469,7 +1469,7 @@
   .rp, .rp-all-w { display: none; }
   @media (min-width: 1001px) {
     .rg { display: none; }
-    .rp { display: flex; gap: 10px; height: clamp(520px, 74vh, 820px); margin-top: clamp(56px, 6vw, 6rem); }
+    .rp { display: flex; gap: 10px; height: clamp(540px, 76vh, 860px); margin-top: clamp(56px, 6vw, 6rem); width: min(calc(100vw - 48px), 108rem); margin-left: calc(50% - min(calc(50vw - 24px), 54rem)); }
     .rp-all-w { display: flex; justify-content: center; margin-top: clamp(40px, 4vw, 3.5rem); }
     .rp-p { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; background: #1d2e26; color: #f5f0e6; cursor: pointer; outline: none;
       transition: flex-grow 1s cubic-bezier(.65,0,.2,1); }
@@ -1730,8 +1730,7 @@
   <div class="wrap">
     <div class="intro rv">
       <div class="label"><span data-i="roomsL"></span><span class="watermark" aria-hidden="true">FILOTIMIA</span><img decoding="async" class="isle" src="island-path.svg" alt="" aria-hidden="true"></div>
-      <h2 id="rooms-h" data-i="roomsH">Οκτώ δωμάτια, οκτώ <em>βότανα</em>.</h2>
-      <p data-i="roomsP">Κάθε δωμάτιο παίρνει το όνομά του από το αρωματικό φυτό που μεγαλώνει δίπλα στην πόρτα του.</p>
+      <h2 id="rooms-h" data-i="roomsH">4 τύποι <em>δωματίων</em></h2>
     </div>
     <div class="rp" id="rp">
       <article class="rp-p on" data-t="0" tabindex="0" aria-label="Τρίκλινα με βεράντα">
@@ -1855,10 +1854,9 @@
     <span>FILOTIMIA</span><small>Schoinoussa</small>
   </a>
 </section>
-<section class="dayt" id="insta2" aria-labelledby="ig-h2">
+<section class="dayt" id="insta2" aria-label="Φιλοτιμία">
   <div class="dayt-in">
-    <h2 id="ig-h2" class="meet"><span class="mv-l" data-i="dtH1">Απλές στιγμές</span> <em class="mv-r" data-i="dtH2">ηρεμίας και χαλάρωσης.</em></h2>
-    <p class="dt-sub" data-i="dtS">Ανακαλύψτε τους χώρους της Φιλοτιμίας και απολαύστε τη διαμονή σας με τον δικό σας ρυθμό.</p>
+        <p class="dt-sub" data-i="dtS">Ανακαλύψτε τους χώρους της Φιλοτιμίας και απολαύστε τη διαμονή σας με τον δικό σας ρυθμό.</p>
   </div>
 </section>
 <div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo" hidden>
@@ -2081,7 +2079,7 @@
     p3: 'Its name is traced to the mastic shrub, schinos (Pistacia lentiscus), or, in another version, to the Venetian lord Schinoza. Though one of the driest places in Greece, it enchants with crystal-clear water, golden beaches, wild Cycladic landscapes and genuine hospitality — a true refuge of calm in the Aegean.',
     factsT: 'The island at a glance', smallCyc: 'Small Cyclades', fArea: 'Area', fPop: 'Residents', fSet: 'Settlements',
     chora: 'Chora', choraD: '1 km from the port', mesaria: 'Messaria', mesariaD: '~2.5 km',
-    aboveL: 'The rooms from above', aerialL: 'Fig. 03 · The rooms from above', aerialP: 'Between the <em>vineyard</em> and the hills of Mesaria.', roomsL: '', roomsCount: '8 rooms · 3 types', roomsH: 'Eight rooms, eight <em>herbs</em>.', roomsP: 'Each room is named after the aromatic plant growing by its door.', chooseRoom: 'Choose a room', soonL: 'The rooms', soonH: 'Coming <em>soon</em>.', soonP: 'Photographs and details of the rooms are on their way.', mNaxos: 'Naxos', mIraklia: 'Iraklia', mKoufo: 'Koufonisia', mSchoin: 'Schoinoussa', mNorth: 'N'
+    aboveL: 'The rooms from above', aerialL: 'Fig. 03 · The rooms from above', aerialP: 'Between the <em>vineyard</em> and the hills of Mesaria.', roomsL: '', roomsCount: '8 rooms · 3 types', roomsH: '4 room <em>types</em>', roomsP: 'Each room is named after the aromatic plant growing by its door.', chooseRoom: 'Choose a room', soonL: 'The rooms', soonH: 'Coming <em>soon</em>.', soonP: 'Photographs and details of the rooms are on their way.', mNaxos: 'Naxos', mIraklia: 'Iraklia', mKoufo: 'Koufonisia', mSchoin: 'Schoinoussa', mNorth: 'N'
   });
   Object.assign(T.el, { rgMore: 'Όλες οι φωτογραφίες' }); Object.assign(T.en, { rgMore: 'All photos' });
   Object.assign(T.el, { aeHint: 'Σύρετε για όλη τη θέα · πατήστε ένα όνομα' }); Object.assign(T.en, { aeHint: 'Swipe for the whole view · tap a name' });
@@ -2094,7 +2092,7 @@
     p3: 'Το όνομα αποδίδεται στο φυτό σχίνος (Pistacia lentiscus) ή, κατά άλλη εκδοχή, στον Ενετό άρχοντα Σχινοζά. Παρότι από τα πιο ξηρά μέρη της Ελλάδας, μαγεύει με κρυστάλλινα νερά, χρυσαφένιες παραλίες, άγρια κυκλαδίτικα τοπία και αυθεντική φιλοξενία — ένα γνήσιο καταφύγιο γαλήνης στο Αιγαίο.',
     factsT: 'Το νησί με μια ματιά', smallCyc: 'Μικρές Κυκλάδες', fArea: 'Έκταση', fPop: 'Κάτοικοι', fSet: 'Οικισμοί',
     chora: 'Χώρα', choraD: '1 km από το λιμάνι', mesaria: 'Μεσαριά', mesariaD: '~2,5 km',
-    aboveL: 'Τα δωμάτια από ψηλά', aerialL: 'Fig. 03 · Τα δωμάτια από ψηλά', aerialP: 'Ανάμεσα στα <em>αμπέλια</em> και τους λόφους της Μεσαριάς.', roomsL: '', roomsCount: '8 δωμάτια · 3 τύποι', roomsH: 'Οκτώ δωμάτια, οκτώ <em>βότανα</em>.', roomsP: 'Κάθε δωμάτιο παίρνει το όνομά του από το αρωματικό φυτό που μεγαλώνει δίπλα στην πόρτα του.', chooseRoom: 'Διαλέξτε δωμάτιο', soonL: 'Τα δωμάτια', soonH: '<em>Σύντομα</em>.', soonP: 'Οι φωτογραφίες και οι λεπτομέρειες των δωματίων έρχονται σύντομα.', mNaxos: 'Νάξος', mIraklia: 'Ηρακλειά', mKoufo: 'Κουφονήσια', mSchoin: 'Σχοινούσα', mNorth: 'Β'
+    aboveL: 'Τα δωμάτια από ψηλά', aerialL: 'Fig. 03 · Τα δωμάτια από ψηλά', aerialP: 'Ανάμεσα στα <em>αμπέλια</em> και τους λόφους της Μεσαριάς.', roomsL: '', roomsCount: '8 δωμάτια · 3 τύποι', roomsH: '4 τύποι <em>δωματίων</em>', roomsP: 'Κάθε δωμάτιο παίρνει το όνομά του από το αρωματικό φυτό που μεγαλώνει δίπλα στην πόρτα του.', chooseRoom: 'Διαλέξτε δωμάτιο', soonL: 'Τα δωμάτια', soonH: '<em>Σύντομα</em>.', soonP: 'Οι φωτογραφίες και οι λεπτομέρειες των δωματίων έρχονται σύντομα.', mNaxos: 'Νάξος', mIraklia: 'Ηρακλειά', mKoufo: 'Κουφονήσια', mSchoin: 'Σχοινούσα', mNorth: 'Β'
   });
   Object.assign(T.en, { cLabel: 'Contact', cH: 'Get in<br><em>touch</em>.', cP: 'Write to us about availability, questions or anything you need before you reach the island.', cPhoneL: 'Phone', cMapL: 'Location', cAddrL: 'Address', cAddr1: 'Messaria, Schoinoussa', cAddr2: '843 00 · Cyclades, Greece',
     cMailL: 'Email', cCopy: 'Copy', cCopied: 'Copied', cWhere: 'Schoinoussa · Small Cyclades · Greece', bL: 'Book direct', bBest: 'Best rate when you book direct', bIn: 'Check-in', bOut: 'Check-out',
@@ -3217,6 +3215,11 @@
     if (im.complete && im.naturalWidth) ok(); else { im.addEventListener('load', ok, { once: true }); im.addEventListener('error', function () { loaded++; }, { once: true }); } }
   onImg(imA, function (a) { aspA = a; }); onImg(imH, function (a) { aspB = a; }); onImg(imC, function () {}); onImg(imG, function () {});
 
+  // write a style only when its value really changes: fewer repaints, no flicker
+  function st(el, k, v) { var c = el.__s || (el.__s = {}); if (c[k] === v) return; c[k] = v; el.style[k] = v; }
+  function clip(el, v) { var c = el.__s || (el.__s = {}); if (c.cp === v) return; c.cp = v; el.style.clipPath = v; el.style.webkitClipPath = v; }
+  // decode every hero photograph before the first frame that needs it, so none is ever painted half-ready
+  [imA, imH, imF, imC, imG].forEach(function (im) { if (im.decode) im.decode().catch(function () {}); });
   var mouse = { x: 0, y: 0 }, mT = { x: 0, y: 0 };
   window.addEventListener('pointermove', function (e) { if (e.pointerType !== 'mouse') return; mT.x = (e.clientX / innerWidth - 0.5) * 2; mT.y = (e.clientY / innerHeight - 0.5) * 2; });
   document.addEventListener('pointerleave', function () { mT.x = 0; mT.y = 0; });
@@ -3226,11 +3229,11 @@
   function place(img, asp, z, fx, fy, px, py) {
     var W = innerWidth, H = innerHeight, w, h;
     if (W / H > asp) { w = W; h = W / asp; } else { h = H; w = H * asp; }
-    if (sized < 3) { img.style.width = w + 'px'; img.style.height = h + 'px'; }
+    if (sized < 3) { st(img, 'width', w + 'px'); st(img, 'height', h + 'px'); }
     var sx = W / (w * z), sy = H / (h * z);
     var cx = Math.min(Math.max(fx, sx / 2), 1 - sx / 2), cy = Math.min(Math.max(fy, sy / 2), 1 - sy / 2);
     var left = W / 2 - cx * w * z + px, top = H / 2 - (1 - cy) * h * z + py;
-    img.style.transform = 'translate3d(' + left.toFixed(2) + 'px,' + top.toFixed(2) + 'px,0) scale(' + z.toFixed(4) + ')';
+    st(img, 'transform', 'translate3d(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px,0) scale(' + z.toFixed(4) + ')');
     return { left: left, top: top, w: w, h: h, z: z };
   }
   // the same photo, with its point (fx, fy) set exactly on the screen point (X, Y), at zoom z (no edge clamping: used only where a frame hides the edges)
@@ -3266,27 +3269,19 @@
     place(imF, aspB, zB, fx, fy, -mx * 14, -my * 10);
     if (sized < 3) sized++;
     var room = s1 > 0.2 ? 1 : 0;
-    imH.style.opacity = room; imF.style.opacity = room ? sm(0.78, 0.96, s1).toFixed(3) : 0;
+    st(imH, 'opacity', String(room)); st(imF, 'opacity', room ? sm(0.78, 0.96, s1).toFixed(3) : '0');
     // the third view falls like a lowered curtain: its bottom edge sweeps down the screen while the photo settles down behind it (the fourth then rises the other way)
     var c = ease(sm(0.05, 0.85, b3));
-    boxC.style.visibility = c > 0 ? 'visible' : 'hidden';
-    if (c > 0) {
-      var bt = ((1 - c) * 100).toFixed(2) + '%';
-      boxC.style.clipPath = boxC.style.webkitClipPath = 'inset(0 0 ' + bt + ' 0)';
-      var g0 = ease(sm(0.05, 0.85, d4));
-      imC.style.transform = 'translate3d(' + (-mx * 8).toFixed(2) + 'px,' + (-(1 - c) * 18 - my * 0.6 - g0 * 4).toFixed(2) + '%,0) scale(' + (1.14 - 0.1 * c - 0.04 * g0).toFixed(4) + ')';
-    }
-    dimB.style.opacity = (0.45 * sm(0, 0.6, b3) * (1 - sm(0.7, 1, b3))).toFixed(3);
+    clip(boxC, 'inset(0 0 ' + ((1 - c) * 100).toFixed(2) + '% 0)');
+    var g0 = ease(sm(0.05, 0.85, d4));
+    st(imC, 'transform', 'translate3d(' + (-mx * 8).toFixed(1) + 'px,' + (-(1 - c) * 18 - my * 0.6 - g0 * 4).toFixed(2) + '%,0) scale(' + (1.14 - 0.1 * c - 0.04 * g0).toFixed(4) + ')');
+    st(dimB, 'opacity', (0.3 * sm(0, 0.6, b3) * (1 - sm(0.7, 1, b3))).toFixed(3));
     // the fourth view rises like a lifted curtain: its top edge sweeps up the screen while the photo drifts up behind it, and the bedroom sinks back
     var g = ease(sm(0.05, 0.85, d4));
-    boxG.style.visibility = g > 0 ? 'visible' : 'hidden';
-    dimC.style.opacity = (0.5 * sm(0, 0.7, d4) * (1 - sm(0.8, 1, d4))).toFixed(3);
-    if (g > 0) {
-      var tp = ((1 - g) * 100).toFixed(2) + '%';
-      boxG.style.clipPath = boxG.style.webkitClipPath = 'inset(' + tp + ' 0 0 0)';
-      imG.style.transform = 'translate3d(' + (-mx * 8).toFixed(2) + 'px,' + ((1 - g) * 18 - my * 0.6).toFixed(2) + '%,0) scale(' + (1.14 - 0.1 * g).toFixed(4) + ')';
-    }
-    dimEl.style.opacity = (0.22 * (1 - intro)).toFixed(3);
+    st(dimC, 'opacity', (0.32 * sm(0, 0.7, d4) * (1 - sm(0.8, 1, d4))).toFixed(3));
+    clip(boxG, 'inset(' + ((1 - g) * 100).toFixed(2) + '% 0 0 0)');
+    st(imG, 'transform', 'translate3d(' + (-mx * 8).toFixed(1) + 'px,' + ((1 - g) * 18 - my * 0.6).toFixed(2) + '%,0) scale(' + (1.14 - 0.1 * g).toFixed(4) + ')');
+    st(dimEl, 'opacity', (0.22 * (1 - intro)).toFixed(3));
   }
   requestAnimationFrame(frame);
 })();
@@ -3318,7 +3313,7 @@
 (function () {
   var rg = document.getElementById('rg'); if (!rg) return;
   var tabs = [].slice.call(rg.querySelectorAll('.rg-tab')), infos = [].slice.call(rg.querySelectorAll('.rg-info')), tiles = [].slice.call(rg.querySelectorAll('.rg-tile'));
-  var cur = 0, DUR = 7000, tm = null, vis = false, user = false, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cur = 0, DUR = 8500, tm = null, vis = false, user = false, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   rg.style.setProperty('--rgd', (DUR / 1000) + 's');
   function preload(i) { tiles.forEach(function (t) { var im = t.querySelector('img[data-t="' + i + '"]'); if (im && im.loading === 'lazy') im.loading = 'eager'; }); }
   function show(i, by) {

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Filotimia Rooms</title><link rel="icon" href="favicon.svg?v=2" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=2" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=2"><meta name="theme-color" content="#1d2e26">
-<link rel="preload" as="image" href="r/hero.jpg" fetchpriority="high">
+<title>Filotimia Rooms</title>
+<link rel="preload" as="image" href="r/hero.jpg" fetchpriority="high"><link rel="icon" href="favicon.svg?v=2" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=2" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=2"><meta name="theme-color" content="#1d2e26">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
   /* Layout: a guide in the site's voice. Full-bleed sunset opener, a short intro with three figures, an index of the nine beaches,
@@ -507,6 +507,14 @@
   }
   @media (max-width: 700px) and (prefers-reduced-motion: reduce) { .rh-img { animation: none; transform: translate3d(calc(-50% + 50vw), 0, 0); } }
 
+  /* the line under the rooms title: a short statement in the display face, then a quiet second line */
+  .rh-t p.rh-lead { display: grid; gap: 14px; max-width: 30rem; padding-left: 0; border-left: 0; margin-bottom: .4em; }
+  .rh-lead .rp-a { font-family: var(--display); font-weight: 400; font-size: clamp(1.45rem, 1.9vw, 1.95rem); line-height: 1.22; letter-spacing: -.005em; color: #f5f0e6; text-wrap: balance; }
+  .rh-lead .rp-a em { color: #e3c9a8; }
+  .rh-lead .rp-b { position: relative; padding-top: 16px; font-size: clamp(.9rem, .95vw, .98rem); line-height: 1.7; color: rgba(245,240,230,.78); max-width: 34ch; }
+  .rh-lead .rp-b::before { content: ""; position: absolute; left: 0; top: 0; width: 42px; height: 1px; background: #e3c9a8; opacity: .8; }
+  @media (max-width: 700px) { .rh-t p.rh-lead { gap: 12px; } .rh-lead .rp-a { font-size: 1.5rem; } .rh-lead .rp-b { font-size: .95rem; } }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -547,7 +555,7 @@
   <div class="rh-in gut">
     <div class="rh-t">
       <h1 id="h1" class="rh-h rh-sr"><span class="ln"><span data-i="rH1">Οκτώ δωμάτια,</span></span><span class="ln"><span data-i="rH2"><em>οκτώ βότανα.</em></span></span></h1>
-      <p class="rh-r" data-i="rP">Πέτρα από τη Σχοινούσα και ξύλο, με απλή κυκλαδίτικη αισθητική. Κάθε δωμάτιο έχει το όνομα ενός βοτάνου που φυτρώνει δίπλα στην πόρτα του.</p>
+      <p class="rh-r rh-lead" data-i="rP"><span class="rp-a">Πέτρα από τη Σχοινούσα και ξύλο, <em>με απλή κυκλαδίτικη αισθητική.</em></span><span class="rp-b">Κάθε δωμάτιο έχει το όνομα ενός βοτάνου που φυτρώνει δίπλα στην πόρτα του.</span></p>
     </div>
     <ol class="rh-idx rh-r" id="rhIdx"></ol>
   </div>
@@ -657,7 +665,7 @@
   };
   Object.assign(T.el, {
     rL: 'Δωμάτια', rH1: 'Οκτώ δωμάτια,', rH2: '<em>οκτώ βότανα.</em>',
-    rP: 'Πέτρα από τη Σχοινούσα και ξύλο, με απλή κυκλαδίτικη αισθητική. Κάθε δωμάτιο έχει το όνομα ενός βοτάνου που φυτρώνει δίπλα στην πόρτα του.',
+    rP: '<span class="rp-a">Πέτρα από τη Σχοινούσα και ξύλο, <em>με απλή κυκλαδίτικη αισθητική.</em></span><span class="rp-b">Κάθε δωμάτιο έχει το όνομα ενός βοτάνου που φυτρώνει δίπλα στην πόρτα του.</span>',
     book: 'Κράτηση', bookNow: 'Κάντε κράτηση', ask: 'Ρωτήστε για διαθεσιμότητα', enlarge: 'Μεγέθυνση',
     amL: 'Σε κάθε δωμάτιο', amH: 'Όσα χρειάζεστε, <em>τίποτα περιττό</em>.',
     cmpL: 'Σύγκριση', cmpH: 'Ποιο δωμάτιο <em>σας ταιριάζει</em>;',
@@ -666,7 +674,7 @@
   });
   Object.assign(T.en, {
     rL: 'Rooms', rH1: 'Eight rooms,', rH2: '<em>eight herbs.</em>',
-    rP: 'Stone from Schoinoussa and wood, with a simple Cycladic look. Each room is named after a herb that grows beside its door.',
+    rP: '<span class="rp-a">Stone from Schoinoussa and wood, <em>with a simple Cycladic look.</em></span><span class="rp-b">Each room is named after a herb that grows beside its door.</span>',
     book: 'Book', bookNow: 'Book now', ask: 'Ask about availability', enlarge: 'Enlarge',
     amL: 'In every room', amH: 'All you need, <em>nothing more</em>.',
     cmpL: 'Compare', cmpH: 'Which room <em>suits you</em>?',
