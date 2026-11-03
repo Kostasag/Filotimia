@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="preload" as="image" href="hero-1.jpg" fetchpriority="high"><title>Filotimia · Σχοινούσα</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1d2e26">
+<link rel="preload" as="image" href="hero-1.jpg" fetchpriority="high"><title>Filotimia · Σχοινούσα</title><link rel="icon" href="favicon.svg?v=2" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=2" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=2"><meta name="theme-color" content="#1d2e26">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
@@ -144,9 +144,23 @@
   }
   @media (max-width: 560px), (hover: none) and (pointer: coarse) {
     /* phones: each photograph is shown at its natural proportions, full height, and travels slowly across the screen so the whole view is seen, not a zoomed slice */
-    .mslides img { right: auto; width: auto; min-width: 100%; max-width: none; height: 100%; aspect-ratio: 3 / 2; object-fit: cover; transform: translate3d(var(--p1, 0px), 0, 0); will-change: transform, opacity; }
-    .mslides img.on { animation: mpan var(--pd, 10s) cubic-bezier(.45,.05,.55,.95) both; }
-    @keyframes mpan { from { transform: translate3d(var(--p0, 0px), 0, 0); } to { transform: translate3d(var(--p1, 0px), 0, 0); } }
+    .mslides img { left: 0; right: auto; width: auto; min-width: 100%; max-width: none; height: 100%; aspect-ratio: 3 / 2; object-fit: cover; will-change: transform, opacity; -webkit-transform: translate3d(calc((100vw - 100%) * .5), 0, 0); transform: translate3d(calc((100vw - 100%) * .5), 0, 0); }
+    .mslides img:nth-child(1) { transform: translate3d(calc((100vw - 100%) * .98), 0, 0); }
+    .mslides img:nth-child(2) { transform: translate3d(calc((100vw - 100%) * .12), 0, 0); }
+    .mslides img:nth-child(3) { transform: translate3d(calc((100vw - 100%) * .9), 0, 0); }
+    .mslides img:nth-child(4) { transform: translate3d(calc((100vw - 100%) * .3), 0, 0); }
+    .mslides img.on:nth-child(1) { -webkit-animation: mpan1 10.8s cubic-bezier(.45,.05,.55,.95) both; animation: mpan1 10.8s cubic-bezier(.45,.05,.55,.95) both; }
+    .mslides img.on:nth-child(2) { -webkit-animation: mpan2 10.8s cubic-bezier(.45,.05,.55,.95) both; animation: mpan2 10.8s cubic-bezier(.45,.05,.55,.95) both; }
+    .mslides img.on:nth-child(3) { -webkit-animation: mpan3 10.8s cubic-bezier(.45,.05,.55,.95) both; animation: mpan3 10.8s cubic-bezier(.45,.05,.55,.95) both; }
+    .mslides img.on:nth-child(4) { -webkit-animation: mpan4 10.8s cubic-bezier(.45,.05,.55,.95) both; animation: mpan4 10.8s cubic-bezier(.45,.05,.55,.95) both; }
+    @keyframes mpan1 { from { transform: translate3d(calc((100vw - 100%) * .02), 0, 0); } to { transform: translate3d(calc((100vw - 100%) * .98), 0, 0); } }
+    @keyframes mpan2 { from { transform: translate3d(calc((100vw - 100%) * .9), 0, 0); } to { transform: translate3d(calc((100vw - 100%) * .12), 0, 0); } }
+    @keyframes mpan3 { from { transform: translate3d(calc((100vw - 100%) * .12), 0, 0); } to { transform: translate3d(calc((100vw - 100%) * .9), 0, 0); } }
+    @keyframes mpan4 { from { transform: translate3d(calc((100vw - 100%) * .92), 0, 0); } to { transform: translate3d(calc((100vw - 100%) * .3), 0, 0); } }
+    @-webkit-keyframes mpan1 { from { -webkit-transform: translate3d(calc((100vw - 100%) * .02), 0, 0); } to { -webkit-transform: translate3d(calc((100vw - 100%) * .98), 0, 0); } }
+    @-webkit-keyframes mpan2 { from { -webkit-transform: translate3d(calc((100vw - 100%) * .9), 0, 0); } to { -webkit-transform: translate3d(calc((100vw - 100%) * .12), 0, 0); } }
+    @-webkit-keyframes mpan3 { from { -webkit-transform: translate3d(calc((100vw - 100%) * .12), 0, 0); } to { -webkit-transform: translate3d(calc((100vw - 100%) * .9), 0, 0); } }
+    @-webkit-keyframes mpan4 { from { -webkit-transform: translate3d(calc((100vw - 100%) * .92), 0, 0); } to { -webkit-transform: translate3d(calc((100vw - 100%) * .3), 0, 0); } }
   }
   @media (prefers-reduced-motion: reduce) { .mslides img.on { animation: none; } .mslides img { transition-duration: .4s; } }
   .dots i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--mist); transition: background .5s, transform .5s var(--ease); }
@@ -3141,10 +3155,7 @@
   /* ---------- phones and tablets: a calm slideshow instead of the scroll-driven doorway ---------- */
   if (MOBHERO) {
     var slides = Array.prototype.slice.call(document.querySelectorAll('#mslides img')), si = 0, sT = null, SD = 9000;
-    function panSet() { var W = innerWidth, H = document.getElementById('mslides').clientHeight || innerHeight, mx = Math.max(0, H * 1.5 - W);
-      slides.forEach(function (im) { var p = (im.getAttribute('data-pan') || '0.5 0.5').split(' ');
-        im.style.setProperty('--p0', (-mx * +p[0]).toFixed(1) + 'px'); im.style.setProperty('--p1', (-mx * +p[1]).toFixed(1) + 'px'); im.style.setProperty('--pd', (SD + 1800) / 1000 + 's'); }); }
-    panSet(); addEventListener('resize', panSet); addEventListener('orientationchange', function () { setTimeout(panSet, 300); });
+
     function showSlide(n) {
       si = (n + slides.length) % slides.length;
       slides.forEach(function (im, i) { if (i === si) { im.classList.remove('on'); void im.offsetWidth; im.classList.add('on'); } else im.classList.remove('on'); });
