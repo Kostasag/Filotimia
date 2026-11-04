@@ -234,7 +234,8 @@
 
   /* ---------- welcome: a large faint word, a row of photographs that runs off the edge, laid over a deep olive band with the words ---------- */
   /* the bar sits on the light welcome at the top: dark text until it turns solid */
-  .bar:not(.solid) { color: var(--olive); }
+  .bar:not(.solid) { color: #f5f0e6; }
+  .bar:not(.solid)::before { content: ""; position: absolute; inset: 0 0 -60px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(14,23,29,.5) 0%, rgba(14,23,29,0) 100%); }
   .welcome { --cw: clamp(280px, 33vw, 42rem); position: relative; background: var(--stone); padding-top: calc(clamp(110px, 12vw, 10rem) + env(safe-area-inset-top, 0px)); overflow: hidden; }
   .wc-head { margin: 0 0 clamp(24px, 3vw, 3rem); display: grid; justify-items: center; text-align: center; font-weight: 400; }
   .wc-big { font-family: var(--display); font-size: clamp(76px, 14vw, 15rem); line-height: .82; letter-spacing: -.03em; color: rgba(168,116,74,.2); white-space: nowrap; user-select: none;
@@ -456,6 +457,64 @@
   }
   .a2-hgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 72rem; } @media (max-width: 700px) { .a2-hgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+  /* ================= the film hero ================= */
+  .avh { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: #1f2a27; color: #f5f0e6; }
+  .avh-media, .avh-media img, .avh-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .avh-poster { animation: avhIn 2.2s var(--ease) both; }
+  .avh-vid { opacity: 0; transition: opacity 1.4s ease; }
+  .avh-vid.on { opacity: 1; }
+  @keyframes avhIn { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+  .avh-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(14,23,29,.42) 0%, rgba(14,23,29,0) 22%, rgba(14,23,29,0) 48%, rgba(14,23,29,.5) 78%, rgba(14,23,29,.72) 100%); }
+  .avh-in { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 90rem; margin: 0 auto; box-sizing: border-box; display: flex; align-items: flex-end; justify-content: space-between; gap: 28px 40px; flex-wrap: wrap; padding-bottom: clamp(54px, 9vh, 7rem); }
+  .avh-h { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(52px, 7.4vw, 8.4rem); line-height: .96; letter-spacing: -.025em; text-shadow: 0 6px 40px rgba(14,23,29,.28); }
+  .avh-h .ln { display: block; overflow: hidden; padding-bottom: .06em; }
+  .avh-h .ln > span { display: block; transform: translateY(105%); animation: avhLine 1.5s var(--ease) .35s forwards; }
+  .avh-h .ln:nth-child(2) > span { animation-delay: .5s; padding-left: .9em; font-size: .62em; }
+  .avh-h em { color: #e3c9a8; }
+  @keyframes avhLine { to { transform: none; } }
+  .avh-play { display: inline-flex; align-items: center; gap: 14px; padding: 9px 22px 9px 9px; border-radius: 999px; border: 1px solid rgba(245,240,230,.5); background: rgba(14,23,29,.24); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #f5f0e6; font: inherit; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; cursor: pointer; opacity: 0; animation: avhRise 1.2s var(--ease) 1s forwards; transition: background .35s, border-color .35s; }
+  .avh-play .ic { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #f5f0e6; color: #1f2a27; transition: transform .45s var(--ease); }
+  .avh-play .ic svg { width: 16px; height: 16px; margin-left: 2px; }
+  .avh-play .t { color: rgba(245,240,230,.6); letter-spacing: .12em; font-weight: 500; }
+  .avh-play:hover { background: rgba(14,23,29,.42); border-color: #f5f0e6; } .avh-play:hover .ic { transform: scale(1.08); }
+  .avh-play:focus-visible { outline: 2px solid #f5f0e6; outline-offset: 4px; }
+  @keyframes avhRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .avh-cue { position: absolute; z-index: 2; left: 50%; bottom: 22px; width: 1px; height: 46px; margin-left: -.5px; background: rgba(245,240,230,.28); overflow: hidden; }
+  .avh-cue i { position: absolute; left: 0; top: 0; width: 1px; height: 40%; background: #f5f0e6; animation: avhCue 2.4s ease-in-out infinite; }
+  @keyframes avhCue { from { transform: translateY(-100%); } to { transform: translateY(250%); } }
+  @media (max-width: 700px) {
+    .avh { height: 88svh; min-height: 520px; }
+    .avh-in { padding-bottom: 64px; gap: 22px; }
+    .avh-h { font-size: clamp(46px, 13vw, 4.4rem); }
+    .avh-play { font-size: .64rem; padding: 7px 18px 7px 7px; gap: 12px; } .avh-play .ic { width: 36px; height: 36px; }
+    .avh-cue { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .avh-poster, .avh-h .ln > span, .avh-play, .avh-cue i { animation: none; transform: none; opacity: 1; } }
+
+  /* the welcome words and the facts now sit together in the band right under the film */
+  .welcome { padding-top: 0; background: #2c4550; }
+  .welcome .wc-band { top: 0; }
+  .welcome .wc-stage { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: end; gap: 0 clamp(30px, 6vw, 7rem); max-width: 90rem; margin: 0 auto; }
+  .welcome .wc-text { padding-top: clamp(64px, 8vw, 7rem); padding-bottom: clamp(64px, 8vw, 7rem); }
+  .wc-side { position: relative; z-index: 1; grid-column: 2; grid-row: 1; padding-bottom: clamp(64px, 8vw, 7rem); }
+  .wc-side .wc-extra { padding: 0 max(var(--gx), env(safe-area-inset-right, 0px)) 0 0; flex-direction: column; align-items: flex-start; gap: 36px; }
+  @media (max-width: 900px) {
+    .welcome .wc-stage { display: flex; flex-direction: column; align-items: stretch; }
+    .welcome .wc-text { order: 1; padding: 52px max(24px, env(safe-area-inset-right, 0px)) 36px max(24px, env(safe-area-inset-left, 0px)); }
+    .wc-side { order: 2; padding: 0 24px 60px; }
+    .wc-side .wc-extra { padding: 0; }
+  }
+
+  /* the full film, with sound */
+  .filmbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: rgba(10,14,13,.94); opacity: 0; transition: opacity .45s ease; padding: max(16px, env(safe-area-inset-top, 0px)) 16px; }
+  .filmbox[hidden] { display: none; }
+  .filmbox.on { opacity: 1; }
+  .filmbox-v { width: min(100%, calc((100vh - 120px) * 16 / 9), 1600px); aspect-ratio: 16 / 9; background: #000; box-shadow: 0 40px 120px rgba(0,0,0,.5); transform: scale(.97); transition: transform .6s var(--ease); }
+  .filmbox.on .filmbox-v { transform: none; }
+  .filmbox-x { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); right: 16px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(245,240,230,.4); background: rgba(14,23,29,.4); color: #f5f0e6; display: grid; place-items: center; cursor: pointer; }
+  .filmbox-x svg { width: 20px; height: 20px; }
+  html.film-open { overflow: hidden; }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -490,27 +549,31 @@
 
 
 <main id="content" tabindex="-1">
-<!-- ============ welcome, at the very top ============ -->
-<section class="welcome" id="welcome" aria-labelledby="h1">
-  <h1 class="wc-head" id="h1"><span class="wc-big" data-i="welBig">Καλώς ήρθατε</span><span class="wc-sub" data-i="welT">στη <em>Φιλοτιμία</em></span></h1>
+<!-- ============ the film, at the very top ============ -->
+<section class="avh" id="avh" aria-labelledby="h1">
+  <div class="avh-media" aria-hidden="true">
+    <img class="avh-poster" src="film/poster.jpg" alt="" fetchpriority="high">
+    <video class="avh-vid" id="avhVid" muted loop playsinline preload="metadata" poster="film/poster.jpg"><source data-hd="film/loop-hd.mp4" data-m="film/loop-m.mp4" type="video/mp4"></video>
+  </div>
+  <div class="avh-shade" aria-hidden="true"></div>
+  <div class="avh-in gut">
+    <h1 class="avh-h" id="h1"><span class="ln"><span data-i="welBig">Καλώς ήρθατε</span></span><span class="ln"><span data-i="welT">στη <em>Φιλοτιμία</em></span></span></h1>
+    <button type="button" class="avh-play" id="avhPlay"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span><span data-i="filmBtn">Δείτε την ταινία</span><span class="t">0:30</span></button>
+  </div>
+  <a class="avh-cue" href="#welcome" aria-label="Scroll"><i></i></a>
+</section>
+<div class="filmbox" id="filmBox" role="dialog" aria-modal="true" aria-label="Filotimia film" hidden>
+  <button type="button" class="filmbox-x" id="filmX" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <video class="filmbox-v" id="filmV" controls playsinline preload="none" poster="film/poster-end.jpg"><source src="film/filotimia-film.mp4" type="video/mp4"></video>
+</div>
+<section class="welcome" id="welcome" aria-label="Καλώς ήρθατε">
   <div class="wc-stage">
     <div class="wc-band" aria-hidden="true"></div>
     <div class="wc-text gut">
       <p data-i="welcome">Καλώς ήρθες στα δωμάτια της Φιλοτιμίας. Ελπίζουμε η διαμονή σου να αποτελέσει ένα βάλσαμο για όσα προηγήθηκαν και μια πηγή ανανέωσης και δύναμης για όσα έπονται μετά τις διακοπές.</p>
       <p class="wc-2" data-i="welcome2">Το όνομα «Φιλοτιμία» εκφράζει το φιλότιμο: να κάνεις τα πράγματα με υπευθυνότητα, προθυμία και γενναιοδωρία. Και αυτό κάνουμε για εσάς.</p>
     </div>
-    <div class="wc-car">
-      <ul class="wc-track" id="wcTrack" tabindex="0" aria-label="Photographs">
-        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-2.jpg" alt="The blue door of the Lavender room with its wooden name sign" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-24.jpg" alt="The shared pergola with its tables and the hills beyond" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-1.jpg" alt="The Lavender room, with bougainvillea climbing the stone" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-16.jpg" alt="Island stone in the shade of the pergola" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/lavender-11.jpg" alt="A bedroom with stone walls and a blue window" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/exterior-7.jpg" alt="The vineyard in autumn colours" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/sage-10.jpg" alt="A shaded veranda looking out to the Aegean" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-        <li class="wc-s"><figure><div class="ph"><img src="p/drone-30.jpg" alt="A veranda with a hammock, lit at night" loading="lazy" decoding="async" draggable="false"></div></figure></li>
-      </ul>
-      <div class="wc-dots" id="wcDots" role="group" aria-label="Photos"></div>
+    <div class="wc-side">
       <div class="wc-extra">
         <ul class="wc-facts">
           <li><b>8</b><span data-i="wfRooms">πέτρινα δωμάτια</span></li>
@@ -729,7 +792,7 @@
     e3B: 'ελιές', e3H: 'ελιές και μικρό αμπέλι',
     clH: 'Απλότητα, γαλήνη και <em>ειλικρίνεια</em>.',
     clP: 'Με θέα το Αιγαίο και σεβασμό στη φύση, η Φιλοτιμία προσφέρει μια εμπειρία φιλοξενίας που συνδυάζει απλότητα, γαλήνη και ειλικρίνεια.',
-    md1: 'Λείες, ήσυχες επιφάνειες στα δάπεδα και στις βεράντες.', md2: 'Πέτρα από το ίδιο το νησί, χτισμένη με το χέρι στους τοίχους.', md3: 'Πόρτες και κουφώματα που ζεσταίνουν τον χώρο.', md4: 'Μεγάλα ανοίγματα που φέρνουν μέσα το φως και τη θάλασσα.', md5: 'Χαμηλό, ζεστό φως που αναδεικνύει την πέτρα το βράδυ.', wfRooms: 'πέτρινα δωμάτια', wfTypes: 'τύποι δωματίων', wfIsle: 'από τη Χώρα', wfLink: 'Δείτε τα δωμάτια', welBig: 'Καλώς ήρθατε', welT: 'στη <em>Φιλοτιμία</em>', aMore: 'Για εμάς το φιλότιμο δεν είναι μια λέξη, είναι ο τρόπος που φιλοξενούμε. Να προσέχουμε τις μικρές λεπτομέρειες, να είμαστε εκεί όταν μας χρειάζεστε και να δίνουμε πάντα λίγο περισσότερο από όσο περιμένετε.', clL: 'Φιλοτιμία · Σχοινούσα', ovL: 'Τι σημαίνει φιλότιμο', v1: 'Υπευθυνότητα', v1d: '', v2: 'Προθυμία', v2d: '', v3: 'Γενναιοδωρία', v3d: '', ovEnd: 'Αυτό είναι το <em>φιλότιμο</em>. Αυτό κάνουμε για εσάς.',
+    md1: 'Λείες, ήσυχες επιφάνειες στα δάπεδα και στις βεράντες.', md2: 'Πέτρα από το ίδιο το νησί, χτισμένη με το χέρι στους τοίχους.', md3: 'Πόρτες και κουφώματα που ζεσταίνουν τον χώρο.', md4: 'Μεγάλα ανοίγματα που φέρνουν μέσα το φως και τη θάλασσα.', md5: 'Χαμηλό, ζεστό φως που αναδεικνύει την πέτρα το βράδυ.', wfRooms: 'πέτρινα δωμάτια', wfTypes: 'τύποι δωματίων', wfIsle: 'από τη Χώρα', wfLink: 'Δείτε τα δωμάτια', welBig: 'Καλώς ήρθατε', welT: 'στη <em>Φιλοτιμία</em>', filmBtn: 'Δείτε την ταινία', aMore: 'Για εμάς το φιλότιμο δεν είναι μια λέξη, είναι ο τρόπος που φιλοξενούμε. Να προσέχουμε τις μικρές λεπτομέρειες, να είμαστε εκεί όταν μας χρειάζεστε και να δίνουμε πάντα λίγο περισσότερο από όσο περιμένετε.', clL: 'Φιλοτιμία · Σχοινούσα', ovL: 'Τι σημαίνει φιλότιμο', v1: 'Υπευθυνότητα', v1d: '', v2: 'Προθυμία', v2d: '', v3: 'Γενναιοδωρία', v3d: '', ovEnd: 'Αυτό είναι το <em>φιλότιμο</em>. Αυτό κάνουμε για εσάς.',
     clQ: '«Τέλος, θα σας υποδεχτούμε και θα σας περιποιηθούμε με χαμόγελο, προθυμία και σεβασμό, ώστε να αισθανθείτε σαν στο σπίτι σας.»'
   });
   Object.assign(T.en, {
@@ -763,7 +826,7 @@
     e3B: 'olive trees', e3H: 'olive trees and a small vineyard',
     clH: 'Simplicity, calm and <em>sincerity</em>.',
     clP: 'Looking out over the Aegean and with respect for nature, Filotimia offers a stay that brings together simplicity, calm and sincerity.',
-    md1: 'Smooth, quiet surfaces on the floors and verandas.', md2: 'Stone from the island itself, laid by hand in the walls.', md3: 'Doors and frames that warm the space.', md4: 'Large openings that bring in the light and the sea.', md5: 'Low, warm light that brings out the stone at night.', wfRooms: 'stone rooms', wfTypes: 'room types', wfIsle: 'from Chora', wfLink: 'See the rooms', welBig: 'Welcome', welT: 'to <em>Filotimia</em>', aMore: 'For us, filotimo is not just a word; it is the way we host. Taking care of the small details, being there when you need us, and always giving a little more than you expect.', clL: 'Filotimia · Schoinoussa', ovL: 'What filotimo means', v1: 'Responsibility', v1d: '', v2: 'Willingness', v2d: '', v3: 'Generosity', v3d: '', ovEnd: 'This is <em>filotimo</em>. This is what we do for you.',
+    md1: 'Smooth, quiet surfaces on the floors and verandas.', md2: 'Stone from the island itself, laid by hand in the walls.', md3: 'Doors and frames that warm the space.', md4: 'Large openings that bring in the light and the sea.', md5: 'Low, warm light that brings out the stone at night.', wfRooms: 'stone rooms', wfTypes: 'room types', wfIsle: 'from Chora', wfLink: 'See the rooms', welBig: 'Welcome', welT: 'to <em>Filotimia</em>', filmBtn: 'Watch the film', aMore: 'For us, filotimo is not just a word; it is the way we host. Taking care of the small details, being there when you need us, and always giving a little more than you expect.', clL: 'Filotimia · Schoinoussa', ovL: 'What filotimo means', v1: 'Responsibility', v1d: '', v2: 'Willingness', v2d: '', v3: 'Generosity', v3d: '', ovEnd: 'This is <em>filotimo</em>. This is what we do for you.',
     clQ: '“Finally, we will welcome you and look after you with a smile, willingness and respect, so that you feel at home.”'
   });
   var lang = 'el';
@@ -887,6 +950,30 @@
   $('close').addEventListener('click', function () { toggleMenu(false); });
   menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
+
+  /* the film at the top: a silent loop plays behind the title; the button opens the full film with sound */
+  (function () {
+    var v = $('avhVid'); if (!v) return;
+    var so = v.querySelector('source'), small = matchMedia('(max-width: 760px)').matches;
+    var save = navigator.connection && navigator.connection.saveData;
+    if (reduced || save) { v.remove(); } else {
+      so.src = so.getAttribute(small ? 'data-m' : 'data-hd'); v.load();
+      v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+      // pause it when it is scrolled away or the tab is hidden, so it never costs anything off screen
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !document.hidden && $('filmBox').hidden) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } else v.pause(); }); }, { threshold: 0.05 }).observe(v);
+      document.addEventListener('visibilitychange', function () { if (document.hidden) v.pause(); else if ($('filmBox').hidden) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
+    }
+    var box = $('filmBox'), fv = $('filmV'), btn = $('avhPlay'), last = null;
+    function open() { last = document.activeElement; box.hidden = false; document.documentElement.classList.add('film-open'); requestAnimationFrame(function () { box.classList.add('on'); });
+      if (v && v.pause) v.pause(); fv.currentTime = 0; var q = fv.play(); if (q && q.catch) q.catch(function () {}); $('filmX').focus(); }
+    function close() { box.classList.remove('on'); fv.pause(); document.documentElement.classList.remove('film-open');
+      setTimeout(function () { box.hidden = true; }, 450); if (v && v.play && !reduced) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } if (last) last.focus(); }
+    btn.addEventListener('click', open); $('filmX').addEventListener('click', close);
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
+    fv.addEventListener('ended', function () { setTimeout(close, 900); });
+  })();
 
   /* welcome carousel: swipe or drag, dots to jump, and it moves on by itself every few seconds while on screen */
   (function () {
