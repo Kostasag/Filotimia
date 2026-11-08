@@ -515,6 +515,8 @@
   .filmbox-x svg { width: 20px; height: 20px; }
   html.film-open { overflow: hidden; }
 
+  .filmbox.vert .filmbox-v { width: auto; height: min(calc(100svh - 96px), 177.8vw); max-width: 100%; aspect-ratio: 9 / 16; }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -552,8 +554,8 @@
 <!-- ============ the film, at the very top ============ -->
 <section class="avh" id="avh" aria-labelledby="h1">
   <div class="avh-media" aria-hidden="true">
-    <img class="avh-poster" src="film/poster.jpg" alt="" fetchpriority="high">
-    <video class="avh-vid" id="avhVid" muted loop playsinline preload="metadata" poster="film/poster.jpg"><source data-hd="film/loop-hd.mp4" data-m="film/loop-m.mp4" type="video/mp4"></video>
+    <img class="avh-poster" src="film/poster2.jpg" alt="" fetchpriority="high">
+    <video class="avh-vid" id="avhVid" muted loop playsinline preload="metadata" poster="film/poster2.jpg"><source data-hd="film/loop2-hd.mp4" data-m="film/loop2-m.mp4" type="video/mp4"></video>
   </div>
   <div class="avh-shade" aria-hidden="true"></div>
   <div class="avh-in gut">
@@ -564,7 +566,7 @@
 </section>
 <div class="filmbox" id="filmBox" role="dialog" aria-modal="true" aria-label="Filotimia film" hidden>
   <button type="button" class="filmbox-x" id="filmX" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
-  <video class="filmbox-v" id="filmV" controls playsinline preload="none" poster="film/poster-end.jpg"><source src="film/filotimia-film.mp4" type="video/mp4"></video>
+  <video class="filmbox-v" id="filmV" controls playsinline preload="none" poster="film/poster2-end.jpg"><source data-hd="film/film2.mp4" data-m="film/film2-v.mp4" type="video/mp4"></video>
 </div>
 <section class="welcome" id="welcome" aria-label="Καλώς ήρθατε">
   <div class="wc-stage">
@@ -675,7 +677,7 @@
 
 <!-- ============ closing: the house at night, the words and the booking link ============ -->
 <section class="a2-close" id="closing" aria-labelledby="cl-h">
-  <img src="p/drone-27.jpg" alt="Filotimia lit up at dusk" loading="lazy" decoding="async">
+  <img src="p/exterior-39.jpg" alt="The Aegean seen from Filotimia" loading="lazy" decoding="async">
   <div class="a2-cin gut">
     <blockquote id="cl-h" class="rv cl-quote" data-i="clQ"></blockquote>
   </div>
@@ -965,6 +967,7 @@
       document.addEventListener('visibilitychange', function () { if (document.hidden) v.pause(); else if ($('filmBox').hidden) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
     }
     var box = $('filmBox'), fv = $('filmV'), btn = $('avhPlay'), last = null;
+    var fso = fv.querySelector('source'); fso.src = fso.getAttribute(small ? 'data-m' : 'data-hd'); if (small) box.classList.add('vert');
     function open() { last = document.activeElement; box.hidden = false; document.documentElement.classList.add('film-open'); requestAnimationFrame(function () { box.classList.add('on'); });
       if (v && v.pause) v.pause(); fv.currentTime = 0; var q = fv.play(); if (q && q.catch) q.catch(function () {}); $('filmX').focus(); }
     function close() { box.classList.remove('on'); fv.pause(); document.documentElement.classList.remove('film-open');

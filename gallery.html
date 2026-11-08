@@ -511,6 +511,12 @@
     .gc-dots { padding-top: 18px; }
   }
 
+  /* the wall moves as one calm sheet: every column drifts slowly upward at the same pace, the odd ones set half a photo lower */
+  .gh4-wall { transform: rotate(-2.5deg) scale(1.08); gap: 16px; }
+  .gw-in { gap: 16px; }
+  .gw-in img { border-radius: 3px; }
+  @media (prefers-reduced-motion: reduce) { .gw-in { animation: none; } }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -865,17 +871,17 @@
   /* hero: a slow wall of photographs drifting in columns behind an arched window, whose view changes every few seconds */
   (function () {
     var wall = $('ghWall'); if (!wall) return;
-    var th = P.filter(function (p) { return p.src.indexOf('g/') === 0; }).map(function (p) { return p.src.replace('g/', 'g/t/'); });
+    var th = P.filter(function (p) { return p.src.indexOf('g/') === 0 && !/μπάνιο|bathroom/i.test(p.el + ' ' + p.en); }).map(function (p) { return p.src.replace('g/', 'g/t/'); });
     th = th.map(function (_, i) { return th[(i * 17) % th.length]; });   // mix the spaces so each column shows a bit of everything
-    var nc = innerWidth < 700 ? 3 : 6, cols = '';
-    th = th.slice(0, nc * (nc === 3 ? 7 : 6));   // only as many as the wall shows, so the page's own photographs come first
+    var nc = innerWidth < 700 ? 3 : 5, cols = '';
+    th = th.slice(0, nc * 7);   // only as many as the wall shows, so the page's own photographs come first
     for (var c = 0; c < nc; c++) {
       var mine = th.filter(function (_, i) { return i % nc === c; }), html = mine.concat(mine).map(function (s) { return '<img src="' + s + '" alt="" decoding="async" draggable="false">'; }).join('');
       // a slow drift: each column moves at roughly 18-24 pixels a second
-      cols += '<div class="gw-col' + (c % 2 ? ' up' : '') + '"><div class="gw-in">' + html + '</div></div>';
+      cols += '<div class="gw-col" data-c="' + c + '"><div class="gw-in">' + html + '</div></div>';
     }
     wall.innerHTML = cols;
-    function speed() { Array.prototype.forEach.call(wall.querySelectorAll('.gw-in'), function (el, i) { var h = el.offsetHeight / 2; if (h > 0) el.style.animationDuration = (h / (18 + (i % 3) * 3)).toFixed(0) + 's'; }); }
+    function speed() { Array.prototype.forEach.call(wall.querySelectorAll('.gw-in'), function (el, i) { var h = el.offsetHeight / 2; if (h > 0) var d = h / 9; el.style.animationDuration = d.toFixed(0) + 's'; el.style.animationDelay = (-d * ((i * 0.37) % 1)).toFixed(1) + 's'; }); }
     speed(); addEventListener('load', speed);
   })();
   /* hero: the photographs in the arch take turns every few seconds; the dots choose one */
