@@ -334,6 +334,14 @@
   }
   @media (max-width: 480px) { .contact.lt .cpanel { padding: 20px 16px; border-radius: 18px; } .contact.lt .ctabs button { letter-spacing: .1em; } }
 
+  /* hero words: the title has the full width to itself, the sentence sits beneath it */
+  .kh-in { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .kh h1 { font-size: clamp(54px, 7.2vw, 8.4rem); white-space: nowrap; }
+  .kh-p { max-width: 46ch; }
+  .contact.lt .cleft { position: sticky; top: 120px; }
+  @media (max-width: 980px) { .contact.lt .cleft { position: static; } }
+  .kh h1 .ln { padding-top: .12em; padding-bottom: .1em; padding-right: .06em; }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -389,7 +397,6 @@
       <div class="cleft rv">
         <h2 id="contact-h" data-i="cH">Επικοινωνήστε<br><em>μαζί μας</em>.</h2>
         <p class="clede" data-i="cP">Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.</p>
-        <figure class="c-arch"><img src="g/sage-30.jpg" alt="A shaded veranda with a view of the Aegean" loading="lazy" decoding="async"></figure>
       </div>
       <div class="cpanel rv">
       <div class="ctabs" role="tablist" aria-label="Contact">
