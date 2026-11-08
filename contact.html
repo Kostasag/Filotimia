@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filotimia Contact</title><link rel="icon" href="favicon.svg?v=2" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=2" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=2"><meta name="theme-color" content="#1d2e26">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+  /* Layout: a guide in the site's voice. Full-bleed sunset opener, a short intro with three figures, an index of the nine beaches,
+     then one beach per band: photograph(s) in the arched window on one side, name and a few words on the other, sides alternating. */
+  :root {
+    --stone: #eeece3; --ivory: #f8f6ef; --olive: #263d34; --olive-2: #4d5d50; --sage: #838d76; --aegean: #5b7d88; --sand: #e3d6b6; --cream: #f5f0e6;
+    --rule: rgba(38,61,52,.18);
+    --display: "Playfair Display", Georgia, serif;
+    --body: "DM Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --ease: cubic-bezier(.22,.7,.12,1);
+    --gx: clamp(24px, 5vw, 6.25rem);
+    --cx: clamp(24px, 12vw, 15rem);
+    --mist: rgba(245,240,230,.78);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--stone); color: var(--olive); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 1px solid var(--aegean); outline-offset: 4px; }
+  .label { font-size: .66rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+  .gut { padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+
+  /* top bar */
+  .bar { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: calc(14px + env(safe-area-inset-top, 0px)) 14px; color: var(--cream); transition: background .5s, color .5s, border-color .5s; border-bottom: 1px solid transparent; }
+  .bar { transition: background .5s, color .5s, border-color .5s, transform .6s var(--ease), opacity .5s; }
+  .bar.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+  .bar.solid { background: #eeece3; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--olive); border-color: rgba(38,61,52,.1); }
+  .blogo { display: flex; align-items: center; gap: 12px; }
+  .blogo svg { height: 32px; width: auto; }
+  .blogo span { font-family: var(--display); font-size: .98rem; letter-spacing: .3em; }
+  .btools { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 2.125rem); }
+  .lang { display: flex; gap: 8px; opacity: .7; }
+  .lang button { letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; opacity: .6; }
+  .lang button[aria-pressed="true"] { opacity: 1; }
+  .home { display: inline-flex; align-items: center; gap: 10px; }
+  .home svg { width: 20px; height: 10px; transition: transform .4s var(--ease); }
+  .home:hover svg { transform: translateX(-4px); }
+  .burger { width: 26px; height: 18px; display: grid; align-content: space-between; }
+  .burger i { display: block; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+  .burger:hover i:nth-child(2) { transform: translateX(5px); }
+  @media (max-width: 640px) { .blogo span { display: none; } }
+
+  /* phones: a small booking pill in the top bar */
+  .bbook { display: none; }
+  @media (max-width: 720px) { .bbook { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border: 1px solid currentColor; border-radius: 999px; font-size: .56rem; letter-spacing: .16em; font-weight: 600; text-transform: uppercase; white-space: nowrap; opacity: .9; } .bar .home span { display: none; } }
+  /* menu overlay */
+  .menu { position: fixed; inset: 0; z-index: 20; background: rgba(14,23,29,.96); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: grid; align-content: center; gap: 8px;
+    padding-left: max(var(--cx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease); }
+  .menu.open { clip-path: inset(0 0 0 0); }
+  .menu a.big { font-family: var(--display); font-size: clamp(2.1rem, min(5.4vw, 8.5vh), 4.6rem); line-height: 1.1; color: var(--cream); width: max-content; max-width: 100%; transition: color .3s, transform .5s var(--ease); }
+  .menu a.big:hover { color: var(--sand); transform: translateX(10px); }
+  .menu .close { position: absolute; top: calc(28px + env(safe-area-inset-top, 0px)); right: max(var(--gx), env(safe-area-inset-right, 0px)); color: var(--cream); }
+  .menu .row { margin-top: 32px; display: flex; gap: 28px; flex-wrap: wrap; color: var(--mist); }
+
+  /* reveal */
+  .rv { transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .rv.pre { opacity: 0; transform: translateY(30px); }
+
+  /* end */
+  .end { background: var(--olive); color: var(--cream); padding-block: clamp(80px, 10vw, 8.75rem) clamp(40px, 5vw, 4.375rem); }
+  .end .cta { padding-bottom: 0 !important; }
+  .end .cta { display: grid; gap: 26px; justify-items: start; padding-bottom: clamp(60px, 8vw, 6.25rem); }
+  .end h3 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.6vw, 5.5rem); line-height: 1; letter-spacing: -.022em; margin: 0; }
+  .end h3 em { color: #c9cfba; }
+  .end .go { display: inline-flex; align-items: center; gap: 16px; padding: 18px 24px; background: var(--cream); color: var(--olive); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; border-radius: 2px; }
+  .end .go svg { width: 24px; height: 12px; transition: transform .4s var(--ease); }
+  .end .go:hover svg { transform: translateX(5px); }
+  .end .foot { display: flex; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.5); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.14); }
+
+  /* ---------- Footer: deep olive, four quiet columns, the name set large as a signature ---------- */
+  .sfoot { position: relative; z-index: 2; background: #1d2e26; color: #f5f0e6; overflow: hidden;
+    padding-block: clamp(64px, 8vw, 6.875rem) 26px; padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .fwrap { max-width: 90rem; margin: 0 auto; }
+  .fgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 44px; padding-bottom: clamp(40px, 6vw, 5rem); }
+  .fbrand { grid-column: 1 / span 4; display: grid; gap: 22px; align-content: start; }
+  .femblem { width: 64px; height: auto; }
+  .fsocial { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .fsocial a { display: inline-grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(245,240,230,.2); border-radius: 50%; color: rgba(245,240,230,.85);
+    font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; transition: background .35s, color .35s, border-color .35s; }
+  .fsocial a svg { width: 22px; height: 22px; transition: transform .45s var(--ease); }
+  .fsocial a:hover { background: #f5f0e6; color: #263d34; border-color: #f5f0e6; }
+  .fsocial a:hover svg { transform: rotate(-8deg) scale(1.06); }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: #263d34; color: #f5f0e6; padding: 10px 16px; border-radius: 2px; font-size: .9rem; }
+  .skip:focus { top: 12px; }
+  .flegal { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fcopy { color: rgba(245,240,230,.62); }
+  .flegal a, .flegal button { color: rgba(245,240,230,.72); font: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(245,240,230,.25); text-underline-offset: 4px; }
+  .flegal a:hover, .flegal button:hover { color: #f5f0e6; }
+  .fbar { color: rgba(245,240,230,.62) !important; }
+  .fcol .label { color: rgba(245,240,230,.62) !important; }
+  .fbrand p { margin: 0; color: rgba(245,240,230,.65); line-height: 1.7; max-width: 30ch; }
+  .fcol { grid-column: span 2; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .fcol:nth-of-type(1) { grid-column: 7 / span 2; }
+  .fcol .label { color: rgba(245,240,230,.45); margin-bottom: 6px; }
+  .fcol a { color: rgba(245,240,230,.85); width: fit-content; max-width: 100%; overflow-wrap: anywhere; position: relative; transition: color .3s; }
+  .fcol a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  .fcol a:hover { color: #f5f0e6; }
+  .fcol a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .flang { margin-top: 10px; color: rgba(245,240,230,.45); }
+  .flang button[aria-pressed="true"] { color: #f5f0e6; }
+  .fword { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 15.5vw, 18.75rem); line-height: .78; letter-spacing: .08em; margin-right: -.08em; text-align: center; white-space: nowrap;
+    color: transparent; -webkit-text-stroke: 1px rgba(245,240,230,.22); user-select: none; margin-bottom: clamp(18px, 2.4vw, 2.125rem); }
+  .fbar { display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap; color: rgba(245,240,230,.45); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.12); }
+  .fup { color: rgba(245,240,230,.7); letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-weight: inherit; transition: color .3s; }
+  .fup:hover { color: #f5f0e6; }
+  @media (max-width: 980px) {
+    .fbrand { grid-column: 1 / -1; }
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 4; }
+  }
+  @media (max-width: 560px) {
+    .fcol, .fcol:nth-of-type(1) { grid-column: span 6; }
+    .fcol:last-of-type { grid-column: 1 / -1; }
+    .fbar { flex-direction: column; align-items: flex-start; }
+  }
+  .totop { position: fixed; z-index: 14; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 52px; display: grid; place-items: center;
+    color: #eeece3; mix-blend-mode: difference; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
+  .totop.show { opacity: .9; pointer-events: auto; }
+  .totop svg { width: 22px; height: 34px; }
+
+  @media (max-width: 900px) {
+    .intro .lead, .intro .body { grid-column: 1 / -1; }
+    .intro { padding-top: clamp(150px, 32vw, 13.75rem); }
+    .sketch { width: 150%; max-width: none; right: -32%; top: clamp(-150px, -30vw, -110px); opacity: .32;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%); mask-image: linear-gradient(180deg, #000 55%, transparent 92%); }
+    .index ol { grid-template-columns: 1fr 1fr; }
+    .gal, .beach.flip .gal { grid-column: 1 / -1; grid-row: 1; margin-left: 0; margin-right: 0; }
+    .thumbs, .beach.flip .thumbs { padding-left: 0; padding-right: 0; }
+    .txt, .beach.flip .txt { grid-column: 1 / -1; grid-row: 3; }
+    /* phones: name first, then the photo, then the text */
+    .mhead { display: grid; gap: 10px; grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px; }
+    .mhead b { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 3.6rem); line-height: 1; letter-spacing: -.02em; color: var(--olive); }
+    .gal, .beach.flip .gal { grid-row: 2; }
+    .mhead .lat { font-family: var(--display); font-style: italic; color: var(--aegean); font-size: 1.1rem; }
+    .mhead .no { display: flex; align-items: center; gap: 14px; color: var(--olive-2); margin-bottom: 6px; }
+    .mhead .no::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+    .txt .no, .txt h2, .txt .lat { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+  @media (min-width: 901px) { .mhead { display: none; } }
+  @media (max-width: 560px) {
+    .index ol { grid-template-columns: 1fr; }
+    .figs { grid-template-columns: 1fr; gap: 20px; }
+    .win, .beach.flip .win { aspect-ratio: 4 / 5; }
+    .wf::before, .beach.flip .wf::before { inset: 12px -10px -12px 10px; }
+    .thumbs button { width: 54px; height: 42px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .opener .rise { animation: none; opacity: 1; transform: none; }
+    .rv, .rv.pre { transition: none; opacity: 1; transform: none; }
+    .win img { transition: none; }
+  }
+
+  .contact { position: relative; z-index: 2; background: #263d34; color: #f5f0e6; min-height: 100vh; min-height: 100svh; display: grid; overflow: hidden;
+    padding-block: clamp(80px, 10vw, 8.75rem) clamp(70px, 8vw, 7.5rem); padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .contact::before { content: ""; position: absolute; right: -12vw; top: -20vw; width: 60vw; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(131,141,118,.22), transparent); pointer-events: none; }
+  .cwrap { position: relative; max-width: 90rem; width: 100%; margin: 0 auto; display: grid; grid-template-rows: auto 1fr; gap: clamp(40px, 6vw, 5rem); }
+  .ctop { display: flex; justify-content: space-between; color: rgba(245,240,230,.65); padding-bottom: 18px; border-bottom: 1px solid rgba(245,240,230,.18); }
+  .cgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 2.75rem); row-gap: 56px; align-items: center; }
+  .cleft { grid-column: 1 / span 6; display: grid; gap: 26px; min-width: 0; }
+  .contact h2 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 6.4vw, 6.5rem); line-height: .98; letter-spacing: -.025em; margin: 0; }
+  .contact h2 em { font-style: italic; color: #c9cfba; }
+  .clede { margin: 0; color: rgba(245,240,230,.75); line-height: 1.7; max-width: 42ch; }
+  .lines { display: grid; gap: 22px; margin-top: 10px; }
+  .line1 { display: grid; gap: 8px; justify-items: start; }
+  .line1 .label { color: rgba(245,240,230,.55); }
+  .mail { font-family: var(--display); font-size: clamp(1.6rem, 2.7vw, 2.5rem); line-height: 1.1; letter-spacing: -.01em; border-bottom: 1px solid rgba(245,240,230,.3); padding-bottom: 6px; transition: border-color .3s; overflow-wrap: anywhere; }
+  .mail:hover { border-color: #f5f0e6; }
+  .addr { font-style: normal; display: grid; gap: 6px; }
+  .addr .a1 { font-family: var(--display); font-size: clamp(1.6rem, 2.7vw, 2.5rem); line-height: 1.1; letter-spacing: -.01em; }
+  .addr .a2 { color: rgba(245,240,230,.65); font-size: .95rem; }
+  .maplink { display: inline-flex; align-items: center; gap: 10px; }
+  .maplink svg { width: .55em; height: .55em; transition: transform .4s var(--ease); }
+  .maplink:hover svg { transform: translate(3px, -3px); }
+
+  .cpanel { grid-column: 7 / span 6; display: grid; gap: 26px; padding: clamp(24px, 2.6vw, 2.5rem); border: 1px solid rgba(245,240,230,.16); border-radius: 4px;
+    background: rgba(245,240,230,.04); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); min-width: 0; }
+  .book { display: grid; gap: 22px; min-width: 0; }
+  .book[hidden], .cform[hidden] { display: none; }
+  .ctabs { position: relative; display: flex; gap: clamp(20px, 2.4vw, 2.25rem); border-bottom: 1px solid rgba(245,240,230,.14); }
+  .ctabs button { padding: 0 0 16px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: rgba(245,240,230,.5); transition: color .3s; }
+  .ctabs button[aria-selected="true"], .ctabs button:hover { color: #f5f0e6; }
+  .ctab-bar { position: absolute; left: 0; bottom: -1px; height: 1px; width: var(--w, 0); transform: translateX(var(--x, 0)); background: #f5f0e6; transition: transform .5s var(--ease), width .5s var(--ease); }
+  .cform { display: grid; gap: 22px; min-width: 0; }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .fld .label i { font-style: normal; text-transform: none; letter-spacing: .02em; opacity: .7; }
+  .cform input, .cform select, .cform textarea { color-scheme: dark; width: 100%; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid rgba(245,240,230,.3); border-radius: 0; color: #f5f0e6;
+    padding: 8px 0 10px; font-family: var(--display); font-size: 1.2rem; outline: none; transition: border-color .3s; -webkit-appearance: none; appearance: none; }
+  .cform textarea { resize: vertical; min-height: 96px; line-height: 1.5; }
+  .cform select { cursor: pointer; padding-right: 28px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23f5f0e6' stroke-width='1.3'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") right 2px center / 14px no-repeat; }
+  .cform select option { background: #263d34; color: #f5f0e6; }
+  .cform input:focus, .cform select:focus, .cform textarea:focus { border-color: #f5f0e6; }
+  .cform [aria-invalid="true"] { border-color: #e2a58c; }
+  .fcheck { display: flex; gap: 12px; align-items: flex-start; font-size: .86rem; line-height: 1.55; color: rgba(245,240,230,.75); cursor: pointer; }
+  .fcheck input { flex: 0 0 auto; width: 18px; height: 18px; margin: 2px 0 0; padding: 0; border: 1px solid rgba(245,240,230,.5); border-radius: 2px; display: grid; place-items: center; cursor: pointer; }
+  .fcheck input:checked { background: #f5f0e6; }
+  .fcheck input:checked::after { content: ""; width: 9px; height: 5px; border: solid #263d34; border-width: 0 0 1.5px 1.5px; transform: translateY(-1px) rotate(-45deg); }
+  .fcheck input[aria-invalid="true"] { border-color: #e2a58c; }
+  .fcheck a { text-decoration: underline; text-underline-offset: 3px; }
+  .fmsg { margin: 0; min-height: 0; font-size: .86rem; line-height: 1.5; color: #e2a58c; }
+  .fmsg:empty { display: none; }
+  .fmsg.ok { color: #c9cfba; }
+  button.bgo { width: 100%; text-align: left; cursor: pointer; border: 0; font-family: inherit; }
+  .bhead { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid rgba(245,240,230,.14); }
+  .bhead .label { color: #f5f0e6; }
+  .bhead .best { color: #c9cfba; }
+  .dates { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 14px; }
+  .fld { display: grid; gap: 10px; min-width: 0; }
+  .fld .label, .step .label { color: rgba(245,240,230,.55); }
+  .fld input { color-scheme: dark; width: 100%; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid rgba(245,240,230,.3); color: #f5f0e6; padding: 8px 0 10px;
+    font-family: var(--display); font-size: 1.3rem; outline: none; transition: border-color .3s; }
+  .fld input:focus { border-color: #f5f0e6; }
+  .nights { font-family: var(--display); font-style: italic; color: #c9cfba; padding-bottom: 12px; white-space: nowrap; font-size: .95rem; }
+  .guests { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .step { display: grid; gap: 10px; }
+  .ctl { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(245,240,230,.3); padding-bottom: 6px; }
+  .ctl button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(245,240,230,.25); font-size: 1.1rem; line-height: 1; transition: background .3s, color .3s; }
+  .ctl button:hover { background: #f5f0e6; color: #263d34; }
+  .ctl output { font-family: var(--display); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+  .bgo { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 6px; padding: 18px 22px; background: #f5f0e6; color: #263d34; border-radius: 2px;
+    font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; transition: background .3s, gap .4s var(--ease); }
+  .bgo:hover { background: #ffffff; }
+  .bgo svg { width: 24px; height: 12px; transition: transform .4s var(--ease); }
+  .bgo:hover svg { transform: translateX(5px); }
+  .bnote { margin: 0; font-size: .78rem; color: rgba(245,240,230,.5); line-height: 1.5; }
+  .cfoot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: rgba(245,240,230,.45); padding-top: 18px; border-top: 1px solid rgba(245,240,230,.14); }
+
+  @media (max-width: 980px) {
+    .cleft, .cpanel { grid-column: 1 / -1; }
+    .cpanel { max-width: 38.75rem; }
+  }
+  @media (max-width: 480px) {
+    .frow { grid-template-columns: 1fr; }
+    .dates { grid-template-columns: 1fr 1fr; } .nights { display: none; }
+  }
+
+  /* ---------- contact page ---------- */
+  .bar:not(.solid) { color: #f5f0e6; }
+  .bar:not(.solid)::before { content: ""; position: absolute; inset: 0 0 -60px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(14,23,29,.5) 0%, rgba(14,23,29,0) 100%); }
+  .kh { position: relative; height: 74vh; height: 74svh; min-height: 520px; overflow: hidden; color: #f5f0e6; background: #1d2e26; }
+  .kh-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; animation: khIn 2.2s var(--ease) both; }
+  @keyframes khIn { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
+  .kh-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,23,29,.38) 0%, rgba(14,23,29,0) 26%, rgba(14,23,29,.14) 45%, rgba(14,23,29,.82) 100%); }
+  .kh-in { position: relative; z-index: 1; height: 100%; max-width: 90rem; margin: 0 auto; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 28rem); gap: 24px clamp(30px, 6vw, 7rem); align-content: end; align-items: end; padding-bottom: clamp(54px, 9vh, 6.5rem); }
+  .kh h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(56px, 8vw, 9rem); line-height: .92; letter-spacing: -.03em; }
+  .kh h1 .ln { display: block; overflow: hidden; padding-bottom: .06em; }
+  .kh h1 .ln > span { display: block; transform: translateY(105%); animation: khLine 1.4s var(--ease) .25s forwards; }
+  .kh h1 em { color: #e3c9a8; }
+  @keyframes khLine { to { transform: none; } }
+  .kh-p { margin: 0; padding-left: 18px; border-left: 1px solid rgba(245,240,230,.45); color: rgba(245,240,230,.9); line-height: 1.75; max-width: 34ch; opacity: 0; animation: khRise 1.2s var(--ease) .7s forwards; }
+  @keyframes khRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* three quick ways to reach us, as cards on the stone background */
+  .kq { background: var(--stone, #eeece3); padding-block: clamp(46px, 6vw, 5.5rem); padding-left: max(var(--gx), env(safe-area-inset-left, 0px)); padding-right: max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .kq-g { max-width: 90rem; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 1.5rem); }
+  .kq a { position: relative; display: grid; gap: 14px; align-content: start; padding: clamp(24px, 2.4vw, 2.25rem); background: #f7f4ec; border: 1px solid rgba(38,61,52,.1); border-radius: 18px; color: #263d34; transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s; }
+  .kq a:hover { transform: translateY(-4px); box-shadow: 0 26px 50px -30px rgba(38,61,52,.45); border-color: rgba(38,61,52,.22); }
+  .kq .ic { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #263d34; color: #f5f0e6; }
+  .kq .ic svg { width: 20px; height: 20px; }
+  .kq .lb { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: #6a7568; }
+  .kq .v { font-family: var(--display); font-size: clamp(1.3rem, 1.9vw, 1.8rem); line-height: 1.15; word-break: break-word; }
+  .kq .go { position: absolute; top: clamp(24px, 2.4vw, 2.25rem); right: clamp(24px, 2.4vw, 2.25rem); width: 18px; height: 18px; color: #a8744a; transition: transform .4s var(--ease); }
+  .kq a:hover .go { transform: translate(3px, -3px); }
+  .contact { min-height: 0; }
+  @media (max-width: 860px) {
+    .kh-in { grid-template-columns: 1fr; padding-bottom: 44px; }
+    .kh h1 { font-size: clamp(52px, 15vw, 5rem); }
+    .kq-g { grid-template-columns: 1fr; }
+    .kq a { grid-template-columns: auto 1fr; align-items: center; column-gap: 16px; row-gap: 4px; padding: 18px 20px; border-radius: 14px; }
+    .kq .ic { grid-row: 1 / 3; }
+    .kq .v { font-size: 1.2rem; }
+    .kq .go { top: 50%; margin-top: -9px; right: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .kh-img, .kh h1 .ln > span, .kh-p { animation: none; opacity: 1; transform: none; } }
+  .contact .cleft { align-content: start; }
+
+</style>
+<script src="a11y.js?v=5"></script>
+</head>
+<body data-legal="legal.html">
+<a class="skip" href="#content" data-i="skip">Μετάβαση στο περιεχόμενο</a>
+
+<header class="bar gut" id="bar">
+  <a class="blogo" href="./" aria-label="Filotimia, home">
+    <svg viewBox="264 26 192 166" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M296 179V97a64 64 0 0 1 128 0v82"/><path d="M296 107 270 98v67l26 10ZM424 107l26-9v67l-26 10Z"/><path d="M288 181h144"/></g><path d="M308 132q26-6 52 0t52 0M314 150q23-5 46 0t46 0" fill="none" stroke="#5b7d88" stroke-width="6" stroke-linecap="round"/><circle cx="360" cy="108" r="12" fill="#c9a876"/></svg>
+    <span>FILOTIMIA</span>
+  </a>
+  <div class="btools label">
+    <a class="home" href="./"><svg viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 5H1M5 1 1 5l4 4"/></svg><span data-i="home">Αρχική</span></a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+    <a class="bbook" href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener" data-i="bookS">Κράτηση</a>
+    <button type="button" class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button type="button" class="close label" id="close" data-i="close">Κλείσιμο</button>
+  <a class="big" href="about.html" data-i="nav1">Σχετικά με εμάς</a>
+  <a class="big" href="rooms.html" data-i="nav2">Δωμάτια</a>
+  <a class="big" href="gallery.html" data-i="nav3">Γκαλερί</a>
+  <a class="big" href="access.html" data-i="nav4">Πρόσβαση</a>
+  <a class="big" href="beaches.html" data-i="nav5">Παραλίες</a>
+  <a class="big" href="contact.html" data-i="nav6">Επικοινωνία</a>
+  <div class="row label">
+    <a href="contact.html" data-i="enquire">Επικοινωνία</a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
+  </div>
+</div>
+
+
+<main id="content" tabindex="-1">
+<section class="kh" id="khero" aria-labelledby="h1">
+  <img class="kh-img" src="m/exterior-19.jpg" alt="Bougainvillea in front of the Aegean at Filotimia" fetchpriority="high">
+  <div class="kh-shade" aria-hidden="true"></div>
+  <div class="kh-in gut">
+    <h1 id="h1"><span class="ln"><span data-i="kH1">Επικοινωνία</span></span></h1>
+    <p class="kh-p" data-i="kP">Είμαστε εδώ για ό,τι χρειαστείτε, πριν φτάσετε και σε όλη τη διάρκεια της διαμονής σας.</p>
+  </div>
+</section>
+<section class="kq" aria-label="Contact details">
+  <div class="kq-g">
+    <a href="tel:+306943102945"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><span class="lb" data-i="kCall">Τηλέφωνο</span><span class="v">+30 694 310 2945</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+    <a href="mailto:info@filotimia.gr"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="lb">Email</span><span class="v">info@filotimia.gr</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Filotimia+Apartments+Schoinoussa" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="lb" data-i="kWhere">Θα μας βρείτε</span><span class="v" data-i="kAddr">Μεσαριά, Σχοινούσα</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+  </div>
+</section>
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="cwrap">
+    <div class="ctop label"><span data-i="cLabel">Επικοινωνία</span></div>
+    <div class="cgrid">
+      <div class="cleft rv">
+        <h2 id="contact-h" data-i="cH">Επικοινωνήστε<br><em>μαζί μας</em>.</h2>
+        <p class="clede" data-i="cP">Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.</p>
+      </div>
+      <div class="cpanel rv">
+      <div class="ctabs" role="tablist" aria-label="Contact">
+        <button type="button" role="tab" id="tabMsg" aria-controls="msgForm" aria-selected="true"><span data-i="tMsg">Στείλτε μήνυμα</span></button>
+        <button type="button" role="tab" id="tabBook" aria-controls="bookForm" aria-selected="false" tabindex="-1"><span data-i="tBook">Κράτηση</span></button>
+        <i class="ctab-bar" aria-hidden="true"></i>
+      </div>
+      <form class="cform" id="msgForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" role="tabpanel" aria-labelledby="tabMsg" novalidate><input type="hidden" name="form-name" value="contact"><p hidden><label>Leave empty <input name="bot-field"></label></p>
+        <div class="frow">
+          <label class="fld"><span class="label"><span data-i="fFirst">Όνομα</span> *</span><input type="text" name="first" autocomplete="given-name" required></label>
+          <label class="fld"><span class="label"><span data-i="fLast">Επώνυμο</span> *</span><input type="text" name="last" autocomplete="family-name" required></label>
+        </div>
+        <div class="frow">
+          <label class="fld"><span class="label">Email *</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+          <label class="fld"><span class="label"><span data-i="fPhone">Τηλέφωνο</span> <i data-i="fOpt">(προαιρετικό)</i></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel"></label>
+        </div>
+        <label class="fld"><span class="label" data-i="fTopic">Θέμα</span>
+          <select name="topic">
+            <option value="1" data-i="fT1">Διαθεσιμότητα και κράτηση</option>
+            <option value="2" data-i="fT2">Τα δωμάτια</option>
+            <option value="3" data-i="fT3">Πρόσβαση στο νησί</option>
+            <option value="4" data-i="fT4">Κάτι άλλο</option>
+          </select>
+        </label>
+        <label class="fld"><span class="label"><span data-i="fMsg">Μήνυμα</span> *</span><textarea name="message" rows="4" required></textarea></label>
+        <label class="fcheck"><input type="checkbox" name="consent" required><span data-i="fConsent">Συμφωνώ με την <a href="legal.html">πολιτική απορρήτου</a>.</span></label>
+        <p class="fmsg" id="fMsgOut" role="status" aria-live="polite"></p>
+        <button type="submit" class="bgo"><span data-i="fSend">Αποστολή μηνύματος</span><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></button>
+      </form>
+      <form class="book" id="bookForm" role="tabpanel" aria-labelledby="tabBook" novalidate hidden>
+        <div class="bhead"><span class="label" data-i="bL">Απευθείας κράτηση</span></div>
+        <div class="dates">
+          <label class="fld"><span class="label" data-i="bIn">Άφιξη</span><input type="date" id="bkIn" required></label>
+          <span class="nights" id="bkNights">3 νύχτες</span>
+          <label class="fld"><span class="label" data-i="bOut">Αναχώρηση</span><input type="date" id="bkOut" required></label>
+        </div>
+        <div class="guests">
+          <div class="step"><span class="label" data-i="bAd">Ενήλικες</span><div class="ctl"><button type="button" data-k="ad" data-d="-1" aria-label="Fewer adults">−</button><output id="bkAd">2</output><button type="button" data-k="ad" data-d="1" aria-label="More adults">+</button></div></div>
+          <div class="step"><span class="label" data-i="bCh">Παιδιά</span><div class="ctl"><button type="button" data-k="ch" data-d="-1" aria-label="Fewer children">−</button><output id="bkCh">0</output><button type="button" data-k="ch" data-d="1" aria-label="More children">+</button></div></div>
+        </div>
+        <a class="bgo" id="bkGo" href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener"><span data-i="bGo">Έλεγχος διαθεσιμότητας</span><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="sfoot" aria-label="Footer">
+  <div class="fwrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <svg class="femblem" viewBox="264 26 192 166" aria-hidden="true"><defs><clipPath id="fv"><path d="M303 178V97a57 57 0 0 1 114 0v81Z"/></clipPath></defs><g stroke-linecap="round" stroke-linejoin="round"><g clip-path="url(#fv)"><rect x="302" y="35" width="116" height="145" fill="#f3eee1"/><circle cx="360" cy="113" r="13" fill="#d5b58b"/><path d="M300 130q30-5 59 0t59 0" fill="none" stroke="#78969a" stroke-width="3.5"/><path d="M301 143q28-5 57 0t59 0m-112 12q30-4 58 0t58 0" fill="none" stroke="#93aa9f" stroke-width="3"/></g><path d="M296 179V97a64 64 0 0 1 128 0v82" fill="none" stroke="#f5f0e6" stroke-width="5"/><path d="M296 107 270 98v67l26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M424 107 450 98v67l-26 10Z" fill="#879e9e" stroke="#f5f0e6" stroke-width="4"/><path d="M288 181h144M304 189h112" fill="none" stroke="#f5f0e6" stroke-width="5"/></g></svg>
+        <p data-i="fTag">Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.</p>
+        <span class="fcopy label">© 2026 Filotimia</span>
+        <div class="fsocial">
+          <a href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener" aria-label="Filotimia Apartments on Google Maps" title="Google Maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.4"/></svg>
+          </a>
+          <a href="https://www.booking.com/hotel/gr/filotimia.el.html" target="_blank" rel="noopener" aria-label="Filotimia on Booking.com" title="Booking.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><text x="12.6" y="17.4" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="16" fill="currentColor">B.</text></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="fcol" aria-label="Footer menu">
+        <span class="label" data-i="fMenu">Μενού</span>
+        <a href="about.html" data-i="nav1">Σχετικά με εμάς</a>
+        <a href="rooms.html" data-i="nav2">Δωμάτια</a>
+        <a href="gallery.html" data-i="nav3">Γκαλερί</a>
+        <a href="access.html" data-i="nav4">Πρόσβαση</a>
+        <a href="beaches.html" data-i="nav5">Παραλίες</a>
+      </nav>
+      <div class="fcol">
+        <span class="label" data-i="fContact">Επικοινωνία</span>
+        <a href="mailto:info@filotimia.gr">info@filotimia.gr</a>
+        <a href="tel:+306943102945">+30 694 310 2945</a>
+        <a href="https://www.google.com/maps/place/Filotimia+Apartments/@36.8810559,25.5154,17z/data=!4m8!3m7!1s0x14981b003c577321:0xed3e225574de0b36!8m2!3d36.8810559!4d25.5179749!9m1!1b1!16s%2Fg%2F11vxm0ky9w" target="_blank" rel="noopener"><span data-i="fMap">Δείτε στον χάρτη</span> ↗</a>
+      </div>
+      <div class="fcol">
+        <span class="label" data-i="fBook">Κράτηση</span>
+        <a href="https://direct-book.com/properties/filotimia" target="_blank" rel="noopener"><span data-i="bL">Απευθείας κράτηση</span> ↗</a>
+        <a href="contact.html" data-i="enquire">Επικοινωνία</a>
+        <div class="lang flang label" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="false">GR</button></div>
+      </div>
+    </div>
+    <div class="fword" aria-hidden="true">FILOTIMIA</div>
+    <nav class="flegal label" aria-="Legal">
+        <a href="legal.html#terms" data-i="lgTerms">Όροι και προϋποθέσεις</a>
+        <a href="legal.html#privacy" data-i="lgPriv">Πολιτική απορρήτου</a>
+        <a href="legal.html#cookies" data-i="lgCook">Cookies</a>
+        <button type="button" data-cookie-settings data-i="lgSet">Ρυθμίσεις cookies</button>
+        <a href="legal.html#accessibility" data-i="lgA11y">Προσβασιμότητα</a>
+      </nav>
+  </div>
+</footer>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top"><svg viewBox="0 0 22 34" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 33V2M3 10l8-8 8 8"/></svg></button>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var T = {
+    el: { bookS: 'Κράτηση', home: 'Αρχική', book: 'Κράτηση', openL: 'Οδηγός παραλιών', openH: 'Οι παραλίες της <em>Σχοινούσας</em>.', introL: 'Απάτητες · Προστατευόμενες · Κοντά',
+      lead: 'Οι παραλίες της Σχοινούσας είναι απάτητες και ανήκουν σε ειδικό καθεστώς προστασίας. Παρά το μικρό της μέγεθος, το νησί έχει μεγάλο αριθμό παραλιών.',
+      body: 'Από τη Χώρα, η πινακίδα δείχνει τις αποστάσεις για κάθε παραλία, με την πιο μακρινή διαδρομή (Λιόλιου) να είναι στα 3,5 χιλιόμετρα. Οι αποστάσεις είναι μικρές: οι περισσότερες φτάνονται σε λίγα λεπτά, με τα πόδια ή με αυτοκίνητο. Μια επιστροφή στη φύση και στην αυθεντικότητα.',
+      f1: 'Παραλίες σε αυτόν τον οδηγό', f2: 'Η πιο μακρινή, η Λιόλιου', f3: 'Το Λιβάδι από τη Χώρα', map: 'Δείτε στον χάρτη', photo: 'Φωτογραφία',
+      stayL: 'Η Φιλοτιμία, στη Μεσαριά', stayP: 'Λίγα λεπτά από <em>κάθε παραλία</em>.',
+      lgTerms: 'Όροι και προϋποθέσεις', lgPriv: 'Πολιτική απορρήτου', lgCook: 'Cookies', lgSet: 'Ρυθμίσεις cookies', lgA11y: 'Προσβασιμότητα', skip: 'Μετάβαση στο περιεχόμενο', 
+      endH: 'Μείνετε κοντά <em>σε όλες</em>.', endGo: 'Απευθείας κράτηση', footP: 'Σχοινούσα, Μικρές Κυκλάδες',
+      fTag: 'Πέτρινα δωμάτια με θέα στο Αιγαίο, στη Σχοινούσα των Μικρών Κυκλάδων.', fMenu: 'Μενού', fContact: 'Επικοινωνία', fMap: 'Δείτε στον χάρτη', fBook: 'Κράτηση', fTop: 'Επιστροφή στην κορυφή',
+      nav1: 'Σχετικά με εμάς', nav2: 'Δωμάτια', nav3: 'Γκαλερί', nav4: 'Πρόσβαση', nav5: 'Παραλίες', nav6: 'Επικοινωνία', close: 'Κλείσιμο', enquire: 'Επικοινωνία', bL: 'Απευθείας κράτηση', cFoot: 'Σχοινούσα, Μικρές Κυκλάδες' },
+    en: { bookS: 'Book', home: 'Home', book: 'Book', openL: 'Beach guide', openH: 'The beaches of <em>Schoinoussa</em>.', introL: 'Unspoilt · Protected · Close by',
+      lead: 'The beaches of Schoinoussa are unspoilt and under special protection. Small as it is, the island has a great number of them.',
+      body: 'In Chora, a signpost shows the distance to every beach, the farthest route (Lioliou) being 3.5 kilometres. Distances are short: most are a few minutes away, on foot or by car. A return to nature and to the authentic.',
+      f1: 'Beaches in this guide', f2: 'The farthest, Lioliou', f3: 'Livadi from Chora', map: 'View on the map', photo: 'Photo',
+      stayL: 'Filotimia, in Mesaria', stayP: 'A few minutes from <em>every beach</em>.',
+      lgTerms: 'Terms and conditions', lgPriv: 'Privacy policy', lgCook: 'Cookies', lgSet: 'Cookie settings', lgA11y: 'Accessibility', skip: 'Skip to content', 
+      endH: 'Stay close <em>to them all</em>.', endGo: 'Book direct', footP: 'Schoinoussa, Small Cyclades',
+      fTag: 'Stone rooms with Aegean views on Schoinoussa, in the Small Cyclades.', fMenu: 'Menu', fContact: 'Contact', fMap: 'View on the map', fBook: 'Booking', fTop: 'Back to top',
+      nav1: 'About us', nav2: 'Rooms', nav3: 'Gallery', nav4: 'Getting here', nav5: 'Beaches', nav6: 'Contact', close: 'Close', enquire: 'Contact', bL: 'Book direct', cFoot: 'Schoinoussa, Small Cyclades' }
+  };
+  Object.assign(T.el, {"kH1": "Επικοινωνία", "kP": "Είμαστε εδώ για ό,τι χρειαστείτε, πριν φτάσετε και σε όλη τη διάρκεια της διαμονής σας.", "kCall": "Τηλέφωνο", "kWhere": "Θα μας βρείτε", "kAddr": "Μεσαριά, Σχοινούσα"}); T.el.cue = 'Κύλιση';
+  Object.assign(T.en, {"kH1": "Contact", "kP": "We are here for anything you need, before you arrive and throughout your stay.", "kCall": "Phone", "kWhere": "Find us", "kAddr": "Mesaria, Schoinoussa"}); T.en.cue = 'Scroll';
+  Object.assign(T.en, { cLabel: 'Contact', cH: 'Get in<br><em>touch</em>.', cP: 'Write to us about availability, questions or anything you need before you reach the island.', cPhoneL: 'Phone', cMapL: 'Location', cAddrL: 'Address', cAddr1: 'Messaria, Schoinoussa', cAddr2: '843 00 · Cyclades, Greece',
+    cMailL: 'Email', cCopy: 'Copy', cCopied: 'Copied', cWhere: 'Schoinoussa · Small Cyclades · Greece', bL: 'Book direct', bBest: 'Best rate when you book direct', bIn: 'Check-in', bOut: 'Check-out',
+    bAd: 'Adults', bCh: 'Children', bGo: 'Check availability', bNote: 'Your booking is completed securely on Filotimia’s booking page.', cFoot: 'Schoinoussa, Small Cyclades', night: 'night', nights: 'nights' });
+  Object.assign(T.el, { cLabel: 'Επικοινωνία', cH: 'Επικοινωνήστε<br><em>μαζί μας</em>.', cP: 'Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.', cPhoneL: 'Τηλέφωνο', cMapL: 'Τοποθεσία', cAddrL: 'Διεύθυνση', cAddr1: 'Μεσαριά, Σχοινούσα', cAddr2: 'Τ.Κ. 843 00 · Κυκλάδες, Ελλάδα',
+    cMailL: 'Email', cCopy: 'Αντιγραφή', cCopied: 'Αντιγράφηκε', cWhere: 'Σχοινούσα · Μικρές Κυκλάδες · Ελλάδα', bL: 'Απευθείας κράτηση', bBest: 'Καλύτερη τιμή απευθείας', bIn: 'Άφιξη', bOut: 'Αναχώρηση',
+    bAd: 'Ενήλικες', bCh: 'Παιδιά', bGo: 'Έλεγχος διαθεσιμότητας', bNote: 'Η κράτηση ολοκληρώνεται με ασφάλεια στη σελίδα κρατήσεων της Filotimia.', cFoot: 'Σχοινούσα, Μικρές Κυκλάδες', night: 'νύχτα', nights: 'νύχτες' });
+  Object.assign(T.el, { hLab1: 'Μεσαριά · Σχοινούσα', hLab2: 'Έξι πέτρινα δωμάτια', ctaBook: 'Κάντε Κράτηση', ctaRooms: 'Δείτε τα Δωμάτια', h3a: 'Νιώστε', h3b: '<em>σαν στο σπίτι σας</em>', lede3: 'Ένας χώρος φτιαγμένος για να χαλαρώσετε και να απολαύσετε τη διαμονή σας.', ctaContact: 'Επικοινωνήστε μαζί μας', ctaAbout: 'Γνωρίστε μας', h4a: 'Η βεράντα <em>σας</em>.', h4b: '', lede4: 'Ευρύχωρα μπαλκόνια με θέα στο Αιγαίο, για να απολαύσετε στιγμές ξεκούρασης.', ctaGal: 'Δείτε τη γκαλερί', ctaBeach: 'Δείτε τις παραλίες', ctaAccess: 'Πώς θα έρθετε', tMsg: 'Στείλτε μήνυμα', tBook: 'Κράτηση', fFirst: 'Όνομα', fLast: 'Επώνυμο', fPhone: 'Τηλέφωνο', fOpt: '(προαιρετικό)', fTopic: 'Θέμα',
+    fT1: 'Διαθεσιμότητα και κράτηση', fT2: 'Τα δωμάτια', fT3: 'Πρόσβαση στο νησί', fT4: 'Κάτι άλλο', fMsg: 'Μήνυμα', fConsent: 'Συμφωνώ με την <a href="legal.html">πολιτική απορρήτου</a>.', fSend: 'Αποστολή μηνύματος',
+    fErrReq: 'Συμπληρώστε τα πεδία με αστερίσκο.', fErrMail: 'Γράψτε ένα έγκυρο email.', fErrConsent: 'Χρειάζεται να συμφωνήσετε με την πολιτική απορρήτου.', fOk: 'Ευχαριστούμε! Ανοίγει το email σας με το μήνυμα έτοιμο για αποστολή.', fSent: 'Ευχαριστούμε! Λάβαμε το μήνυμά σας και θα σας απαντήσουμε σύντομα.', fFail: 'Κάτι πήγε στραβά. Γράψτε μας στο info@filotimia.gr.' });
+  Object.assign(T.en, { hLab1: 'Messaria · Schoinoussa', hLab2: 'Six stone rooms', ctaBook: 'Book now', ctaRooms: 'See the rooms', h3a: 'Feel', h3b: '<em>at home</em>', lede3: 'A space made for you to relax and enjoy your stay.', ctaContact: 'Get in touch', ctaAbout: 'About us', h4a: 'Your <em>veranda</em>.', h4b: '', lede4: 'Spacious balconies overlooking the Aegean, for moments of rest.', ctaGal: 'See the gallery', ctaBeach: 'See the beaches', ctaAccess: 'Getting here', tMsg: 'Send a message', tBook: 'Booking', fFirst: 'First name', fLast: 'Last name', fPhone: 'Phone', fOpt: '(optional)', fTopic: 'Enquiry about',
+    fT1: 'Availability and booking', fT2: 'The rooms', fT3: 'Getting to the island', fT4: 'Something else', fMsg: 'Message', fConsent: 'I agree to the <a href="legal.html">privacy policy</a>.', fSend: 'Send message',
+    fErrReq: 'Please fill in the fields marked with an asterisk.', fErrMail: 'Please enter a valid email.', fErrConsent: 'Please agree to the privacy policy.', fOk: 'Thank you! Your email app is opening with the message ready to send.', fSent: 'Thank you! We have your message and will reply soon.', fFail: 'Something went wrong. Please write to info@filotimia.gr.' });
+  var lang = 'el';
+  try { var sv = sessionStorage.getItem('aegean-lang'); if (sv === 'en' || sv === 'el') lang = sv; } catch (e) {}
+  function render() {
+    var l = lang;
+    document.querySelectorAll('[data-i]').forEach(function (el) { var v = T[l][el.dataset.i]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang button').forEach(function (bt) { bt.setAttribute('aria-pressed', bt.dataset.lang === l ? 'true' : 'false'); });
+  }
+  document.querySelectorAll('.lang button').forEach(function (bt) {
+    bt.addEventListener('click', function () { lang = bt.dataset.lang; try { sessionStorage.setItem('aegean-lang', lang); } catch (e) {} render(); });
+  });
+  var io = ('IntersectionObserver' in window && !reduced) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  if (io) document.querySelectorAll('.rv').forEach(function (el) { if (el.getBoundingClientRect().top > innerHeight * 0.9) { el.classList.add('pre'); io.observe(el); } });
+
+  var bar = $('bar'), top = $('totop'), menu = $('menu'), lastY = scrollY, acc = 0;
+  function onScroll() {
+    var y = scrollY, h = innerHeight || 1, dy = y - lastY; lastY = y;
+    top.classList.toggle('show', y > h * 1.2);
+    bar.classList.toggle('solid', y > h * 0.85);
+    if (y < h * 0.4 || menu.classList.contains('open')) { acc = 0; bar.classList.remove('hide'); return; }
+    acc = (dy > 0) === (acc > 0) ? acc + dy : dy;
+    if (acc > 14) bar.classList.add('hide'); else if (acc < -14) bar.classList.remove('hide');
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  top.addEventListener('click', function () { scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+  var burger = $('burger');
+  function toggleMenu(open) { menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', open ? 'false' : 'true'); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function () { toggleMenu(true); });
+  $('close').addEventListener('click', function () { toggleMenu(false); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
+  /* ---------- Contact: copy email, build the direct-booking link from the chosen dates ---------- */
+  (function () {
+    /* contact panel: two tabs (message / booking) */
+    (function () {
+      var tabs = [$('tabMsg'), $('tabBook')], panes = [$('msgForm'), $('bookForm')], bar = document.querySelector('.ctab-bar');
+      function place() { var t = tabs.filter(function (b) { return b.getAttribute('aria-selected') === 'true'; })[0]; if (!t || !bar) return; bar.style.setProperty('--x', t.offsetLeft + 'px'); bar.style.setProperty('--w', t.offsetWidth + 'px'); }
+      function pick(i, focus) { tabs.forEach(function (b, j) { b.setAttribute('aria-selected', i === j ? 'true' : 'false'); b.tabIndex = i === j ? 0 : -1; panes[j].hidden = i !== j; }); place(); if (focus) tabs[i].focus(); }
+      tabs.forEach(function (b, i) {
+        b.addEventListener('click', function () { pick(i); });
+        b.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); pick(1 - i, true); } });
+      });
+      addEventListener('resize', place); addEventListener('load', place); setTimeout(place, 300);
+      var l0 = window.__onLang; window.__onLang = function () { if (l0) l0(); setTimeout(place, 30); };
+    })();
+
+    /* contact form. Until the live site has a form service, sending opens the guest's email app with everything filled in.
+       To send from the page itself, set FORM_ENDPOINT to the service's address (e.g. a Formspree form URL). */
+    (function () {
+      var FORM_ENDPOINT = null, TO = 'info@filotimia.gr';
+      var f = $('msgForm'), out = $('fMsgOut'); if (!f) return;
+      function tr(k) { var l = document.documentElement.lang === 'en' ? 'en' : 'el'; return (T[l] && T[l][k]) || k; }
+      function bad(el, on) { el.setAttribute('aria-invalid', on ? 'true' : 'false'); }
+      f.addEventListener('input', function (e) { if (e.target.getAttribute('aria-invalid') === 'true') bad(e.target, false); });
+      f.addEventListener('change', function (e) { if (e.target.getAttribute('aria-invalid') === 'true') bad(e.target, false); });
+      f.addEventListener('submit', function (e) {
+        e.preventDefault(); out.className = 'fmsg'; out.textContent = '';
+        var first = null, msg = '';
+        ['first', 'last', 'email', 'message'].forEach(function (n) { var el = f.elements[n], v = el.value.trim(), ok = !!v;
+          if (ok && n === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+          bad(el, !ok); if (!ok && !first) { first = el; msg = v && n === 'email' ? tr('fErrMail') : tr('fErrReq'); } });
+        var c = f.elements.consent; bad(c, !c.checked); if (!c.checked && !first) { first = c; msg = tr('fErrConsent'); }
+        if (first) { out.textContent = msg; first.focus(); return; }
+        var v = function (n) { return f.elements[n].value.trim(); }, topic = f.elements.topic.selectedOptions[0].textContent;
+        var subject = 'Filotimia · ' + topic + ' · ' + v('first') + ' ' + v('last');
+        var body = v('message') + '\n\n' + v('first') + ' ' + v('last') + '\n' + v('email') + (v('phone') ? '\n' + v('phone') : '');
+        function done() { out.className = 'fmsg ok'; out.textContent = tr(FORM_ENDPOINT ? 'fSent' : 'fOk'); if (FORM_ENDPOINT) f.reset(); }
+        if (/(^|\.)filotimia\.gr$|netlify\.app$/.test(location.hostname)) {
+          var fd = new FormData(f); fd.set('topic', topic);
+          fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString() })
+            .then(function (r) { if (!r.ok) throw 0; out.className = 'fmsg ok'; out.textContent = tr('fSent'); f.reset(); })
+            .catch(function () { location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); done(); });
+        } else if (FORM_ENDPOINT) {
+          fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ name: v('first') + ' ' + v('last'), email: v('email'), phone: v('phone'), topic: topic, message: v('message') }) })
+            .then(function (r) { if (!r.ok) throw 0; done(); }).catch(function () { out.textContent = tr('fFail'); });
+        } else {
+          location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); done();
+        }
+      });
+    })();
+
+    var form = $('bookForm'); if (!form) return;
+    var inEl = $('bkIn'), outEl = $('bkOut'), go = $('bkGo'), nightsEl = $('bkNights'), g = { ad: 2, ch: 0 };
+    var BASE = 'https://direct-book.com/properties/filotimia';
+    function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    inEl.min = iso(today); inEl.value = iso(addDays(today, 1)); outEl.value = iso(addDays(today, 4));
+    function update() {
+      var a = new Date(inEl.value), b = new Date(outEl.value);
+      if (isNaN(a)) { a = addDays(today, 1); inEl.value = iso(a); }
+      outEl.min = iso(addDays(a, 1));
+      if (isNaN(b) || b <= a) { b = addDays(a, 1); outEl.value = iso(b); }
+      var n = Math.round((b - a) / 864e5), l = document.documentElement.lang === 'el' ? 'el' : 'en';
+      nightsEl.textContent = n + ' ' + (n === 1 ? T[l].night : T[l].nights);
+      $('bkAd').textContent = g.ad; $('bkCh').textContent = g.ch;
+      go.href = BASE + '?locale=en&items[0][adults]=' + g.ad + '&items[0][children]=' + g.ch + '&items[0][infants]=0&currency=EUR&checkInDate=' + inEl.value + '&checkOutDate=' + outEl.value;
+    }
+    inEl.addEventListener('change', update); outEl.addEventListener('change', update);
+    form.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-k]'); if (!b) return;
+      var k = b.dataset.k; g[k] = Math.max(k === 'ad' ? 1 : 0, Math.min(k === 'ad' ? 4 : 3, g[k] + (+b.dataset.d))); update();
+    });
+    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    update();
+    window.__onLangContact = update;
+
+  })();
+
+
+
+  render();
+  var r0 = render; render = function () { r0(); if (window.__onLang) window.__onLang(); if (window.__onLangContact) window.__onLangContact(); };
+})();
+</script>
+<script>
+/* the photograph in the arch drifts gently as the page moves */
+(function () { var im = document.getElementById('wtImg'); if (!im || matchMedia('(prefers-reduced-motion: reduce)').matches) return; var tk = false;
+  function fx() { tk = false; var r = im.parentNode.getBoundingClientRect(), h = innerHeight || 1; if (r.bottom < 0 || r.top > h) return; var t = Math.max(0, Math.min(1, (h - r.top) / (h + r.height))); im.style.transform = 'translate3d(0,' + ((0.5 - t) * 8).toFixed(2) + '%,0) scale(' + (1.06 - t * 0.06).toFixed(4) + ')'; }
+  addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(fx); } }, { passive: true }); fx(); })();
+</script>
+<script src="consent.js"></script>
+</body>
+</html>
