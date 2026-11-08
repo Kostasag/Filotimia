@@ -283,6 +283,57 @@
   @media (prefers-reduced-motion: reduce) { .kh-img, .kh h1 .ln > span, .kh-p { animation: none; opacity: 1; transform: none; } }
   .contact .cleft { align-content: start; }
 
+  /* ---------- the contact block, light and calm: words and an arched photo on the left, a white card with the forms on the right ---------- */
+  .contact.lt { background: #f3efe6; color: #263d34; min-height: 0; padding-block: clamp(64px, 8vw, 7.5rem); }
+  .contact.lt::before { display: none; }
+  .contact.lt .cwrap { gap: 0; }
+  .contact.lt .cgrid { align-items: start; row-gap: 48px; }
+  .contact.lt .cleft { grid-column: 1 / span 5; gap: 22px; }
+  .contact.lt h2 { color: #263d34; font-size: clamp(42px, 5vw, 5rem); line-height: 1; margin: 0; }
+  .contact.lt h2 em { color: #a8744a; }
+  .contact.lt .clede { color: #55635a; max-width: 38ch; font-size: clamp(1rem, 1.1vw, 1.1rem); }
+  .c-arch { margin: 14px 0 0; width: min(100%, 23rem); aspect-ratio: 4 / 5; overflow: hidden; border-radius: 50% 50% 18px 18px / 31% 31% 18px 18px; box-shadow: 0 40px 70px -46px rgba(38,61,52,.55); }
+  .c-arch img { width: 100%; height: 100%; object-fit: cover; }
+  .contact.lt .cpanel { grid-column: 7 / span 6; background: #fff; border: 1px solid rgba(38,61,52,.08); border-radius: 22px; padding: clamp(24px, 3vw, 2.75rem); box-shadow: 0 40px 90px -50px rgba(38,61,52,.45); gap: 28px; }
+  /* tabs as a soft two-part switch */
+  .contact.lt .ctabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 5px; background: #f1ede4; border: 0; border-radius: 999px; }
+  .contact.lt .ctabs button { position: relative; z-index: 1; padding: 12px 10px; border-radius: 999px; color: #6a7568; font-size: .68rem; letter-spacing: .16em; text-align: center; transition: color .35s; }
+  .contact.lt .ctabs button[aria-selected="true"] { color: #f5f0e6; }
+  .contact.lt .ctabs button:hover { color: #263d34; } .contact.lt .ctabs button[aria-selected="true"]:hover { color: #f5f0e6; }
+  .contact.lt .ctab-bar { top: 5px; bottom: 5px; height: auto; background: #263d34; border-radius: 999px; z-index: 0; }
+  /* fields: label above, a light bordered box */
+  .contact.lt .fld { gap: 8px; }
+  .contact.lt .fld .label, .contact.lt .step .label { color: #55635a; font-size: .64rem; letter-spacing: .16em; }
+  .contact.lt .fld .label i { color: #8a948a; }
+  .contact.lt .cform input, .contact.lt .cform select, .contact.lt .cform textarea, .contact.lt .fld input {
+    color-scheme: light; background: #faf8f3; color: #263d34; border: 1px solid rgba(38,61,52,.16); border-radius: 12px; padding: 13px 15px; font: inherit; font-size: 1rem; transition: border-color .3s, box-shadow .3s, background .3s; }
+  .contact.lt .cform select { padding-right: 38px; background-position: right 14px center; }
+  .contact.lt .cform select option { background: #fff; color: #263d34; }
+  .contact.lt .cform input:focus, .contact.lt .cform select:focus, .contact.lt .cform textarea:focus, .contact.lt .fld input:focus { outline: 0; border-color: #263d34; background: #fff; box-shadow: 0 0 0 4px rgba(38,61,52,.08); }
+  .contact.lt .cform [aria-invalid="true"] { border-color: #c0603e; }
+  .contact.lt .cform textarea { min-height: 130px; }
+  .contact.lt .fcheck { color: #55635a; }
+  .contact.lt .fcheck input { border-color: rgba(38,61,52,.35); border-radius: 5px; background: #fff; }
+  .contact.lt .fcheck input:checked { background: #263d34; border-color: #263d34; }
+  .contact.lt .fcheck input:checked::after { border-color: #f5f0e6; }
+  .contact.lt .fmsg { color: #b4532f; } .contact.lt .fmsg.ok { color: #3f6b55; }
+  .contact.lt .bgo { background: #263d34; color: #f5f0e6; border-radius: 999px; padding: 17px 26px; margin-top: 4px; }
+  .contact.lt .bgo:hover { background: #1d2e26; }
+  /* booking tab */
+  .contact.lt .bhead { border-color: rgba(38,61,52,.12); } .contact.lt .bhead .label { color: #263d34; }
+  .contact.lt .nights { color: #a8744a; padding: 0 0 14px; }
+  .contact.lt .ctl { border: 1px solid rgba(38,61,52,.16); border-radius: 12px; background: #faf8f3; padding: 6px; }
+  .contact.lt .ctl button { border-color: rgba(38,61,52,.2); color: #263d34; background: #fff; }
+  .contact.lt .ctl button:hover { background: #263d34; color: #f5f0e6; }
+  .contact.lt .ctl output { color: #263d34; }
+  .contact.lt .bnote { color: #6a7568; }
+  @media (max-width: 980px) {
+    .contact.lt .cleft, .contact.lt .cpanel { grid-column: 1 / -1; }
+    .contact.lt .cpanel { max-width: none; }
+    .c-arch { display: none; }
+  }
+  @media (max-width: 480px) { .contact.lt .cpanel { padding: 20px 16px; border-radius: 18px; } .contact.lt .ctabs button { letter-spacing: .1em; } }
+
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -311,7 +362,6 @@
   <a class="big" href="beaches.html" data-i="nav5">Παραλίες</a>
   <a class="big" href="contact.html" data-i="nav6">Επικοινωνία</a>
   <div class="row label">
-    <a href="contact.html" data-i="enquire">Επικοινωνία</a>
     <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><span>/</span><button type="button" data-lang="el" aria-pressed="true">GR</button></div>
   </div>
 </div>
@@ -333,13 +383,13 @@
     <a href="https://www.google.com/maps/search/?api=1&amp;query=Filotimia+Apartments+Schoinoussa" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="lb" data-i="kWhere">Θα μας βρείτε</span><span class="v" data-i="kAddr">Μεσαριά, Σχοινούσα</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
   </div>
 </section>
-<section class="contact" id="contact" aria-labelledby="contact-h">
+<section class="contact lt" id="contact" aria-labelledby="contact-h">
   <div class="cwrap">
-    <div class="ctop label"><span data-i="cLabel">Επικοινωνία</span></div>
     <div class="cgrid">
       <div class="cleft rv">
         <h2 id="contact-h" data-i="cH">Επικοινωνήστε<br><em>μαζί μας</em>.</h2>
         <p class="clede" data-i="cP">Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.</p>
+        <figure class="c-arch"><img src="g/sage-30.jpg" alt="A shaded veranda with a view of the Aegean" loading="lazy" decoding="async"></figure>
       </div>
       <div class="cpanel rv">
       <div class="ctabs" role="tablist" aria-label="Contact">
