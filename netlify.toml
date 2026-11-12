@@ -1,3 +1,384 @@
 [build]
   publish = "."
   command = ""
+
+# old addresses from the previous site, sent to the matching new page
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/el"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/el/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/gr"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/gr/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/rooms"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/rooms/"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/room"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/room/"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/accommodation"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/accommodation/"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/suites"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/suites/"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/apartments"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/apartments/"
+  to = "/rooms.html"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/about/"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/about-us"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/about-us/"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/story"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/story/"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/our-story"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/our-story/"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/gallery"
+  to = "/gallery.html"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/"
+  to = "/gallery.html"
+  status = 301
+
+[[redirects]]
+  from = "/photos"
+  to = "/gallery.html"
+  status = 301
+
+[[redirects]]
+  from = "/photos/"
+  to = "/gallery.html"
+  status = 301
+
+[[redirects]]
+  from = "/beaches"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/beaches/"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/island"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/island/"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/explore"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/explore/"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/schoinoussa"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/schoinoussa/"
+  to = "/beaches.html"
+  status = 301
+
+[[redirects]]
+  from = "/location"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/location/"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/access"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/access/"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/getting-here"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/getting-here/"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-get-here"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-get-here/"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/directions"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/directions/"
+  to = "/access.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/booking"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/booking/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/book"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/book/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/book-now"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/book-now/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/reservations"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/reservations/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/reserve"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/reserve/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy/"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy/"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms/"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/cookies"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/cookies/"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/legal"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/legal/"
+  to = "/legal.html"
+  status = 301
+
+[[redirects]]
+  from = "/el/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en/*"
+  to = "/"
+  status = 301

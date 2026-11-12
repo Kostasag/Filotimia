@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Filotimia · Η σελίδα δεν βρέθηκε</title>
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap">
+<style>
+:root{--ink:#0e171d;--cream:#f5f0e6;--sand:#d8cba9;--olive:#263d34}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);color:var(--cream)}
+body{font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.nf{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;text-align:center;padding:6rem 1.25rem 4rem;overflow:hidden}
+.nf::before{content:"";position:absolute;inset:-4%;background:url(/m/drone-22.jpg) center/cover no-repeat;animation:drift 26s ease-in-out infinite alternate}
+.nf::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(14,23,29,.5),rgba(14,23,29,.86) 72%)}
+@keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.1) translate(-1.5%,-1%)}}
+@media (prefers-reduced-motion:reduce){.nf::before{animation:none}}
+.in{position:relative;z-index:1;max-width:40rem;animation:up 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.logo{position:absolute;top:1.6rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:.7rem;color:var(--cream);text-decoration:none;font-family:'Playfair Display',serif;letter-spacing:.32em;font-size:.95rem}
+.logo img{width:34px;height:34px;border-radius:9px}
+.code{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(5rem,16vw,9rem);line-height:1;color:var(--sand);opacity:.92}
+.rule{width:44px;height:1px;background:var(--sand);margin:1.6rem auto;opacity:.8}
+h1{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(1.7rem,4.4vw,2.6rem);line-height:1.2}
+.en{font-family:'Playfair Display',serif;font-style:italic;color:rgba(245,240,230,.7);margin-top:.5rem;font-size:clamp(1rem,2.4vw,1.2rem)}
+p.t{margin:1.4rem auto 0;max-width:30rem;line-height:1.7;color:rgba(245,240,230,.82);font-size:1rem}
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:2.4rem}
+.btns a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.6rem;border-radius:999px;text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .3s,color .3s,border-color .3s}
+.p{background:var(--cream);color:var(--ink)}
+.p:hover{background:var(--sand)}
+.s{border:1px solid rgba(245,240,230,.45);color:var(--cream)}
+.s:hover{border-color:var(--cream);background:rgba(245,240,230,.08)}
+@media (max-width:480px){.btns{flex-direction:column;align-items:stretch;max-width:20rem;margin-left:auto;margin-right:auto}}
+</style>
+</head>
+<body>
+<main class="nf">
+  <a class="logo" href="/" aria-label="Filotimia"><img src="/favicon.svg?v=2" alt="">FILOTIMIA</a>
+  <div class="in">
+    <div class="code">404</div>
+    <div class="rule"></div>
+    <h1>Αυτό το μονοπάτι δεν οδηγεί πουθενά</h1>
+    <div class="en">This path leads nowhere</div>
+    <p class="t">Η σελίδα που ψάχνετε δεν υπάρχει ή έχει μετακινηθεί. Ελάτε πίσω στη Μεσαριά, τα πέτρινα δωμάτια σας περιμένουν.</p>
+    <div class="btns">
+      <a class="p" href="/">Αρχική</a>
+      <a class="s" href="/rooms.html">Δωμάτια</a>
+      <a class="s" href="/contact.html">Επικοινωνία</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
