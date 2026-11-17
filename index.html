@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="preload" as="image" href="hero-1.jpg" fetchpriority="high"><title>Filotimia · Σχοινούσα</title><link rel="icon" href="favicon.svg?v=2" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=2" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=2"><meta name="theme-color" content="#1d2e26">
+<link rel="preload" as="image" href="hero-1.jpg" fetchpriority="high"><title>Filotimia · Σχοινούσα</title><link rel="icon" href="favicon.svg?v=3" type="image/svg+xml"><link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3"><meta name="theme-color" content="#1d2e26">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
@@ -1554,6 +1554,52 @@
     .bs-nav button { width: 40px; height: 40px; }
     .bs-plan img { padding: 2% 2% 16%; }
   }
+  /* ---- your stay ---- */
+  .sty { position: relative; z-index: 2; background: #18241f; color: #f5f0e6; padding-block: clamp(80px, 9vw, 9rem); overflow: hidden; }
+  .sty-in { max-width: 92rem; margin: 0 auto; box-sizing: border-box; padding-inline: max(var(--gx), env(safe-area-inset-left, 0px)) max(var(--gx), env(safe-area-inset-right, 0px)); }
+  .sty-top { text-align: center; margin-bottom: clamp(48px, 6vw, 5.5rem); }
+  .sty-crest { width: 54px; height: 54px; margin: 0 auto 22px; display: block; color: #c9a97c; }
+  .sty-lab { color: #c9a97c; letter-spacing: .32em; }
+  .sty h2 { margin: 18px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(42px, 5.4vw, 5.6rem); line-height: 1; letter-spacing: -.02em; color: #f5f0e6; }
+  .sty h2 em { color: #c9a97c; }
+  .sty-top p { max-width: 52ch; margin: 22px auto 0; color: rgba(245,240,230,.68); line-height: 1.75; font-size: clamp(1rem, 1.1vw, 1.1rem); }
+  .sty-orn { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; }
+  .sty-orn i { width: 60px; height: 1px; background: rgba(201,169,124,.3); } .sty-orn b { width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #c9a97c; }
+  .sty-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 7rem); align-items: center; }
+  .sty-pic { position: relative; margin: 0 9% 9% 0; }
+  .sty-a { aspect-ratio: 4 / 4.6; overflow: hidden; border-radius: 2px; }
+  .sty-a img, .sty-b img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--ease); }
+  .sty-pic:hover .sty-a img { transform: scale(1.03); }
+  .sty-b { position: absolute; right: -11%; bottom: -10%; width: 52%; aspect-ratio: 1; overflow: hidden; border: 8px solid #18241f; border-radius: 2px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); }
+  .sty-frame { position: absolute; inset: -16px 16px 16px -16px; border: 1px solid rgba(201,169,124,.28); pointer-events: none; }
+  .sty-card { position: absolute; left: 22px; top: 22px; max-width: 260px; padding: 18px 20px; background: rgba(18,28,25,.78); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(201,169,124,.28); }
+  .sty-card .k { color: #c9a97c; font-size: .58rem; letter-spacing: .26em; }
+  .sty-card .v { margin-top: 8px; font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
+  .sty-card a { display: inline-block; margin-top: 10px; color: #f5f0e6; font-size: .8rem; border-bottom: 1px solid #c9a97c; padding-bottom: 2px; }
+  .sty-am { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(201,169,124,.28); }
+  .sty-it { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; padding: 24px 0; border-bottom: 1px solid rgba(201,169,124,.28); }
+  .sty-it:nth-child(odd) { padding-right: 22px; border-right: 1px solid rgba(201,169,124,.28); } .sty-it:nth-child(even) { padding-left: 22px; }
+  .sty-it svg { width: 30px; height: 30px; color: #c9a97c; stroke: currentColor; fill: none; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .sty-it b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.08rem, 1.3vw, 1.3rem); line-height: 1.2; }
+  .sty-it span { display: block; margin-top: 5px; color: rgba(245,240,230,.66); font-size: .86rem; line-height: 1.55; }
+  .sty-book { margin-top: clamp(64px, 8vw, 7rem); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; border: 1px solid rgba(201,169,124,.28); background: rgba(245,240,230,.03); }
+  .sty-f { min-width: 0; padding: 18px 24px; border-right: 1px solid rgba(201,169,124,.28); display: grid; gap: 6px; }
+  .sty-f label { font-size: .58rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: #c9a97c; }
+  .sty-f input, .sty-f select { -webkit-appearance: none; appearance: none; background: none; border: 0; border-radius: 0; color: #f5f0e6; font: 400 1.15rem var(--display); padding: 0; color-scheme: dark; width: 100%; min-width: 0; outline: none; }
+  .sty-f select option { background: #18241f; }
+  .sty-go { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 0 clamp(24px, 3vw, 2.6rem); background: #c9a97c; color: #121c19; border: 0; font: 500 .7rem var(--body); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: background .3s; }
+  .sty-go:hover { background: #d8bb92; } .sty-go svg { width: 22px; height: 11px; }
+  @media (max-width: 900px) {
+    .sty-grid { grid-template-columns: 1fr; }
+    .sty-pic { margin: 0 10% 12% 10px; }
+    .sty-frame { inset: -10px 10px 10px -10px; }
+    .sty-am { grid-template-columns: 1fr; }
+    .sty-it:nth-child(odd) { padding-right: 0; border-right: 0; } .sty-it:nth-child(even) { padding-left: 0; }
+    .sty-book { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .sty-f { padding: 16px; } .sty-f input, .sty-f select { font-size: 1rem; }
+    .sty-f:nth-child(2) { border-right: 0; } .sty-f:nth-child(3) { grid-column: 1 / -1; border-right: 0; border-top: 1px solid rgba(201,169,124,.28); }
+    .sty-go { grid-column: 1 / -1; padding: 20px; }
+  }
 </style>
 
 <script src="a11y.js?v=5"></script>
@@ -2041,6 +2087,48 @@
     </div>
   </div>
 </section>
+<section class="sty" id="stay" aria-labelledby="sty-h">
+  <div class="sty-in">
+    <div class="sty-top rv">
+      <svg class="sty-crest" viewBox="0 0 54 54" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M14 46V24a13 13 0 0 1 26 0v22Z"/><circle cx="27" cy="27" r="3.4"/><path d="M17 34q5-2 10 0t10 0M17 39q5-2 10 0t10 0"/><path d="M10 46h34"/></svg>
+      <div class="sty-lab label" data-i="styL">Filotimia · Σχοινούσα</div>
+      <h2 id="sty-h"><span data-i="styH1">Η διαμονή</span> <em data-i="styH2">σας</em></h2>
+      <p data-i="styP">Ό,τι χρειάζεστε για ξεκούραστες διακοπές.</p>
+      <div class="sty-orn" aria-hidden="true"><i></i><b></b><i></i></div>
+    </div>
+    <div class="sty-grid">
+      <div class="sty-pic rv">
+        <div class="sty-frame" aria-hidden="true"></div>
+        <div class="sty-a"><img decoding="async" loading="lazy" src="r/lavender-10.jpg" alt="A stone room at Filotimia with white linen"></div>
+        <div class="sty-b"><img decoding="async" loading="lazy" src="r/sage-10.jpg" alt="A veranda with a view over Schoinoussa"></div>
+        <div class="sty-card"><div class="k label" data-i="styCk">Μεταφορά</div><div class="v" data-i="styCv">Σας περιμένουμε στο λιμάνι κατά την άφιξή σας.</div><a href="tel:+306943102945">+30 694 310 2945</a></div>
+      </div>
+      <div class="sty-am"><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M4 22V12a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v10M4 18h22M4 22v3M26 22v3M8 10V7h14v3"/></svg><div><b data-i="sty1">Κρεβάτια με λευκά σεντόνια</b><span data-i="sty1p">Καθαρά λευκά είδη και πετσέτες.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M5 10h20v6H5zM9 16v3M15 16v5M21 16v3M8 13h2"/></svg><div><b data-i="sty2">Κλιματισμός</b><span data-i="sty2p">Δροσιά στις ζεστές μέρες του καλοκαιριού.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M6 13h14v6a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6Zm14 2h2a3 3 0 0 1 0 6h-3M10 4c-1 2 1 3 0 5M14 4c-1 2 1 3 0 5"/></svg><div><b data-i="sty3">Κουζινάκι και καφές</b><span data-i="sty3p">Ψυγείο, νεροχύτης και μηχανή καφέ.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 24h24M6 24V12M24 24V12M3 12h24M8 12l2-5h10l2 5M11 24v-6h8v6"/></svg><div><b data-i="sty4">Βεράντα με θέα</b><span data-i="sty4p">Τραπέζι και καρέκλες για το πρωινό σας έξω.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 9h24M5 9v15M25 9v15M3 6h24M9 15h12v9H9zM15 15v9"/></svg><div><b data-i="sty5">Κοινόχρηστη πέργκολα</b><span data-i="sty5p">Εξωτερική κουζίνα και τραπεζαρία στη σκιά.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M15 26V12M15 16c-4 0-7-3-7-7 4 0 7 3 7 7Zm0 2c4 0 7-3 7-7-4 0-7 3-7 7ZM9 26h12"/></svg><div><b data-i="sty6">Κήπος με βότανα</b><span data-i="sty6p">Αμπέλια, ελιές και αρωματικά φυτά γύρω σας.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M10 6h10v4a5 5 0 0 1-10 0ZM15 15v10M11 25h8M8 6h14"/></svg><div><b data-i="sty7">Προϊόντα περιποίησης</b><span data-i="sty7p">Σαμπουάν και αφρόλουτρο σε κάθε μπάνιο.</span></div></div><div class="sty-it rv"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 20c3 0 3-2 6-2s3 2 6 2 3-2 6-2 3 2 6 2M5 16l3-8h14l3 8M10 8V5h10v3"/></svg><div><b data-i="sty8">Μεταφορά από το λιμάνι</b><span data-i="sty8p">Κατόπιν συνεννόησης, κατά την άφιξη και την αναχώρηση.</span></div></div></div>
+    </div>
+    <form class="sty-book rv" id="styBook" action="https://direct-book.com/properties/filotimia" method="get" target="_blank">
+      <div class="sty-f"><label for="styIn" data-i="styIn">Άφιξη</label><input id="styIn" type="date" required></div>
+      <div class="sty-f"><label for="styOut" data-i="styOut">Αναχώρηση</label><input id="styOut" type="date" required></div>
+      <div class="sty-f"><label for="styG" data-i="styG">Επισκέπτες</label><select id="styG"><option value="1" data-i="styG1">1 επισκέπτης</option><option value="2" selected data-i="styG2">2 επισκέπτες</option><option value="3" data-i="styG3">3 επισκέπτες</option></select></div>
+      <button type="submit" class="sty-go"><span data-i="styGo">Διαθεσιμότητα</span><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></button>
+    </form>
+  </div>
+</section>
+<script>
+(function () {
+  var f = document.getElementById('styBook'); if (!f) return;
+  var a = document.getElementById('styIn'), b = document.getElementById('styOut'), g = document.getElementById('styG');
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  var t = new Date(); t.setDate(t.getDate() + 1); a.min = iso(t);
+  a.addEventListener('change', function () { if (!a.value) return; var d = new Date(a.value); d.setDate(d.getDate() + 1); b.min = iso(d); if (!b.value || b.value <= a.value) b.value = iso(d); });
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var lang = document.documentElement.lang === 'en' ? 'en' : 'el';
+    var u = 'https://direct-book.com/properties/filotimia?locale=' + lang + '&items[0][adults]=' + g.value + '&items[0][children]=0&items[0][infants]=0&currency=EUR';
+    if (a.value) u += '&checkInDate=' + a.value; if (b.value) u += '&checkOutDate=' + b.value;
+    window.open(u, '_blank', 'noopener');
+  });
+})();
+</script>
 <footer class="sfoot" aria-label="Footer">
   <div class="fwrap">
     <div class="fgrid">
@@ -2189,6 +2277,8 @@
   Object.assign(T.el, {"osP9": "Τα πέτρινα διαμερίσματα φωτισμένα το βράδυ, σε ένα ήσυχο περιβάλλον."}); Object.assign(T.en, {"osP9": "The stone apartments lit up at night, in a peaceful setting."});
   Object.assign(T.el, {"bldL": "Η κατασκευή", "bldH1": "Από το σχέδιο", "bldH2": "στην κατασκευή.", "bldP": "Η Φιλοτιμία ξεκίνησε ως ένα σχέδιο στο χαρτί. Χαμηλοί πέτρινοι όγκοι που ακολουθούν το έδαφος, ώστε τα δωμάτια να δένουν με το τοπίο της Μεσαριάς.", "bldS1": "Το σχέδιο", "bldS1p": "Όψεις και τομές για κάθε δωμάτιο, με απλές γραμμές και πέτρινους τοίχους.", "bldS2": "Τα θεμέλια", "bldS2p": "Γερές βάσεις από οπλισμένο σκυρόδεμα, πριν ανέβει η πέτρα.", "bldS3": "Σήμερα", "bldS3p": "Πέτρα, μπλε παράθυρα και ελιές γύρω από κάθε δωμάτιο."});
   Object.assign(T.en, {"bldL": "The build", "bldH1": "From drawing", "bldH2": "to construction.", "bldP": "Filotimia began as a drawing on paper. Low stone volumes that follow the ground, so the rooms sit naturally in the landscape of Mesaria.", "bldS1": "The drawings", "bldS1p": "Elevations and sections for every room, with simple lines and stone walls.", "bldS2": "The foundations", "bldS2p": "Solid reinforced concrete footings, before the stone goes up.", "bldS3": "Today", "bldS3p": "Stone, blue windows and olive trees around every room."});
+  Object.assign(T.el, {"styL": "Filotimia · Σχοινούσα", "styH1": "Η διαμονή", "styH2": "σας", "styP": "Ό,τι χρειάζεστε για ξεκούραστες διακοπές.", "styCk": "Μεταφορά", "styCv": "Σας περιμένουμε στο λιμάνι κατά την άφιξή σας.", "styIn": "Άφιξη", "styOut": "Αναχώρηση", "styG": "Επισκέπτες", "styG1": "1 επισκέπτης", "styG2": "2 επισκέπτες", "styG3": "3 επισκέπτες", "styGo": "Διαθεσιμότητα", "sty1": "Κρεβάτια με λευκά σεντόνια", "sty1p": "Καθαρά λευκά είδη και πετσέτες.", "sty2": "Κλιματισμός", "sty2p": "Δροσιά στις ζεστές μέρες του καλοκαιριού.", "sty3": "Κουζινάκι και καφές", "sty3p": "Ψυγείο, νεροχύτης και μηχανή καφέ.", "sty4": "Βεράντα με θέα", "sty4p": "Τραπέζι και καρέκλες για το πρωινό σας έξω.", "sty5": "Κοινόχρηστη πέργκολα", "sty5p": "Εξωτερική κουζίνα και τραπεζαρία στη σκιά.", "sty6": "Κήπος με βότανα", "sty6p": "Αμπέλια, ελιές και αρωματικά φυτά γύρω σας.", "sty7": "Προϊόντα περιποίησης", "sty7p": "Σαμπουάν και αφρόλουτρο σε κάθε μπάνιο.", "sty8": "Μεταφορά από το λιμάνι", "sty8p": "Κατόπιν συνεννόησης, κατά την άφιξη και την αναχώρηση."});
+  Object.assign(T.en, {"styL": "Filotimia · Schoinoussa", "styH1": "Your", "styH2": "stay", "styP": "Everything you need for a restful holiday.", "styCk": "Transfer", "styCv": "We will meet you at the port when you arrive.", "styIn": "Check-in", "styOut": "Check-out", "styG": "Guests", "styG1": "1 guest", "styG2": "2 guests", "styG3": "3 guests", "styGo": "Availability", "sty1": "Beds with white linen", "sty1p": "Fresh white linen and towels.", "sty2": "Air conditioning", "sty2p": "Cool rooms on hot summer days.", "sty3": "Kitchenette and coffee", "sty3p": "Fridge, sink and a coffee machine.", "sty4": "Veranda with a view", "sty4p": "A table and chairs for breakfast outside.", "sty5": "Shared pergola", "sty5p": "Outdoor kitchen and dining in the shade.", "sty6": "Herb garden", "sty6p": "Vines, olive trees and aromatic plants around you.", "sty7": "Toiletries", "sty7p": "Shampoo and shower gel in every bathroom.", "sty8": "Port transfer", "sty8p": "On request, on arrival and departure."});
   Object.assign(T.el, {"osT1": "Πρωί", "osT2": "Μεσημέρι", "osT3": "Απόγευμα", "osT4": "Δειλινό", "osT5": "Βράδυ", "osT6": "Όλη τη μέρα", "osH6": "Ώρα για <em>ξεκούραση</em>", "osP6": "Μια αιώρα στη σκιά της πέργκολας, ένα βιβλίο και το αεράκι του Αιγαίου."});
   Object.assign(T.en, {"osT1": "Morning", "osT2": "Midday", "osT3": "Afternoon", "osT4": "Sunset", "osT5": "Evening", "osT6": "All day", "osH6": "Time to <em>rest</em>", "osP6": "A hammock in the shade of the pergola, a book and the breeze off the Aegean."});
   Object.assign(T.el, {"osH1": "Το πρωινό ξεκινά <em>εδώ</em>", "osP1": "Ένας καφές και το πρωινό σας στον εξωτερικό χώρο, με την ησυχία της Σχοινούσας.", "osH2": "Ώρα για <em>φαγητό</em>", "osP2": "Ετοιμάστε το γεύμα σας στην εξωτερική κουζίνα και απολαύστε το στον χώρο της τραπεζαρίας.", "osH3": "Γεύσεις της <em>Σχοινούσας</em>", "osP3": "Φρέσκα φρούτα και λαχανικά από τον κήπο μας, τοπικό κρασί και όμορφες στιγμές γύρω από το τραπέζι.", "osH4": "Τα βράδια στη <em>Φιλοτιμία</em>", "osP4": "Ένα ποτό, όμορφη παρέα και χαλαρές βραδιές κάτω από τα φώτα της πέργκολας.", "osH5": "Και η δική σας <em>βεράντα</em>", "osP5": "Ένας όμορφος εξωτερικός χώρος για να χαλαρώσετε και να απολαύσετε τη θέα στο Αιγαίο."});
