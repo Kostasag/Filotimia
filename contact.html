@@ -342,6 +342,9 @@
   @media (max-width: 980px) { .contact.lt .cleft { position: static; } }
   .kh h1 .ln { padding-top: .12em; padding-bottom: .1em; padding-right: .06em; }
 
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .contact.lt .cgrid { display: block; }
+  .contact.lt .cpanel { width: min(100%, 52rem); margin-inline: auto; }
 </style>
 <script src="a11y.js?v=5"></script>
 </head>
@@ -394,10 +397,7 @@
 <section class="contact lt" id="contact" aria-labelledby="contact-h">
   <div class="cwrap">
     <div class="cgrid">
-      <div class="cleft rv">
-        <h2 id="contact-h" data-i="cH">Επικοινωνήστε<br><em>μαζί μας</em>.</h2>
-        <p class="clede" data-i="cP">Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.</p>
-      </div>
+      <h2 id="contact-h" class="vh" data-i="cH">Επικοινωνήστε μαζί μας</h2>
       <div class="cpanel rv">
       <div class="ctabs" role="tablist" aria-label="Contact">
         <button type="button" role="tab" id="tabMsg" aria-controls="msgForm" aria-selected="true"><span data-i="tMsg">Στείλτε μήνυμα</span></button>
@@ -525,10 +525,10 @@
   };
   Object.assign(T.el, {"kH1": "Επικοινωνία", "kP": "Είμαστε εδώ για ό,τι χρειαστείτε, πριν φτάσετε και σε όλη τη διάρκεια της διαμονής σας.", "kCall": "Τηλέφωνο", "kWhere": "Θα μας βρείτε", "kAddr": "Μεσαριά, Σχοινούσα"}); T.el.cue = 'Κύλιση';
   Object.assign(T.en, {"kH1": "Contact", "kP": "We are here for anything you need, before you arrive and throughout your stay.", "kCall": "Phone", "kWhere": "Find us", "kAddr": "Mesaria, Schoinoussa"}); T.en.cue = 'Scroll';
-  Object.assign(T.en, { cLabel: 'Contact', cH: 'Get in<br><em>touch</em>.', cP: 'Write to us about availability, questions or anything you need before you reach the island.', cPhoneL: 'Phone', cMapL: 'Location', cAddrL: 'Address', cAddr1: 'Messaria, Schoinoussa', cAddr2: '843 00 · Cyclades, Greece',
+  Object.assign(T.en, { cLabel: 'Contact', cH: 'Get in touch', cP: 'Write to us about availability, questions or anything you need before you reach the island.', cPhoneL: 'Phone', cMapL: 'Location', cAddrL: 'Address', cAddr1: 'Messaria, Schoinoussa', cAddr2: '843 00 · Cyclades, Greece',
     cMailL: 'Email', cCopy: 'Copy', cCopied: 'Copied', cWhere: 'Schoinoussa · Small Cyclades · Greece', bL: 'Book direct', bBest: 'Best rate when you book direct', bIn: 'Check-in', bOut: 'Check-out',
     bAd: 'Adults', bCh: 'Children', bGo: 'Check availability', bNote: 'Your booking is completed securely on Filotimia’s booking page.', cFoot: 'Schoinoussa, Small Cyclades', night: 'night', nights: 'nights' });
-  Object.assign(T.el, { cLabel: 'Επικοινωνία', cH: 'Επικοινωνήστε<br><em>μαζί μας</em>.', cP: 'Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.', cPhoneL: 'Τηλέφωνο', cMapL: 'Τοποθεσία', cAddrL: 'Διεύθυνση', cAddr1: 'Μεσαριά, Σχοινούσα', cAddr2: 'Τ.Κ. 843 00 · Κυκλάδες, Ελλάδα',
+  Object.assign(T.el, { cLabel: 'Επικοινωνία', cH: 'Επικοινωνήστε μαζί μας', cP: 'Γράψτε μας για διαθεσιμότητα, ερωτήσεις ή οτιδήποτε χρειάζεστε πριν φτάσετε στο νησί.', cPhoneL: 'Τηλέφωνο', cMapL: 'Τοποθεσία', cAddrL: 'Διεύθυνση', cAddr1: 'Μεσαριά, Σχοινούσα', cAddr2: 'Τ.Κ. 843 00 · Κυκλάδες, Ελλάδα',
     cMailL: 'Email', cCopy: 'Αντιγραφή', cCopied: 'Αντιγράφηκε', cWhere: 'Σχοινούσα · Μικρές Κυκλάδες · Ελλάδα', bL: 'Απευθείας κράτηση', bBest: 'Καλύτερη τιμή απευθείας', bIn: 'Άφιξη', bOut: 'Αναχώρηση',
     bAd: 'Ενήλικες', bCh: 'Παιδιά', bGo: 'Έλεγχος διαθεσιμότητας', bNote: 'Η κράτηση ολοκληρώνεται με ασφάλεια στη σελίδα κρατήσεων της Filotimia.', cFoot: 'Σχοινούσα, Μικρές Κυκλάδες', night: 'νύχτα', nights: 'νύχτες' });
   Object.assign(T.el, { hLab1: 'Μεσαριά · Σχοινούσα', hLab2: 'Έξι πέτρινα δωμάτια', ctaBook: 'Κάντε Κράτηση', ctaRooms: 'Δείτε τα Δωμάτια', h3a: 'Νιώστε', h3b: '<em>σαν στο σπίτι σας</em>', lede3: 'Ένας χώρος φτιαγμένος για να χαλαρώσετε και να απολαύσετε τη διαμονή σας.', ctaContact: 'Επικοινωνήστε μαζί μας', ctaAbout: 'Γνωρίστε μας', h4a: 'Η βεράντα <em>σας</em>.', h4b: '', lede4: 'Ευρύχωρα μπαλκόνια με θέα στο Αιγαίο, για να απολαύσετε στιγμές ξεκούρασης.', ctaGal: 'Δείτε τη γκαλερί', ctaBeach: 'Δείτε τις παραλίες', ctaAccess: 'Πώς θα έρθετε', tMsg: 'Στείλτε μήνυμα', tBook: 'Κράτηση', fFirst: 'Όνομα', fLast: 'Επώνυμο', fPhone: 'Τηλέφωνο', fOpt: '(προαιρετικό)', fTopic: 'Θέμα',

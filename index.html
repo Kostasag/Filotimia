@@ -1510,6 +1510,50 @@
     .rp-th:hover { opacity: .9; } .rp-th.on { opacity: 1; outline-color: #f5f0e6; }
   }
   @media (prefers-reduced-motion: reduce) { .rp-p, .rp-bg, .rp-c, .rp-ths { transition: none !important; } }
+  /* ---- from drawing to stone ---- */
+  .bld { position: relative; z-index: 2; background: #ebe5d8; color: #263d34; padding-block: clamp(80px, 9vw, 9rem); overflow: hidden; }
+  .bld-in { max-width: 96rem; margin: 0 auto; box-sizing: border-box; padding-inline: max(var(--gx), env(safe-area-inset-left, 0px)) max(var(--gx), env(safe-area-inset-right, 0px)); display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(36px, 5vw, 6rem); align-items: center; }
+  .bld-stage { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; background: #d9d1c1; box-shadow: 0 50px 100px -60px rgba(38,61,52,.55); isolation: isolate; }
+  .bs-f { position: absolute; inset: 0; margin: 0; overflow: hidden; clip-path: inset(0 0 0 100%); -webkit-clip-path: inset(0 0 0 100%); z-index: 0; }
+  .bs-f.was { clip-path: inset(0); -webkit-clip-path: inset(0); z-index: 1; }
+  .bs-f.on { clip-path: inset(0); -webkit-clip-path: inset(0); z-index: 2; transition: clip-path 1.25s var(--ease), -webkit-clip-path 1.25s var(--ease); }
+  .bs-f img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.12); }
+  .bs-f.on img { transform: scale(1); transition: transform 7.5s cubic-bezier(.2,.6,.2,1); }
+  .bs-plan { background-color: #fbfaf6; background-image: linear-gradient(rgba(91,125,136,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(91,125,136,.09) 1px, transparent 1px), linear-gradient(rgba(91,125,136,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(91,125,136,.05) 1px, transparent 1px); background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+  .bs-plan img { object-fit: contain; padding: 4%; box-sizing: border-box; mix-blend-mode: multiply; }
+  .bs-cap { position: absolute; left: clamp(18px, 2vw, 2rem); bottom: clamp(16px, 2vw, 1.8rem); z-index: 3; display: flex; align-items: baseline; gap: 8px; padding: 10px 16px 9px; background: rgba(245,240,230,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius: 999px; color: #263d34; }
+  .bs-no { font-family: var(--display); font-style: italic; font-size: 1.25rem; line-height: 1; color: #a8744a; }
+  .bs-of { font-size: .62rem; letter-spacing: .2em; color: #55635a; }
+  .bs-nav { position: absolute; right: clamp(18px, 2vw, 2rem); bottom: clamp(16px, 2vw, 1.8rem); z-index: 3; display: flex; gap: 8px; }
+  .bs-nav button { width: 46px; height: 46px; border-radius: 50%; border: 0; background: rgba(245,240,230,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #263d34; display: grid; place-items: center; cursor: pointer; transition: background .3s, color .3s; }
+  .bs-nav button:hover { background: #263d34; color: #f5f0e6; }
+  .bs-nav svg { width: 18px; height: 10px; } .bs-prev svg { transform: scaleX(-1); }
+  .bld-lab { display: flex; align-items: center; gap: 14px; color: var(--aegean); margin-bottom: 22px; } .bld-lab::before { content: ""; width: 36px; height: 1px; background: currentColor; }
+  .bld h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.4vw, 4.8rem); line-height: 1; letter-spacing: -.022em; color: #263d34; }
+  .bld h2 em { display: block; padding-left: .8em; color: #a8744a; }
+  .bld-lede { margin: clamp(20px, 2vw, 1.75rem) 0 0; max-width: 40ch; color: #55635a; line-height: 1.75; font-size: clamp(.98rem, 1.05vw, 1.06rem); }
+  .bld-tabs { margin-top: clamp(28px, 3.4vw, 3rem); border-top: 1px solid rgba(38,61,52,.18); }
+  .bt { position: relative; display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 10px; width: 100%; padding: clamp(16px, 1.6vw, 1.4rem) 0; background: none; border: 0; border-bottom: 1px solid rgba(38,61,52,.18); text-align: left; color: #263d34; font: inherit; cursor: pointer; }
+  .bt .n { font-family: var(--display); font-style: italic; font-size: 1.05rem; color: #a8744a; opacity: .55; transition: opacity .4s; line-height: 1.5; }
+  .bt b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.3rem, 1.6vw, 1.7rem); line-height: 1.2; opacity: .45; transition: opacity .4s; }
+  .bt .tx > span { display: grid; grid-template-rows: 0fr; overflow: hidden; color: #55635a; font-size: .93rem; line-height: 1.65; max-width: 36ch; opacity: 0; max-height: 0; transition: max-height .6s var(--ease), opacity .5s, margin .6s var(--ease); }
+  .bt.on .n, .bt.on b, .bt:hover b, .bt:hover .n { opacity: 1; }
+  .bt.on .tx > span { opacity: 1; max-height: 6em; margin-top: 6px; }
+  .bt .bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; overflow: hidden; }
+  .bt .bar i { display: block; height: 100%; width: 100%; background: #a8744a; transform: scaleX(0); transform-origin: 0 50%; }
+  .bt.on .bar i { animation: bldFill 6.5s linear forwards; }
+  .bld.hold .bt.on .bar i, .bld.out .bt.on .bar i { animation-play-state: paused; }
+  @keyframes bldFill { to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { .bt.on .bar i { animation: none; transform: scaleX(1); } .bs-f.on, .bs-f.on img { transition: none; } .bs-f img { transform: none; } }
+  @media (max-width: 900px) {
+    .bld-in { grid-template-columns: 1fr; gap: 30px; }
+    .bld-side { display: contents; }
+    .bld-lab { order: 1; margin-bottom: -14px; } .bld h2 { order: 2; } .bld-lede { order: 3; margin-top: -10px; }
+    .bld-stage { order: 4; aspect-ratio: 4 / 3.6; margin-inline: calc(-1 * max(var(--gx), env(safe-area-inset-left, 0px)) + 8px); }
+    .bld-tabs { order: 5; margin-top: -6px; }
+    .bs-nav button { width: 40px; height: 40px; }
+    .bs-plan img { padding: 2% 2% 16%; }
+  }
 </style>
 
 <script src="a11y.js?v=5"></script>
@@ -1842,6 +1886,56 @@
     </div>
   </div>
 </section>
+<section class="bld" id="build" aria-labelledby="bld-h">
+  <div class="bld-in">
+    <div class="bld-stage rv" id="bldStage">
+      <figure class="bs-f bs-plan on" data-k="0"><img decoding="async" loading="lazy" src="m/build-plans.jpg" alt="Architectural elevations and sections of the stone rooms"></figure>
+      <figure class="bs-f" data-k="1"><img decoding="async" loading="lazy" src="m/build-frame.jpg" alt="Steel reinforcement for the foundations during construction"></figure>
+      <figure class="bs-f" data-k="2"><img decoding="async" loading="lazy" src="m/build-today.jpg" alt="Filotimia today, the stone rooms from above"></figure>
+      <div class="bs-cap" aria-hidden="true"><span class="bs-no" id="bldNo">01</span><span class="bs-of">/ 03</span></div>
+      <div class="bs-nav"><button type="button" class="bs-prev" aria-label="Previous"><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></button><button type="button" class="bs-next" aria-label="Next"><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></button></div>
+    </div>
+    <div class="bld-side">
+      <h2 id="bld-h" class="rv"><span data-i="bldH1">Από το σχέδιο</span> <em data-i="bldH2">στην κατασκευή.</em></h2>
+      <p class="bld-lede rv" data-i="bldP">Η Φιλοτιμία ξεκίνησε ως ένα σχέδιο στο χαρτί. Χαμηλοί πέτρινοι όγκοι που ακολουθούν το έδαφος, ώστε τα δωμάτια να δένουν με το τοπίο της Μεσαριάς.</p>
+      <div class="bld-tabs rv" role="tablist" aria-label="Από το σχέδιο στην κατασκευή">
+        <button type="button" role="tab" class="bt on" aria-selected="true" data-k="0"><span class="n">01</span><span class="tx"><b data-i="bldS1">Το σχέδιο</b></span><i class="bar"><i></i></i></button>
+        <button type="button" role="tab" class="bt" aria-selected="false" data-k="1"><span class="n">02</span><span class="tx"><b data-i="bldS2">Τα θεμέλια</b></span><i class="bar"><i></i></i></button>
+        <button type="button" role="tab" class="bt" aria-selected="false" data-k="2"><span class="n">03</span><span class="tx"><b data-i="bldS3">Σήμερα</b></span><i class="bar"><i></i></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  var root = document.getElementById('build'); if (!root) return;
+  var tabs = [].slice.call(root.querySelectorAll('.bt')), figs = [].slice.call(root.querySelectorAll('.bs-f')), no = document.getElementById('bldNo');
+  var stage = document.getElementById('bldStage'), i = 0, reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(n) {
+    var prev = i; i = (n + figs.length) % figs.length;
+    figs.forEach(function (f, k) { f.classList.toggle('was', k === prev && k !== i); f.classList.remove('on'); });
+    void figs[i].offsetWidth; figs[i].classList.add('on');
+    tabs.forEach(function (t, k) { t.classList.remove('on'); t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    void tabs[i].offsetWidth; tabs[i].classList.add('on');
+    no.textContent = '0' + (i + 1);
+  }
+  tabs.forEach(function (t, k) {
+    t.addEventListener('click', function () { if (k !== i) go(k); });
+    t.querySelector('.bar i').addEventListener('animationend', function () { if (!reduce && k === i) go(i + 1); });
+  });
+  root.querySelector('.bs-prev').addEventListener('click', function () { go(i - 1); });
+  root.querySelector('.bs-next').addEventListener('click', function () { go(i + 1); });
+  stage.addEventListener('mouseenter', function () { root.classList.add('hold'); });
+  stage.addEventListener('mouseleave', function () { root.classList.remove('hold'); });
+  var x0 = null;
+  stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', function (e) { if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); });
+  if ('IntersectionObserver' in window) {
+    root.classList.add('out');
+    new IntersectionObserver(function (es) { es.forEach(function (e) { root.classList.toggle('out', !e.isIntersecting); }); }, { threshold: 0.35 }).observe(stage);
+  }
+})();
+</script>
 <section class="insta" id="insta" aria-labelledby="ig-h">
   <h2 id="ig-h" class="rv" data-i="igH">Το Instagram μας</h2>
   <ul><li class="rv" style="--i:0"><a class="sq" href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram"><img decoding="async" src="ext/drone-8.jpg" alt="Filotimia and its pergola from above" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg></a></li><li class="rv" style="--i:1"><a class="sq" href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram"><img decoding="async" src="ext/drone-15.jpg" alt="The Aegean seen from Schoinoussa" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg></a></li><li class="rv" style="--i:2"><a class="sq" href="https://www.instagram.com/filotimia_/" target="_blank" rel="noopener" aria-label="Filotimia on Instagram"><img decoding="async" src="ext/drone-29.jpg" alt="The stone rooms lit up at night" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg></a></li></ul>
@@ -2093,6 +2187,8 @@
   Object.assign(T.en, {"mk0": "Veranda", "mk1": "Room", "mk2": "Bathroom", "mk3": "Pergola", "mk4": "Veranda", "mk5": "Details", "mk6": "Room", "mk7": "Balcony", "mk8": "Bathroom", "mk9": "Veranda", "mk10": "Pergola", "mk11": "Room", "mk12": "Details", "mk13": "View", "mk14": "Bathroom", "mk15": "Room", "mk16": "Veranda", "mk17": "Bathroom", "mk18": "Veranda", "mk19": "Bathroom"});
   Object.assign(T.el, {"mk0": "Βεράντα", "mk1": "Δωμάτιο", "mk2": "Μπάνιο", "mk3": "Αυλή", "mk4": "Πέργκολα", "mk5": "Βεράντα", "mk6": "Λεπτομέρειες", "mk7": "Δωμάτιο", "mk8": "Μπάνιο", "mk9": "Θέα", "mk10": "Βεράντα", "mk11": "Πέργκολα", "mk12": "Δωμάτιο", "mk13": "Λεπτομέρειες", "mk14": "Εξωτερικός χώρος", "mk15": "Θέα", "mk16": "Μπάνιο", "mk17": "Δωμάτιο", "mk18": "Βεράντα", "mk19": "Τα δωμάτια", "mk20": "Μπάνιο", "mk21": "Βεράντα", "mk22": "Μπάνιο"}); Object.assign(T.en, {"mk0": "Veranda", "mk1": "Room", "mk2": "Bathroom", "mk3": "Courtyard", "mk4": "Pergola", "mk5": "Veranda", "mk6": "Details", "mk7": "Room", "mk8": "Bathroom", "mk9": "View", "mk10": "Veranda", "mk11": "Pergola", "mk12": "Room", "mk13": "Details", "mk14": "Outdoors", "mk15": "View", "mk16": "Bathroom", "mk17": "Room", "mk18": "Veranda", "mk19": "The rooms", "mk20": "Bathroom", "mk21": "Veranda", "mk22": "Bathroom"});
   Object.assign(T.el, {"osP9": "Τα πέτρινα διαμερίσματα φωτισμένα το βράδυ, σε ένα ήσυχο περιβάλλον."}); Object.assign(T.en, {"osP9": "The stone apartments lit up at night, in a peaceful setting."});
+  Object.assign(T.el, {"bldL": "Η κατασκευή", "bldH1": "Από το σχέδιο", "bldH2": "στην κατασκευή.", "bldP": "Η Φιλοτιμία ξεκίνησε ως ένα σχέδιο στο χαρτί. Χαμηλοί πέτρινοι όγκοι που ακολουθούν το έδαφος, ώστε τα δωμάτια να δένουν με το τοπίο της Μεσαριάς.", "bldS1": "Το σχέδιο", "bldS1p": "Όψεις και τομές για κάθε δωμάτιο, με απλές γραμμές και πέτρινους τοίχους.", "bldS2": "Τα θεμέλια", "bldS2p": "Γερές βάσεις από οπλισμένο σκυρόδεμα, πριν ανέβει η πέτρα.", "bldS3": "Σήμερα", "bldS3p": "Πέτρα, μπλε παράθυρα και ελιές γύρω από κάθε δωμάτιο."});
+  Object.assign(T.en, {"bldL": "The build", "bldH1": "From drawing", "bldH2": "to construction.", "bldP": "Filotimia began as a drawing on paper. Low stone volumes that follow the ground, so the rooms sit naturally in the landscape of Mesaria.", "bldS1": "The drawings", "bldS1p": "Elevations and sections for every room, with simple lines and stone walls.", "bldS2": "The foundations", "bldS2p": "Solid reinforced concrete footings, before the stone goes up.", "bldS3": "Today", "bldS3p": "Stone, blue windows and olive trees around every room."});
   Object.assign(T.el, {"osT1": "Πρωί", "osT2": "Μεσημέρι", "osT3": "Απόγευμα", "osT4": "Δειλινό", "osT5": "Βράδυ", "osT6": "Όλη τη μέρα", "osH6": "Ώρα για <em>ξεκούραση</em>", "osP6": "Μια αιώρα στη σκιά της πέργκολας, ένα βιβλίο και το αεράκι του Αιγαίου."});
   Object.assign(T.en, {"osT1": "Morning", "osT2": "Midday", "osT3": "Afternoon", "osT4": "Sunset", "osT5": "Evening", "osT6": "All day", "osH6": "Time to <em>rest</em>", "osP6": "A hammock in the shade of the pergola, a book and the breeze off the Aegean."});
   Object.assign(T.el, {"osH1": "Το πρωινό ξεκινά <em>εδώ</em>", "osP1": "Ένας καφές και το πρωινό σας στον εξωτερικό χώρο, με την ησυχία της Σχοινούσας.", "osH2": "Ώρα για <em>φαγητό</em>", "osP2": "Ετοιμάστε το γεύμα σας στην εξωτερική κουζίνα και απολαύστε το στον χώρο της τραπεζαρίας.", "osH3": "Γεύσεις της <em>Σχοινούσας</em>", "osP3": "Φρέσκα φρούτα και λαχανικά από τον κήπο μας, τοπικό κρασί και όμορφες στιγμές γύρω από το τραπέζι.", "osH4": "Τα βράδια στη <em>Φιλοτιμία</em>", "osP4": "Ένα ποτό, όμορφη παρέα και χαλαρές βραδιές κάτω από τα φώτα της πέργκολας.", "osH5": "Και η δική σας <em>βεράντα</em>", "osP5": "Ένας όμορφος εξωτερικός χώρος για να χαλαρώσετε και να απολαύσετε τη θέα στο Αιγαίο."});

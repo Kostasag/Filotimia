@@ -565,7 +565,7 @@
 <section class="avh" id="avh" aria-labelledby="h1">
   <div class="avh-media" aria-hidden="true">
     <img class="avh-poster" src="film/poster2.jpg" alt="" fetchpriority="high">
-    <video class="avh-vid" id="avhVid" muted loop playsinline preload="metadata" poster="film/poster2.jpg"><source data-hd="film/loop2-hd.mp4" data-m="film/loop2-m.mp4" type="video/mp4"></video>
+    <video class="avh-vid" id="avhVid" muted loop playsinline preload="metadata" poster="film/poster2.jpg"><source data-hd="film/film40.mp4" data-m="film/loop2-m.mp4" type="video/mp4"></video>
   </div>
   <div class="avh-shade" aria-hidden="true"></div>
   <div class="avh-in gut">
@@ -576,7 +576,7 @@
 </section>
 <div class="filmbox" id="filmBox" role="dialog" aria-modal="true" aria-label="Filotimia film" hidden>
   <button type="button" class="filmbox-x" id="filmX" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
-  <video class="filmbox-v" id="filmV" controls playsinline preload="none" poster="film/poster2-end.jpg"><source data-hd="film/film2.mp4" data-m="film/film2-v.mp4" type="video/mp4"></video>
+  <video class="filmbox-v" id="filmV" controls playsinline preload="none" poster="film/poster2-end.jpg"><source data-hd="film/film40.mp4" data-m="film/film2-v.mp4" type="video/mp4"></video>
 </div>
 <section class="welcome" id="welcome" aria-label="Καλώς ήρθατε">
   <div class="wc-stage">
@@ -977,7 +977,7 @@
       document.addEventListener('visibilitychange', function () { if (document.hidden) v.pause(); else if ($('filmBox').hidden) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
     }
     var box = $('filmBox'), fv = $('filmV'), btn = $('avhPlay'), last = null;
-    var fso = fv.querySelector('source'); fso.src = fso.getAttribute(small ? 'data-m' : 'data-hd'); if (small) box.classList.add('vert');
+    var fso = fv.querySelector('source'); fso.src = fso.getAttribute(small ? 'data-m' : 'data-hd'); if (small) box.classList.add('vert'); if (!small) { fv.poster = 'film/poster48-end.jpg'; var tt = btn && btn.querySelector('.t'); if (tt) tt.textContent = '0:40'; }
     function open() { last = document.activeElement; box.hidden = false; document.documentElement.classList.add('film-open'); requestAnimationFrame(function () { box.classList.add('on'); });
       if (v && v.pause) v.pause(); fv.currentTime = 0; var q = fv.play(); if (q && q.catch) q.catch(function () {}); $('filmX').focus(); }
     function close() { box.classList.remove('on'); fv.pause(); document.documentElement.classList.remove('film-open');
